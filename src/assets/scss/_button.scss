@@ -1,0 +1,35 @@
+@import '../scss/variables';
+
+
+.button{
+    border: 1px solid transparent;
+    width: 32rem;
+    height: 4.8rem;
+    border-radius: 0.5rem;
+    font-size: 2.4rem;
+    background-color: transparent;
+
+    &-big{
+        width: 32rem;
+    }
+
+    &-small{
+        width: 24rem;
+
+        @media screen and (max-width:768px){
+            width: 14rem;
+        }
+
+    }
+
+    &-fill{
+        background-color: $primary-color;
+        color: $white-color;
+    }
+
+    &-outline{
+        color: $primary-color;
+        border: 1px solid $primary-color
+    }
+}
+

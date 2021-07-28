@@ -1,0 +1,18 @@
+{
+    "home": {
+        "projectTitle": " Boxtrainer",
+        "title" : "Suturing Basics 1 - Knots"
+    },
+
+    "header": {
+        "headerTitle" : "Suturing Basics 1 - Knots",
+        "duration" : "Procedure time: 02:37"
+    },
+    "recordingPage": {
+        "finishRecording" : "Finish recording",
+        "screenShotText" : "Take a screenshot of your result.",
+        "retry" : "Retry",
+        "done" : "Done"
+    }
+    
+}

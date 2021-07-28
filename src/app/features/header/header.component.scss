@@ -1,0 +1,232 @@
+@import '../../../assets/scss/variables';
+
+.header {
+  display: flex;
+  height: 6.4rem;
+
+  @media screen and (max-width: 600px) {
+    height: 3.4rem;
+  }
+
+  &__left {
+    width: 89.114rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0px;
+    background: $blue-color;
+    opacity: 0.9;
+    margin-right: -3.7rem;
+    clip-path: polygon(0 0%, 100% 0%, 94.5% 100%, 0% 100%);
+    padding-left: 4rem;
+
+    @media screen and (min-width: 1366px) {
+      width: 150rem !important;
+      clip-path: polygon(0 0%, 100% 0%, 96.5% 100%, 0% 100%) !important;
+      margin-right: -4rem !important;
+    }
+
+    @media screen and (min-width: 1919px) {
+      margin-right: -5.1rem !important;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 95rem;
+      margin-right: -5rem;
+    }
+
+    @media screen and (max-width: 992px) {
+      margin-right: -4.6rem !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-right: -4rem !important;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin-right: -2rem;
+      padding-left: 0.5rem;
+    }
+
+    @media screen and(max-width:1600px) {
+      width: 95rem;
+      margin-right: -5.1rem;
+    }
+
+    @media screen and (max-width: 320px) {
+      margin-right: -2rem !important;
+    }
+
+    &--text {
+      display: block;
+      font-size: 3.2rem;
+      color: $white-color;
+      margin: 0;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 2.8rem;
+      }
+
+      @media screen and (max-width: 992px) {
+        font-size: 2.8rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        font-size: 2.5rem !important;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.2rem;
+      }
+
+      @media screen and (max-width: 320px) {
+        font-size: 1.5rem !important;
+      }
+    }
+
+    &--duration {
+      display: flex;
+      align-items: center;
+      font-size: 2.4rem;
+      padding-right: 5.5rem;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 1.8rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.2rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        font-size: 1.8rem !important;
+      }
+
+      &-icon {
+        color: $primary-color;
+        font-size: inherit;
+        padding-right: 1rem;
+
+        @media screen and (max-width: 600px) {
+          display: none;
+        }
+      }
+
+      &-time {
+        color: $white-color;
+
+        @media screen and (max-width: 600px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__right {
+    width: 52.148rem;
+    border-radius: 0px;
+    background: $element-grey-color;
+    opacity: 0.8;
+    clip-path: polygon(9% 0, 100% 0%, 100% 100%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media screen and (min-width: 1366px) {
+      clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%) !important;
+    }
+
+    @media screen and (min-width: 992px) {
+      clip-path: polygon(9.4% 0, 100% 0%, 100% 100%, 0 100%);
+    }
+
+    @media screen and (min-width: 768px) {
+      clip-path: polygon(10.2% 0, 100% 0%, 100% 100%, 0 100%) !important;
+    }
+
+    @media screen and (max-width: 600px) {
+      clip-path: polygon(7.2% 0, 100% 0%, 100% 100%, 0 100%);
+    }
+
+    @media screen and (min-width: 1919px) {
+      width: 70rem;
+      clip-path: polygon(7% 0, 100% 0%, 100% 100%, 0 100%) !important;
+    }
+
+    &--icons {
+      display: flex;
+      align-items: center;
+      padding-left: 5rem;
+      justify-content: space-between;
+
+      &-group {
+        display: flex;
+        align-items: center;
+        margin-right: 2.8rem;
+
+        @media screen and (max-width: 768px) {
+          margin-right: 2rem !important;
+        }
+
+        #mic {
+          margin-right: 1.2rem;
+          width: 2.5rem;
+
+          @media screen and (max-width: 768px) {
+            margin-right: 0.8rem !important;
+            width: 2rem;
+          }
+
+          @media screen and (max-width: 600px) {
+            width: 1.2rem;
+          }
+        }
+        #flash {
+          margin-right: 1.2rem;
+          width: 2.2rem;
+
+          @media screen and (max-width: 768px) {
+            margin-right: 0.8rem !important;
+            width: 1.8rem;
+          }
+
+          @media screen and (max-width: 600px) {
+            width: 1.2rem;
+          }
+        }
+
+        #fullscreen {
+          width: 2.8rem;
+          @media screen and (max-width: 768px) {
+            width: 2.5rem !important;
+          }
+
+          @media screen and (max-width: 600px) {
+            width: 1.6rem;
+          }
+        }
+
+        .pi-arrow-left:before {
+          content: '\e91a';
+          color: $white-color;
+          font-size: 3rem;
+          border-left: 1px solid $white-color;
+
+          @media screen and (max-width: 768px) {
+            font-size: 2.5rem;
+          }
+
+          @media screen and (max-width: 600px) {
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
