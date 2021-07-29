@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'OnlineBoxTrainer';
   constructor(
     private primengConfig: PrimeNGConfig,
-    private translate: TranslateService
+    public translate: TranslateService
   ) {
     translate.setDefaultLang('en');
     translate.use('en');

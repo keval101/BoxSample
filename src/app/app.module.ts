@@ -15,18 +15,16 @@ import { FormsModule } from '@angular/forms';
 import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HeaderComponent } from './features/header/header.component';
 import { HomePageModule } from './pages/home-page/home-page.module';
+import { ChooseScreenshotModule } from './pages/choose-screenshot/choose-screenshot.module';
+import { HeaderModule } from './features/header/header.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent   
-  ],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
@@ -36,6 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     InputSwitchModule,
     HttpClientModule,
     HomePageModule,
+    ChooseScreenshotModule,
+    HeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports:[TranslateModule],
+  exports: [TranslateModule, HeaderModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {}

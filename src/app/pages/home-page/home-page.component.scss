@@ -28,7 +28,6 @@
     overflow: hidden;
     width: 100%;
   }
-
 }
 
 .logo {
@@ -39,15 +38,13 @@
     top: 40.7rem;
   }
 
-  @media  screen and (max-width:768px) {
-    top:50.7rem;
+  @media screen and (max-width: 768px) {
+    top: 50.7rem;
   }
 
-  @media  screen and (max-width:600px) {
-    top:50rem;
+  @media screen and (max-width: 600px) {
+    top: 50rem;
   }
-
-
 
   &__items {
     position: relative;
@@ -60,7 +57,6 @@
       height: 100%;
       margin-right: 0.425rem;
     }
-
   }
 }
 
@@ -93,10 +89,9 @@
       top: 57.127rem;
     }
 
-    @media  screen and (max-width:320px) {
-      left:-16.972rem;
+    @media screen and (max-width: 320px) {
+      left: -16.972rem;
     }
-
 
     &--text {
       padding: 0.8rem 0;
@@ -120,15 +115,16 @@
     opacity: 0.8;
     backdrop-filter: blur(10px);
 
-    @media screen and (min-width:1366px){
+    @media screen and (min-width: 1366px) {
+      width: 150rem;
+      clip-path: polygon(3.5% 0, 100% 0%, 100% 100%, 0 100%);
+    }
+
+    @media screen and (max-width: 1200px) {
       width: 120rem;
       clip-path: polygon(4.5% 0, 100% 0%, 100% 100%, 0 100%);
     }
 
-    @media screen and (max-width:1200px){
-      width: 120rem;
-      clip-path: polygon(4.5% 0, 100% 0%, 100% 100%, 0 100%);
-    }
     @media screen and (max-width: 992px) {
       top: 47.127rem;
     }
@@ -137,19 +133,14 @@
       top: 57.127rem;
     }
 
-    @media screen and (max-width:600px){
+    @media screen and (max-width: 600px) {
       width: 120rem;
       clip-path: polygon(4.5% 0, 100% 0%, 100% 100%, 0 100%);
     }
 
-    @media  screen and (max-width:320px) {
-      left:38.4rem;
+    @media screen and (max-width: 320px) {
+      left: 38.4rem;
     }
-    // @media screen and (max-width: 375px) {
-    //   top: 67.127rem;
-    //   padding-left: 3.6rem;
-    // }
-
 
     &--text {
       padding: 0.8rem 0;
@@ -158,12 +149,8 @@
       margin: 0;
 
       @media screen and (max-width: 768px) {
-       font-size: 3rem;
+        font-size: 3rem;
       }
-
-      // @media screen and (max-width: 320px) {
-      //   font-size: 2.5rem;
-      //  }
     }
   }
 }
@@ -176,15 +163,14 @@
   top: 43.527rem;
   background-color: rgba($element-grey-color, 0.5);
 
-  @media  screen and (max-width:992px) {
-    top:53.527rem;
+  @media screen and (max-width: 992px) {
+    top: 53.527rem;
   }
 
-  @media  screen and (max-width:768px) {
-    top:63.527rem;
+  @media screen and (max-width: 768px) {
+    top: 63.527rem;
   }
-  
- 
+
   &--fill {
     background-color: $primary-color;
     position: absolute;
@@ -193,14 +179,9 @@
     left: 0.028rem;
     top: 0px;
 
-    // @media screen and (max-width: 375px) {
-    //   width: 19.566rem;
-    // }
 
-    @media  screen and (max-width:320px) {
-      left:-15rem;
+    @media screen and (max-width: 320px) {
+      left: -15rem;
     }
-  
-
   }
 }
