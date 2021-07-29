@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/scss/variables';
+@import 'assets/scss/mixin';
 
 *{
     box-sizing: border-box;
@@ -15,27 +16,47 @@ html{
     
     font-size: 62.5%;
 
-    @media screen and(max-width:1600px){
-        font-size: 48.75% !important;
-    }
+    // @media screen and(max-width:1600px){
+    //     font-size: 48.75% !important;
+    // }
     
-    @media screen and (min-width:1366px) {
-        font-size: 62.5% !important;
-    }
+    // @media screen and (min-width:1366px) {
+    //     font-size: 62.5% !important;
+    // }
     
-    @media screen and (max-width: 768px) {
-        font-size: 43.75% !important;
-    }
+    // @media screen and (max-width: 768px) {
+    //     font-size: 43.75% !important;
+    // }
 
-    @media screen and (max-width: 992px) {
-        font-size: 50% !important;
-        overflow: hidden;
-    }
+    // @media screen and (max-width: 992px) {
+    //     font-size: 50% !important;
+    //     overflow: hidden;
+    // }
 
-    @media screen and (max-width: 375px) and (max-width:320px) {
-        font-size: 37.5% !important;
-        overflow: hidden;
-    }
+    // @media screen and (max-width: 375px) and (max-width:320px) {
+    //     font-size: 37.5% !important;
+    //     overflow: hidden;
+    // }
+
+    @include respond(big-desktop){
+        font-size: 75%;  //1 rem = 12px; 12px/16px = 75%
+      }
+  
+      @include respond(tab-land){  //width < 1200
+          font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%
+        }
+      
+      @include respond(tab-port){ //width < 900
+          font-size: 42%; //1 rem = 8px; 8px/16px = 50%
+      }
+  
+      @media (max-width:768px){
+          font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+      }
+      
+      @include respond(phone){ //width < 900
+          font-size: 22%; //1 rem = 3.52px; 3.52px/16px = 22%
+      }
 }
 
 
