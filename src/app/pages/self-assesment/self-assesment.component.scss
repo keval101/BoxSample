@@ -1,0 +1,118 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/carousel';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 11.2rem);
+  padding: 0 4rem;
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 400;
+      color: $blue-color;
+      margin: 4.8rem 0 3rem 0;
+    }
+
+    &-message {
+      font-weight: 500;
+      font-size: 3.2rem;
+      color: $primary-color;
+    }
+  }
+}
+
+.selfassesment__result {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 45rem;
+  margin-top: 8.8rem;
+  flex-wrap: nowrap;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+
+  &-title {
+    font-size: 3.2rem;
+    margin: -1.2rem 0 1.2rem 0;
+    color: $blue-color;
+  }
+
+  &-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &-image,
+  &-choise {
+    flex-grow: 0.5;
+    width: 62.8rem;
+    height: 45rem;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      height: 60rem;
+      margin-bottom: 10rem;
+    }
+  }
+
+  &-image {
+    margin-right: 3rem;
+
+    p {
+      font-weight: 400;
+    }
+
+    img {
+      width: 100%;
+      height: 40.6rem;
+
+      @media screen and (max-width: 768px) {
+        width: 102%;
+        height: 54rem;
+      }
+    }
+  }
+
+  &-choise {
+    p {
+      font-weight: 500;
+      color: $primary-color;
+    }
+
+    .screenShotImage {
+      width: 100%;
+      height: 40.6rem !important;
+
+      @media screen and (max-width: 768px) {
+        height: 54rem !important;
+      }
+    }
+  }
+}
+
+.bottomContainer {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 4rem;
+  width: 100%;
+  right: 0;
+  padding: 0 4rem;
+}
+
+::ng-deep .p-carousel .p-carousel-indicators {
+  position: absolute;
+  bottom: -4rem !important;
+  left: 50%;
+  z-index: 1;
+}

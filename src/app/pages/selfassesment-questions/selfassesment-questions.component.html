@@ -1,0 +1,54 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    [onScreenShot]="isScreenShot"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="container__title">
+    <p class="container__title-text">{{ 'selfassesmentquestions.title' | translate }}</p>
+    <p class="container__title-message m-0">
+      {{ 'selfassesmentquestions.message' | translate }}
+    </p>
+  </div>
+
+  <div class="questions">
+    <div class="questions__ques" *ngFor="let ques of questions; let i = index">
+      <p class="questions__ques-text">{{ i + 1 }} . {{ ques.question }}</p>
+
+      <div class="questions__ques-radioGroup" >
+        <div class="p-field-radiobutton radioBtn">
+          <p-radioButton
+            name="answer"
+            value="Yes"
+           ngModel="ans{{i}}"
+            inputId="yes{{i}}"
+          ></p-radioButton>
+          <label for="yes">Yes</label>
+        </div>
+
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="answer"
+            value="No"
+            ngModel="ans{{i}}"
+            inputId="no{{i}}"
+          ></p-radioButton>
+          <label for="no">No</label>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="bottomContainer">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
+      {{ 'selfassesment.next' | translate }}
+    </button>
+  </div>
+</div>

@@ -21,8 +21,27 @@
     "selfassesment":{
         "title": "Self Assesment",
         "resultTitle": "Your result",
-        "exampleTitle" : "Example images",
-        "message" : "Select the example image that best matches your result"
+        "choice" : "Your Choice",
+        "message" : "Select the example image that best matches your result",
+        "next" : "Next"
+    },
+    "selfassesmentquestions":{
+        "title" : "Self assessment questions",
+        "message" : "Please answer the questions to proceed",
+        "questionone" : "My knot was tied tightly and in the correct location ",
+        "questiontwo" : "My knot was tied tightly and in the correct location",
+        "anotherquestion" : "Another question"
+    },
+    "evaluation" : {
+        "title" : " Evaluation",
+        "score": "Score",
+        "save" : "Save and Upload",
+        "quit" : "Quit without saving",
+        "feedback" : "Feedback",
+        "radioone" : "Goal",
+        "radiotwo" : "Your self assessment",
+        "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
+        "ratingtext" : "How was the case? Rate yourself"
     }
     
 }

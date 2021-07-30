@@ -23,6 +23,25 @@ const routes: Routes = [
         (m) => m.RecordingScreenModule
       ),
   },
+  {
+    path: 'self-assesment',
+    loadChildren: () =>
+      import('src/app/pages//self-assesment/self-assesment.module').then(
+        (m) => m.SelfAssesmentModule
+      ),
+  },
+  {
+    path:'self-assesment-questions',
+    loadChildren: () => import ('src/app/pages/selfassesment-questions/selfassesment-questions.module').then(
+      (m) => m.SelfassesmentQuestionsModule
+    )
+  },
+  {
+    path:'evaluation',
+    loadChildren: () => import ('src/app/pages/evaluation/evaluation-routing.module').then(
+      (m) => m.EvaluationRoutingModule
+    )
+  }
 ];
 
 @NgModule({

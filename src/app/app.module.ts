@@ -18,6 +18,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HomePageModule } from './pages/home-page/home-page.module';
 import { ChooseScreenshotModule } from './pages/choose-screenshot/choose-screenshot.module';
 import { HeaderModule } from './features/header/header.module';
+import { SelfAssesmentModule } from './pages/self-assesment/self-assesment.module';
+import { SelfassesmentQuestionsModule } from './pages/selfassesment-questions/selfassesment-questions.module';
+import { EvaluationModule } from './pages/evaluation/evaluation.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,6 +39,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomePageModule,
     ChooseScreenshotModule,
     HeaderModule,
+    SelfAssesmentModule,
+    SelfassesmentQuestionsModule,
+    EvaluationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
