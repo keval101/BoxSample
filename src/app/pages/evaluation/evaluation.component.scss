@@ -3,11 +3,6 @@
 @import '../../../assets/scss/carousel';
 @import '../../../assets/scss/_radiobutton';
 
-@font-face {
-  font-family: 'MyriadPro';
-  src: url(../../../assets/fonts/MYRIADPRO-REGULAR.OTF);
-}
-
 .container {
   position: relative;
   width: 100%;
@@ -96,6 +91,7 @@
     margin-top: 9.1rem;
 
     &-text {
+      font-family: 'Myriad Light';
       font-size: 2.4rem;
       font-weight: 400;
       color: $black-color;
@@ -113,6 +109,22 @@
   }
 }
 
+.rowTitle {
+  font-family: 'Myriad Regular' !important;
+  text-align: left !important;
+}
+
+::ng-deep .pi-star-o:before {
+  content: '\e937';
+}
+
+::ng-deep .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+  color: none;
+}
+
+::ng-deep .p-rating .p-rating-icon:focus {
+  box-shadow: none;
+}
 ::ng-deep .p-rating .p-rating-icon {
   color: $bright-grey-color;
   font-size: 4.2rem;
@@ -126,7 +138,7 @@
   color: $primary-color;
 }
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  font-family: 'MyriadPro';
+  font-family: 'Myriad Light';
   text-align: center;
   font-size: 2rem;
   color: $black-color;
@@ -144,13 +156,12 @@
 }
 
 ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  font-family: 'MyriadPro';
   text-align: center;
   padding: 1rem 1rem;
   border: 1px solid transparent;
   border-width: 0 0 1px 0;
-  font-weight: 600;
   font-size: 2.4rem;
+  font-weight: 500;
   color: $primary-color;
   background: transparent;
   transition: box-shadow 0.2s;
@@ -200,8 +211,10 @@
 }
 
 ::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  font-family: 'Myriad Light';
   margin-top: 2.8rem;
   font-size: 2.4rem;
+  line-height: 3.2rem;
   font-weight: 300;
 }
 

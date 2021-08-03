@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
   selector: 'app-end-screen',
@@ -8,13 +8,18 @@ import { EvaluationComponent } from '../evaluation/evaluation.component';
   styleUrls: ['./end-screen.component.scss'],
 })
 export class EndScreenComponent implements OnInit {
-  constructor(public TranslateService: TranslateService) {}
-
   recording: boolean;
   isScreenShot: boolean;
+  cancel: boolean = false;
+
+  constructor(
+    public TranslateService: TranslateService,
+    private evolutionService: EvolutionService
+  ) {}
 
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
+    this.cancel = this.evolutionService.cancelValue;
   }
 }

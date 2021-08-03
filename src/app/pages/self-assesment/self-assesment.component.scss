@@ -116,3 +116,8 @@
   left: 50%;
   z-index: 1;
 }
+
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next,
+::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
+  top: 45%;
+}

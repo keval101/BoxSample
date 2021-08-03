@@ -8,16 +8,18 @@ import { Subject } from "rxjs";
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
+  checkedMic: boolean = true;
+  checkedFlash: boolean = false;
+  showSide: boolean = true
+  fullScreen:boolean = false;
+
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot:boolean;
   @Output() show = new Subject()
 
-  checkedMic: boolean = true;
-  checkedFlash: boolean = false;
-  showSide: boolean = true
-  fullScreen:boolean = false;
   constructor(public translate: TranslateService) {}
 
   ngOnInit(): void {}

@@ -8,6 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./recording-screen.component.scss'],
 })
 export class RecordingScreenComponent implements OnInit {
+  recording: boolean = false;
+  isScreenShot: boolean = false;
+  takeScreenshot: boolean = false;
+  isSidebarOpen: boolean = false;
+
   constructor(
     public TranslateService: TranslateService,
     private router: Router
@@ -15,18 +20,11 @@ export class RecordingScreenComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  recording: boolean = false;
-  isScreenShot: boolean = false;
-  takeScreenshot: boolean = false;
-  isSidebarOpen: boolean = false;
-
   onRetake() {
     this.takeScreenshot = false;
   }
 
-  onDone() {
-   
-  }
+  onDone() {}
 
   onFinish() {
     this.router.navigate(['/self-assesment']);

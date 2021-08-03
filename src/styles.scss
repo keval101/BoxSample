@@ -7,6 +7,14 @@
     src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF")format('opentype');
 }
 
+@font-face {
+    font-family:"Myriad Light";
+    src: url("./assets/fonts/MyriadPro-Light.otf")format('opentype');
+}
+
+body .p-component {
+    font-family: "Myriad Regular" !important; 
+}
 
 *{
     box-sizing: border-box;
@@ -15,7 +23,6 @@
 body{
     margin: 0;
     padding: 0;
-    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-family: "Myriad Regular" !important;
     overflow-x: hidden;
 }
@@ -27,14 +34,6 @@ html{
     @include respond(big-desktop){
         font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
       }
-  
-    //   @media (min-width:1200px){
-    //     font-size: 50%; //1 rem = 5.5px; 5.5px/16px = 34.375%
-    // }
-
-    // @media (min-width:1366px){
-    //     font-size: 62.5%; //1 rem = 5.5px; 5.5px/16px = 34.375%
-    // }
 
       @include respond(tab-land){  //width < 1200
           font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%

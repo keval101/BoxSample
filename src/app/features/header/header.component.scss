@@ -1,5 +1,6 @@
 @import '../../../assets/scss/variables';
 
+
 .header {
   display: flex;
   height: 6.4rem;
@@ -27,6 +28,7 @@
       font-size: 3.2rem;
       color: $white-color;
       margin: 0;
+      font-family: "Myriad Light";
 
       @media screen and (max-width: 400px) {
         font-size: 2.2rem;
@@ -39,7 +41,8 @@
       align-items: center;
       font-size: 2.4rem;
       padding-right: 7.5rem;
-
+      font-family: "Myriad Light";
+      
       @media screen and (max-width: 400px) {
         padding-right: 3.5rem;
         font-size: 1.4rem;

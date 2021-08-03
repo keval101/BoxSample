@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { EvolutionService } from './evolution.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -9,17 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./evaluation.component.scss'],
 })
 export class EvaluationComponent implements OnInit {
-  constructor(
-    private router: Router,
-    public TranslateService: TranslateService,
-    private confirmationService: ConfirmationService
-  ) {}
-
   recording: boolean;
   isScreenShot: boolean;
   ans: string = 'Goal';
   val: number = 3;
-
+  cancelValue: boolean = true;
   scores = [
     {
       title: 'Exercise Duration',
@@ -40,9 +35,18 @@ export class EvaluationComponent implements OnInit {
       score: 40,
     },
   ];
+
+  constructor(
+    private router: Router,
+    public TranslateService: TranslateService,
+    private evolutionService: EvolutionService,
+    private confirmationService: ConfirmationService
+  ) {}
+
   ngOnInit(): void {
     this.recording = true;
     this.isScreenShot = true;
+    this.evolutionService.cancelValue = false;
   }
 
   redirectTo() {
@@ -54,7 +58,10 @@ export class EvaluationComponent implements OnInit {
       message:
         'You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course. ',
 
-      accept: () => {},
+      accept: () => {
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
+      },
     });
   }
 }

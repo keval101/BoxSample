@@ -56,15 +56,15 @@
         <ng-template pTemplate="header">
           <tr>
             <th>&nbsp;</th>
-            <th>Measured</th>
-            <th>Goal Value</th>
-            <th>Score</th>
+            <th>{{ 'evaluation.measured' | translate }}</th>
+            <th>{{ 'evaluation.goalValue' | translate }}</th>
+            <th>{{ 'evaluation.score' | translate }}</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-score>
           <tr>
-            <td style="font-family: 'MyriadPro'; text-align: left">
+            <td class="rowTitle">
               {{ score.title }}
             </td>
             <td>{{ score.measured }}</td>
@@ -113,7 +113,7 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">Confirmation</p>
+    <p class="header m-0">{{ 'evaluation.confirmation' | translate }}</p>
   </ng-template>
   <ng-template pTemplate="footer">
     <button

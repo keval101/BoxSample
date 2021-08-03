@@ -3,10 +3,13 @@
         "projectTitle": " Boxtrainer",
         "title" : "Suturing Basics 1 - Knots"
     },
-
     "header": {
         "headerTitle" : "Suturing Basics 1 - Knots",
         "duration" : "Procedure time: 02:37"
+    },
+    "setup":{
+        "title" : "Prepare setup",
+        "message" : "Please select camera and choose your camera settings"
     },
     "recordingPage": {
         "finishRecording" : "Finish recording",
@@ -51,7 +54,16 @@
         "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
         "ratingtext" : "How was the case? Rate yourself",
         "cancel" : "Cancel",
-        "confirm" : "Confirm"
+        "confirm" : "Confirm",
+        "measured" : "Measured",
+        "goalValue" : "Goal Value",
+        "confirmation" : "Confirmation"
+    },
+    "end" : {
+        "success" : "Success",
+        "successMessage" : "Your results have been uploaded.",
+        "cancel" : "You cancelled the exercise.",
+        "cancelMessage" : "We would be pleased to welcome you back ",
+        "close" : "Close"
     }
-    
 }

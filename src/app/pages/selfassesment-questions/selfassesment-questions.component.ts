@@ -8,11 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./selfassesment-questions.component.scss'],
 })
 export class SelfassesmentQuestionsComponent implements OnInit {
-  constructor(
-    private router: Router,
-    public TranslateService: TranslateService
-  ) {}
-
   recording: boolean;
   isScreenShot: boolean;
 
@@ -34,6 +29,11 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       question: 'Another question',
     },
   ];
+
+  constructor(
+    private router: Router,
+    public TranslateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.isScreenShot = true;

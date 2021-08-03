@@ -10,11 +10,11 @@
   </div>
 
   <div class="recording__logo">
-    <img src="../../../assets/images/Logo2.svg" alt="logo" />
+    <img src="assets/images/Logo2.svg" alt="logo" />
   </div>
 
   <div class="recording__image">
-    <img src="../../../assets/images/01.png" alt="recordingImage" />
+    <img src="assets/images/01.png" alt="recordingImage" />
   </div>
 
   <div
@@ -28,11 +28,7 @@
         (click)="takeScreenShot()"
         [disabled]="!recording"
       >
-        <img
-          src="../../../assets/icnons/camera.png"
-          alt="camera-icon"
-          id="cameraIcon"
-        />
+        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
       </button>
       <p class="screenShotText" *ngIf="isScreenShot">
         {{ 'recordingPage.screenShotText' | translate }}
@@ -63,11 +59,7 @@
   <div class="sidebar" *ngIf="isSidebarOpen">
     <div class="sidebar__header">
       <button type="button" (click)="onSlidebarClose()">
-        <img
-          src="../../../assets/icnons/close.png"
-          alt="closebtn"
-          id="closeBtn"
-        />
+        <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
       </button>
 
       <button type="button">

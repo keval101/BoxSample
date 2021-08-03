@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./self-assesment.component.scss'],
 })
 export class SelfAssesmentComponent implements OnInit {
+  recording: boolean;
+  isScreenShot: boolean;
   items: any[] = [];
   responsiveOptions;
 
@@ -34,16 +36,13 @@ export class SelfAssesmentComponent implements OnInit {
     ];
   }
 
-  recording: boolean;
-  isScreenShot: boolean;
-
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
 
     this.items = [
       {
-        picture: '../../../assets/images/01.png',
+        picture: '../../../assets/images/result.png',
       },
       {
         picture: '../../../assets/images/01.png',
