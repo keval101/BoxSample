@@ -11,17 +11,25 @@
     "recordingPage": {
         "finishRecording" : "Finish recording",
         "screenShotText" : "Take a screenshot of your result.",
-        "retry" : "Retry",
-        "done" : "Done"
+        "retake" : "Retake",
+        "done" : "Done",
+        "exercise" : "Exercise",
+        "goals" : "Goals",
+        "goalText" : "This is the goal",
+        "yourTasks" : "Your tasks",
+        "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
+        "ulText1" : "Check if your hardware is ready",
+        "ulText2" : "Check optimal image of camera",
+        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
     },
     "chooseScreenshot" :{
-        "chooseResult" : "Select a screenshot showing your result.",
+        "chooseResult" : "Choose the screenshot showing your result the best.",
         "chooseBtn" : "Choose this screenshot"
     },
     "selfassesment":{
-        "title": "Self Assesment",
+        "title": "Self assesment",
         "resultTitle": "Your result",
-        "choice" : "Your Choice",
+        "choice" : "Your choice",
         "message" : "Select the example image that best matches your result",
         "next" : "Next"
     },
@@ -41,7 +49,9 @@
         "radioone" : "Goal",
         "radiotwo" : "Your self assessment",
         "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
-        "ratingtext" : "How was the case? Rate yourself"
+        "ratingtext" : "How was the case? Rate yourself",
+        "cancel" : "Cancel",
+        "confirm" : "Confirm"
     }
     
 }

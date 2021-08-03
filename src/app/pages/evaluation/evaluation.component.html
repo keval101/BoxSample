@@ -55,7 +55,7 @@
       <p-table [value]="scores" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
           <tr>
-            <th></th>
+            <th>&nbsp;</th>
             <th>Measured</th>
             <th>Goal Value</th>
             <th>Score</th>
@@ -64,10 +64,12 @@
 
         <ng-template pTemplate="body" let-score>
           <tr>
-            <td class="text-bold">{{ score.title }}</td>
+            <td style="font-family: 'MyriadPro'; text-align: left">
+              {{ score.title }}
+            </td>
             <td>{{ score.measured }}</td>
             <td>{{ score.goalvalue }}</td>
-            <td class="text-bold">{{ score.score }} /50</td>
+            <td style="font-family: 'MyriadPro'">{{ score.score }} /50</td>
           </tr>
         </ng-template>
       </p-table>
@@ -77,7 +79,7 @@
           {{ 'evaluation.feedback' | translate }}
         </p>
         <p class="score__container-feedback-text">
-          {{ ' evaluation.feedbacktext' | translate }}
+          {{ 'evaluation.feedbacktext' | translate }}
         </p>
       </div>
 
@@ -91,12 +93,43 @@
   </div>
 
   <div class="bottomContainer">
-    <button class="button button-small button-outline" type="button">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="confirm()"
+    >
       {{ 'evaluation.quit' | translate }}
     </button>
 
-    <button class="button button-small button-fill" type="button">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
       {{ 'evaluation.save' | translate }}
     </button>
   </div>
 </div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">Confirmation</p>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'evaluation.cancel' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'evaluation.confirm' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

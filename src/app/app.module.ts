@@ -16,11 +16,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HomePageModule } from './pages/home-page/home-page.module';
-import { ChooseScreenshotModule } from './pages/choose-screenshot/choose-screenshot.module';
 import { HeaderModule } from './features/header/header.module';
 import { SelfAssesmentModule } from './pages/self-assesment/self-assesment.module';
 import { SelfassesmentQuestionsModule } from './pages/selfassesment-questions/selfassesment-questions.module';
 import { EvaluationModule } from './pages/evaluation/evaluation.module';
+import { EndScreenModule } from './pages/end-screen/end-screen.module';
+import { RecordingScreenModule } from './pages/recording-screen/recording-screen.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,12 +37,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     InputSwitchModule,
     HttpClientModule,
-    HomePageModule,
-    ChooseScreenshotModule,
     HeaderModule,
+    HomePageModule,
+    EndScreenModule,
+    EvaluationModule,
+    RecordingScreenModule,
     SelfAssesmentModule,
     SelfassesmentQuestionsModule,
-    EvaluationModule,
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

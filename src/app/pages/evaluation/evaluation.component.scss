@@ -3,6 +3,11 @@
 @import '../../../assets/scss/carousel';
 @import '../../../assets/scss/_radiobutton';
 
+@font-face {
+  font-family: 'MyriadPro';
+  src: url(../../../assets/fonts/MYRIADPRO-REGULAR.OTF);
+}
+
 .container {
   position: relative;
   width: 100%;
@@ -58,9 +63,14 @@
     display: flex;
     width: 100%;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1366px) {
       margin-top: 0.1rem;
     }
+
+    @media screen and (max-width: 1367px) {
+      margin-top: 1.6rem;
+    }
+
     .radioBtn {
       margin-right: 4.4rem;
     }
@@ -78,7 +88,7 @@
   height: 100%;
 
   .text-bold {
-    font-weight: 600;
+    font-weight: 400;
     color: $black-color;
   }
 
@@ -116,7 +126,9 @@
   color: $primary-color;
 }
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  font-size: 2.4rem;
+  font-family: 'MyriadPro';
+  text-align: center;
+  font-size: 2rem;
   color: $black-color;
   font-weight: 400;
 }
@@ -132,7 +144,8 @@
 }
 
 ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  text-align: left;
+  font-family: 'MyriadPro';
+  text-align: center;
   padding: 1rem 1rem;
   border: 1px solid transparent;
   border-width: 0 0 1px 0;
@@ -151,6 +164,59 @@
   width: 100%;
   right: 0;
   padding: 0 4rem;
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}
+
+// Dailog Box CSS
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  color: red;
+}
+::ng-deep .p-dialog-mask.p-component-overlay {
+  background-color: rgba(255, 255, 255, 0.66);
+}
+::ng-deep .p-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 36.2rem;
+  position: relative;
+  font-family: 'MyriadPro';
+  transform: scale(1);
+  width: 72.5rem;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 0 none;
+  padding: 3.4rem 4.3rem;
+}
+
+.header {
+  font-size: 4rem;
+  color: $primary-color;
+  font-weight: 500;
+}
+
+::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  margin-top: 2.8rem;
+  font-size: 2.4rem;
+  font-weight: 300;
+}
+
+::ng-deep .p-dialog .p-dialog-header,
+::ng-deep .p-dialog .p-dialog-content,
+::ng-deep .p-dialog .p-dialog-footer {
+  padding: 0;
+}
+
+::ng-deep .p-dialog .p-dialog-footer {
+  margin-top: 10rem;
+
+  button {
+    width: 24rem;
+  }
 
   button:not(:last-child) {
     margin-right: 1.6rem;

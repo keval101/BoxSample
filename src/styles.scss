@@ -2,6 +2,12 @@
 @import 'assets/scss/variables';
 @import 'assets/scss/mixin';
 
+@font-face {
+    font-family:"Myriad Regular";
+    src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF")format('opentype');
+}
+
+
 *{
     box-sizing: border-box;
 }
@@ -9,7 +15,9 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Myriad Regular" !important;
+    overflow-x: hidden;
 }
 
 html{
@@ -20,9 +28,13 @@ html{
         font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
       }
   
-      @media (min-width:1200px){
-        font-size: 50%; //1 rem = 5.5px; 5.5px/16px = 34.375%
-    }
+    //   @media (min-width:1200px){
+    //     font-size: 50%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+    // }
+
+    // @media (min-width:1366px){
+    //     font-size: 62.5%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+    // }
 
       @include respond(tab-land){  //width < 1200
           font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%

@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [EvaluationComponent],
@@ -22,6 +24,8 @@ import { RatingModule } from 'primeng/rating';
     TranslateModule,
     RadioButtonModule,
     EvaluationRoutingModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
 })
 export class EvaluationModule {}

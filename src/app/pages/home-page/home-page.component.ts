@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 export class HomePageComponent implements OnInit {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigate(['/recording']);
+    }, 2000);
+  }
 
   redirectTo() {
     this.router.navigate(['/recording']);

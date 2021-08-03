@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class EvaluationComponent implements OnInit {
   constructor(
     private router: Router,
-    public TranslateService: TranslateService
+    public TranslateService: TranslateService,
+    private confirmationService: ConfirmationService
   ) {}
 
   recording: boolean;
@@ -41,5 +43,18 @@ export class EvaluationComponent implements OnInit {
   ngOnInit(): void {
     this.recording = true;
     this.isScreenShot = true;
+  }
+
+  redirectTo() {
+    this.router.navigate(['/end']);
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message:
+        'You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course. ',
+
+      accept: () => {},
+    });
   }
 }

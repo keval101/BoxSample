@@ -10,13 +10,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'choosescreenshot',
-    loadChildren: () =>
-      import('src/app/pages/choose-screenshot/choose-screenshot.module').then(
-        (m) => m.ChooseScreenshotModule
-      ),
-  },
-  {
     path: 'recording',
     loadChildren: () =>
       import('src/app/pages/recording-screen/recording-screen.module').then(
@@ -31,17 +24,26 @@ const routes: Routes = [
       ),
   },
   {
-    path:'self-assesment-questions',
-    loadChildren: () => import ('src/app/pages/selfassesment-questions/selfassesment-questions.module').then(
-      (m) => m.SelfassesmentQuestionsModule
-    )
+    path: 'self-assesment-questions',
+    loadChildren: () =>
+      import(
+        'src/app/pages/selfassesment-questions/selfassesment-questions.module'
+      ).then((m) => m.SelfassesmentQuestionsModule),
   },
   {
-    path:'evaluation',
-    loadChildren: () => import ('src/app/pages/evaluation/evaluation-routing.module').then(
-      (m) => m.EvaluationRoutingModule
-    )
-  }
+    path: 'evaluation',
+    loadChildren: () =>
+      import('src/app/pages/evaluation/evaluation-routing.module').then(
+        (m) => m.EvaluationRoutingModule
+      ),
+  },
+  {
+    path: 'end',
+    loadChildren: () =>
+      import('src/app/pages/end-screen/end-screen.module').then(
+        (m) => m.EndScreenModule
+      ),
+  },
 ];
 
 @NgModule({

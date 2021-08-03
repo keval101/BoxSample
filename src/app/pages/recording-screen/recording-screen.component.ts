@@ -17,25 +17,31 @@ export class RecordingScreenComponent implements OnInit {
 
   recording: boolean = false;
   isScreenShot: boolean = false;
+  takeScreenshot: boolean = false;
+  isSidebarOpen: boolean = false;
 
-  takeScreenShot() {
-    this.isScreenShot = true;
-  }
-
-  onRetry() {
-    this.isScreenShot = false;
-    this.recording = false;
+  onRetake() {
+    this.takeScreenshot = false;
   }
 
   onDone() {
-    this.isScreenShot = false;
-    this.recording = false;
+   
   }
 
   onFinish() {
-    this.isScreenShot = true;
-    this.recording = true;
+    this.router.navigate(['/self-assesment']);
+  }
 
-    this.router.navigate(['/choosescreenshot']);
+  takeScreenShot() {
+    this.takeScreenshot = true;
+  }
+
+  onSlidebarOpen(value) {
+    this.isSidebarOpen = true;
+    console.log(value);
+  }
+
+  onSlidebarClose() {
+    this.isSidebarOpen = false;
   }
 }
