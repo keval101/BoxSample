@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public translate: TranslateService) {}
 
   ngOnInit(): void {
     setTimeout(() => {

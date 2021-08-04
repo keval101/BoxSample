@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  <div class="sidebar" *ngIf="isSidebarOpen">
+  <div class="sidebar" *ngIf="isSidebarOpen" @fadeAnimation>
     <div class="sidebar__header">
       <button type="button" (click)="onSlidebarClose()">
         <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
@@ -73,10 +73,10 @@
       </p>
       <div class="sidebar__content-goal">
         <p class="sidebar__content-title2">
-          {{ 'recordingPage.goals' | translate }}
+          {{ 'intro.goals' | translate }}
         </p>
         <p class="sidebar__content-text">
-          {{ 'recordingPage.goalText' | translate }}
+          {{ 'intro.goalsText' | translate }}
         </p>
       </div>
       <div class="sidebar__content-task">

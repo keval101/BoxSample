@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { RecordingService } from './recording.service';
+import { fadeAnimation } from '../../shared/app.animation';
 
 @Component({
   selector: 'app-recording-screen',
   templateUrl: './recording-screen.component.html',
   styleUrls: ['./recording-screen.component.scss'],
+  animations: [fadeAnimation],
 })
 export class RecordingScreenComponent implements OnInit {
   recording: boolean = false;
@@ -15,7 +18,8 @@ export class RecordingScreenComponent implements OnInit {
 
   constructor(
     public TranslateService: TranslateService,
-    private router: Router
+    private router: Router,
+    private recordingService: RecordingService
   ) {}
 
   ngOnInit(): void {}
@@ -24,10 +28,15 @@ export class RecordingScreenComponent implements OnInit {
     this.takeScreenshot = false;
   }
 
-  onDone() {}
+  onDone() {
+    this.router.navigate(['/choosescreenshot']);
+  }
 
   onFinish() {
-    this.router.navigate(['/self-assesment']);
+    this.recordingService.fullscreen = false;
+    this.recording = true;
+    this.isScreenShot = true;
+    this.isSidebarOpen = false;
   }
 
   takeScreenShot() {

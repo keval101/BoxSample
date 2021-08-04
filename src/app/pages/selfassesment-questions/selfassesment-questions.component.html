@@ -24,20 +24,22 @@
           <p-radioButton
             name="answer"
             value="Yes"
-            ngModel="ans{{ i }}"
-            inputId="yes{{ i }}"
+            [(ngModel)]="ques.id"
+            id="yes"
           ></p-radioButton>
-          <label for="yes">Yes</label>
+          <label for="yes">{{
+            'selfassesmentquestions.yes' | translate
+          }}</label>
         </div>
 
         <div class="p-field-radiobutton">
           <p-radioButton
             name="answer"
             value="No"
-            ngModel="ans{{ i }}"
-            inputId="no{{ i }}"
+            [(ngModel)]="ques.id"
+            id="no"
           ></p-radioButton>
-          <label for="no">No</label>
+          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
         </div>
       </div>
     </div>

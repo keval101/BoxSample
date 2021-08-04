@@ -1,7 +1,28 @@
 {
     "home": {
         "projectTitle": " Boxtrainer",
-        "title" : "Suturing Basics 1 - Knots"
+        "title" : "Suturing Basics 1 - Knots",
+        "rightReserved" : "© VirtaMed AG  2021 All rights reserved,  V1.0.13 "
+    },
+    "intro":{
+        "title" :"How to suture right with Kelly Grasper",
+        "description" : "Description",
+        "descriptionText" : "Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
+        "goals":"Goals",
+        "goalsText": "This is the goal",
+        "duration" : "Duration",
+        "durationTime" : "ca. 17 min",
+        "whatyouneed" : "What you need",
+        "boxtrainerHardware": "Boxtrainer Hardware",
+        "tool":"Tool",
+        "testObject":"Testobject",
+        "filament":"Filament",
+        "whatwillyoudo": "What will you do",
+        "tutorial": "Watch tutorial movie",
+        "procedure": "Record your procedure",
+        "result": "Rate your result",
+        "upload": "Upload data",
+        "watchMovie": "Watch movie"
     },
     "header": {
         "headerTitle" : "Suturing Basics 1 - Knots",
@@ -9,7 +30,8 @@
     },
     "setup":{
         "title" : "Prepare setup",
-        "message" : "Please select camera and choose your camera settings"
+        "message" : "Please select camera and choose your camera settings",
+        "startExercise" : "Start exercise"
     },
     "recordingPage": {
         "finishRecording" : "Finish recording",
@@ -17,8 +39,6 @@
         "retake" : "Retake",
         "done" : "Done",
         "exercise" : "Exercise",
-        "goals" : "Goals",
-        "goalText" : "This is the goal",
         "yourTasks" : "Your tasks",
         "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
         "ulText1" : "Check if your hardware is ready",
@@ -41,7 +61,9 @@
         "message" : "Please answer the questions to proceed",
         "questionone" : "My knot was tied tightly and in the correct location ",
         "questiontwo" : "My knot was tied tightly and in the correct location",
-        "anotherquestion" : "Another question"
+        "anotherquestion" : "Another question",
+        "yes" : "Yes",
+        "no" : "No"
     },
     "evaluation" : {
         "title" : " Evaluation",

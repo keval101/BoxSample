@@ -11,22 +11,30 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
 
-  ans0: string;
-  ans1: string;
-  ans2: string;
-
   questions = [
     {
       id: 1,
       question: 'My knot was tied tightly and in the correct location',
+      options: {
+        opt1: 'Yes',
+        opt2: 'No',
+      },
     },
     {
       id: 2,
       question: 'My knot was tied tightly and in the correct location',
+      options: {
+        opt1: 'Yes',
+        opt2: 'No',
+      },
     },
     {
       id: 3,
       question: 'Another question',
+      options: {
+        opt1: 'Yes',
+        opt2: 'No',
+      },
     },
   ];
 

@@ -17,6 +17,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'choosescreenshot',
+    loadChildren: () =>
+      import('src/app/pages/choose-screenshot/choose-screenshot.module').then(
+        (m) => m.ChooseScreenshotModule
+      ),
+  },
+  {
     path: 'self-assesment',
     loadChildren: () =>
       import('src/app/pages//self-assesment/self-assesment.module').then(
