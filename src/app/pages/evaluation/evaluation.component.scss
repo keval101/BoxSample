@@ -1,0 +1,237 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/carousel';
+@import '../../../assets/scss/_radiobutton';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 11.2rem);
+  padding: 0 4rem;
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 400;
+      color: $blue-color;
+      margin: 4.4rem 0 0 0;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  height: calc(100% - 7.2rem);
+  margin-top: 2.216rem;
+  display: flex;
+}
+
+.result__container {
+  position: relative;
+  width: 56.587rem;
+  height: 100%;
+  margin-right: 5.369rem;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 3.2rem;
+    margin: 0 0 0.736rem 0;
+    color: $blue-color;
+  }
+
+  &-result {
+    width: 100%;
+    height: 31.939rem;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-radioGroup {
+    display: flex;
+    width: 100%;
+
+    @media screen and (min-width: 1366px) {
+      margin-top: 0.1rem;
+    }
+
+    @media screen and (max-width: 1367px) {
+      margin-top: 1.6rem;
+    }
+
+    .radioBtn {
+      margin-right: 4.4rem;
+    }
+  }
+
+  label {
+    font-size: 3.2rem;
+    margin-left: 1.46rem;
+  }
+}
+
+.score__container {
+  flex-grow: 1;
+  width: 66.654rem;
+  height: 100%;
+
+  .text-bold {
+    font-weight: 400;
+    color: $black-color;
+  }
+
+  &-feedback {
+    margin-top: 9.1rem;
+
+    &-text {
+      font-family: 'Myriad Light';
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: $black-color;
+      line-height: 3.2rem;
+    }
+  }
+
+  &-ratings {
+    margin-top: 5.2rem;
+
+    &-text {
+      color: $primary-color;
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.rowTitle {
+  font-family: 'Myriad Regular' !important;
+  text-align: left !important;
+}
+
+::ng-deep .pi-star-o:before {
+  content: '\e937';
+}
+
+::ng-deep .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+  color: none;
+}
+
+::ng-deep .p-rating .p-rating-icon:focus {
+  box-shadow: none;
+}
+::ng-deep .p-rating .p-rating-icon {
+  color: $bright-grey-color;
+  font-size: 4.2rem;
+}
+
+::ng-deep .p-rating .p-rating-icon.pi-star {
+  color: $primary-color;
+}
+
+::ng-deep .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+  color: $primary-color;
+}
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  font-family: 'Myriad Light';
+  text-align: center;
+  font-size: 2rem;
+  color: $black-color;
+  font-weight: 400;
+}
+::ng-deep .p-rating-icon pi pi-star-o {
+  color: blueviolet;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr {
+  background: rgba($bright-grey-color, 0.5);
+  color: #495057;
+  transition: box-shadow 0.2s;
+  outline-color: transparent;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  text-align: center;
+  padding: 1rem 1rem;
+  border: 1px solid transparent;
+  border-width: 0 0 1px 0;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: $primary-color;
+  background: transparent;
+  transition: box-shadow 0.2s;
+}
+
+.bottomContainer {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 4rem;
+  width: 100%;
+  right: 0;
+  padding: 0 4rem;
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}
+
+// Dailog Box CSS
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  color: red;
+}
+::ng-deep .p-dialog-mask.p-component-overlay {
+  background-color: rgba(255, 255, 255, 0.66);
+}
+::ng-deep .p-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 36.2rem;
+  position: relative;
+  font-family: 'MyriadPro';
+  transform: scale(1);
+  width: 72.5rem;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 0 none;
+  padding: 3.4rem 4.3rem;
+}
+
+.header {
+  font-size: 4rem;
+  color: $primary-color;
+  font-weight: 500;
+}
+
+::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  font-family: 'Myriad Light';
+  margin-top: 2.8rem;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  font-weight: 300;
+}
+
+::ng-deep .p-dialog .p-dialog-header,
+::ng-deep .p-dialog .p-dialog-content,
+::ng-deep .p-dialog .p-dialog-footer {
+  padding: 0;
+}
+
+::ng-deep .p-dialog .p-dialog-footer {
+  margin-top: 10rem;
+
+  button {
+    width: 24rem;
+  }
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}

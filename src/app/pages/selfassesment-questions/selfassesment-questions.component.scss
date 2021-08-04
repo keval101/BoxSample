@@ -1,0 +1,126 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 11.2rem);
+  padding: 0 4rem;
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 400;
+      color: $blue-color;
+      margin: 4.8rem 0 3rem 0;
+    }
+
+    &-message {
+      font-weight: 500;
+      font-size: 3.2rem;
+      color: $primary-color;
+    }
+  }
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 4.8rem;
+  height: 49.624rem;
+  padding: 7.736rem 3.893rem;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+  justify-content: space-between;
+
+  &__ques {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-text {
+      flex-grow: 1;
+      color: $black-color;
+      font-size: 3.2rem;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    &-radioGroup {
+      width: 30%;
+      display: flex;
+
+      .radioBtn {
+        margin-right: 7.3rem;
+      }
+      label {
+        font-size: 3.2rem;
+        margin-left: 1.46rem;
+      }
+    }
+  }
+}
+
+.bottomContainer {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 4rem;
+  width: 100%;
+  right: 0;
+  padding: 0 4rem;
+}
+
+::ng-deep .p-radiobutton {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+  width: 2rem;
+  height: 2rem;
+  transition-duration: 0.2s;
+  background-color: $primary-color;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: #d8d9da;
+  background: #d8d9da;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box {
+  border: 2px solid #d8d9da;
+  background-color: #d8d9da;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.25);
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s,
+    box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  border-color: #d8d9da;
+  background: #d8d9da;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+  box-shadow: none;
+  border-color: none;
+}
+
+::ng-deep
+  .p-radiobutton
+  .p-radiobutton-box
+  .p-highlight:not(.p-disabled).p-focus {
+  border-color: #d8d9da;
+}
+
+::ng-deep
+  .p-radiobutton
+  .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+  border-color: transparent;
+}

@@ -1,0 +1,26 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    [onScreenShot]="isScreenShot"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="content">
+    <img src="assets/images/logo.png" alt="logo" />
+
+    <div *ngIf="!cancel">
+      <p class="success">{{ 'end.success' | translate }}</p>
+      <p class="success-text m-0">{{ 'end.successMessage' | translate }}</p>
+    </div>
+
+    <div *ngIf="cancel">
+      <p class="success">{{ 'end.cancel' | translate }}</p>
+      <p class="success-text m-0">{{ 'end.cancelMessage' | translate }}</p>
+    </div>
+
+    <button class="button button-fill button-small">
+      {{ 'end.close' | translate }}
+    </button>
+  </div>
+</div>

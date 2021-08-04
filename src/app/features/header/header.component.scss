@@ -1,0 +1,128 @@
+@import '../../../assets/scss/variables';
+
+
+.header {
+  display: flex;
+  height: 6.4rem;
+  
+  &__left {
+    width: 8911.4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0px;
+    background: $blue-color;
+    opacity: 0.9;
+    margin-right: -3%;
+    clip-path: polygon(0 0%, 100% 0%, 95.5% 100%, 0% 100%);
+    padding-left: 4rem;
+    transition: background 0.5s ease;
+
+    &.fullscreen{
+      background:transparent;
+      transition: all 0.5s ease;
+    }
+
+    &--text {
+      display: block;
+      font-size: 3.2rem;
+      color: $white-color;
+      margin: 0;
+      font-family: "Myriad Light";
+
+      @media screen and (max-width: 400px) {
+        font-size: 2.2rem;
+      }
+
+    }
+
+    &--duration {
+      display: flex;
+      align-items: center;
+      font-size: 2.4rem;
+      padding-right: 7.5rem;
+      font-family: "Myriad Light";
+      
+      @media screen and (max-width: 400px) {
+        padding-right: 3.5rem;
+        font-size: 1.4rem;
+      }
+
+      &-icon {
+        color: $primary-color;
+        font-size: inherit;
+        margin-right: 1.4rem;
+
+        @media screen and (max-width: 375px) {
+          margin-right: 0.7rem;
+        }
+      }
+
+      &-time {
+        color: $white-color;
+      }
+    }
+  }
+
+  &__right {
+    width: 5514.8%;
+    border-radius: 0px;
+    flex-grow: 1;
+    background: $element-grey-color;
+    opacity: 0.8;
+    clip-path: polygon(7.5% 0, 100% 0%, 100% 100%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.5s ease;
+
+    &.fullscreen{
+      background:transparent;
+      transition: all 0.5s ease;
+    }
+
+
+    &--icons {
+      display: flex;
+      align-items: center;
+      padding-left: 10rem;
+      justify-content: space-between;
+
+      &-group {
+        display: flex;
+        align-items: center;
+        margin-right: 2.8rem;
+
+        #mic {
+          margin-right: 1.2rem;
+          width: 2.5rem;
+        }
+        #flash {
+          margin-right: 1.2rem;
+          width: 2.2rem;
+        }
+
+        #fullscreen {
+          width: 2.8rem;
+        }
+        #closescreen{
+          width: 3rem;
+        }
+
+        .pi-question-circle:before {
+          color: $white-color;
+          font-size: 3.2rem;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.buttonMargin{
+  padding-left: 6rem;   
+}

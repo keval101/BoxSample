@@ -1,0 +1,69 @@
+{
+    "home": {
+        "projectTitle": " Boxtrainer",
+        "title" : "Suturing Basics 1 - Knots"
+    },
+    "header": {
+        "headerTitle" : "Suturing Basics 1 - Knots",
+        "duration" : "Procedure time: 02:37"
+    },
+    "setup":{
+        "title" : "Prepare setup",
+        "message" : "Please select camera and choose your camera settings"
+    },
+    "recordingPage": {
+        "finishRecording" : "Finish recording",
+        "screenShotText" : "Take a screenshot of your result.",
+        "retake" : "Retake",
+        "done" : "Done",
+        "exercise" : "Exercise",
+        "goals" : "Goals",
+        "goalText" : "This is the goal",
+        "yourTasks" : "Your tasks",
+        "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
+        "ulText1" : "Check if your hardware is ready",
+        "ulText2" : "Check optimal image of camera",
+        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
+    },
+    "chooseScreenshot" :{
+        "chooseResult" : "Choose the screenshot showing your result the best.",
+        "chooseBtn" : "Choose this screenshot"
+    },
+    "selfassesment":{
+        "title": "Self assesment",
+        "resultTitle": "Your result",
+        "choice" : "Your choice",
+        "message" : "Select the example image that best matches your result",
+        "next" : "Next"
+    },
+    "selfassesmentquestions":{
+        "title" : "Self assessment questions",
+        "message" : "Please answer the questions to proceed",
+        "questionone" : "My knot was tied tightly and in the correct location ",
+        "questiontwo" : "My knot was tied tightly and in the correct location",
+        "anotherquestion" : "Another question"
+    },
+    "evaluation" : {
+        "title" : " Evaluation",
+        "score": "Score",
+        "save" : "Save and Upload",
+        "quit" : "Quit without saving",
+        "feedback" : "Feedback",
+        "radioone" : "Goal",
+        "radiotwo" : "Your self assessment",
+        "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
+        "ratingtext" : "How was the case? Rate yourself",
+        "cancel" : "Cancel",
+        "confirm" : "Confirm",
+        "measured" : "Measured",
+        "goalValue" : "Goal Value",
+        "confirmation" : "Confirmation"
+    },
+    "end" : {
+        "success" : "Success",
+        "successMessage" : "Your results have been uploaded.",
+        "cancel" : "You cancelled the exercise.",
+        "cancelMessage" : "We would be pleased to welcome you back ",
+        "close" : "Close"
+    }
+}
