@@ -108,7 +108,10 @@
     }
   }
 }
-
+::ng-deep .p-dialog-footer {
+  display: flex !important;
+  justify-content: flex-end;
+}
 .rowTitle {
   font-family: 'Myriad Regular' !important;
   text-align: left !important;

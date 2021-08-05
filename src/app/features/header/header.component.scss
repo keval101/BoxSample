@@ -89,6 +89,9 @@
         align-items: center;
         margin-right: 2.8rem;
 
+        #speaker {
+          width: 2.1rem !important;
+        }
         #mic {
           margin-right: 1.2rem;
           width: 2.5rem;
@@ -97,14 +100,12 @@
           margin-right: 1.2rem;
           width: 2.2rem;
         }
-
         #fullscreen {
           width: 2.8rem;
         }
         #closescreen {
           width: 3rem;
         }
-
         .pi-question-circle:before {
           color: $white-color;
           font-size: 3.2rem;
@@ -112,6 +113,9 @@
       }
     }
   }
+}
+::ng-deep .p-inputswitch .p-inputswitch-slider:before {
+  background: $white-color;
 }
 .button {
   background-color: transparent;

@@ -51,6 +51,16 @@ const routes: Routes = [
         (m) => m.EndScreenModule
       ),
   },
+  {
+    path: 'intro',
+    loadChildren: () =>
+      import('src/app/pages/intro/intro.module').then((m) => m.IntroModule),
+  },
+  {
+    path: 'setup',
+    loadChildren: () =>
+      import('src/app/pages/setup/setup.module').then((m) => m.SetupModule),
+  },
 ];
 
 @NgModule({

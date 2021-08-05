@@ -69,13 +69,16 @@
     }
 
     &--group {
+      display: flex;
       button:not(:last-child) {
         margin-right: 1.6rem;
       }
     }
   }
 }
-
+::ng-deep .p-inputswitch .p-inputswitch-slider:before {
+  background: $white-color;
+}
 .sidebar {
   position: absolute;
   top: 0;

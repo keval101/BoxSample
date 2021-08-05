@@ -1,0 +1,106 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    [onScreenShot]="isScreenShot"
+  ></app-header>
+</div>
+
+<div class="container" (window:resize)="onResize($event)">
+  <div class="container__title">
+    <p class="container__title-text m-0">
+      {{ 'intro.title' | translate }}
+    </p>
+
+    <div>
+      <p class="container__title-description m-0">
+        {{ 'intro.description' | translate }}
+      </p>
+      <p class="container__title-descriptionText m-0">
+        {{ 'intro.descriptionText' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="videoPreview">
+    <video
+      autoplay
+      muted
+      loop
+      oncanplay="this.play()"
+      onloadedmetadata="this.muted = true"
+    >
+      <source
+        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+    <div class="sidebar__header">
+      <img src="assets/images/logo.png" alt="logo" />
+    </div>
+
+    <div class="sidebar__content">
+      <div class="sidebar__content-texDiv">
+        <p class="sidebar__content-title">
+          {{ 'intro.goals' | translate }}
+        </p>
+        <p class="sidebar__content-text">
+          {{ 'intro.goalsText' | translate }}
+        </p>
+      </div>
+
+      <div class="sidebar__content-texDiv">
+        <p class="sidebar__content-title">
+          {{ 'intro.duration' | translate }}
+        </p>
+        <p class="sidebar__content-text">
+          {{ 'intro.durationTime' | translate }}
+        </p>
+      </div>
+
+      <div class="sidebar__content-texDiv">
+        <p class="sidebar__content-title">
+          {{ 'intro.whatyouneed' | translate }}
+        </p>
+        <ul class="sidebar__content-text need">
+          <li>{{ 'intro.boxtrainerHardware' | translate }}</li>
+          <li>{{ 'intro.tool' | translate }}</li>
+          <li>{{ 'intro.testObject' | translate }}</li>
+          <li>{{ 'intro.filament' | translate }}</li>
+        </ul>
+      </div>
+
+      <div class="sidebar__content-texDiv">
+        <p class="sidebar__content-title">
+          {{ 'intro.whatwillyoudo' | translate }}
+        </p>
+        <ol class="sidebar__content-text willdo">
+          <li>{{ 'intro.tutorial' | translate }}</li>
+          <li>{{ 'intro.procedure' | translate }}</li>
+          <li>{{ 'intro.result' | translate }}</li>
+          <li>{{ 'intro.upload' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="sidebar__buttonGroup">
+      <button class="button button-fill button-big" (click)="redirectTo()">
+        {{ 'intro.watchMovie' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<p class="rightReserved">
+  {{ 'home.rightReserved' | translate }}
+</p>
+
+<div class="buttonContainer" (click)="showDetail()">
+  <button>
+    <i class="pi pi-chevron-circle-left" *ngIf="!sidebar" @fadeAnimation></i>
+    <i class="pi pi-chevron-circle-right" *ngIf="sidebar" @fadeAnimation></i>
+  </button>
+</div>

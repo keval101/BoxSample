@@ -6,8 +6,12 @@
   border-radius: 0.5rem;
   font-size: 2.4rem;
   background-color: transparent;
+  border: 0.2rem solid transparent;
   cursor: pointer;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &-big {
     width: 32rem;
@@ -29,7 +33,7 @@
 
   &-outline {
     color: $primary-color;
-    border: 0.2rem solid $primary-color;
+    border-color: $primary-color;
 
     &:hover {
       transform: translateY(0.2rem);
