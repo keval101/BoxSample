@@ -16,6 +16,12 @@
     top: 9rem;
     left: 4rem;
     z-index: 1;
+
+    img{
+      @media screen and (max-width:600px){
+        width: 16rem;
+      }
+    }
   }
 
   &__image {
@@ -77,8 +83,9 @@
   }
 }
 ::ng-deep .p-inputswitch .p-inputswitch-slider:before {
-  background: $white-color;
+  background: $white-color !important;
 }
+
 .sidebar {
   position: absolute;
   top: 0;
@@ -180,6 +187,7 @@
     button {
       padding: 0;
       border: none;
+      background: none;
       cursor: pointer;
     }
 

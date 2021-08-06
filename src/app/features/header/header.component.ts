@@ -3,11 +3,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { RecordingService } from 'src/app/pages/recording-screen/recording.service';
 import { HeaderService } from './header.service';
+import { fadeAnimation } from '../../shared/app.animation';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [fadeAnimation],
 })
 export class HeaderComponent implements OnInit, OnChanges {
   checkedMic: boolean = true;

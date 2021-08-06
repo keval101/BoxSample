@@ -21,6 +21,13 @@ export class IntroComponent implements OnInit {
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
+
+    if (window.innerWidth > 600) {
+      this.sidebar = true;
+    } else {
+      this.sidebar = false;
+    }
+    this.onResize(window.innerWidth);
   }
 
   onResize(event) {
@@ -38,6 +45,12 @@ export class IntroComponent implements OnInit {
   }
 
   redirectTo() {
-    this.router.navigate(['/setup']);
+    this.router.navigate(['/video']);
+  }
+
+  closeSidebar(){
+    if (window.innerWidth < 600) {
+      this.sidebar = false;
+    } 
   }
 }

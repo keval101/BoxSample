@@ -5,7 +5,11 @@
   ></app-header>
 </div>
 
-<div class="container" (window:resize)="onResize($event)">
+<div
+  class="container"
+  (window:resize)="onResize($event)"
+  (click)="closeSidebar()"
+>
   <div class="container__title">
     <p class="container__title-text m-0">
       {{ 'setup.title' | translate }}

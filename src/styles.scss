@@ -35,6 +35,10 @@ html{
         font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
       }
 
+      @media screen and (min-width : 1367px){
+        font-size: 50%;
+      }
+
       @include respond(tab-land){  //width < 1200
           font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%
         }
@@ -100,7 +104,7 @@ html{
         @media screen and (max-width: 600px) {
             width: 1.5rem  !important;
             height: 1.5rem !important;
-            margin-top: -0.9rem !important;
+            margin-top: -0.75rem !important;
         }
     }
 

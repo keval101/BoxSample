@@ -199,6 +199,10 @@
   height: 2rem !important;
   background: $element-grey-color !important;
   left: -0.5rem;
+
+  @media screen and (max-width:600px){
+    top: 0.5rem;
+  }
 }
 
 ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
@@ -227,10 +231,7 @@
   color: $black-color;
 }
 
-::ng-deep
-  .p-dropdown-panel
-  .p-dropdown-items
-  .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover,
+::ng-deep.p-dropdown-panel.p-dropdown-items.p-dropdown-item:not(.p-highlight):not(.p-disabled):hover,
 ::ng-deep .p-dropdown .p-dropdown-label,
 ::ng-deep .p-dropdown-items-wrapper,
 ::ng-deep .p-dropdown .p-dropdown-trigger,

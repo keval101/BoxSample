@@ -1,6 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ChoosescreenshotService } from './choosescreenshot.service';
 @Component({
   selector: 'app-choose-screenshot',
   templateUrl: './choose-screenshot.component.html',
@@ -14,7 +15,8 @@ export class ChooseScreenshotComponent implements OnInit {
 
   constructor(
     public TranslateService: TranslateService,
-    private router: Router
+    private router: Router,
+    private choosescreenshotService: ChoosescreenshotService
   ) {
     this.responsiveOptions = [
       {
@@ -50,6 +52,7 @@ export class ChooseScreenshotComponent implements OnInit {
   }
 
   backToScreenShot() {
+    this.choosescreenshotService.backToScreen = true;
     this.router.navigate(['/recording']);
   }
 

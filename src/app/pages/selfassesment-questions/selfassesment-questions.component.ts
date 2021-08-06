@@ -10,31 +10,18 @@ import { TranslateService } from '@ngx-translate/core';
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-
   questions = [
     {
       id: 1,
       question: 'My knot was tied tightly and in the correct location',
-      options: {
-        opt1: 'Yes',
-        opt2: 'No',
-      },
     },
     {
       id: 2,
       question: 'My knot was tied tightly and in the correct location',
-      options: {
-        opt1: 'Yes',
-        opt2: 'No',
-      },
     },
     {
       id: 3,
       question: 'Another question',
-      options: {
-        opt1: 'Yes',
-        opt2: 'No',
-      },
     },
   ];
 

@@ -67,8 +67,12 @@
     }
 
     .radioBtn {
-      margin-right: 4.4rem;
-    }
+      display: flex;
+      align-items: center;
+      
+      &:not(:last-child){
+        margin-right: 4.4rem;
+      }}
   }
 
   label {
@@ -116,6 +120,10 @@
   font-family: 'Myriad Regular' !important;
   text-align: left !important;
 }
+.score{
+  font-family: 'Myriad Regular' !important;
+}
+
 
 ::ng-deep .pi-star-o:before {
   content: '\e937';
@@ -180,6 +188,7 @@
   padding: 0 4rem;
 
   button:not(:last-child) {
+    width: 24.5rem;
     margin-right: 1.6rem;
   }
 }
@@ -202,7 +211,7 @@
   width: 72.5rem;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
   border: 0 none;
   padding: 3.4rem 4.3rem;
 }

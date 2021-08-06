@@ -32,7 +32,7 @@
             <label for="Goal">{{ 'evaluation.radioone' | translate }}</label>
           </div>
 
-          <div class="p-field-radiobutton">
+          <div class="p-field-radiobutton radioBtn">
             <p-radioButton
               name="ans"
               value="Your self assessment"
@@ -69,7 +69,7 @@
             </td>
             <td>{{ score.measured }}</td>
             <td>{{ score.goalvalue }}</td>
-            <td style="font-family: 'MyriadPro'">{{ score.score }} /50</td>
+            <td class="score">{{ score.score }} /50</td>
           </tr>
         </ng-template>
       </p-table>

@@ -1,7 +1,7 @@
 <div class="conatiner">
   <div class="header">
     <div class="header__left" [ngClass]="{ fullscreen: fullScreen }">
-      <span class="header__left--text" *ngIf="!fullScreen"
+      <span class="header__left--text" *ngIf="!fullScreen" @fadeAnimation
         >{{ 'header.headerTitle' | translate }}
       </span>
 
@@ -21,11 +21,6 @@
         class="header__right--icons"
         [ngStyle]="{ visibility: sidebarOpen ? 'hidden' : 'visible' }"
       >
-        <div class="slider" *ngIf="videoScreen">
-          <img src="assets/icnons/speaker.png" alt="speaker" id="speaker" />
-          <p-slider [(ngModel)]="val"></p-slider>
-        </div>
-
         <div
           class="header__right--icons-group"
           [ngStyle]="{

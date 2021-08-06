@@ -61,6 +61,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/pages/setup/setup.module').then((m) => m.SetupModule),
   },
+  {
+    path: 'video',
+    loadChildren: () =>
+      import('src/app/pages/videoscreen/videoscreen.module').then((m) => m.VideoscreenModule),
+  }
 ];
 
 @NgModule({

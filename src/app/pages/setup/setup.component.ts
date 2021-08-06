@@ -44,7 +44,6 @@ export class SetupComponent implements OnInit {
   }
 
   onResize(event) {
-    console.log(event);
     let width = event;
     if (width <= 600) {
       this.sidebar = false;
@@ -58,6 +57,12 @@ export class SetupComponent implements OnInit {
   }
 
   redirectToBack() {
-    this.router.navigate(['/intro']);
+    this.router.navigate(['/video']);
+  }
+
+  closeSidebar(){
+    if (window.innerWidth < 600) {
+      this.sidebar = false;
+    } 
   }
 }
