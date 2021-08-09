@@ -72,7 +72,7 @@
     },
     "evaluation" : {
         "title" : " Evaluation",
-        "score": "Score",
+        "score": "Scores",
         "save" : "Save and Upload",
         "quit" : "Quit without saving",
         "feedback" : "Feedback",

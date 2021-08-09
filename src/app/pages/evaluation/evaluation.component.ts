@@ -17,7 +17,7 @@ export class EvaluationComponent implements OnInit {
   cancelValue: boolean = true;
   scores = [
     {
-      title: 'Exercise Duration',
+      title: 'Exercise duration',
       measured: '01:33',
       goalvalue: '< 02.00',
       score: 50,
@@ -29,7 +29,7 @@ export class EvaluationComponent implements OnInit {
       score: 25,
     },
     {
-      title: 'Score',
+      title: 'Questions',
       measured: '80%',
       goalvalue: '100%',
       score: 40,

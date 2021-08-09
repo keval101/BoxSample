@@ -13,6 +13,6 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.router.navigate(['/intro']);
-    }, 2000);
+    }, 2800);
   }
 }

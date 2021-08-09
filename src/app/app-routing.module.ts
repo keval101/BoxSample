@@ -10,6 +10,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('src/app/pages/home-page/home-page.module').then(
+        (m) => m.HomePageModule
+      ),
+  },
+  {
     path: 'recording',
     loadChildren: () =>
       import('src/app/pages/recording-screen/recording-screen.module').then(
@@ -26,7 +33,7 @@ const routes: Routes = [
   {
     path: 'self-assesment',
     loadChildren: () =>
-      import('src/app/pages//self-assesment/self-assesment.module').then(
+      import('src/app/pages/self-assesment/self-assesment.module').then(
         (m) => m.SelfAssesmentModule
       ),
   },

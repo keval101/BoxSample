@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
 import { fadeAnimation } from '../../shared/app.animation';
-import { interval, Subscription } from 'rxjs';
-import { ChoosescreenshotService } from '../choose-screenshot/choosescreenshot.service';
 
 @Component({
   selector: 'app-recording-screen',
@@ -47,7 +45,6 @@ export class RecordingScreenComponent implements OnInit {
 
   onSlidebarOpen(value) {
     this.isSidebarOpen = true;
-    console.log(value);
   }
 
   onSlidebarClose() {

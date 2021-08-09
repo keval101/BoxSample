@@ -43,10 +43,10 @@ export class ChooseScreenshotComponent implements OnInit {
 
     this.items = [
       {
-        picture: '../../../assets/images/01.png',
+        picture: '../../../assets/images/image2.png',
       },
       {
-        picture: '../../../assets/images/01.png',
+        picture: '../../../assets/images/image2.png',
       },
     ];
   }

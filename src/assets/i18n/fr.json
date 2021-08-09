@@ -24,6 +24,11 @@
         "upload": "Upload data",
         "watchMovie": "Watch movie"
     },
+    "video" : {
+        "prepareSetup": "Prepare Setup",
+        "title" : "How to suture right with Kelly Grasper",
+        "name": "by Doctor Hansensbacher Zurich, Sept 2019"
+    },
     "header": {
         "headerTitle" : "Suturing Basics 1 - Knots",
         "duration" : "Procedure time: 02:37"
@@ -67,7 +72,7 @@
     },
     "evaluation" : {
         "title" : " Evaluation",
-        "score": "Score",
+        "score": "Scores",
         "save" : "Save and Upload",
         "quit" : "Quit without saving",
         "feedback" : "Feedback",

@@ -18,7 +18,7 @@
       font-size: 4rem;
       font-weight: 400;
       color: $blue-color;
-      padding: 4.882rem 0 4rem 0;
+      padding: 4.882rem 0 2.5rem 0;
       padding-left: 4rem;
     }
 
@@ -98,7 +98,7 @@
   &__content {
     position: relative;
     margin-top: 3.6rem;
-    flex-grow: 0.85;
+    flex-grow: 1;
 
     &-title {
       font-size: 3.2rem;
@@ -178,7 +178,7 @@
   &__buttonGroup {
     font-size: 2.4rem;
     display: flex;
-
+    margin-bottom: 4rem;
     button:not(:last-child) {
       margin-right: 1.6rem;
     }

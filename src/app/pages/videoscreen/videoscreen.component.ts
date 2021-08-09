@@ -9,7 +9,7 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./videoscreen.component.scss'],
   animations: [fadeAnimation],
 })
-export class VideoscreenComponent implements OnInit ,AfterViewInit{
+export class VideoscreenComponent implements OnInit{
   recording: boolean;
   isScreenShot: boolean;
   isVideoScreen:boolean
@@ -38,32 +38,7 @@ export class VideoscreenComponent implements OnInit ,AfterViewInit{
     this.width = window.innerWidth
   };
 
-  togglePlayPause(){
-    if(this.video.nativeElement.paused){
-      this.playVideo = true
-      this.video.nativeElement.play()
-    }
-    else{
-      this.playVideo = false
-      this.video.nativeElement.pause()
-    }
-  };
 
-  ngAfterViewInit() {
-    this.video.nativeElement.addEventListener('timeupdate', ()=>{
-      var progressBar = document.getElementById('progressBar')
-      var time = this.video.nativeElement.currentTime / this.video.nativeElement.duration;
-      progressBar.style.width = time * 100 + "%";
-      if(this.video.nativeElement.ended){
-        this.playVideo = false
-      }
-    } );
-  }
-
-  onPlayPause(){
-    this.togglePlayPause()
-   };
-   
    redirectToBack(){
      this.router.navigate(['/intro'])
    }
