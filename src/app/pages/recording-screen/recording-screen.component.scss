@@ -201,3 +201,34 @@
   color: $blue-color;
   font-size: 3.2rem;
 }
+
+.counter{
+  position: absolute;
+  width: 40rem;
+  height: 40rem;
+  opacity: 0.5;
+  background: radial-gradient(266.77% 97.9% at 1.86% 0.8%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 6.4rem;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p{
+    font-size: 33.33rem;
+    color: $primary-color;
+    text-align: center;
+    font-weight: 700;
+  }
+}
+.goPadding{
+  padding-bottom: 12rem;
+  background: $primary-color;
+  p{
+    color: $white-color;
+  }
+}

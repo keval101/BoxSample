@@ -18,6 +18,14 @@
   </div>
 
   <div
+  class="counter"
+  [ngClass]="{ goPadding: paddingClass }"
+  *ngIf="counterTime"
+>
+  <p class="m-0">{{ text }}</p>
+</div>
+
+  <div
     class="recording__button"
     [ngClass]="{ 'recording__button-bg': isScreenShot }"
   >
