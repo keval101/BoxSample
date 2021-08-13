@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class EvaluationComponent implements OnInit {
   cancelValue: boolean = true;
   scores = [
     {
-      title: 'Exercise Duration',
+      title: 'Exercise duration',
       measured: '01:33',
       goalvalue: '< 02.00',
       score: 50,
@@ -29,7 +29,7 @@ export class EvaluationComponent implements OnInit {
       score: 25,
     },
     {
-      title: 'Score',
+      title: 'Questions',
       measured: '80%',
       goalvalue: '100%',
       score: 40,

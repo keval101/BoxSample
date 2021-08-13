@@ -1,11 +1,14 @@
 <div class="conatiner">
   <div class="header">
-    <div class="header__left" [ngClass] = "{ 'fullscreen' : fullScreen}">
-      <span class="header__left--text" *ngIf = "!fullScreen"
+    <div class="header__left" [ngClass]="{ fullscreen: fullScreen }">
+      <span class="header__left--text" *ngIf="!fullScreen" @fadeAnimation
         >{{ 'header.headerTitle' | translate }}
       </span>
 
-      <span class="header__left--duration" *ngIf="!onFinishRecording || sidebarOpen">
+      <span
+        class="header__left--duration"
+        *ngIf="!onFinishRecording || sidebarOpen"
+      >
         <p class="pi pi-circle-on header__left--duration-icon"></p>
         <p class="header__left--duration-time">
           {{ 'header.duration' | translate }}
@@ -13,9 +16,17 @@
       </span>
     </div>
 
-    <div class="header__right" [ngClass] = "{ 'fullscreen' : fullScreen}">
-      <div class="header__right--icons" [ngStyle] = "{ 'visibility' : sidebarOpen ? 'hidden' : 'visible'}">
-        <div class="header__right--icons-group" [ngStyle] = "{ 'visibility' : onFinishRecording || sidebarOpen ? 'hidden' : 'visible'}">
+    <div class="header__right" [ngClass]="{ fullscreen: fullScreen }">
+      <div
+        class="header__right--icons"
+        [ngStyle]="{ visibility: sidebarOpen ? 'hidden' : 'visible' }"
+      >
+        <div
+          class="header__right--icons-group"
+          [ngStyle]="{
+            visibility: onFinishRecording || sidebarOpen ? 'hidden' : 'visible'
+          }"
+        >
           <img src="assets/icnons/mic.png" alt="mic" id="mic" />
           <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
         </div>
@@ -26,8 +37,12 @@
         </div>
 
         <div class="header__right--icons-group" *ngIf="!onScreenShot">
-          <button type="button" class="button"  (click) = "fullscreen()"
-          [ngStyle] = "{ 'display' : fullScreen ? 'none' : 'block'}">
+          <button
+            type="button"
+            class="button"
+            (click)="fullscreen()"
+            [ngStyle]="{ display: fullScreen ? 'none' : 'block' }"
+          >
             <img
               src="assets/icnons/fullscreen.png"
               alt="flash"
@@ -35,7 +50,12 @@
             />
           </button>
 
-          <button type="button" class="button" (click) = "closescreen()" [ngStyle] = "{ 'display' : !fullScreen ? 'none' : 'block'}">
+          <button
+            type="button"
+            class="button"
+            (click)="closescreen()"
+            [ngStyle]="{ display: !fullScreen ? 'none' : 'block' }"
+          >
             <img
               src="assets/icnons/closescreen.png"
               alt="closescreen"
@@ -51,6 +71,30 @@
       >
         <button class="button" type="button" (click)="onShow()">
           <i class="pi pi-question-circle"></i>
+        </button>
+      </div>
+
+      <div class="header__right--icons-group" *ngIf="videoScreen">
+        <button
+          type="button"
+          class="button"
+          (click)="fullscreen()"
+          [ngStyle]="{ display: fullScreen ? 'none' : 'block' }"
+        >
+          <img src="assets/icnons/fullscreen.png" alt="flash" id="fullscreen" />
+        </button>
+
+        <button
+          type="button"
+          class="button"
+          (click)="closescreen()"
+          [ngStyle]="{ display: !fullScreen ? 'none' : 'block' }"
+        >
+          <img
+            src="assets/icnons/closescreen.png"
+            alt="closescreen"
+            id="closescreen"
+          />
         </button>
       </div>
     </div>

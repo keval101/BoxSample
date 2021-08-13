@@ -1,4 +1,5 @@
 @import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixin';
 
 .main-container {
   background: url('../../../assets/images/background.png');
@@ -98,27 +99,21 @@
     left: 0;
     width: 0;
     height: 1.6rem;
-    animation: filling 2s ease;
+    animation: filling 2.5s ease;
+    animation-delay: 0.5s;
   }
 }
 
 @keyframes filling {
   0% {
-    width: 10%;
-  }
-  35% {
-    width: 25%;
-  }
-  75% {
-    width: 35%;
-  }
-  85% {
-    width: 55%;
-  }
-  95% {
-    width: 85%;
+    width: 0%;
   }
   100% {
     width: 100%;
   }
+}
+
+.rightReserved {
+  @include reservedText;
+  color: $white-color !important;
 }

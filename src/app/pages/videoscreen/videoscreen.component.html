@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="header">
+    <app-header
+      [onFinishRecording]="recording"
+      [onScreenShot]="isScreenShot"
+      [videoScreen]="isVideoScreen"
+    ></app-header>
+  </div>
+
+  <div class="videoContainer">
+    <video
+      src="assets/video/video.mp4"
+      #video
+      id="myvideo"
+      type="video/mp4"
+    ></video>
+  </div>
+
+  <div class="bottomContainer">
+    <div class="buttons">
+      <div class="playedBtn">
+        <button class="playPauseBtn" (click)="onRestart()">
+          <img
+            src="assets/icnons/fast-backward-solid.svg"
+            alt="play"
+            class="icon"
+            id="restart"
+          />
+        </button>
+
+        <button class="playPauseBtn" (click)="onPlayPause()"
+        >
+          <img
+            src="assets/icnons/play-solid.svg"
+            alt="play"
+            class="icon"
+            id="playpause"
+            *ngIf="!playVideo"
+          />
+          <img
+            src="assets/icnons/pause-solid.svg"
+            alt="pause"
+            class="icon"
+            id="playpause"
+            *ngIf="playVideo"
+          />
+        </button>
+      </div>
+
+      <div class="buttonGroup">
+        <button
+          class="button button-exSmall button-outline"
+          (click)="redirectToBack()"
+        >
+          <i class="pi pi-chevron-left"></i>
+        </button>
+        <button class="button button-small button-fill" (click)="redirectTo()">
+          {{ 'video.prepareSetup' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer" [ngClass]="{ footerAnimation: videoFullScreen }">
+    <div class="progressbar" id="seekbar">
+      <div class="progressbar-color" id="progressBar"></div>
+    </div>
+
+    <div class="footer__text">
+      <p class="footer__text-bold m-0">{{ 'video.title' | translate }}</p>
+      <p class="footer__text-light m-0">{{ 'video.name' | translate }}</p>
+    </div>
+  </div>
+
+  <p
+    class="rightReserved m-0"
+    [ngClass]="{ rightReservedTop: videoFullScreen }"
+  >
+    {{ 'home.rightReserved' | translate }}
+  </p>
+
+  <div class="logo" [ngClass]="{ logoTop: videoFullScreen }">
+    <img src="assets/images/Logo2.svg" alt="logo" />
+  </div> 
+
+  <div class="slider" *ngIf="!videoFullScreen" @fadeAnimation>
+    <img src="../../../assets/icnons/volume.svg" alt="" id="speaker" />
+    <p-slider
+      [(ngModel)]="val"
+      [min]="0"
+      [max]="100"
+      [step]="10"
+      class="slideBar"
+      (ngModelChange)="volumeChanged($event)"
+    ></p-slider>
+  </div>
+
+</div>

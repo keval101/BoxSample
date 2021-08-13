@@ -1,4 +1,4 @@
-<div class="main-container" (click)="redirectTo()">
+<div class="main-container">
   <div class="container">
     <div class="logo">
       <div class="logo__items">
@@ -8,11 +8,13 @@
 
     <div class="header">
       <div class="header__left">
-        <p class="header__left--text m-0">Boxtrainer</p>
+        <p class="header__left--text m-0">
+          {{ 'home.projectTitle' | translate }}
+        </p>
       </div>
 
       <div class="header__right">
-        <span class="header__right--text">Suturing Basics 1 - Knots</span>
+        <span class="header__right--text">{{ 'home.title' | translate }}</span>
       </div>
     </div>
 
@@ -21,3 +23,7 @@
     </div>
   </div>
 </div>
+
+<p class="rightReserved">
+  {{ 'home.rightReserved' | translate }}
+</p>

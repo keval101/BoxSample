@@ -10,6 +10,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('src/app/pages/home-page/home-page.module').then(
+        (m) => m.HomePageModule
+      ),
+  },
+  {
     path: 'recording',
     loadChildren: () =>
       import('src/app/pages/recording-screen/recording-screen.module').then(
@@ -17,9 +24,16 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'choosescreenshot',
+    loadChildren: () =>
+      import('src/app/pages/choose-screenshot/choose-screenshot.module').then(
+        (m) => m.ChooseScreenshotModule
+      ),
+  },
+  {
     path: 'self-assesment',
     loadChildren: () =>
-      import('src/app/pages//self-assesment/self-assesment.module').then(
+      import('src/app/pages/self-assesment/self-assesment.module').then(
         (m) => m.SelfAssesmentModule
       ),
   },
@@ -44,6 +58,21 @@ const routes: Routes = [
         (m) => m.EndScreenModule
       ),
   },
+  {
+    path: 'intro',
+    loadChildren: () =>
+      import('src/app/pages/intro/intro.module').then((m) => m.IntroModule),
+  },
+  {
+    path: 'setup',
+    loadChildren: () =>
+      import('src/app/pages/setup/setup.module').then((m) => m.SetupModule),
+  },
+  {
+    path: 'video',
+    loadChildren: () =>
+      import('src/app/pages/videoscreen/videoscreen.module').then((m) => m.VideoscreenModule),
+  }
 ];
 
 @NgModule({

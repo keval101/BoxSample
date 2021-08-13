@@ -35,6 +35,10 @@ html{
         font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
       }
 
+      @media screen and (min-width : 1367px){
+        font-size: 50%;
+      }
+
       @include respond(tab-land){  //width < 1200
           font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%
         }
@@ -64,7 +68,7 @@ html{
     @media screen and (max-width: 600px) {
         width: 2.5rem;
         height: 1.2rem;
-      }
+    }
 
 
     &.p-inputswitch-checked .p-inputswitch-slider:before {
@@ -73,9 +77,10 @@ html{
 
         @media  screen and (max-width:768px) {
             transform: translateX(2.25rem) ;
-
         }
-    
+        @media  screen and (max-width:600px) {
+            transform: translateX(1.75rem) ;
+        }
     }
     &.p-inputswitch-checked:not(p-disabled):hover .p-inputswitch-slider{
         background-color: $bright-grey-color !important;
@@ -99,12 +104,8 @@ html{
         @media screen and (max-width: 600px) {
             width: 1.5rem  !important;
             height: 1.5rem !important;
-            margin-top: -0.7rem !important;
+            margin-top: -0.75rem !important;
         }
-    }
-
-    &.p-inputswitch-checked .p-inputswitch-slider {
-        background: $bright-grey-color;
     }
 
     &.p-inputswitch-checked .p-inputswitch-slider {

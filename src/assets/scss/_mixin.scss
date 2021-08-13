@@ -29,3 +29,51 @@
     } //1800px
   }
 }
+
+@mixin reservedText {
+  position: absolute;
+  bottom: 1.2rem;
+  font-weight: 500;
+  left: 4rem;
+  color: $element-grey-color;
+  font-size: 1.6rem;
+  margin: 0;
+  font-family: 'Myriad Light';
+}
+
+@mixin onMobileScreenButton {
+  .buttonContainer {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    width: 5.4rem;
+    height: 4.4rem;
+    overflow: hidden;
+    top: 0.8rem;
+    right: 4rem;
+    z-index: 1000;
+
+    @media screen and (max-width: 600px) {
+      display: inline-block;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      position: absolute;
+
+      .pi-chevron-circle-left:before,
+      .pi-chevron-circle-right:before {
+        opacity: 0.7;
+        font-size: 3.4rem;
+      }
+
+      .pi-chevron-circle-left:before {
+        color: $white-color;
+      }
+      .pi-chevron-circle-right:before {
+        color: $primary-color;
+      }
+    }
+  }
+}

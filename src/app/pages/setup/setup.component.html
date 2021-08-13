@@ -1,0 +1,127 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    [onScreenShot]="isScreenShot"
+  ></app-header>
+</div>
+
+<div
+  class="container"
+  (window:resize)="onResize($event)"
+  (click)="closeSidebar()"
+>
+  <div class="container__title">
+    <p class="container__title-text m-0">
+      {{ 'setup.title' | translate }}
+    </p>
+    <p class="container__title-message m-0">
+      {{ 'setup.message' | translate }}
+    </p>
+  </div>
+
+  <div class="dropdown__div">
+    <div>
+      <p-dropdown
+        [options]="camera"
+        [(ngModel)]="selectedCamera"
+        optionLabel="cameraName"
+        placeholder="Logitech XY123"
+      ></p-dropdown>
+    </div>
+
+    <div class="dropdown__div-butonGroup">
+      <div class="dropdown__div-butonGroup--iconsGroup">
+        <img
+          src="assets/icnons/greyMic.png"
+          alt="mic"
+          id="mic"
+          [ngStyle]="{ display: checkedMic ? 'none' : 'block' }"
+        />
+        <img
+          src="assets/icnons/redMic.png"
+          alt="mic"
+          id="mic"
+          [ngStyle]="{ display: !checkedMic ? 'none' : 'block' }"
+        />
+        <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
+      </div>
+
+      <div class="dropdown__div-butonGroup--iconsGroup">
+        <img
+          src="assets/icnons/greyFlash.png"
+          alt="flash"
+          id="flash"
+          [ngStyle]="{ display: checkedFlash ? 'none' : 'block' }"
+        />
+        <img
+          src="assets/icnons/redFlash.png"
+          alt="flash"
+          id="flash"
+          [ngStyle]="{ display: !checkedFlash ? 'none' : 'block' }"
+        />
+        <p-inputSwitch [(ngModel)]="checkedFlash"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+
+  <div class="recordingPreview">
+    <img src="assets/images/01.png" />
+  </div>
+
+  <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+    <div class="sidebar__header">
+      <img src="assets/images/logo.png" alt="logo" />
+    </div>
+
+    <div class="sidebar__content">
+      <p class="sidebar__content-title">
+        {{ 'recordingPage.exercise' | translate }}
+      </p>
+      <div class="sidebar__content-goal">
+        <p class="sidebar__content-title2">
+          {{ 'intro.goals' | translate }}
+        </p>
+        <p class="sidebar__content-text">
+          {{ 'intro.goalsText' | translate }}
+        </p>
+      </div>
+      <div class="sidebar__content-task">
+        <p class="sidebar__content-title2">
+          {{ 'recordingPage.yourTasks' | translate }}
+        </p>
+        <p class="sidebar__content-text">
+          {{ 'recordingPage.taskText' | translate }}
+        </p>
+
+        <ul>
+          <li>{{ 'recordingPage.ulText1' | translate }}</li>
+          <li>{{ 'recordingPage.ulText2' | translate }}</li>
+        </ul>
+
+        <p class="sidebar__content-text">
+          {{ 'recordingPage.sidebarmsg' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="sidebar__buttonGroup">
+      <button
+        class="button button-outline button-exSmall"
+        (click)="redirectToBack()"
+      >
+        <i class="pi pi-chevron-left"></i>
+      </button>
+
+      <button class="button button-fill button-small" (click)="redirectTo()">
+        {{ 'setup.startExercise' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="buttonContainer" (click)="showDetail()">
+  <button>
+    <i class="pi pi-chevron-circle-left" *ngIf="!sidebar" @fadeAnimation></i>
+    <i class="pi pi-chevron-circle-right" *ngIf="sidebar" @fadeAnimation></i>
+  </button>
+</div>
