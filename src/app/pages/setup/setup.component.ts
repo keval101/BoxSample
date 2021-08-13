@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { fadeAnimation } from '../../shared/app.animation';
@@ -9,7 +9,7 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./setup.component.scss'],
   animations: [fadeAnimation],
 })
-export class SetupComponent implements OnInit {
+export class SetupComponent implements OnInit, AfterViewInit {
   recording: boolean;
   isScreenShot: boolean;
   selectedCamera: string;
@@ -21,6 +21,7 @@ export class SetupComponent implements OnInit {
     { cameraName: 'Internal camera' },
     { cameraName: 'Another camera' },
   ];
+  @ViewChild('video') video:any; 
 
   constructor(
     private router: Router,
@@ -37,6 +38,19 @@ export class SetupComponent implements OnInit {
       this.sidebar = false;
     }
     this.onResize(window.innerWidth);
+  }
+  ngAfterViewInit() {
+    let _video = this.video.nativeElement;
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment',}})
+      .then(stream => {
+        
+        (<any>window).stream = stream;
+        _video.srcObject = stream;
+        _video.onloadedmetadata = function (e: any) { };
+        _video.play();
+      })
+    }
   }
 
   showDetail() {

@@ -24,14 +24,24 @@
     }
   }
 
-  &__image {
+  .video-js{
+    width: 100%;
+    height: 100vh;
+  }
+
+  .vjs-control-bar{
+    z-index: 100;
+  }
+
+  &__video {
     width: 100%;
     height: 100%;
     position: relative;
 
-    img {
-      width: 100vw;
-      height: 100%;
+    video{
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
     }
   }
 
@@ -231,4 +241,12 @@
   p{
     color: $white-color;
   }
+}
+
+::ng-deep .vjs-record .vjs-device-button.vjs-control {
+  display: none !important;
+}
+
+::ng-deep .vjs-control-bar{
+  z-index: 100;
 }

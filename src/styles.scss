@@ -2,6 +2,9 @@
 @import 'assets/scss/variables';
 @import 'assets/scss/mixin';
 
+@import '~video.js/dist/video-js.css';
+@import '~videojs-record/dist/css/videojs.record.css';
+
 @font-face {
     font-family:"Myriad Regular";
     src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF")format('opentype');
