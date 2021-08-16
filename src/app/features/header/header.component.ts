@@ -12,12 +12,14 @@ import { fadeAnimation } from '../../shared/app.animation';
   animations: [fadeAnimation],
 })
 export class HeaderComponent implements OnInit, OnChanges {
+  
   checkedMic: boolean = true;
   checkedFlash: boolean = false;
   showSide: boolean = true;
   fullScreen: boolean = false;
   val: number;
-
+  
+  @Input() recordingDuration:string;
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;

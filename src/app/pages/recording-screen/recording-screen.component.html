@@ -5,8 +5,14 @@
       [onScreenShot]="isScreenShot"
       [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
+      [recordingDuration] = "recordingDurationTime"
       (show)="onSlidebarOpen($event)"
     ></app-header>
+  </div>
+
+  <div class="videoPreview" *ngIf = 'recordingFinish'>
+    <video [src]="videoSource" #videoPreview autoplay controls></video>
+    <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
 
   <div class="recording__logo">
@@ -14,7 +20,7 @@
   </div>
 
   <div class="recording__video">
-    <video id="video_{{idx}}" class="video-js vjs-default-skin video" playsinline></video>
+    <video id="video_{{idx}}" class="video-js vjs-default-skin video" playsinline #video></video>
   </div>
 
   <div
@@ -53,14 +59,6 @@
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
 
-      <div class="recording__button--group" *ngIf="takeScreenshot">
-        <button class="button button-small button-outline" (click)="onRetake()">
-          {{ 'recordingPage.retake' | translate }}
-        </button>
-        <button class="button button-small button-fill" (click)="onDone()">
-          {{ 'recordingPage.done' | translate }}
-        </button>
-      </div>
     </div>
   </div>
 

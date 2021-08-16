@@ -31,7 +31,7 @@
     },
     "header": {
         "headerTitle" : "Suturing Basics 1 - Knots",
-        "duration" : "Procedure time: 02:37"
+        "duration" : "Procedure time:"
     },
     "setup":{
         "title" : "Prepare setup",
@@ -64,8 +64,7 @@
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
         "message" : "Please answer the questions to proceed",
-        "questionone" : "My knot was tied tightly and in the correct location ",
-        "questiontwo" : "My knot was tied tightly and in the correct location",
+        "question" : "My knot was tied tightly and in the correct location ",
         "anotherquestion" : "Another question",
         "yes" : "Yes",
         "no" : "No"

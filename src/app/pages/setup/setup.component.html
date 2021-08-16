@@ -24,8 +24,8 @@
       <p-dropdown
         [options]="camera"
         [(ngModel)]="selectedCamera"
-        optionLabel="cameraName"
         placeholder="Logitech XY123"
+        (ngModelChange)  = "dropValue($event)"
       ></p-dropdown>
     </div>
 

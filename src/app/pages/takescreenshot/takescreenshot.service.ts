@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class RecordingService {
-  fullscreen: boolean = false;
-  cameraidValue;
+export class TakescreenshotService {
+  captures = [];
   constructor() {}
 }

@@ -10,21 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-  questions = [
-    {
-      id: 1,
-      question: 'My knot was tied tightly and in the correct location',
-    },
-    {
-      id: 2,
-      question: 'My knot was tied tightly and in the correct location',
-    },
-    {
-      id: 3,
-      question: 'Another question',
-    },
-  ];
-
+  answer1 = "Yes";
+  answer2;
+  answer3;
+  
   constructor(
     private router: Router,
     public TranslateService: TranslateService
@@ -36,6 +25,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   redirectTo() {
+
     this.router.navigate(['/evaluation']);
   }
 }

@@ -230,6 +230,7 @@
   padding-left: 1.6rem;
   font-size: 2.4rem;
   color: $black-color;
+  text-overflow: ellipsis;
 }
 
 ::ng-deep.p-dropdown-panel.p-dropdown-items.p-dropdown-item:not(.p-highlight):not(.p-disabled):hover,
@@ -237,6 +238,8 @@
 ::ng-deep .p-dropdown-items-wrapper,
 ::ng-deep .p-dropdown .p-dropdown-trigger,
 ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  display: flex;
+  align-items: center;
   color: $black-color;
   background: #d8d9da;
 }

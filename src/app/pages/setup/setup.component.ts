@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
 import { fadeAnimation } from '../../shared/app.animation';
+import { RecordingService } from '../recording-screen/recording.service';
 
 @Component({
   selector: 'app-setup',
@@ -16,16 +18,17 @@ export class SetupComponent implements OnInit, AfterViewInit {
   checkedMic: boolean = true;
   checkedFlash: boolean;
   sidebar: boolean;
-
-  camera = [
-    { cameraName: 'Internal camera' },
-    { cameraName: 'Another camera' },
-  ];
+  deviceID;
+  cameraName;
+  cameraSetting;
+  camera = [];
   @ViewChild('video') video:any; 
-
+  @ViewChild('value') drop:ElementRef; 
+  cameraId = new Subject()
   constructor(
     private router: Router,
-    public TranslateService: TranslateService
+    public TranslateService: TranslateService,
+    private service: RecordingService
   ) {}
 
   ngOnInit(): void {
@@ -38,13 +41,36 @@ export class SetupComponent implements OnInit, AfterViewInit {
       this.sidebar = false;
     }
     this.onResize(window.innerWidth);
+
+    setTimeout(() => {
+      this.cameraChange()
+    }, 500);
   }
-  ngAfterViewInit() {
+
+  dropValue(event){
+    this.cameraName = event.Id
+    this.cameraId.next(event.Id)
+  }
+
+  cameraChange(){
     let _video = this.video.nativeElement;
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment',}})
+    let s = this
+
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+      devices.forEach(function(device) {
+    
+        if(device.kind === 'videoinput'){
+          s.camera.push({label : device.label, Id: device.deviceId})
+          s.cameraSetting = device.label
+          s.deviceID = device.deviceId
+        }
+      });
+    })
+
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {     
+      navigator.mediaDevices.getUserMedia({ video:{deviceId: s.cameraName ? {exact: s.cameraName} : undefined}})
       .then(stream => {
-        
         (<any>window).stream = stream;
         _video.srcObject = stream;
         _video.onloadedmetadata = function (e: any) { };
@@ -53,6 +79,8 @@ export class SetupComponent implements OnInit, AfterViewInit {
     }
   }
 
+  ngAfterViewInit() {}
+  
   showDetail() {
     this.sidebar = !this.sidebar;
   }

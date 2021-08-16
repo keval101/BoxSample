@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
@@ -9,6 +9,7 @@ import videojs from 'video.js';
 import * as RecordRTC from 'recordrtc';
 // register videojs-record plugin with this import
 import * as Record from 'videojs-record/dist/videojs.record.js';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recording-screen',
@@ -22,7 +23,10 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
   takeScreenshot: boolean = false;
   isSidebarOpen: boolean = false;
   counterTime:boolean = false;
+  recordingFinish:boolean = false;
+  videoSource;
   paddingClass:boolean;
+  recordingDurationTime:string;
   data = [3,2,1,"go"]
   text;
   // index to create unique ID for component
@@ -32,11 +36,13 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
   private player: any; 
   private plugin: any;
 
+  @ViewChild('video') videoEle : ElementRef
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
     private choosescreenshotService : ChoosescreenshotService,
+    private sanitizer : DomSanitizer,
     elementRef: ElementRef
   ) {
     this.player = false;
@@ -64,14 +70,11 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
           video: {
             facingMode: 'environment',
           },
-           // fire the timestamp event every 2 seconds
           debug: true,
           maxLength: 10000
         }
       }
     };
-
-    
   }
 
   ngOnInit(): void {
@@ -93,13 +96,7 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
     setTimeout( () => {
       this.videoInitialize()
     },500)
-
-    if(this.choosescreenshotService.backToScreen == true){
-      timer.unsubscribe()
-      this.takeScreenshot = true;
-      this.recording = true;
-      this.isScreenShot = true;
-    }
+    this.recordingDurationTime = "00:00"
   }
 
   onRetake() {
@@ -112,9 +109,8 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
 
   onFinish() {
     this.recordingService.fullscreen = false;
-    this.recording = true;
-    this.isScreenShot = true;
     this.isSidebarOpen = false;
+    this.recordingFinish = true;
     this.player.record().stopDevice();
   }
 
@@ -134,7 +130,7 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
     private _elementRef: ElementRef;
 
 
-// use ngAfterViewInit to make sure we initialize the videojs element
+  // use ngAfterViewInit to make sure we initialize the videojs element
   // after the component template itself has been rendered
 
   ngAfterViewInit() {}
@@ -144,6 +140,7 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
 
     // setup the player via the unique element ID
     this.player = videojs(document.getElementById(el), this.config, () => {
+      console.log('player ready! id:', el);
       // print version information at startup
       var msg = 'Using video.js ' + videojs.VERSION +
         ' with videojs-record ' + videojs.getPluginVersion('record') +
@@ -157,11 +154,22 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
     this.player.on('deviceReady', () => {
       this.player.record().start()
     })
+
+    const currentTime = () => {
+      const currentTimeElement = document.querySelector('#current')
+
+      let currentMinutes = Math.floor(this.videoEle.nativeElement.currentTime / 60)
+      let currentSeconds = Math.floor(this.videoEle.nativeElement.currentTime - currentMinutes * 60)
+      this.recordingDurationTime = `${currentMinutes < 10 ? '0'+currentMinutes : currentMinutes }:${currentSeconds < 10 ? '0'+currentSeconds : currentSeconds}`
+    }
+
+    this.videoEle.nativeElement.addEventListener('timeupdate', currentTime)
      
     // user completed recording and stream is available
     this.player.on('finishRecord', () => {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
+      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.player.recordedData));
     });
 
     // error handling
@@ -170,6 +178,10 @@ export class RecordingScreenComponent implements OnInit, AfterViewInit {
 
     this.player.on('deviceError', () => {
     });
+  }
+
+  redirectToPhoto(){
+    this.router.navigate(['/takescreenshot']);
   }
 
 }
