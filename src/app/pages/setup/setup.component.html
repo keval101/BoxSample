@@ -21,10 +21,10 @@
 
   <div class="dropdown__div">
     <div>
-      <p-dropdown
+      <p-dropdown *ngIf = "camera.length"
         [options]="camera"
         [(ngModel)]="selectedCamera"
-        placeholder="Logitech XY123"
+        [placeholder]="camera[0].label"
         (ngModelChange)  = "dropValue($event)"
       ></p-dropdown>
     </div>
