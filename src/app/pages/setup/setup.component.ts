@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { fadeAnimation } from '../../shared/app.animation';
-import { RecordingService } from '../recording-screen/recording.service';
 
 @Component({
   selector: 'app-setup',
@@ -11,24 +10,23 @@ import { RecordingService } from '../recording-screen/recording.service';
   styleUrls: ['./setup.component.scss'],
   animations: [fadeAnimation],
 })
-export class SetupComponent implements OnInit, AfterViewInit {
+export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
   recording: boolean;
   isScreenShot: boolean;
   selectedCamera: string;
   checkedMic: boolean = true;
   checkedFlash: boolean;
   sidebar: boolean;
-  deviceID;
-  cameraName;
-  cameraSetting;
-  camera = [];
+  deviceID : any;
+  cameraDeviceId : any;
+  videoStream:any;
+  camera:any[] = [];
   @ViewChild('video') video:any; 
   @ViewChild('value') drop:ElementRef; 
   cameraId = new Subject()
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
-    private service: RecordingService
   ) {}
 
   ngOnInit(): void {
@@ -48,30 +46,30 @@ export class SetupComponent implements OnInit, AfterViewInit {
   }
 
   dropValue(event){
-    this.cameraName = event.Id
+    this.cameraDeviceId = event.Id
     this.cameraId.next(event.Id)
   }
 
   cameraChange(){
     let _video = this.video.nativeElement;
-    let s = this
+    let tempThis = this
 
     navigator.mediaDevices.enumerateDevices()
     .then(function(devices) {
       devices.forEach(function(device) {
     
         if(device.kind === 'videoinput'){
-          s.camera.push({label : device.label, Id: device.deviceId})
-          s.cameraSetting = device.label
-          s.deviceID = device.deviceId
+          tempThis.camera.push({label : device.label, Id: device.deviceId})
+          tempThis.deviceID = device.deviceId
         }
       });
     })
 
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {     
-      navigator.mediaDevices.getUserMedia({ video:{deviceId: s.cameraName ? {exact: s.cameraName} : undefined}})
+      navigator.mediaDevices.getUserMedia({ video:{deviceId: tempThis.cameraDeviceId ? {exact: tempThis.cameraDeviceId} : undefined}})
       .then(stream => {
         (<any>window).stream = stream;
+        this.videoStream = stream;
         _video.srcObject = stream;
         _video.onloadedmetadata = function (e: any) { };
         _video.play();
@@ -106,5 +104,8 @@ export class SetupComponent implements OnInit, AfterViewInit {
     if (window.innerWidth < 600) {
       this.sidebar = false;
     } 
+  }
+  ngOnDestroy(){
+    this.videoStream.getTracks()[0].stop()
   }
 }

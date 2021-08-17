@@ -1,8 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChoosescreenshotService } from '../choose-screenshot/choosescreenshot.service';
-import { TakescreenshotService } from './takescreenshot.service';
 
 @Component({
   selector: 'app-takescreenshot',

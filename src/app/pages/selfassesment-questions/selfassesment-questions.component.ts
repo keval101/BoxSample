@@ -10,9 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-  answer1 = "Yes";
-  answer2;
-  answer3;
+  answer1:any = "Yes";
+  answer2:any;
+  answer3:any;
   
   constructor(
     private router: Router,

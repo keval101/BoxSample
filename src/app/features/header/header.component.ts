@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   fullScreen: boolean = false;
   val: number;
   
-  @Input() recordingDuration:string;
+  recordingDuration:any = "00:00";
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
@@ -37,6 +37,12 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.fullScreen = this.recordingService.fullscreen;
+    
+    this.recordingService.recordTimeDuration.subscribe(
+      res => {
+        this.recordingDuration = res
+      }
+    )
   }
 
   onShow() {
