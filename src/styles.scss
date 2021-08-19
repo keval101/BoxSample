@@ -42,6 +42,10 @@ html{
         font-size: 50%;
       }
 
+      @media screen and (max-width : 1365px) and (min-width:1024px){
+        font-size: 40%; 
+      }
+
       @include respond(tab-land){  //width < 1200
           font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%
         }
@@ -56,6 +60,10 @@ html{
       
       @include respond(phone){ //width < 900
           font-size: 22%; //1 rem = 3.52px; 3.52px/16px = 22%
+      }
+
+      @include respond(phone){ //width < 900
+        font-size: 3.52px;  -webkit-text-size-adjust:none; //1 rem = 3.52px; 3.52px/16px = 22%
       }
 }
 

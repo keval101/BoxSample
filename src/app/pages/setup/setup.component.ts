@@ -106,6 +106,6 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
     } 
   }
   ngOnDestroy(){
-    this.videoStream.getTracks()[0].stop()
+    this.videoStream =null
   }
 }

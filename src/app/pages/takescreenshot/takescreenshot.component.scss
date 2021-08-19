@@ -30,13 +30,12 @@
         .cameraBtn {
             background-color: transparent;
             border: none;
-            width: 7.7rem;
             cursor: pointer;
         }
         .screenShotText {
           color: $primary-color;
           font-size: 3.2rem;
-          margin-left: 2rem;
+          margin-left: 1rem;
         }
 
         &--Btngroup{
@@ -48,34 +47,25 @@
         }
     }
 }
+.snapshotContainer{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 6.4rem);
+    justify-content: space-between;
+}
 .video{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-#canvas{
+.canvas{
     position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-}
-.snapshotContainer{
-    position: relative;
-    display: flex;
+    height: auto;
+    object-fit: cover;
 }
 .zIndex{
     z-index: 1;
 }
-.img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 
-    img{
-        width: 100%;
-        height: 100%;
-    }
-}

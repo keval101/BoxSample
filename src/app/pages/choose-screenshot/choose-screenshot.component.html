@@ -8,8 +8,7 @@
     <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
       <ng-template let-item pTemplate="item" >
         <img
-          style="height: 100%"
-          [src]="item.picture"
+          [src]="item"
           class="screenShotImage"
         />
       </ng-template>

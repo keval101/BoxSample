@@ -8,9 +8,9 @@
 
   <div class="container">
     <!-- <video autoplay #video id="video"></video> -->
-    
-    <div class="img">
-      <img src="../../../assets/images/01.png" alt="img">
+    <div class="snapshotContainer">
+      <video #video class="video" width="640" height="480" autoplay [ngClass] = " {'zIndex' : !imageCapture}"></video>
+      <canvas #canvas class="canvas" width="640" height="480" ></canvas>
     </div>
     
 

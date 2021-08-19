@@ -28,7 +28,7 @@
           }"
         >
           <img src="assets/icnons/mic.png" alt="mic" id="mic" />
-          <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()"></p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">

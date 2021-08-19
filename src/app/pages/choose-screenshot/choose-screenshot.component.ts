@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { ChoosescreenshotService } from './choosescreenshot.service';
 @Component({
   selector: 'app-choose-screenshot',
@@ -11,12 +12,13 @@ export class ChooseScreenshotComponent implements OnInit {
   items: any[] = [];
   recording: boolean = false;
   isScreenShot: boolean = false;
-  responsiveOptions;
+  responsiveOptions:any;
 
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private choosescreenshotService: ChoosescreenshotService,
+    private takescreenshotService : TakescreenshotService
   ) {
     this.responsiveOptions = [
       {
@@ -40,14 +42,7 @@ export class ChooseScreenshotComponent implements OnInit {
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
-    this.items = [
-      {
-        picture: '../../../assets/images/image2.png',
-      },
-      {
-        picture: '../../../assets/images/image2.png',
-      },
-    ];
+    this.items = this.takescreenshotService.captures
   }
 
   backToScreenShot() {

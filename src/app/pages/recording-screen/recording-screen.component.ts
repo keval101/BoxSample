@@ -9,6 +9,7 @@ import * as RecordRTC from 'recordrtc';
 // register videojs-record plugin with this import
 import * as Record from 'videojs-record/dist/videojs.record.js';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HeaderService } from 'src/app/features/header/header.service';
 
 @Component({
   selector: 'app-recording-screen',
@@ -28,9 +29,10 @@ export class RecordingScreenComponent implements OnInit {
   recordingDurationTime:string;
   data = [3,2,1,"go"]
   text:any;
+  micValue:boolean;
   // index to create unique ID for component
   idx = 'clip1';
-
+  
   private config: any;
   private player: any; 
   private plugin: any;
@@ -41,12 +43,11 @@ export class RecordingScreenComponent implements OnInit {
     private router: Router,
     private recordingService: RecordingService,
     private sanitizer : DomSanitizer,
+    private headerService : HeaderService
   ) {
     this.player = false;
-
     // save reference to plugin (so it initializes)
     this.plugin = Record;
-
     // video.js configuration
     this.config = {
       controls: false,
@@ -58,9 +59,10 @@ export class RecordingScreenComponent implements OnInit {
       bigPlayButton: false,
       controlBar: {
         fullscreenToggle: false,
-        volumePanel: false
+        volumePanel: false,
+        recordIndicator: false,
       },
-      plugins: {
+      plugins:{
         // configure videojs-record plugin
         record: {
           audio: true,
@@ -130,15 +132,23 @@ export class RecordingScreenComponent implements OnInit {
   // after the component template itself has been rendered
 
   videoInitialize(){
-    let el = 'video_' + this.idx;
+    let el = 'video';
+      this.headerService.muteUnmuteMic.subscribe(
+      res =>{
+        this.micValue = res
+        this.config.plugins.record.audio = this.micValue
+      })
 
     // setup the player via the unique element ID
+    console.log(this.config.plugins.record.audio)
+
     this.player = videojs(document.getElementById(el), this.config, () => {
       // print version information at startup
       var msg = 'Using video.js ' + videojs.VERSION +
         ' with videojs-record ' + videojs.getPluginVersion('record') +
         ' and recordrtc ' + RecordRTC.version;
       videojs.log(msg);
+
     });
 
     this.player.on('ready', () => {

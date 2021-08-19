@@ -1,7 +1,8 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChoosescreenshotService } from '../choose-screenshot/choosescreenshot.service';
+import { TakescreenshotService } from './takescreenshot.service';
 
 @Component({
   selector: 'app-takescreenshot',
@@ -14,11 +15,17 @@ export class TakescreenshotComponent implements OnInit{
   takeScreenshot: boolean = false;
   onCameraClick : boolean = false;
   imageCapture:boolean = false
+  isTaken:boolean = false
+  videoStream:any;
+  
+  @ViewChild('video') video:ElementRef; 
+  @ViewChild('canvas') canvas: ElementRef;
 
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
     private choosescreenshotService:ChoosescreenshotService,
+    private takescreenshotService: TakescreenshotService
   ) {}
 
   ngOnInit(): void {
@@ -33,11 +40,27 @@ export class TakescreenshotComponent implements OnInit{
     }
   }
 
+  ngAfterViewInit() {
+    let _video = this.video.nativeElement;
+
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        (<any>window).stream = stream;
+        this.videoStream= stream;
+        _video.srcObject = stream;
+        _video.play();
+      })
+    }
+  }
 
   takeScreenShot(){
    this.onCameraClick = true
    this.takeScreenshot = false
    this.imageCapture = true
+   var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
+   this.takescreenshotService.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+   console.log(this.takescreenshotService.captures)
   }
 
   onRetake(){

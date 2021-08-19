@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+
 @Component({
   selector: 'app-self-assesment',
   templateUrl: './self-assesment.component.html',
@@ -10,11 +12,12 @@ export class SelfAssesmentComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
   items: any[] = [];
-  responsiveOptions;
+  responsiveOptions:any;
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService
+    public TranslateService: TranslateService,
+    private takescreenshotService : TakescreenshotService
   ) {
     this.responsiveOptions = [
       {
@@ -38,15 +41,8 @@ export class SelfAssesmentComponent implements OnInit {
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
-
-    this.items = [
-      {
-        picture: '../../../assets/images/result.png',
-      },
-      {
-        picture: '../../../assets/images/01.png',
-      },
-    ];
+    this.items = this.takescreenshotService.captures
+    console.log(this.takescreenshotService.captures)
   }
 
   redirectTo() {

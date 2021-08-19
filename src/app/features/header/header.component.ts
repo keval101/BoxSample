@@ -24,8 +24,8 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
-  @Output() show = new Subject();
   @Input() videoScreen: boolean = false;
+  @Output() show = new Subject();
 
   constructor(
     public translate: TranslateService,
@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit, OnChanges {
         this.recordingDuration = res
       }
     )
+    this.muteUnmuteToggle()
   }
 
   onShow() {
@@ -57,5 +58,10 @@ export class HeaderComponent implements OnInit, OnChanges {
   closescreen() {
     this.headerService.videoFullscreen.next(false);
     this.fullScreen = false;
+  }
+
+  muteUnmuteToggle(){
+    this.headerService.muteMic = this.checkedMic;
+    this.headerService.muteUnmuteMic.next(this.checkedMic);
   }
 }

@@ -29,13 +29,13 @@
         {{ 'selfassesment.choice' | translate }}
       </p>
 
-      <div class="selfassesment__result-content">
+      <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
-          <p-carousel [value]="items" [numVisible]="1">
+          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
             <ng-template let-item pTemplate="item">
               <img
                 style="height: 100%"
-                [src]="item.picture"
+                [src]="item"
                 class="screenShotImage"
               />
             </ng-template>
