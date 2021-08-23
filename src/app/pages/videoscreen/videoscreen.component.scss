@@ -10,6 +10,9 @@
 }
 
 .header {
+  position: absolute;
+  top:0;
+  width: 100%;
   z-index: 1000;
 }
 
@@ -20,12 +23,9 @@
 }
 
 #myvideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .bottomContainer {
@@ -186,12 +186,13 @@
   align-items: center;
   position: absolute;
   top: 1.345rem;
-  right: 16.008rem;
-  width: 21.843rem;
+  right: 22.008rem;
+  width: 17.959rem;
   height: 3.601rem;
+  z-index: 1000;
 
   @media screen and (max-width:375px){
-    right :14rem;
+    right :26rem;
   }
 
   @media screen and (max-width:320px){

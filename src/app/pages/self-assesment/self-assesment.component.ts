@@ -42,7 +42,6 @@ export class SelfAssesmentComponent implements OnInit {
     this.isScreenShot = true;
     this.recording = true;
     this.items = this.takescreenshotService.captures
-    console.log(this.takescreenshotService.captures)
   }
 
   redirectTo() {

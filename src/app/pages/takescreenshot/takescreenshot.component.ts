@@ -60,7 +60,6 @@ export class TakescreenshotComponent implements OnInit{
    this.imageCapture = true
    var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
    this.takescreenshotService.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
-   console.log(this.takescreenshotService.captures)
   }
 
   onRetake(){

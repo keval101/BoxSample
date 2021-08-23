@@ -1,87 +1,70 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
 import { fadeAnimation } from '../../shared/app.animation';
-import { interval, Subscription } from 'rxjs';
-import videojs from 'video.js';
-import * as RecordRTC from 'recordrtc';
-// register videojs-record plugin with this import
-import * as Record from 'videojs-record/dist/videojs.record.js';
+import { interval, Subscription, timer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from 'src/app/features/header/header.service';
-
+import { Platform } from '@angular/cdk/platform';
+declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
   templateUrl: './recording-screen.component.html',
   styleUrls: ['./recording-screen.component.scss'],
   animations: [fadeAnimation],
 })
-export class RecordingScreenComponent implements OnInit {
+export class RecordingScreenComponent implements OnInit, OnDestroy {
   recording: boolean = false;
   isScreenShot: boolean = false;
   takeScreenshot: boolean = false;
   isSidebarOpen: boolean = false;
   counterTime:boolean = false;
   recordingFinish:boolean = false;
+  isRunning:boolean;
   videoSource:any;
   paddingClass:boolean;
   recordingDurationTime:string;
   data = [3,2,1,"go"]
-  text:any;
+  counter:any;
   micValue:boolean;
-  // index to create unique ID for component
-  idx = 'clip1';
-  
-  private config: any;
-  private player: any; 
-  private plugin: any;
-
+  mediaRecorder:any;
+  recordedBlobs:any;
+  options:any;
+  micCheckedValue:boolean;
+  recordedType:any;
+  videoTrack:any;
+  audioTrack:any;
+  time:number = 0;
+  displayTimer:any;
+  videoType:any;
+  videoTimer:Subscription;
   @ViewChild('video') videoEle : ElementRef
+  @ViewChild('videoPreview') recordedVideoEle : ElementRef;
+
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
     private sanitizer : DomSanitizer,
-    private headerService : HeaderService
-  ) {
-    this.player = false;
-    // save reference to plugin (so it initializes)
-    this.plugin = Record;
-    // video.js configuration
-    this.config = {
-      controls: false,
-      autoplay: false,
-      fluid: false,
-      loop: false,
-      width: 320,
-      height: 240,
-      bigPlayButton: false,
-      controlBar: {
-        fullscreenToggle: false,
-        volumePanel: false,
-        recordIndicator: false,
-      },
-      plugins:{
-        // configure videojs-record plugin
-        record: {
-          audio: true,
-          video: {
-            facingMode: 'environment',
-          },
-          debug: true,
-          maxLength: 10000
-        }
-      }
-    };
+    private headerService : HeaderService,
+    public platform: Platform
+  ) { 
+    setTimeout(() => {
+      this.headerService.muteUnmuteMic.subscribe(
+        res =>{
+          this.micValue = res
+          this.muteVideo()
+        })
+    }, 4000);    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     const obs = interval(1000)
     const timer:Subscription = obs.subscribe( (d) => {
       this.counterTime = true;
-      let text = this.data[d];
-      this.text = text
+      let counterText = this.data[d];
+      this.counter = counterText
 
       if(d == 3){
         this.paddingClass = true
@@ -89,12 +72,18 @@ export class RecordingScreenComponent implements OnInit {
     })
     setTimeout(() => {
         timer.unsubscribe()
-        this.counterTime = false
+        this.startRecording()
+        this.counterTime = false;
+        if(this.headerService.muteMic == false){
+         if((<any>window).stream.getAudioTracks().length > 0){
+          (<any>window).stream.getAudioTracks()[0].enabled = false
+         }
+        }
     }, 5000);
-
     setTimeout( () => {
-      this.videoInitialize()
+    this.startCamera();
     },500)
+    this.micCheckedValue = this.headerService.muteMic
   }
 
   onRetake() {
@@ -108,12 +97,13 @@ export class RecordingScreenComponent implements OnInit {
   onFinish() {
     this.recordingService.fullscreen = false;
     this.isSidebarOpen = false;
-    this.recordingFinish = true;
-    this.player.record().stopDevice();
-  }
-
-  takeScreenShot() {
-    this.takeScreenshot = true;
+    this.isRunning = false;
+    this.stopRecording();
+    setTimeout(() => {
+      this.recordingFinish = true;
+    }, 1000);
+    this.videoTrack.stop()
+    this.audioTrack.stop()
   }
 
   onSlidebarOpen(value) {
@@ -124,67 +114,140 @@ export class RecordingScreenComponent implements OnInit {
     this.isSidebarOpen = false;
   }
 
-    // reference to the element itself: used to access events and methods
-    private _elementRef: ElementRef;
+  playVideo(){
+    if(this.platform.SAFARI){
+      this.recordedType = {type: 'video/mp4'};
+    }else{ 
+      this.recordedType = {type: 'video/webm'};
+    }
+    const superBuffer = new Blob(this.recordedBlobs, this.recordedType);
+    this.videoSource = window.URL.createObjectURL(superBuffer);
+  }
+  
+  muteVideo(){
+    if((<any>window).stream.getAudioTracks().length > 0){
+      (<any>window).stream.getAudioTracks()[0].enabled = !((<any>window).stream.getAudioTracks()[0].enabled)
+    }
+  }
 
+  handleDataAvailable(event) {
+    let table = []
+    if (event.data && event.data.size > 0) {
+      table.push(event.data);
+    }
+    this.recordedBlobs = table
+  }
 
-  // use ngAfterViewInit to make sure we initialize the videojs element
-  // after the component template itself has been rendered
+  startRecording(){
+    this.stopwatch()
+    this.isRunning = true
+    this.videoEle.nativeElement.volume = 0
+    if(this.platform.SAFARI){
+      this.options = {mimeType: 'video/mp4'};
+      this.videoType =  {type: 'video/mp4'};
+    }else{ 
+      this.options = {mimeType: 'video/webm'};
+      this.videoType =  {type: 'video/webm'};
+    }
+    try {
+     this.mediaRecorder = new MediaRecorder( (<any>window).stream, this.options);
+    } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    return;
+    }
+    this.mediaRecorder.onstop = (event) => {
+      this.recordedBlobs = event.target.recordedBlobs
+      const superBuffer = new Blob(this.recordedBlobs, this.videoType);
+      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(superBuffer));
+    };
+    this.mediaRecorder.ondataavailable = this.handleDataAvailable;
+    this.mediaRecorder.start();
+  }
+
+  stopwatch() {
+     this.videoTimer =  timer(0, 1000).subscribe(() => {
+      if (this.isRunning) {
+        this.time++;
+        this.getDisplayTimer(this.time);
+      } else {
+      }
+    });
+  }
+
+  getDisplayTimer(time: number) {
+    var hours = '' + Math.floor(time / 3600);
+    var minutes = '' + Math.floor(time % 3600 / 60);
+    var seconds = '' + Math.floor(time % 3600 % 60);
+
+    if (Number(hours) < 10) {
+      hours = '0' + hours;
+    } else {
+      hours = '' + hours;
+    }
+    if (Number(minutes) < 10) {
+      minutes = '0' + minutes;
+    } else {
+      minutes = '' + minutes;
+    }
+    if (Number(seconds) < 10) {
+      seconds = '0' + seconds;
+    } else {
+      seconds = '' + seconds;
+    }
+
+    this.displayTimer = minutes + ':' + seconds;
+    this.recordingDurationTime = this.displayTimer
+    this.recordingService.recordTimeDuration.next(this.displayTimer)
+  }
+
+  stopRecording(){
+    this.mediaRecorder.stop();
+  }
+
+  handleSuccess(stream) {
+    (<any>window).stream = stream;
+    const gumVideo = this.videoEle.nativeElement;
+    gumVideo.srcObject = stream;
+  }
+
+  async init(constraints) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+       this.videoTrack = stream.getVideoTracks()[0];
+       this.audioTrack = stream.getAudioTracks()[0];
+      this.handleSuccess(stream);
+    } catch (e) {
+      console.error('navigator.getUserMedia error:', e);
+    }
+  }
+  
+  async startCamera(){
+    this.videoEle.nativeElement.volume = 0
+    const constraints = {
+      audio: {
+        echoCancellation: true
+      },
+      video: {
+        width: 1280, height: 720
+      }
+    };
+    await this.init(constraints);
+  }
 
   videoInitialize(){
     let el = 'video';
       this.headerService.muteUnmuteMic.subscribe(
       res =>{
         this.micValue = res
-        this.config.plugins.record.audio = this.micValue
       })
-
-    // setup the player via the unique element ID
-    console.log(this.config.plugins.record.audio)
-
-    this.player = videojs(document.getElementById(el), this.config, () => {
-      // print version information at startup
-      var msg = 'Using video.js ' + videojs.VERSION +
-        ' with videojs-record ' + videojs.getPluginVersion('record') +
-        ' and recordrtc ' + RecordRTC.version;
-      videojs.log(msg);
-
-    });
-
-    this.player.on('ready', () => {
-      this.player.record().getDevice()
-    })
-
-    setTimeout(() => {
-      this.player.record().start()
-      this.videoEle.nativeElement.addEventListener('timeupdate', currentTime)
-    }, 4000);
-
-    const currentTime = () => {
-      let currentTime = this.player.record().getCurrentTime()
-      let currentMinutes = Math.floor( currentTime / 60)
-      let currentSeconds = Math.floor(currentTime - currentMinutes * 60)
-      this.recordingDurationTime = `${currentMinutes < 10 ? '0'+currentMinutes : currentMinutes }:${currentSeconds < 10 ? '0'+currentSeconds : currentSeconds}`
-      this.recordingService.recordTimeDuration.next(this.recordingDurationTime)
-    }
-     
-    // user completed recording and stream is available
-    this.player.on('finishRecord', () => {
-      // recordedData is a blob object containing the recorded data that
-      // can be downloaded by the user, stored on server etc.
-      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.player.recordedData));
-    });
-
-    // error handling
-    this.player.on('error', (element, error) => {
-    });
-
-    this.player.on('deviceError', () => {
-    });
   }
 
   redirectToPhoto(){
     this.router.navigate(['/takescreenshot']);
   }
 
+  ngOnDestroy(){
+    (<any>window).stream.getTracks()[0].stop()
+    this.videoTimer.unsubscribe()
+  }
 }

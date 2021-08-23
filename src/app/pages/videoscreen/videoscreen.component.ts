@@ -69,21 +69,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit{
   onPlayPause(){
     this.togglePlayPause()
    };
-   
-   onRestart(){
-    if(this.video.nativeElement.currentTime > 0 ){
-      if(this.playVideo === true){
-      this.video.nativeElement.currentTime = 0;
-        this.playVideo = true
-        this.video.nativeElement.play()
-      }else if(this.playVideo === false){
-      this.video.nativeElement.currentTime = 0;
-        this.playVideo = false
-        this.video.nativeElement.pause()
-      }
-
-    } 
-   }
 
    volumeChanged(e){
     if (e.cancelable) {

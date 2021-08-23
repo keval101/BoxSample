@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 
 @Component({
@@ -10,7 +11,7 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./setup.component.scss'],
   animations: [fadeAnimation],
 })
-export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
+export class SetupComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
   selectedCamera: string;
@@ -27,6 +28,7 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
+    private headerService:HeaderService
   ) {}
 
   ngOnInit(): void {
@@ -54,18 +56,7 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
     let _video = this.video.nativeElement;
     let tempThis = this
 
-    navigator.mediaDevices.enumerateDevices()
-    .then(function(devices) {
-      devices.forEach(function(device) {
-    
-        if(device.kind === 'videoinput'){
-          tempThis.camera.push({label : device.label, Id: device.deviceId})
-          tempThis.deviceID = device.deviceId
-        }
-      });
-    })
-
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {     
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video:{deviceId: tempThis.cameraDeviceId ? {exact: tempThis.cameraDeviceId} : undefined}})
       .then(stream => {
         (<any>window).stream = stream;
@@ -73,12 +64,20 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
         _video.srcObject = stream;
         _video.onloadedmetadata = function (e: any) { };
         _video.play();
+
+        navigator.mediaDevices.enumerateDevices()
+      .then(function(devices) {
+        devices.forEach(function(device) {
+          if(device.kind === 'videoinput'){
+            tempThis.camera.push({label : device.label, Id: device.deviceId})
+            tempThis.deviceID = device.deviceId
+          }
+        });
+      })
       })
     }
   }
 
-  ngAfterViewInit() {}
-  
   showDetail() {
     this.sidebar = !this.sidebar;
   }
@@ -90,6 +89,11 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
     } else {
       this.sidebar = true;
     }
+  }
+
+  muteUnmuteToggle(){
+    this.headerService.muteMic = this.checkedMic
+    this.headerService.muteUnmuteMic.next(this.checkedMic)
   }
 
   redirectTo() {
@@ -104,8 +108,5 @@ export class SetupComponent implements OnInit, AfterViewInit , OnDestroy{
     if (window.innerWidth < 600) {
       this.sidebar = false;
     } 
-  }
-  ngOnDestroy(){
-    this.videoStream =null
   }
 }

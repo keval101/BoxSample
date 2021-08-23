@@ -13,7 +13,7 @@ import { fadeAnimation } from '../../shared/app.animation';
 })
 export class HeaderComponent implements OnInit, OnChanges {
   
-  checkedMic: boolean = true;
+ 
   checkedFlash: boolean = false;
   showSide: boolean = true;
   fullScreen: boolean = false;
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
   @Output() show = new Subject();
-
+  @Input()  checkedMic: boolean = true;
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,

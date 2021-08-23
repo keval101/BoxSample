@@ -6,11 +6,12 @@
       [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
       (show)="onSlidebarOpen($event)"
+      [checkedMic] = micCheckedValue
     ></app-header>
   </div>
 
   <div class="videoPreview" *ngIf = 'recordingFinish'>
-    <video [src]="videoSource" #videoPreview autoplay controls></video>
+    <video [src]="videoSource" playsinline controls #videoPreview></video>
     <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
 
@@ -19,7 +20,7 @@
   </div>
 
   <div class="recording__video">
-    <video id="video" class="video-js vjs-default-skin video" playsinline #video></video>
+    <video id="video" class="video" autoplay playsinline muted #video></video>
   </div>
 
   <div
@@ -27,7 +28,7 @@
   [ngClass]="{ goPadding: paddingClass }"
   *ngIf="counterTime"
 >
-  <p class="m-0">{{ text }}</p>
+  <p class="m-0">{{ counter }}</p>
 </div>
 
   <div
@@ -38,8 +39,6 @@
       <button
         type="button"
         class="cameraBtn"
-        (click)="takeScreenShot()"
-        [disabled]="!recording"
       >
         <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
       </button>
@@ -88,18 +87,13 @@
         <p class="sidebar__content-title2">
           {{ 'recordingPage.yourTasks' | translate }}
         </p>
-        <p class="sidebar__content-text">
-          {{ 'recordingPage.taskText' | translate }}
-        </p>
-
         <ul>
           <li>{{ 'recordingPage.ulText1' | translate }}</li>
           <li>{{ 'recordingPage.ulText2' | translate }}</li>
+          <li>{{ 'recordingPage.ulText3' | translate }}</li>
+          <li>{{ 'recordingPage.ulText4' | translate }}</li>
+          <li>{{ 'recordingPage.ulText5' | translate }}</li>
         </ul>
-
-        <p class="sidebar__content-text">
-          {{ 'recordingPage.sidebarmsg' | translate }}
-        </p>
       </div>
     </div>
   </div>

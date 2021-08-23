@@ -43,7 +43,7 @@
           id="mic"
           [ngStyle]="{ display: !checkedMic ? 'none' : 'block' }"
         />
-        <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
+        <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()"></p-inputSwitch>
       </div>
 
       <div class="dropdown__div-butonGroup--iconsGroup">
@@ -69,8 +69,11 @@
   </div>
 
   <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+    <button class="close"> 
+      <img src="assets/icnons/close.svg" alt="close">
+    </button>
     <div class="sidebar__header">
-      <img src="assets/images/logo.png" alt="logo" />
+      <img src="assets/images/logo.svg" alt="logo" />
     </div>
 
     <div class="sidebar__content">
@@ -90,16 +93,17 @@
           {{ 'recordingPage.yourTasks' | translate }}
         </p>
         <p class="sidebar__content-text">
-          {{ 'recordingPage.taskText' | translate }}
+          {{ 'setup.tasks' | translate }}
         </p>
 
         <ul>
-          <li>{{ 'recordingPage.ulText1' | translate }}</li>
-          <li>{{ 'recordingPage.ulText2' | translate }}</li>
+          <li>{{ 'setup.ulText1' | translate }}</li>
+          <li>{{ 'setup.ulText2' | translate }}</li>
+          <li>{{ 'setup.ulText3' | translate }}</li>
         </ul>
 
         <p class="sidebar__content-text">
-          {{ 'recordingPage.sidebarmsg' | translate }}
+          {{ 'setup.note' | translate }}
         </p>
       </div>
     </div>
