@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+import { SelfAssesmentService } from './self-assesment.service';
 
 @Component({
   selector: 'app-self-assesment',
@@ -13,11 +14,14 @@ export class SelfAssesmentComponent implements OnInit {
   isScreenShot: boolean;
   items: any[] = [];
   responsiveOptions:any;
-
+  resultImage: any;
+  ExcelRowDatas:string
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
-    private takescreenshotService : TakescreenshotService
+    private takescreenshotService : TakescreenshotService,
+    private selfAssesmentService : SelfAssesmentService
+
   ) {
     this.responsiveOptions = [
       {
@@ -38,10 +42,22 @@ export class SelfAssesmentComponent implements OnInit {
     ];
   }
 
+  pageIndex: any;
+  setPage(indexOf){
+    this.pageIndex = indexOf.page;
+    this.selfAssesmentService.imageIndex = this.pageIndex
+}
+
   ngOnInit(): void {
     this.isScreenShot = true;
     this.recording = true;
-    this.items = this.takescreenshotService.captures
+    this.items = [
+      { img : '../../../assets/images/screenshot0.png'},
+      { img : '../../../assets/images/screenshot1.png'},
+      { img : '../../../assets/images/screenshot2.png'},
+      { img : '../../../assets/images/screenshot3.png'}
+    ]
+    this.resultImage = this.takescreenshotService.captures[0]
   }
 
   redirectTo() {

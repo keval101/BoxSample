@@ -1,4 +1,4 @@
-import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {  Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./setup.component.scss'],
   animations: [fadeAnimation],
 })
-export class SetupComponent implements OnInit {
+export class SetupComponent implements OnInit, OnDestroy{
   recording: boolean;
   isScreenShot: boolean;
   selectedCamera: string;
@@ -57,8 +57,9 @@ export class SetupComponent implements OnInit {
     let tempThis = this
 
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video:{deviceId: tempThis.cameraDeviceId ? {exact: tempThis.cameraDeviceId} : undefined}})
+      navigator.mediaDevices.getUserMedia({ audio:true ,video:{deviceId: tempThis.cameraDeviceId ? {exact: tempThis.cameraDeviceId} : undefined}})
       .then(stream => {
+        _video.volume = 0;
         (<any>window).stream = stream;
         this.videoStream = stream;
         _video.srcObject = stream;
@@ -109,4 +110,11 @@ export class SetupComponent implements OnInit {
       this.sidebar = false;
     } 
   }
+  ngOnDestroy(){
+    if ((<any>window).stream) {
+      (<any>window).stream.getTracks().forEach(track => {
+        track.stop();
+      });
+  }
+}
 }

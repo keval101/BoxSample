@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChoosescreenshotService } from '../choose-screenshot/choosescreenshot.service';
@@ -9,7 +9,7 @@ import { TakescreenshotService } from './takescreenshot.service';
   templateUrl: './takescreenshot.component.html',
   styleUrls: ['./takescreenshot.component.scss']
 })
-export class TakescreenshotComponent implements OnInit{
+export class TakescreenshotComponent implements OnInit,OnDestroy{
   recording: boolean;
   isScreenShot: boolean;
   takeScreenshot: boolean = false;
@@ -38,6 +38,7 @@ export class TakescreenshotComponent implements OnInit{
       this.recording = true;
       this.isScreenShot = true;
     }
+   this.takescreenshotService.captures = []
   }
 
   ngAfterViewInit() {
@@ -63,6 +64,7 @@ export class TakescreenshotComponent implements OnInit{
   }
 
   onRetake(){
+   this.takescreenshotService.captures = []
    this.takeScreenshot = true
    this.onCameraClick = false
    this.imageCapture = false
@@ -71,4 +73,13 @@ export class TakescreenshotComponent implements OnInit{
   onDone(){
     this.router.navigate(['/choosescreenshot']);
   }
+
+  ngOnDestroy(){
+    if ((<any>window).stream) {
+      (<any>window).stream.getTracks().forEach(track => {
+        track.stop();
+      });
+  }
+  }
+
 }

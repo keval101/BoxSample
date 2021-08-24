@@ -72,8 +72,9 @@
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
         "message" : "Please answer the questions to proceed",
-        "question" : "My knot was tied tightly and in the correct location ",
-        "anotherquestion" : "Another question",
+        "question1" : "I used my dominant hand to cut",
+        "question2" : "I used my non dominant hand to apply tension  ",
+        "question3" : "I switched hands during the exercise",
         "yes" : "Yes",
         "no" : "No"
     },
@@ -85,7 +86,8 @@
         "feedback" : "Feedback",
         "radioone" : "Goal",
         "radiotwo" : "Your self assessment",
-        "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
+        "feedbacktextone" : "Nice work. It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+        "feedbacktexttwo" : "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting. ",
         "ratingtext" : "How was the case? Rate yourself",
         "cancel" : "Cancel",
         "confirm" : "Confirm",

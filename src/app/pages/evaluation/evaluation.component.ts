@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { EvolutionService } from './evolution.service';
+import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -15,6 +17,9 @@ export class EvaluationComponent implements OnInit {
   ans: string = 'Goal';
   val: number = 3;
   cancelValue: boolean = true;
+  resultImage:any;
+  isGoal:boolean = true;
+  id:any;
   scores = [
     {
       title: 'Exercise duration',
@@ -40,13 +45,19 @@ export class EvaluationComponent implements OnInit {
     private router: Router,
     public TranslateService: TranslateService,
     private evolutionService: EvolutionService,
-    private confirmationService: ConfirmationService
-  ) {}
+    private confirmationService: ConfirmationService,
+    private takescreenshotService:TakescreenshotService,
+    private selfAssesmentService : SelfAssesmentService
+  ) {
+   this.id = this.selfAssesmentService.imageIndex
+  }
 
   ngOnInit(): void {
     this.recording = true;
     this.isScreenShot = true;
     this.evolutionService.cancelValue = false;
+    this.resultImage = this.takescreenshotService.captures[0]
+    this.id = 0
   }
 
   redirectTo() {
@@ -63,5 +74,13 @@ export class EvaluationComponent implements OnInit {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  ansChanged(event){
+    if(event == "Goal"){
+      this.isGoal = true
+    }else {
+      this.isGoal = false
+    }
   }
 }

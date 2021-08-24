@@ -42,16 +42,12 @@
       >
         <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
       </button>
-      <p class="screenShotText" *ngIf="isScreenShot">
-        {{ 'recordingPage.screenShotText' | translate }}
-      </p>
     </div>
 
     <div class="recording__button--finish">
       <button
         type="button"
         class="button button-big button-fill"
-        *ngIf="!isScreenShot"
         (click)="onFinish()"
       >
         {{ 'recordingPage.finishRecording' | translate }}

@@ -41,7 +41,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoTimer:Subscription;
   @ViewChild('video') videoEle : ElementRef
   @ViewChild('videoPreview') recordedVideoEle : ElementRef;
-
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
@@ -56,7 +55,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           this.micValue = res
           this.muteVideo()
         })
-    }, 4000);    
+    }, 4000);  
+    
   }
 
   ngOnInit(): void {    
@@ -84,14 +84,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.startCamera();
     },500)
     this.micCheckedValue = this.headerService.muteMic
-  }
-
-  onRetake() {
-    this.takeScreenshot = false;
-  }
-
-  onDone() {
-    this.router.navigate(['/choosescreenshot']);
+    this.recordingDurationTime = "00:00"  
   }
 
   onFinish() {
@@ -169,7 +162,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       if (this.isRunning) {
         this.time++;
         this.getDisplayTimer(this.time);
-      } else {
       }
     });
   }
@@ -248,6 +240,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     (<any>window).stream.getTracks()[0].stop()
-    this.videoTimer.unsubscribe()
+    setTimeout(() => {
+      this.videoTimer.unsubscribe()
+    }, 4000);
   }
 }
