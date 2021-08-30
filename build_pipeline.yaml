@@ -1,0 +1,178 @@
+parameters:
+  - name: environment
+    displayName: Environment
+    type: string
+    default: Develop
+    values:
+      - Develop
+      - Demo
+      - Production
+  - name: test
+    displayName: Run Tests
+    type: boolean
+    default: false
+
+name: ${{parameters.environment}}_$(date:yyyyMMdd)$(rev:.r)
+
+variables:
+  - name: node_version
+    value: '14.17.5'
+
+trigger:
+  - master
+
+stages:
+  - ${{ if or(eq(parameters.test, true), eq(variables['Build.Reason'], 'PullRequest'))}}:
+      - stage: test
+        pool:
+          vmImage: ubuntu-18.04
+          demands: npm
+        jobs:
+          - job: Linter
+            steps:
+              - task: NodeTool@0
+                inputs:
+                  versionSpec: ${{ variables.node_version }}
+              - task: Npm@1
+                inputs:
+                  command: 'ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+              - task: Npm@1
+                inputs:
+                  command: 'custom'
+                  customCommand: 'run lint:ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+
+          - job: Prettier
+            steps:
+              - task: NodeTool@0
+                inputs:
+                  versionSpec: ${{ variables.node_version }}
+              - task: Npm@1
+                inputs:
+                  command: 'ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+              - task: Npm@1
+                inputs:
+                  command: 'custom'
+                  customCommand: 'run prettier:ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+
+          - job: UnitTesting
+            steps:
+              - task: NodeTool@0
+                inputs:
+                  versionSpec: ${{ variables.node_version }}
+              - task: Npm@1
+                inputs:
+                  command: 'ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+              - task: Npm@1
+                inputs:
+                  command: 'custom'
+                  customCommand: 'run test:ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+
+          - job: e2eTesting
+            steps:
+              - task: NodeTool@0
+                inputs:
+                  versionSpec: ${{ variables.node_version }}
+              - task: Npm@1
+                inputs:
+                  command: 'ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+              - task: Npm@1
+                inputs:
+                  command: 'custom'
+                  customCommand: 'run e2e:ci'
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+
+  - stage: build
+    pool:
+      name: Hosted Windows 2019 with VS2019
+      demands: npm
+    jobs:
+      - job: Build
+        steps:
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                $environment="${{ parameters.environment }} "
+                if ($environment -eq "Production ") {
+                  $environment = ""
+                }
+                $gitVersion= git.exe "describe"
+                $major,$minor,$patchWithChanges = $gitVersion.split('.')
+                $patch,$patchDifference,$patchChangeHash = $patchWithChanges.split('-')
+
+                Write-Host "major:"$major
+                Write-Host "minor:"$minor
+                Write-Host "patch:"$patch
+                Write-Host "buildNumber:"$(Build.BuildNumber)
+
+                $appVersion = $environment + $major + "." + $minor + "." + $patch
+                Write-Host "appVersion:"$appVersion
+
+                $path = "./tag.js"
+                $word = "%TAG"
+                $text = Get-Content -path $path -Raw
+                ($text -replace $word, $appVersion) | Set-Content $path
+              errorActionPreference: 'continue'
+            displayName: 'Prepare tag number'
+
+          - task: NodeTool@0
+            inputs:
+              versionSpec: ${{ variables.node_version }}
+
+          - task: Npm@1
+            displayName: 'npm install'
+            inputs:
+              workingDir: '$(System.DefaultWorkingDirectory)'
+              verbose: false
+
+          - ${{ if ne(parameters.environment, 'Production') }}:
+              - task: Npm@1
+                displayName: 'npm run build'
+                inputs:
+                  command: custom
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+                  customCommand: 'run build_${{ lower(parameters.environment) }}'
+
+          - ${{ if eq(parameters.environment, 'Production') }}:
+              - task: Npm@1
+                displayName: 'npm run build'
+                inputs:
+                  command: custom
+                  workingDir: '$(System.DefaultWorkingDirectory)'
+                  verbose: false
+                  customCommand: 'run build'
+
+          - task: CopyFiles@2
+            displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+            inputs:
+              SourceFolder: dist
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+          - task: CopyFiles@2
+            displayName: 'Copy ARM_templates to: $(Build.ArtifactStagingDirectory)'
+            inputs:
+              SourceFolder: 'ARM_Templates'
+              Contents: |
+                **
+
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/ARM_Templates'
+
+          - ${{ if ne(variables['Build.Reason'], 'PullRequest')}}:
+              - task: PublishBuildArtifacts@1
+                displayName: 'Publish Artifact: drop'

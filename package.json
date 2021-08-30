@@ -6,7 +6,13 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "prettier:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.css,.scss,.html}\"",
+    "prettier:write": "prettier --config --write ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.css,.scss,.html}\"",
+    "prettier:ci": "npm run prettier:check",
+    "lint": "ng lint",
+    "lint:ci": "ng lint",
+    "test": "ng test --sourceMap=false",
+    "test:ci": "ng test --watch=false --sourceMap=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
