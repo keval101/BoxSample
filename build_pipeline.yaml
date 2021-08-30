@@ -79,23 +79,6 @@ stages:
                   workingDir: '$(System.DefaultWorkingDirectory)'
                   verbose: false
 
-          - job: e2eTesting
-            steps:
-              - task: NodeTool@0
-                inputs:
-                  versionSpec: ${{ variables.node_version }}
-              - task: Npm@1
-                inputs:
-                  command: 'ci'
-                  workingDir: '$(System.DefaultWorkingDirectory)'
-                  verbose: false
-              - task: Npm@1
-                inputs:
-                  command: 'custom'
-                  customCommand: 'run e2e:ci'
-                  workingDir: '$(System.DefaultWorkingDirectory)'
-                  verbose: false
-
   - stage: build
     pool:
       name: Hosted Windows 2019 with VS2019
