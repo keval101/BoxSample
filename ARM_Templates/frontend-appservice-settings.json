@@ -1,0 +1,231 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the function app that you wish to create."
+      }
+    },
+    "planName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of existing host plan."
+      }
+    },
+    "planNameRG": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the RG where the host plan is."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "APPINSIGHTS_INSTRUMENTATIONKEY": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "ApplicationInsightsAgent_EXTENSION_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "MobileAppsManagement_EXTENSION_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "APPINSIGHTS_PROFILERFEATURE_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "DiagnosticServices_EXTENSION_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "InstrumentationEngine_EXTENSION_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "SnapshotDebugger_EXTENSION_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "WEBSITE_RUN_FROM_PACKAGE": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "WEBSITE_NODE_DEFAULT_VERSION": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "XDT_MicrosoftApplicationInsights_Mode": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "XDT_MicrosoftApplicationInsights_BaseExtensions": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "production": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "API_HOST": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "API_IDENTITY_SERVER": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "BLOB_PUBLIC_MOVIES": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "hmr": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    },
+    "version": {
+      "type": "string",
+      "metadata": {
+        "description": "."
+      }
+    }
+  },
+  "variables": {
+    "webAppRGName": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('planNameRG'), '/providers/Microsoft.Web/serverfarms/', parameters('planName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-08-01",
+      "kind": "mobileapp",
+      "location": "[parameters('location')]",
+      "name": "[parameters('AppName')]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "serverFarmId": "[variables('webAppRGName')]",
+        "siteConfig": {
+          "cors": {
+            "allowedOrigins": ["*"]
+          },
+          "appSettings": [
+            {
+              "name": "API_HOST",
+              "value": "[parameters('API_HOST')]"
+            },
+            {
+              "name": "API_IDENTITY_SERVER",
+              "value": "[parameters('API_IDENTITY_SERVER')]"
+            },
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[parameters('APPINSIGHTS_INSTRUMENTATIONKEY')]"
+            },
+            {
+              "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
+              "value": "[parameters('APPINSIGHTS_PROFILERFEATURE_VERSION')]"
+            },
+            {
+              "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
+              "value": "[parameters('APPINSIGHTS_SNAPSHOTFEATURE_VERSION')]"
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "[parameters('ApplicationInsightsAgent_EXTENSION_VERSION')]"
+            },
+            {
+              "name": "BLOB_PUBLIC_MOVIES",
+              "value": "[parameters('BLOB_PUBLIC_MOVIES')]"
+            },
+            {
+              "name": "DiagnosticServices_EXTENSION_VERSION",
+              "value": "[parameters('DiagnosticServices_EXTENSION_VERSION')]"
+            },
+            {
+              "name": "hmr",
+              "value": "[parameters('hmr')]"
+            },
+            {
+              "name": "InstrumentationEngine_EXTENSION_VERSION",
+              "value": "[parameters('InstrumentationEngine_EXTENSION_VERSION')]"
+            },
+            {
+              "name": "production",
+              "value": "[parameters('production')]"
+            },
+            {
+              "name": "SnapshotDebugger_EXTENSION_VERSION",
+              "value": "[parameters('SnapshotDebugger_EXTENSION_VERSION')]"
+            },
+            {
+              "name": "version",
+              "value": "[parameters('version')]"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "[parameters('WEBSITE_RUN_FROM_PACKAGE')]"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
+              "value": "[parameters('XDT_MicrosoftApplicationInsights_BaseExtensions')]"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "[parameters('XDT_MicrosoftApplicationInsights_Mode')]"
+            }
+          ]
+        }
+      },
+      "tags": {
+        "project": "Virtamed Boxtrainer"
+      },
+      "type": "Microsoft.Web/sites"
+    }
+  ]
+}
