@@ -17,9 +17,9 @@
       </p>
 
       <div class="result__container-result">
-        <img src="assets/images/01.png" alt="" style="margin-bottom: 3rem" />
-
-        <img src="assets/images/result.png" alt="result" />
+        <img [src]="resultImage" alt="resultImage" class="resultImage" />
+        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal"/>
+        <img src="assets/images/screenshot{{id}}.png" alt="selfassesment" *ngIf="!isGoal"/>
 
         <div class="result__container-radioGroup">
           <div class="p-field-radiobutton radioBtn">
@@ -28,6 +28,7 @@
               value="Goal"
               [(ngModel)]="ans"
               inputId="Goal"
+              (ngModelChange) = "ansChanged($event)"
             ></p-radioButton>
             <label for="Goal">{{ 'evaluation.radioone' | translate }}</label>
           </div>
@@ -38,6 +39,7 @@
               value="Your self assessment"
               [(ngModel)]="ans"
               inputId="Selfassesment"
+              (ngModelChange) = "ansChanged($event)"
             ></p-radioButton>
             <label for="Selfassesment">{{
               'evaluation.radiotwo' | translate
@@ -79,7 +81,10 @@
           {{ 'evaluation.feedback' | translate }}
         </p>
         <p class="score__container-feedback-text">
-          {{ 'evaluation.feedbacktext' | translate }}
+          {{ 'evaluation.feedbacktextone' | translate }}
+        </p>
+        <p class="score__container-feedback-text">
+          {{ 'evaluation.feedbacktexttwo' | translate }}
         </p>
       </div>
 
@@ -97,6 +102,7 @@
       class="button button-small button-outline"
       type="button"
       (click)="confirm()"
+      id="quitBtn"
     >
       {{ 'evaluation.quit' | translate }}
     </button>

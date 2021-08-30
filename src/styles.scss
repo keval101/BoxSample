@@ -31,28 +31,37 @@ html{
     
     font-size: 62.5%;
 
-    @include respond(big-desktop){
-        font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
+      @media screen and (min-width : 1200px){
+        // font-size: 50%;
+        font-size: 7.5px;
       }
 
-      @media screen and (min-width : 1367px){
-        font-size: 50%;
+      @media screen and (min-width : 1366px){
+        // font-size: 50%;
+        font-size: 10px;
       }
-
+     
       @include respond(tab-land){  //width < 1200
-          font-size: 45.50%; //1 rem = 9px; 9px/16px = 56.25%
+        //   font-size: 45.50%; //1 rem = 7.28px; 7.28px/16px = 56.25%
+          font-size: 7.28px; //1 rem = 7.28px; 7.28px/16px = 56.25%
         }
       
       @include respond(tab-port){ //width < 900
-          font-size: 42%; //1 rem = 8px; 8px/16px = 50%
+        //   font-size: 42%; //1 rem = 6.72px; 6.72px/16px = 50%
+          font-size: 6.72px; //1 rem = 6.72px; 6.72px/16px = 50%
       }
   
       @media (max-width:768px){
-          font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+        //   font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+          font-size: 5.5px; //1 rem = 5.5px; 5.5px/16px = 34.375%
       }
       
       @include respond(phone){ //width < 900
-          font-size: 22%; //1 rem = 3.52px; 3.52px/16px = 22%
+        font-size: 3.52px;  -webkit-text-size-adjust:none; //1 rem = 3.52px; 3.52px/16px = 22%
+      }
+
+      @media screen and (max-width : 411px) {
+          font-size: 2.52px;-webkit-text-size-adjust:none;
       }
 }
 

@@ -11,7 +11,7 @@
       >
         <p class="pi pi-circle-on header__left--duration-icon"></p>
         <p class="header__left--duration-time">
-          {{ 'header.duration' | translate }}
+          {{ 'header.duration' | translate }} <span>{{recordingDuration}}</span>
         </p>
       </span>
     </div>
@@ -28,7 +28,7 @@
           }"
         >
           <img src="assets/icnons/mic.png" alt="mic" id="mic" />
-          <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()"></p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
@@ -45,7 +45,7 @@
           >
             <img
               src="assets/icnons/fullscreen.png"
-              alt="flash"
+              alt="fullscreen"
               id="fullscreen"
             />
           </button>
@@ -74,14 +74,14 @@
         </button>
       </div>
 
-      <div class="header__right--icons-group" *ngIf="videoScreen">
+      <div class="header__right--icons-group videoScreenIcons" *ngIf="videoScreen">
         <button
           type="button"
           class="button"
           (click)="fullscreen()"
           [ngStyle]="{ display: fullScreen ? 'none' : 'block' }"
         >
-          <img src="assets/icnons/fullscreen.png" alt="flash" id="fullscreen" />
+          <img src="assets/icnons/fullscreen.png" alt="fullscreen" id="fullscreen" />
         </button>
 
         <button
@@ -96,6 +96,18 @@
             id="closescreen"
           />
         </button>
+
+        <button
+          type="button"
+          class="button"
+          id="cross"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
+        </button>
+
       </div>
     </div>
   </div>

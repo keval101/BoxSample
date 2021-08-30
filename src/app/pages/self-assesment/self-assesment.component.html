@@ -20,7 +20,7 @@
       </p>
 
       <div class="selfassesment__result-content">
-        <img src="assets/images/01.png" alt="resultImage" />
+        <img [src]="resultImage" alt="resultImage" />
       </div>
     </div>
 
@@ -29,14 +29,15 @@
         {{ 'selfassesment.choice' | translate }}
       </p>
 
-      <div class="selfassesment__result-content">
+      <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
-          <p-carousel [value]="items" [numVisible]="1">
-            <ng-template let-item pTemplate="item">
+          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions] (onPage)="setPage($event)">
+            <ng-template let-item pTemplate="item" let-i="index">
               <img
                 style="height: 100%"
-                [src]="item.picture"
+                [src]="item.img"
                 class="screenShotImage"
+                id="index"
               />
             </ng-template>
           </p-carousel>

@@ -24,14 +24,15 @@
     }
   }
 
-  &__image {
+  &__video {
     width: 100%;
     height: 100%;
     position: relative;
 
-    img {
-      width: 100vw;
-      height: 100%;
+    video{
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
     }
   }
 
@@ -60,12 +61,7 @@
     .cameraBtn {
       background-color: transparent;
       border: none;
-      width: 7.7rem;
       cursor: pointer;
-    }
-
-    &--finish {
-      z-index: 100;
     }
 
     .screenShotText {
@@ -167,6 +163,7 @@
       font-size: 2.8rem;
       font-weight: 300;
       font-family: "Myriad Light";
+      margin-top: 0.5rem;
       @media screen and (min-width: 768px) {
         font-size: 2.4rem;
       }
@@ -231,4 +228,48 @@
   p{
     color: $white-color;
   }
+}
+
+::ng-deep .vjs-record .vjs-device-button.vjs-control {
+  display: none !important;
+}
+
+::ng-deep .vjs-control-bar{
+  z-index: 100;
+}
+
+.videoPreview{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  video{
+    width: 80%;
+    height: 80%;
+  }
+}
+
+.close{
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  right: 4rem;
+  top: 6.4rem;
+  background: transparent;
+  color: white;
+  outline: none;
+  border: 1px solid white;
+  padding: 2rem;
+  font-size: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }

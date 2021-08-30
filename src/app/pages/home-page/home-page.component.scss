@@ -46,6 +46,7 @@
     width: 42%;
     height: 6.4rem;
     clip-path: polygon(0 0%, 99.8% 0%, 92% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 0%, 99.8% 0%, 92% 100%, 0% 100%);
     padding-right: 5.7rem;
     margin-right: -3.3%;
     background: $blue-color;
@@ -53,7 +54,9 @@
     backdrop-filter: blur(4px);
 
     &--text {
-      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
       font-size: 3.2rem;
       color: $white-color;
       margin: 0;
@@ -68,13 +71,16 @@
     left: 55.4rem;
     top: 37.127rem;
     clip-path: polygon(4.8% 0, 100% 0%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(4.8% 0, 100% 0%, 100% 100%, 0 100%);
     padding-left: 6.4rem;
     background: $element-grey-color;
     opacity: 0.8;
     backdrop-filter: blur(10px);
 
     &--text {
-      padding: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
       font-size: 3.2rem;
       color: $white-color;
       margin: 0;

@@ -26,21 +26,15 @@
   </div>
 
   <div class="videoPreview">
-    <video
-      autoplay
-      muted
-      loop
-      oncanplay="this.play()"
-      onloadedmetadata="this.muted = true"
-    >
-      <source src="assets/video/video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img src="assets/images/Cover image.png" alt="coverImages">
   </div>
 
   <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+    <button class="close"> 
+      <img src="assets/icnons/close.svg" alt="close">
+    </button>
     <div class="sidebar__header">
-      <img src="assets/images/logo.png" alt="logo" />
+      <img src="assets/images/logo.svg" alt="logo" />
     </div>
 
     <div class="sidebar__content">
@@ -68,9 +62,9 @@
         </p>
         <ul class="sidebar__content-text need">
           <li>{{ 'intro.boxtrainerHardware' | translate }}</li>
-          <li>{{ 'intro.tool' | translate }}</li>
-          <li>{{ 'intro.testObject' | translate }}</li>
-          <li>{{ 'intro.filament' | translate }}</li>
+          <li>{{ 'intro.grasper' | translate }}</li>
+          <li>{{ 'intro.scissors' | translate }}</li>
+          <li>{{ 'intro.circlePattern' | translate }}</li>
         </ul>
       </div>
 
@@ -80,7 +74,7 @@
         </p>
         <ol class="sidebar__content-text willdo">
           <li>{{ 'intro.tutorial' | translate }}</li>
-          <li>{{ 'intro.procedure' | translate }}</li>
+          <li>{{ 'intro.recordExercise' | translate }}</li>
           <li>{{ 'intro.result' | translate }}</li>
           <li>{{ 'intro.upload' | translate }}</li>
         </ol>

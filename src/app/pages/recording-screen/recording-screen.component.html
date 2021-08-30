@@ -6,15 +6,21 @@
       [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
       (show)="onSlidebarOpen($event)"
+      [checkedMic] = micCheckedValue
     ></app-header>
+  </div>
+
+  <div class="videoPreview" *ngIf = 'recordingFinish'>
+    <video [src]="videoSource" playsinline controls #videoPreview></video>
+    <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
 
   <div class="recording__logo">
     <img src="assets/images/Logo2.svg" alt="logo" />
   </div>
 
-  <div class="recording__image">
-    <img src="assets/images/01.png" alt="recordingImage" />
+  <div class="recording__video">
+    <video id="video" class="video" autoplay playsinline muted #video></video>
   </div>
 
   <div
@@ -22,7 +28,7 @@
   [ngClass]="{ goPadding: paddingClass }"
   *ngIf="counterTime"
 >
-  <p class="m-0">{{ text }}</p>
+  <p class="m-0">{{ counter }}</p>
 </div>
 
   <div
@@ -33,34 +39,20 @@
       <button
         type="button"
         class="cameraBtn"
-        (click)="takeScreenShot()"
-        [disabled]="!recording"
       >
         <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
       </button>
-      <p class="screenShotText" *ngIf="isScreenShot">
-        {{ 'recordingPage.screenShotText' | translate }}
-      </p>
     </div>
 
     <div class="recording__button--finish">
       <button
         type="button"
         class="button button-big button-fill"
-        *ngIf="!isScreenShot"
         (click)="onFinish()"
       >
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
 
-      <div class="recording__button--group" *ngIf="takeScreenshot">
-        <button class="button button-small button-outline" (click)="onRetake()">
-          {{ 'recordingPage.retake' | translate }}
-        </button>
-        <button class="button button-small button-fill" (click)="onDone()">
-          {{ 'recordingPage.done' | translate }}
-        </button>
-      </div>
     </div>
   </div>
 
@@ -91,18 +83,13 @@
         <p class="sidebar__content-title2">
           {{ 'recordingPage.yourTasks' | translate }}
         </p>
-        <p class="sidebar__content-text">
-          {{ 'recordingPage.taskText' | translate }}
-        </p>
-
         <ul>
           <li>{{ 'recordingPage.ulText1' | translate }}</li>
           <li>{{ 'recordingPage.ulText2' | translate }}</li>
+          <li>{{ 'recordingPage.ulText3' | translate }}</li>
+          <li>{{ 'recordingPage.ulText4' | translate }}</li>
+          <li>{{ 'recordingPage.ulText5' | translate }}</li>
         </ul>
-
-        <p class="sidebar__content-text">
-          {{ 'recordingPage.sidebarmsg' | translate }}
-        </p>
       </div>
     </div>
   </div>

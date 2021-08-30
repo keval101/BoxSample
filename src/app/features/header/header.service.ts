@@ -6,5 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class HeaderService {
   videoFullscreen = new Subject<boolean>();
+  muteUnmuteMic = new Subject<boolean>()
+  muteMic:boolean = false
   constructor() {}
 }

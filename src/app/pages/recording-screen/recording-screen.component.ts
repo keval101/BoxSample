@@ -1,40 +1,70 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
 import { fadeAnimation } from '../../shared/app.animation';
-import { ChoosescreenshotService } from '../choose-screenshot/choosescreenshot.service';
-import { interval, Subscription } from 'rxjs';
-
+import { interval, Subscription, timer } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HeaderService } from 'src/app/features/header/header.service';
+import { Platform } from '@angular/cdk/platform';
+declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
   templateUrl: './recording-screen.component.html',
   styleUrls: ['./recording-screen.component.scss'],
   animations: [fadeAnimation],
 })
-export class RecordingScreenComponent implements OnInit {
+export class RecordingScreenComponent implements OnInit, OnDestroy {
   recording: boolean = false;
   isScreenShot: boolean = false;
   takeScreenshot: boolean = false;
   isSidebarOpen: boolean = false;
   counterTime:boolean = false;
+  recordingFinish:boolean = false;
+  isRunning:boolean;
+  videoSource:any;
   paddingClass:boolean;
+  recordingDurationTime:string;
   data = [3,2,1,"go"]
-  text;
-
+  counter:any;
+  micValue:boolean;
+  mediaRecorder:any;
+  recordedBlobs:any;
+  options:any;
+  micCheckedValue:boolean;
+  recordedType:any;
+  videoTrack:any;
+  audioTrack:any;
+  time:number = 0;
+  displayTimer:any;
+  videoType:any;
+  videoTimer:Subscription;
+  @ViewChild('video') videoEle : ElementRef
+  @ViewChild('videoPreview') recordedVideoEle : ElementRef;
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
-    private choosescreenshotService : ChoosescreenshotService
-  ) {}
+    private sanitizer : DomSanitizer,
+    private headerService : HeaderService,
+    public platform: Platform
+  ) { 
+    setTimeout(() => {
+      this.headerService.muteUnmuteMic.subscribe(
+        res =>{
+          this.micValue = res
+          this.muteVideo()
+        })
+    }, 4000);  
+    
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     const obs = interval(1000)
     const timer:Subscription = obs.subscribe( (d) => {
       this.counterTime = true;
-      let text = this.data[d];
-      this.text = text
+      let counterText = this.data[d];
+      this.counter = counterText
 
       if(d == 3){
         this.paddingClass = true
@@ -42,41 +72,176 @@ export class RecordingScreenComponent implements OnInit {
     })
     setTimeout(() => {
         timer.unsubscribe()
-        this.counterTime = false
-    }, 5000 );
-
-    if(this.choosescreenshotService.backToScreen == true){
-      timer.unsubscribe()
-      this.takeScreenshot = true;
-      this.recording = true;
-      this.isScreenShot = true;
-    }
-  }
-
-  onRetake() {
-    this.takeScreenshot = false;
-  }
-
-  onDone() {
-    this.router.navigate(['/choosescreenshot']);
+        this.startRecording()
+        this.counterTime = false;
+        if(this.headerService.muteMic == false){
+         if((<any>window).stream.getAudioTracks().length > 0){
+          (<any>window).stream.getAudioTracks()[0].enabled = false
+         }
+        }
+    }, 5000);
+    setTimeout( () => {
+    this.startCamera();
+    },500)
+    this.micCheckedValue = this.headerService.muteMic
+    this.recordingDurationTime = "00:00"  
   }
 
   onFinish() {
     this.recordingService.fullscreen = false;
-    this.recording = true;
-    this.isScreenShot = true;
     this.isSidebarOpen = false;
-  }
-
-  takeScreenShot() {
-    this.takeScreenshot = true;
+    this.isRunning = false;
+    this.stopRecording();
+    setTimeout(() => {
+      this.recordingFinish = true;
+    }, 1000);
+    this.videoTrack.stop()
+    this.audioTrack.stop()
   }
 
   onSlidebarOpen(value) {
-    this.isSidebarOpen = true;
+    this.isSidebarOpen = value;
   }
 
   onSlidebarClose() {
     this.isSidebarOpen = false;
+  }
+
+  playVideo(){
+    if(this.platform.SAFARI){
+      this.recordedType = {type: 'video/mp4'};
+    }else{ 
+      this.recordedType = {type: 'video/webm'};
+    }
+    const superBuffer = new Blob(this.recordedBlobs, this.recordedType);
+    this.videoSource = window.URL.createObjectURL(superBuffer);
+  }
+  
+  muteVideo(){
+    if((<any>window).stream.getAudioTracks().length > 0){
+      (<any>window).stream.getAudioTracks()[0].enabled = !((<any>window).stream.getAudioTracks()[0].enabled)
+    }
+  }
+
+  handleDataAvailable(event) {
+    let table = []
+    if (event.data && event.data.size > 0) {
+      table.push(event.data);
+    }
+    this.recordedBlobs = table
+  }
+
+  startRecording(){
+    this.stopwatch()
+    this.isRunning = true
+    this.videoEle.nativeElement.volume = 0
+    if(this.platform.SAFARI){
+      this.options = {mimeType: 'video/mp4'};
+      this.videoType =  {type: 'video/mp4'};
+    }else{ 
+      this.options = {mimeType: 'video/webm'};
+      this.videoType =  {type: 'video/webm'};
+    }
+    try {
+     this.mediaRecorder = new MediaRecorder( (<any>window).stream, this.options);
+    } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    return;
+    }
+    this.mediaRecorder.onstop = (event) => {
+      this.recordedBlobs = event.target.recordedBlobs
+      const superBuffer = new Blob(this.recordedBlobs, this.videoType);
+      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(superBuffer));
+    };
+    this.mediaRecorder.ondataavailable = this.handleDataAvailable;
+    this.mediaRecorder.start();
+  }
+
+  stopwatch() {
+     this.videoTimer =  timer(0, 1000).subscribe(() => {
+      if (this.isRunning) {
+        this.time++;
+        this.getDisplayTimer(this.time);
+      }
+    });
+  }
+
+  getDisplayTimer(time: number) {
+    var hours = '' + Math.floor(time / 3600);
+    var minutes = '' + Math.floor(time % 3600 / 60);
+    var seconds = '' + Math.floor(time % 3600 % 60);
+
+    if (Number(hours) < 10) {
+      hours = '0' + hours;
+    } else {
+      hours = '' + hours;
+    }
+    if (Number(minutes) < 10) {
+      minutes = '0' + minutes;
+    } else {
+      minutes = '' + minutes;
+    }
+    if (Number(seconds) < 10) {
+      seconds = '0' + seconds;
+    } else {
+      seconds = '' + seconds;
+    }
+
+    this.displayTimer = minutes + ':' + seconds;
+    this.recordingDurationTime = this.displayTimer
+    this.recordingService.recordTimeDuration.next(this.displayTimer)
+  }
+
+  stopRecording(){
+    this.mediaRecorder.stop();
+  }
+
+  handleSuccess(stream) {
+    (<any>window).stream = stream;
+    const gumVideo = this.videoEle.nativeElement;
+    gumVideo.srcObject = stream;
+  }
+
+  async init(constraints) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+       this.videoTrack = stream.getVideoTracks()[0];
+       this.audioTrack = stream.getAudioTracks()[0];
+      this.handleSuccess(stream);
+    } catch (e) {
+      console.error('navigator.getUserMedia error:', e);
+    }
+  }
+  
+  async startCamera(){
+    this.videoEle.nativeElement.volume = 0
+    const constraints = {
+      audio: {
+        echoCancellation: true
+      },
+      video: {
+        width: 1280, height: 720
+      }
+    };
+    await this.init(constraints);
+  }
+
+  videoInitialize(){
+    let el = 'video';
+      this.headerService.muteUnmuteMic.subscribe(
+      res =>{
+        this.micValue = res
+      })
+  }
+
+  redirectToPhoto(){
+    this.router.navigate(['/takescreenshot']);
+  }
+
+  ngOnDestroy(){
+    (<any>window).stream.getTracks()[0].stop()
+    setTimeout(() => {
+      this.videoTimer.unsubscribe()
+    }, 4000);
   }
 }

@@ -24,6 +24,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'takescreenshot',
+    loadChildren: () =>
+      import('src/app/pages/takescreenshot/takescreenshot.module').then(
+        (m) => m.TakescreenshotModule
+      ),
+  },
+  {
     path: 'choosescreenshot',
     loadChildren: () =>
       import('src/app/pages/choose-screenshot/choose-screenshot.module').then(

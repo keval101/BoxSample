@@ -21,11 +21,11 @@
 
   <div class="dropdown__div">
     <div>
-      <p-dropdown
+      <p-dropdown *ngIf = "camera.length"
         [options]="camera"
         [(ngModel)]="selectedCamera"
-        optionLabel="cameraName"
-        placeholder="Logitech XY123"
+        [placeholder]="camera[0].label"
+        (ngModelChange)  = "dropValue($event)"
       ></p-dropdown>
     </div>
 
@@ -43,7 +43,7 @@
           id="mic"
           [ngStyle]="{ display: !checkedMic ? 'none' : 'block' }"
         />
-        <p-inputSwitch [(ngModel)]="checkedMic"></p-inputSwitch>
+        <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()"></p-inputSwitch>
       </div>
 
       <div class="dropdown__div-butonGroup--iconsGroup">
@@ -65,12 +65,15 @@
   </div>
 
   <div class="recordingPreview">
-    <img src="assets/images/01.png" />
+    <video autoplay #video id="video"></video>
   </div>
 
   <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+    <button class="close"> 
+      <img src="assets/icnons/close.svg" alt="close">
+    </button>
     <div class="sidebar__header">
-      <img src="assets/images/logo.png" alt="logo" />
+      <img src="assets/images/logo.svg" alt="logo" />
     </div>
 
     <div class="sidebar__content">
@@ -90,16 +93,17 @@
           {{ 'recordingPage.yourTasks' | translate }}
         </p>
         <p class="sidebar__content-text">
-          {{ 'recordingPage.taskText' | translate }}
+          {{ 'setup.tasks' | translate }}
         </p>
 
         <ul>
-          <li>{{ 'recordingPage.ulText1' | translate }}</li>
-          <li>{{ 'recordingPage.ulText2' | translate }}</li>
+          <li>{{ 'setup.ulText1' | translate }}</li>
+          <li>{{ 'setup.ulText2' | translate }}</li>
+          <li>{{ 'setup.ulText3' | translate }}</li>
         </ul>
 
         <p class="sidebar__content-text">
-          {{ 'recordingPage.sidebarmsg' | translate }}
+          {{ 'setup.note' | translate }}
         </p>
       </div>
     </div>

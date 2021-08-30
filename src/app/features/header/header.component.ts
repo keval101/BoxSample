@@ -12,19 +12,21 @@ import { fadeAnimation } from '../../shared/app.animation';
   animations: [fadeAnimation],
 })
 export class HeaderComponent implements OnInit, OnChanges {
-  checkedMic: boolean = true;
+  
+ 
   checkedFlash: boolean = false;
   showSide: boolean = true;
   fullScreen: boolean = false;
   val: number;
-
+  
+  recordingDuration:any = "00:00";
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
-  @Output() show = new Subject();
   @Input() videoScreen: boolean = false;
-
+  @Output() show = new Subject();
+  @Input()  checkedMic: boolean = true;
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,
@@ -35,6 +37,13 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.fullScreen = this.recordingService.fullscreen;
+    
+    this.recordingService.recordTimeDuration.subscribe(
+      res => {
+        this.recordingDuration = res
+      }
+    )
+    this.muteUnmuteToggle()
   }
 
   onShow() {
@@ -49,5 +58,10 @@ export class HeaderComponent implements OnInit, OnChanges {
   closescreen() {
     this.headerService.videoFullscreen.next(false);
     this.fullScreen = false;
+  }
+
+  muteUnmuteToggle(){
+    this.headerService.muteMic = this.checkedMic;
+    this.headerService.muteUnmuteMic.next(this.checkedMic);
   }
 }

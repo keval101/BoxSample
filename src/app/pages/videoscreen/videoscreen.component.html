@@ -1,12 +1,12 @@
-<div class="container">
-  <div class="header">
-    <app-header
-      [onFinishRecording]="recording"
-      [onScreenShot]="isScreenShot"
-      [videoScreen]="isVideoScreen"
-    ></app-header>
-  </div>
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    [onScreenShot]="isScreenShot"
+    [videoScreen]="isVideoScreen"
+  ></app-header>
+</div>
 
+<div class="container">
   <div class="videoContainer">
     <video
       src="assets/video/video.mp4"
@@ -19,15 +19,6 @@
   <div class="bottomContainer">
     <div class="buttons">
       <div class="playedBtn">
-        <button class="playPauseBtn" (click)="onRestart()">
-          <img
-            src="assets/icnons/fast-backward-solid.svg"
-            alt="play"
-            class="icon"
-            id="restart"
-          />
-        </button>
-
         <button class="playPauseBtn" (click)="onPlayPause()"
         >
           <img

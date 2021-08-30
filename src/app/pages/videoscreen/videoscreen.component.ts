@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-videoscreen',
   templateUrl: './videoscreen.component.html',
@@ -20,7 +21,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit{
 
   @ViewChild('video') video:ElementRef;
 
-  constructor( private Translateservice: TranslateService, private router:Router, private headerService:HeaderService) {
+  constructor( private router:Router, private headerService:HeaderService, private Translateservice: TranslateService) {
     this.headerService.videoFullscreen.subscribe( res =>{
 
       if(res == true){
@@ -57,32 +58,17 @@ export class VideoscreenComponent implements OnInit, AfterViewInit{
       if(this.video.nativeElement.ended){
         this.playVideo = false
       }
+    } );
 
     document.getElementById('seekbar').addEventListener('click', (e) => {
       const progressTime = (e.offsetX / this.width) *   this.video.nativeElement.duration
       this.video.nativeElement.currentTime = progressTime;
     })
-    } );
   }
 
   onPlayPause(){
     this.togglePlayPause()
    };
-   
-   onRestart(){
-    if(this.video.nativeElement.currentTime > 0 ){
-      if(this.playVideo === true){
-      this.video.nativeElement.currentTime = 0;
-        this.playVideo = true
-        this.video.nativeElement.play()
-      }else if(this.playVideo === false){
-      this.video.nativeElement.currentTime = 0;
-        this.playVideo = false
-        this.video.nativeElement.pause()
-      }
-
-    } 
-   }
 
    volumeChanged(e){
     if (e.cancelable) {
@@ -97,6 +83,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit{
    }
 
    redirectTo(){
+    this.playVideo = false
+    this.video.nativeElement.pause()
     this.router.navigate(['/setup'])
    }
 }
