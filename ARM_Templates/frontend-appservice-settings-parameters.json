@@ -1,0 +1,72 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "value": "XXXXXX"
+    },
+    "planName": {
+      "value": "XXXXXX"
+    },
+    "planNameRG": {
+      "value": "XXXXXX"
+    },
+    "location": {
+      "value": "XXXXXX"
+    },
+    "APPINSIGHTS_INSTRUMENTATIONKEY": {
+      "value": "XXXXXX"
+    },
+    "APPINSIGHTS_PROFILERFEATURE_VERSION": {
+      "value": "XXXXXX"
+    },
+    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION": {
+      "value": "XXXXXX"
+    },
+    "ApplicationInsightsAgent_EXTENSION_VERSION": {
+      "value": "XXXXXX"
+    },
+    "DiagnosticServices_EXTENSION_VERSION": {
+      "value": "XXXXXX"
+    },
+    "InstrumentationEngine_EXTENSION_VERSION": {
+      "value": "XXXXXX"
+    },
+    "SnapshotDebugger_EXTENSION_VERSION": {
+      "value": "XXXXXX"
+    },
+    "MobileAppsManagement_EXTENSION_VERSION": {
+      "value": "XXXXXX"
+    },
+    "XDT_MicrosoftApplicationInsights_BaseExtensions": {
+      "value": "XXXXXX"
+    },
+    "WEBSITE_RUN_FROM_PACKAGE": {
+      "value": "XXXXXX"
+    },
+    "WEBSITE_NODE_DEFAULT_VERSION": {
+      "value": "XXXXXX"
+    },
+    "XDT_MicrosoftApplicationInsights_Mode": {
+      "value": "XXXXXX"
+    },
+    "production": {
+      "value": "XXXXXX"
+    },
+    "API_HOST": {
+      "value": "XXXXXX"
+    },
+    "API_IDENTITY_SERVER": {
+      "value": "XXXXXX"
+    },
+    "BLOB_PUBLIC_MOVIES": {
+      "value": "XXXXXX"
+    },
+    "hmr": {
+      "value": "XXXXXX"
+    },
+    "version": {
+      "value": "XXXXXX"
+    }
+  }
+}
