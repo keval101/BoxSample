@@ -13,7 +13,6 @@ import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
 })
 export class EvaluationComponent implements OnInit {
   recording: boolean;
-  isScreenShot: boolean;
   ans: string = 'Goal';
   val: number = 3;
   cancelValue: boolean = true;
@@ -54,9 +53,8 @@ export class EvaluationComponent implements OnInit {
 
   ngOnInit(): void {
     this.recording = true;
-    this.isScreenShot = true;
     this.evolutionService.cancelValue = false;
-    this.resultImage = this.takescreenshotService.captures[0]
+    this.resultImage = this.takescreenshotService.resultImageSource
     this.id = 0
   }
 

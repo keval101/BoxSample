@@ -1,7 +1,6 @@
 <div class="header">
     <app-header
       [onFinishRecording]="recording"
-      [onScreenShot]="isScreenShot"
       [ontakeScreenshot]="takeScreenshot"
     ></app-header>
   </div>
@@ -20,11 +19,11 @@
           type="button"
           class="cameraBtn"
           (click)="takeScreenShot()"
-          [disabled]="!recording"
+          [disabled]="isTaken"
         >
-          <img src="../../../assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+          <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
         </button>
-        <p class="screenShotText" *ngIf="isScreenShot">
+        <p class="screenShotText">
           {{ 'recordingPage.screenShotText' | translate }}
         </p>
       </div>

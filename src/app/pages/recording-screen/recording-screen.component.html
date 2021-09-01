@@ -2,11 +2,11 @@
   <div class="header">
     <app-header
       [onFinishRecording]="recording"
-      [onScreenShot]="isScreenShot"
       [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
       (show)="onSlidebarOpen($event)"
       [checkedMic] = micCheckedValue
+      [checkedFlash] = flashCheckedValue
     ></app-header>
   </div>
 
@@ -31,9 +31,9 @@
   <p class="m-0">{{ counter }}</p>
 </div>
 
+<canvas #canvas class="canvas" id="canvas" width="640" height="480" [ngClass] ="{'zoomOutRight' : isScreenShot}" [ngStyle]="{'visibility' :isScreenShot ? 'visible' : 'hidden' }" ></canvas>
   <div
     class="recording__button"
-    [ngClass]="{ 'recording__button-bg': isScreenShot }"
   >
     <div class="recording__button--camera">
       <button
@@ -62,9 +62,16 @@
         <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
       </button>
 
-      <button type="button">
-        <i class="pi pi-question-circle"></i>
-      </button>
+      <div>
+        <button type="button">
+          <i class="pi pi-question-circle"></i>
+        </button>
+
+        <button type="button" class="button" id="cross">
+          <img src="assets/icnons/blueCros.svg" alt="cross" />
+          </button>
+      </div>
+      
     </div>
 
     <div class="sidebar__content">

@@ -1,7 +1,6 @@
 <div class="header">
   <app-header
     [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"
   ></app-header>
 </div>
 
@@ -31,7 +30,7 @@
 
       <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
-          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions] (onPage)="setPage($event)">
+          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions] (onPage)="setPage($event)" [ngClass]="{'touched' : touchScreen}">
             <ng-template let-item pTemplate="item" let-i="index">
               <img
                 style="height: 100%"

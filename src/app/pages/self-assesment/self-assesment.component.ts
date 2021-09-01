@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
-
 @Component({
   selector: 'app-self-assesment',
   templateUrl: './self-assesment.component.html',
@@ -11,17 +10,16 @@ import { SelfAssesmentService } from './self-assesment.service';
 })
 export class SelfAssesmentComponent implements OnInit {
   recording: boolean;
-  isScreenShot: boolean;
   items: any[] = [];
   responsiveOptions:any;
   resultImage: any;
   ExcelRowDatas:string
+  touchScreen:boolean;
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
     private takescreenshotService : TakescreenshotService,
     private selfAssesmentService : SelfAssesmentService
-
   ) {
     this.responsiveOptions = [
       {
@@ -49,7 +47,6 @@ export class SelfAssesmentComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.isScreenShot = true;
     this.recording = true;
     this.items = [
       { img : '../../../assets/images/screenshot0.png'},
@@ -57,7 +54,8 @@ export class SelfAssesmentComponent implements OnInit {
       { img : '../../../assets/images/screenshot2.png'},
       { img : '../../../assets/images/screenshot3.png'}
     ]
-    this.resultImage = this.takescreenshotService.captures[0]
+    let array = this.takescreenshotService.captures
+    this.resultImage = this.takescreenshotService.resultImageSource
   }
 
   redirectTo() {

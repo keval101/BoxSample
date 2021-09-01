@@ -1,9 +1,8 @@
-<div class="chooseScreenshot">
-  <div class="header">
-    <app-header [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"></app-header>
-  </div>
+<div class="header">
+  <app-header [onFinishRecording]="recording"></app-header>
+</div>
 
+<div class="chooseScreenshot">
   <div class="carousel-images">
     <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
       <ng-template let-item pTemplate="item" >

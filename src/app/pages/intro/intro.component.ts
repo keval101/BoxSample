@@ -11,7 +11,6 @@ import { fadeAnimation } from '../../shared/app.animation';
 })
 export class IntroComponent implements OnInit {
   recording: boolean;
-  isScreenShot: boolean;
   sidebar: boolean = true;
   constructor(
     public TranslateService: TranslateService,
@@ -19,7 +18,6 @@ export class IntroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isScreenShot = true;
     this.recording = true;
 
     if (window.innerWidth > 600) {

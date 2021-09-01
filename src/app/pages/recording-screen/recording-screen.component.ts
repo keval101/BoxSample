@@ -7,6 +7,7 @@ import { interval, Subscription, timer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
+import { SetupService } from '../setup/setup.service';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
@@ -38,15 +39,21 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   time:number = 0;
   displayTimer:any;
   videoType:any;
+  deviceInfoId:any;
   videoTimer:Subscription;
+  flashCheckedValue:boolean = false;
+
   @ViewChild('video') videoEle : ElementRef
   @ViewChild('videoPreview') recordedVideoEle : ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
     private sanitizer : DomSanitizer,
     private headerService : HeaderService,
+    private setupSerice:SetupService,
     public platform: Platform
   ) { 
     setTimeout(() => {
@@ -56,7 +63,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           this.muteVideo()
         })
     }, 4000);  
-    
+    this.deviceInfoId = this.setupSerice.cameraIdInformation
   }
 
   ngOnInit(): void {    
@@ -84,6 +91,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.startCamera();
     },500)
     this.micCheckedValue = this.headerService.muteMic
+    this.flashCheckedValue = this.headerService.flash
     this.recordingDurationTime = "00:00"  
   }
 
@@ -215,19 +223,17 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   
   async startCamera(){
     this.videoEle.nativeElement.volume = 0
+    let tempThis = this;
     const constraints = {
       audio: {
         echoCancellation: true
       },
-      video: {
-        width: 1280, height: 720
-      }
+      video: {deviceId: tempThis.deviceInfoId ? {exact: tempThis.deviceInfoId} : undefined}
     };
     await this.init(constraints);
   }
 
   videoInitialize(){
-    let el = 'video';
       this.headerService.muteUnmuteMic.subscribe(
       res =>{
         this.micValue = res

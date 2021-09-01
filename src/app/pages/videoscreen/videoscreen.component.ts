@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class VideoscreenComponent implements OnInit, AfterViewInit{
   recording: boolean;
-  isScreenShot: boolean;
   isVideoScreen:boolean
   playVideo:boolean;
   videoFullScreen:boolean = false;
@@ -33,7 +32,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit{
    }
 
   ngOnInit(): void {
-    this.isScreenShot = true;
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth

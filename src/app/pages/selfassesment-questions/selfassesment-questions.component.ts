@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
-  isScreenShot: boolean;
   answer1:any = "Yes";
   answer2:any;
   answer3:any;
@@ -20,7 +19,6 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isScreenShot = true;
     this.recording = true;
   }
 

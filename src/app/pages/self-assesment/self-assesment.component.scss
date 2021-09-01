@@ -136,11 +136,19 @@
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
   top: 46%;
   left: 2rem;
+
+  @media screen and (max-width:600px){
+    top: 60%;
+  }
 }
 
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
   top: 46%;
   right: 1.7rem;
+  
+  @media screen and (max-width:600px){
+    top: 60%;
+  }
 }
 
 ::ng-deep .p-carousel .p-carousel-indicators {

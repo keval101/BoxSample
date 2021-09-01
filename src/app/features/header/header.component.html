@@ -28,15 +28,15 @@
           }"
         >
           <img src="assets/icnons/mic.png" alt="mic" id="mic" />
-          <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()"></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()" class="inputSwitch"></p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
           <img src="assets/icnons/flash.png" alt="flash" id="flash" />
-          <p-inputSwitch [(ngModel)]="checkedFlash"></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedFlash" (ngModelChange)="flashedToggle()" class="inputSwitch"></p-inputSwitch>
         </div>
 
-        <div class="header__right--icons-group" *ngIf="!onScreenShot">
+        <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
           <button
             type="button"
             class="button"
@@ -67,10 +67,20 @@
 
       <div
         class="header__right--icons-group"
-        *ngIf="!onScreenShot && !onFinishRecording"
+        *ngIf="!videoScreen"
       >
-        <button class="button" type="button" (click)="onShow()">
+        <button class="button sidebarBtn" type="button" (click)="onShow()" *ngIf="!endscreen">
           <i class="pi pi-question-circle"></i>
+        </button>
+        <button
+          type="button"
+          class="button"
+          id="cross"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
         </button>
       </div>
 

@@ -1,7 +1,6 @@
 <div class="header">
   <app-header
     [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"
   ></app-header>
 </div>
 
@@ -59,7 +58,7 @@
           id="flash"
           [ngStyle]="{ display: !checkedFlash ? 'none' : 'block' }"
         />
-        <p-inputSwitch [(ngModel)]="checkedFlash"></p-inputSwitch>
+        <p-inputSwitch [(ngModel)]="checkedFlash" (ngModelChange)="flashToggle()"></p-inputSwitch>
       </div>
     </div>
   </div>

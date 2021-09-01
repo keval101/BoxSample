@@ -87,14 +87,6 @@
   padding-right: 4rem;
   width: 56%;
   z-index: 1;
-
-  @media screen and (max-width : 375px){
-    margin-right: 4rem;
-  }
-
-  @media screen and (max-width : 320px){
-    margin-right: 9.5rem;
-  }
 }
 
 .playedBtn {

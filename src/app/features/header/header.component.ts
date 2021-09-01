@@ -12,13 +12,9 @@ import { fadeAnimation } from '../../shared/app.animation';
   animations: [fadeAnimation],
 })
 export class HeaderComponent implements OnInit, OnChanges {
-  
- 
-  checkedFlash: boolean = false;
   showSide: boolean = true;
   fullScreen: boolean = false;
   val: number;
-  
   recordingDuration:any = "00:00";
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
@@ -26,7 +22,11 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
   @Output() show = new Subject();
-  @Input()  checkedMic: boolean = true;
+  @Output() flashToggled = new Subject();
+  @Input() checkedFlash: boolean = false;
+  @Input() checkedMic: boolean = true;
+  @Input() endscreen: boolean = false;
+
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,
@@ -63,5 +63,10 @@ export class HeaderComponent implements OnInit, OnChanges {
   muteUnmuteToggle(){
     this.headerService.muteMic = this.checkedMic;
     this.headerService.muteUnmuteMic.next(this.checkedMic);
+  }
+
+  flashedToggle(){
+    this.headerService.flash = this.checkedFlash;
+    this.headerService.flashToggled.next(this.checkedFlash);
   }
 }
