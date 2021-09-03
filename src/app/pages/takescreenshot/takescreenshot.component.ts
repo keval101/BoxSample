@@ -14,6 +14,7 @@ import { fadeAnimation } from '../../shared/app.animation';
 })
 export class TakescreenshotComponent implements OnInit,OnDestroy{
   recording: boolean;
+  isTaken:boolean = false
   takeScreenshot: boolean;
   onCameraClick : boolean = false;
   imageCapture:boolean = false
@@ -31,12 +32,6 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
     private headerService:HeaderService
   ) {
     this.deviceInfoId = this.setupSerice.cameraIdInformation
-
-    this.headerService.videoFullscreen.subscribe(
-      fullscreenValue => {
-        this.isFullScreen = fullscreenValue
-      }
-    )
   }
 
   ngOnInit(): void {
@@ -59,6 +54,7 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
   }
 
   takeScreenShot(){
+    this.isTaken= true
     this.onCameraClick = true
     this.takeScreenshot = false
     this.imageCapture = true
@@ -70,6 +66,7 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
    this.takeScreenshot = true
    this.onCameraClick = false
    this.imageCapture = false
+   this.isTaken= false
   }
 
   onDone(){
