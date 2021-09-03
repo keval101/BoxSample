@@ -59,9 +59,10 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
   }
 
   takeScreenShot(){
-   this.onCameraClick = true
-   this.takeScreenshot = false
-   this.imageCapture = true
+    this.onCameraClick = true
+    this.takeScreenshot = false
+    this.imageCapture = true
+    this.isFullScreen = false
    var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
   }
 
@@ -72,6 +73,7 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
   }
 
   onDone(){
+    this.isFullScreen = false
     this.router.navigate(['/choosescreenshot']);
     this.takescreenshotService.resultImageSource = this.canvas.nativeElement.toDataURL("image/png");
   }
