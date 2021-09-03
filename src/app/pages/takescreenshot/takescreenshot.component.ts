@@ -75,6 +75,7 @@ export class TakescreenshotComponent implements OnInit,OnDestroy{
   onDone(){
     this.isFullScreen = false
     this.router.navigate(['/choosescreenshot']);
+    this.takescreenshotService.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
     this.takescreenshotService.resultImageSource = this.canvas.nativeElement.toDataURL("image/png");
   }
 
