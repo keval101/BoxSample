@@ -1,0 +1,112 @@
+<div class="recording">
+  <div class="header">
+    <app-header
+      [onFinishRecording]="recording"
+      [sidebarOpen]="isSidebarOpen"
+      [ontakeScreenshot]="!takeScreenshot"
+      (show)="onSlidebarOpen($event)"
+      [checkedMic] = micCheckedValue
+      [checkedFlash] = flashCheckedValue
+    ></app-header>
+  </div>
+
+  <div class="videoPreview" *ngIf = 'recordingFinish'>
+    <video [src]="videoSource" playsinline controls #videoPreview></video>
+    <button class="close" (click)="redirectToPhoto()">X</button>
+  </div>
+
+  <div class="recording__logo" [ngClass]="{'transformLogo' : isFullScreen}">
+    <img src="assets/images/Logo2.svg" alt="logo" />
+  </div>
+
+  <div class="recording__video">
+    <video id="video" class="video" autoplay playsinline muted #video></video>
+  </div>
+
+  <div
+  class="counter"
+  [ngClass]="{ goPadding: paddingClass }"
+  *ngIf="counterTime"
+>
+  <p class="m-0">{{ counter }}</p>
+</div>
+
+<canvas #canvas class="canvas" id="canvas" width="640" height="480" [ngClass] ="{'zoomOutRight' : isScreenShot}" [ngStyle]="{'visibility' :isScreenShot ? 'visible' : 'hidden' }" ></canvas>
+  <div
+    class="recording__button"
+  >
+    <div class="recording__button--btnGroups">
+      <button
+      type="button"
+      class="recordingBtn"
+    >
+      <img src="assets/icnons/cancelRecording.svg" alt="cancel-icon" class="btnIcon" />
+    </button>
+
+
+      <button
+        type="button"
+        class="recordingBtn"
+        (click) ="takescreenshot()"
+      >
+        <img src="assets/icnons/camera.png" alt="camera-icon" class="btnIcon" />
+      </button>
+    </div>
+
+    <div class="recording__button--finish">
+      <button
+        type="button"
+        class="button button-big button-fill"
+        (click)="onFinish()"
+      >
+        {{ 'recordingPage.finishRecording' | translate }}
+      </button>
+
+    </div>
+  </div>
+
+  <div class="sidebar" *ngIf="isSidebarOpen" @fadeAnimation>
+    <div class="sidebar__header">
+      <button type="button" (click)="onSlidebarClose()">
+        <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+      </button>
+
+      <div>
+        <button type="button">
+          <i class="pi pi-question-circle"></i>
+        </button>
+
+        <button type="button" class="button" id="cross">
+          <img src="assets/icnons/blueCros.svg" alt="cross" />
+          </button>
+      </div>
+      
+    </div>
+
+    <div class="sidebar__content">
+      <p class="sidebar__content-title">
+        {{ 'recordingPage.exercise' | translate }}
+      </p>
+      <div class="sidebar__content-goal">
+        <p class="sidebar__content-title2">
+          {{ 'intro.goals' | translate }}
+        </p>
+        <p class="sidebar__content-text">
+          {{ 'intro.goalsText' | translate }}
+        </p>
+      </div>
+      <div class="sidebar__content-task">
+        <p class="sidebar__content-title2">
+          {{ 'recordingPage.yourTasks' | translate }}
+        </p>
+        <ul>
+          <li>{{ 'recordingPage.ulText1' | translate }}</li>
+          <li>{{ 'recordingPage.ulText2' | translate }}</li>
+          <li>{{ 'recordingPage.ulText3' | translate }}</li>
+          <li>{{ 'recordingPage.ulText4' | translate }}</li>
+          <li>{{ 'recordingPage.ulText5' | translate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

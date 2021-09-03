@@ -1,0 +1,81 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/_radiobutton';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 11.2rem);
+  padding: 0 4rem;
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 400;
+      color: $blue-color;
+      margin: 4.8rem 0 3rem 0;
+    }
+
+    &-message {
+      font-weight: 500;
+      font-size: 3.2rem;
+      color: $primary-color;
+    }
+  }
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 4.8rem;
+  height: 49.624rem;
+  padding: 7.736rem 3.893rem;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+  justify-content: space-between;
+
+  &__ques {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-text {
+      flex-grow: 1;
+      color: $black-color;
+      font-size: 3.2rem;
+      font-weight: 400;
+      margin: 0;
+      width: 75%;
+    }
+
+    &-radioGroup {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      .radioBtn {
+        margin-right: 7.3rem;
+
+        @media screen and (max-width:420px){
+          margin-right: 6.3rem;
+        }
+      }
+      label {
+        font-size: 3.2rem;
+        margin-left: 1.46rem;
+      }
+    }
+  }
+}
+
+.bottomContainer {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 4rem;
+  width: 100%;
+  right: 0;
+  padding: 0 4rem;
+}

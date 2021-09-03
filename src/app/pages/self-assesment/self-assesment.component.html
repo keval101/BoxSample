@@ -1,0 +1,57 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="container__title">
+    <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
+    <p class="container__title-message m-0">
+      {{ 'selfassesment.message' | translate }}
+    </p>
+  </div>
+
+  <div class="selfassesment__result">
+    <div class="selfassesment__result-image">
+      <p class="selfassesment__result-title">
+        {{ 'selfassesment.resultTitle' | translate }}
+      </p>
+
+      <div class="selfassesment__result-content">
+        <img [src]="resultImage" alt="resultImage" />
+      </div>
+    </div>
+
+    <div class="selfassesment__result-choise">
+      <p class="selfassesment__result-title">
+        {{ 'selfassesment.choice' | translate }}
+      </p>
+
+      <div class="selfassesment__result-content carousel-div">
+        <div class="carousel-images">
+          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions] (onPage)="setPage($event)" [ngClass]="{'touched' : touchScreen}">
+            <ng-template let-item pTemplate="item" let-i="index">
+              <img
+                style="height: 100%"
+                [src]="item.img"
+                class="screenShotImage"
+                id="index"
+              />
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottomContainer">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
+      {{ 'selfassesment.next' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="header">
+    <app-header
+      [onFinishRecording]="recording"
+      [ontakeScreenshot]="takeScreenshot"
+    ></app-header>
+  </div>
+
+  <div class="container">
+    <div class="snapshotContainer">
+      <video #video class="video" width="640" height="480" autoplay [ngClass] = " {'zIndex' : !imageCapture}"></video>
+      <canvas #canvas class="canvas" width="640" height="480" ></canvas>
+    </div>
+    
+    <div class="logo" [ngClass]="{'transformLogo' : isFullScreen}">
+      <img src="assets/images/Logo2.svg" alt="logo" />
+    </div>
+
+    <div class="container__footer" [ngClass]="{'fullScreenbg' : isFullScreen}">
+      <div class="container__footer--camera">
+
+        <p class="screenShotText" *ngIf="takeScreenshot" [ngStyle]="{'visibility' : isFullScreen ? 'hidden' : 'visible' }">
+          {{ 'takescreenshot.screenShotText' | translate }}
+        </p>
+
+        <p class="screenShotText" *ngIf="!takeScreenshot">
+          {{ 'takescreenshot.previewText' | translate }}
+        </p>
+
+        <button
+          type="button"
+          class="cameraBtn"
+          (click)="takeScreenShot()"
+          *ngIf="takeScreenshot"
+        >
+          <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+        </button>
+
+      </div>
+
+      <div class="container__footer--Btngroup" *ngIf="onCameraClick">
+        <button class="button button-small button-outline" (click)="onRetake()">
+          {{ 'takescreenshot.retake' | translate }}
+        </button>
+        <button class="button button-small button-fill" (click)="onDone()">
+          {{ 'takescreenshot.proceed' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,112 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="container__title">
+    <p class="container__title-text">
+      {{ 'selfassesmentquestions.title' | translate }}
+    </p>
+    <p class="container__title-message m-0">
+      {{ 'selfassesmentquestions.message' | translate }}
+    </p>
+  </div>
+
+  <div class="questions">
+    <div class="questions__ques" >
+      <p class="questions__ques-text">1. {{ 'selfassesmentquestions.question1' | translate }}</p>
+
+      <div class="questions__ques-radioGroup">
+        <div class="p-field-radiobutton radioBtn">
+          <p-radioButton
+            name="answer"
+            value="Yes"
+            [(ngModel)]="answer1"
+            id="yes"
+          ></p-radioButton>
+          <label for="yes">{{
+            'selfassesmentquestions.yes' | translate
+          }}</label>
+        </div>
+
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="answer"
+            value="No"
+            [(ngModel)]="answer1"
+            id="no"
+          ></p-radioButton>
+          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions__ques" >
+      <p class="questions__ques-text">2. {{ 'selfassesmentquestions.question2' | translate }}</p>
+
+      <div class="questions__ques-radioGroup">
+        <div class="p-field-radiobutton radioBtn">
+          <p-radioButton
+            name="answer"
+            value="Yes"
+            [(ngModel)]="answer2"
+            id="yes"
+          ></p-radioButton>
+          <label for="yes">{{
+            'selfassesmentquestions.yes' | translate
+          }}</label>
+        </div>
+
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="answer"
+            value="No"
+            [(ngModel)]="answer2"
+            id="no"
+          ></p-radioButton>
+          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions__ques" >
+      <p class="questions__ques-text">3. {{ 'selfassesmentquestions.question3' | translate }}</p>
+
+      <div class="questions__ques-radioGroup">
+        <div class="p-field-radiobutton radioBtn">
+          <p-radioButton
+            name="answer"
+            value="Yes"
+            [(ngModel)]="answer3"
+            id="yes"
+          ></p-radioButton>
+          <label for="yes">{{
+            'selfassesmentquestions.yes' | translate
+          }}</label>
+        </div>
+
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="answer"
+            value="No"
+            [(ngModel)]="answer3"
+            id="no"
+          ></p-radioButton>
+          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottomContainer">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
+      {{ 'selfassesment.next' | translate }}
+    </button>
+  </div>
+</div>

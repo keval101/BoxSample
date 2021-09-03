@@ -1,0 +1,306 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/_radiobutton';
+@import '../../../assets/scss/mixin';
+
+.container {
+  width: 70.7174%;
+  height: calc(100vh - 6.4rem);
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 400;
+      color: $blue-color;
+      padding: 4.882rem 0 2.5rem 0;
+      padding-left: 4rem;
+    }
+
+    &-message {
+      font-weight: 500;
+      font-size: 3.2rem;
+      color: $primary-color;
+      padding-left: 4rem;
+    }
+  }
+}
+
+.dropdown__div {
+  margin-top: 4.555rem;
+  padding: 0 2.9rem 0 4rem;
+  display: flex;
+  justify-content: space-between;
+
+  &-butonGroup {
+    display: flex;
+    align-items: center;
+
+    &--iconsGroup {
+      display: flex;
+      align-items: center;
+      &:not(:last-child) {
+        margin-right: 3.5rem;
+      }
+    }
+
+    #mic {
+      width: 2.494rem;
+      height: 3.207rem;
+      margin-right: 1.06rem;
+    }
+    #flash {
+      width: 1.911rem;
+      height: 2.962rem;
+      margin-right: 1.06rem;
+    }
+  }
+}
+
+.recordingPreview {
+  margin-top: 1.6rem;
+  width: 100%;
+  height: 58.834rem;
+
+  #video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 29.2825%;
+  z-index: 1;
+  background: radial-gradient(
+    266.77% 97.9% at 1.86% 0.8%,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 4rem;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 600px) {
+    width: 250px;
+  }
+  
+  .close{
+    position: absolute;
+    right: 2.3rem;
+    top:2rem;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    img{
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
+  &__content {
+    position: relative;
+    flex-grow: 1;
+    vertical-align: top;
+
+    &-title {
+      font-size: 3.2rem;
+      color: $blue-color;
+      font-weight: 500;
+      margin: 0 0 3rem 0;
+
+      @media screen and (max-width: 768px) {
+        font-size: 2.8rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 5.4rem;
+      }
+    }
+
+    &-title2 {
+      font-size: 2.4rem;
+      color: $blue-color;
+      font-weight: 400;
+      margin: 0;
+      font-family: "Myriad Regular";
+
+      @media screen and (max-width: 768px) {
+        font-size: 2.4rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.6rem;
+      }
+    }
+
+    &-text {
+      font-size: 2.4rem;
+      color: $black-color;
+      margin: 0;
+      line-height: 3rem;
+      font-weight: 300;
+      font-family: 'Myriad Light';
+
+      @media screen and (max-width: 768px) {
+        font-size: 2.4rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.8rem;
+      }
+    }
+
+    &-goal {
+      margin-bottom: 2rem;
+    }
+
+    ul {
+      font-size: 2.4rem;
+      font-weight: 300;
+      font-family: 'Myriad Light';
+      @media screen and (max-width: 768px) {
+        font-size: 2.4rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.8rem;
+      }
+
+      li{
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    img {
+      width: 31.939rem;
+      height: 3.019rem;
+      margin-top: 11.3rem;
+      margin-bottom: 6.667rem;
+    }
+  }
+
+  &__buttonGroup {
+    font-size: 2.4rem;
+    display: flex;
+    margin-bottom: 4rem;
+    button:not(:last-child) {
+      margin-right: 1.6rem;
+    }
+  }
+
+  .pi-chevron-left:before {
+    font-size: 2.4rem;
+  }
+}
+
+::ng-deep .p-inputswitch {
+  width: 3.4rem;
+  height: 1.4rem;
+}
+
+::ng-deep .p-inputswitch .p-inputswitch-slider:before {
+  width: 2rem !important;
+  height: 2rem !important;
+  background: $element-grey-color !important;
+  left: -0.5rem;
+
+  @media screen and (max-width:600px){
+    top: 0.5rem;
+  }
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
+  transform: translateX(2rem);
+}
+
+::ng-deep .p-dropdown {
+  width: 49.1rem;
+  height: 4.8rem;
+  border-radius: 0;
+  box-shadow: 0 2px 4px rgba($color: #000000, $alpha: 0.2);
+}
+
+::ng-deep .p-dropdown-item,
+::ng-deep .p-dropdown .p-dropdown-label.p-placeholder,
+::ng-deep .p-dropdown-label,
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  font-family: 'Myriad Regular';
+  border-radius: 0;
+  padding-left: 1.6rem;
+  font-size: 2.4rem;
+  color: $black-color;
+  text-overflow: ellipsis;
+}
+
+::ng-deep.p-dropdown-panel.p-dropdown-items.p-dropdown-item:not(.p-highlight):not(.p-disabled):hover,
+::ng-deep .p-dropdown .p-dropdown-label,
+::ng-deep .p-dropdown-items-wrapper,
+::ng-deep .p-dropdown .p-dropdown-trigger,
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  display: flex;
+  align-items: center;
+  color: $black-color;
+  background: #d8d9da;
+}
+
+::ng-deep .pi-chevron-down:before {
+  font-size: 2.4rem;
+  color: $primary-color;
+}
+
+::ng-deep .p-dropdown .p-dropdown-trigger {
+  border-radius: 0;
+  width: 5.357rem;
+}
+
+::ng-deep .p-dropdown.p-component.p-dropdown-open .pi-chevron-down:before {
+  content: '\e903';
+}
+
+::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: none;
+  border-color: #d8d9da;
+}
+
+::ng-deep .p-dropdown:not(.p-disabled):hover {
+  border-color: #d8d9da;
+}
+
+::ng-deep .p-dropdown-panel {
+  box-shadow: none;
+}
+
+::ng-deep .p-dropdown-items-wrapper {
+  border-top: 1px solid rgba($color: #000000, $alpha: 0.2);
+}
+
+@include onMobileScreenButton;

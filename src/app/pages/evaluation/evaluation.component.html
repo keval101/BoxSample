@@ -1,0 +1,140 @@
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="container__title">
+    <p class="container__title-text">{{ 'evaluation.title' | translate }}</p>
+  </div>
+
+  <div class="content">
+    <div class="result__container">
+      <p class="result__container-title">
+        {{ 'selfassesment.resultTitle' | translate }}
+      </p>
+
+      <div class="result__container-result">
+        <img [src]="resultImage" alt="resultImage" class="resultImage" />
+        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal"/>
+        <img src="assets/images/screenshot{{id}}.png" alt="selfassesment" *ngIf="!isGoal"/>
+
+        <div class="result__container-radioGroup">
+          <div class="p-field-radiobutton radioBtn">
+            <p-radioButton
+              name="ans"
+              value="Goal"
+              [(ngModel)]="ans"
+              inputId="Goal"
+              (ngModelChange) = "ansChanged($event)"
+            ></p-radioButton>
+            <label for="Goal">{{ 'evaluation.radioone' | translate }}</label>
+          </div>
+
+          <div class="p-field-radiobutton radioBtn">
+            <p-radioButton
+              name="ans"
+              value="Your self assessment"
+              [(ngModel)]="ans"
+              inputId="Selfassesment"
+              (ngModelChange) = "ansChanged($event)"
+            ></p-radioButton>
+            <label for="Selfassesment">{{
+              'evaluation.radiotwo' | translate
+            }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score__container">
+      <p class="result__container-title">
+        {{ 'evaluation.score' | translate }}
+      </p>
+
+      <p-table [value]="scores" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>&nbsp;</th>
+            <th>{{ 'evaluation.measured' | translate }}</th>
+            <th>{{ 'evaluation.goalValue' | translate }}</th>
+            <th>{{ 'evaluation.score' | translate }}</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-score>
+          <tr>
+            <td class="rowTitle">
+              {{ score.title }}
+            </td>
+            <td>{{ score.measured }}</td>
+            <td>{{ score.goalvalue }}</td>
+            <td class="score">{{ score.score }} /50</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <div class="score__container-feedback">
+        <p class="result__container-title">
+          {{ 'evaluation.feedback' | translate }}
+        </p>
+        <p class="score__container-feedback-text">
+          {{ 'evaluation.feedbacktextone' | translate }}
+        </p>
+        <p class="score__container-feedback-text">
+          {{ 'evaluation.feedbacktexttwo' | translate }}
+        </p>
+      </div>
+
+      <div class="score__container-ratings">
+        <p class="score__container-ratings-text">
+          {{ 'evaluation.ratingtext' | translate }}
+        </p>
+        <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottomContainer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="confirm()"
+      id="quitBtn"
+    >
+      {{ 'evaluation.quit' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
+      {{ 'evaluation.save' | translate }}
+    </button>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'evaluation.confirmation' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'evaluation.cancel' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'evaluation.confirm' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

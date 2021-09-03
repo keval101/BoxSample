@@ -1,0 +1,236 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/mixin';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top:0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#myvideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottomContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 14.4rem;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 0.2s ease;
+  &__text {
+    height: 12.8rem;
+    background-color: rgba(242, 246, 249, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+    color: $blue-color;
+    padding-top: 2.2rem;
+    padding-left: 4rem;
+    font-size: 2.4rem;
+    &-light {
+      font-family: 'Myriad Light';
+    }
+  }
+}
+.progressbar {
+  height: 1.6rem;
+  width: 100%;
+  background: rgba(#dee2e4, 0.8);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  z-index: 100;
+  &-color {
+    background-color: $primary-color;
+    height: 100%;
+    width: 0;
+  }
+}
+
+.footerAnimation {
+  transform: translateY(12.8rem);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  padding-right: 4rem;
+  width: 56%;
+  z-index: 1;
+}
+
+.playedBtn {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.play {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.playPauseBtn {
+  position: relative;
+  background: $primary-color;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 6.531rem;
+  height: 6.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6.565rem;
+
+  &:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -3.328rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 2px;
+    opacity: 0.5;
+    border-radius: 50%;
+    height: 6.4rem;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.pi-chevron-left {
+  font-size: 2.4rem;
+}
+
+.rightReserved {
+  @include reservedText;
+  bottom: 1.2rem;
+}
+
+.logo {
+  position: absolute;
+  top: 9.04rem;
+  left: 4rem;
+  z-index: 1;
+  transform: translateY(0);
+  transition: all 0.2s ease;
+
+  img {
+    @media screen and (max-width: 600px) {
+      width: 16rem;
+    }
+  }
+}
+
+.logoTop {
+  transform: translateY(-6.4rem);
+  transition: all 0.2s ease;
+}
+
+.rightReservedTop {
+  color: $white-color;
+  transform: translateY(-1.2rem);
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 1.345rem;
+  right: 22.008rem;
+  width: 17.959rem;
+  height: 3.601rem;
+  z-index: 1000;
+
+  @media screen and (max-width:375px){
+    right :26rem;
+  }
+
+  @media screen and (max-width:320px){
+    right :9rem;
+  }
+}
+#speaker {
+  width: 3rem;
+}
+.slideBar {
+  margin-left: 1.882rem;
+}
+.pi-chevron-left:before {
+  color: $primary-color;
+}
+::ng-deep .p-slider.p-slider-horizontal {
+  width: 17.959rem;
+  height: 0.846rem;
+  background-color: $white-color;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width:320px){
+    width: 15rem;
+  }
+}
+
+::ng-deep .p-slider .p-slider-handle {
+  background-color: $primary-color;
+  border: none;
+  width: 2.393rem;
+  height: 2.393rem;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+::ng-deep .p-slider .p-slider-range {
+  background-color: transparent;
+}
+::ng-deep .p-slider.p-slider-horizontal .p-slider-handle {
+  margin-top: -1.2rem;
+  margin-left: -0.2rem;
+}
+
+::ng-deep .p-slider .p-slider-handle:focus {
+  box-shadow: none;
+}
+
+::ng-deep .p-slider:not(.p-disabled) .p-slider-handle:hover {
+  background: $primary-color;
+  border-color: transparent;
+}

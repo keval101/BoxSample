@@ -1,0 +1,112 @@
+{
+    "home": {
+        "projectTitle": "Boxtrainer",
+        "title" : "Essential skills - Circular cutting",
+        "rightReserved" : "© VirtaMed AG  2021 All rights reserved,  V1.0.13"
+    },
+    "intro":{
+        "title" :"Circular cutting",
+        "description" : "Description",
+        "descriptionText" : "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible.",
+        "goals":"Goals",
+        "goalsText": "Precisely cut out the circle pattern from the gauze",
+        "duration" : "Average duration",
+        "durationTime" : "1:30 minutes",
+        "whatyouneed" : "What you need",
+        "boxtrainerHardware": "Your choice of box trainer",
+        "grasper":"Grasper",
+        "scissors":"Scissors",
+        "circlePattern":"Gauze with circle pattern",
+        "whatwillyoudo": "What you will do",
+        "tutorial": "Watch a tutorial video",
+        "recordExercise": " Record your exercise",
+        "result": "Rate your result",
+        "upload": "Review and upload result",
+        "watchMovie": "Watch movie"
+    },
+    "video" : {
+        "prepareSetup": "Prepare Setup",
+        "title" : "Circular cutting",
+        "name": "by VirtaMed, Zurich, August 2021"
+    },
+    "header": {
+        "headerTitle" : "Essential skills - Circular cutting",
+        "duration" : "Procedure time:"
+    },
+    "setup":{
+        "title" : "Prepare setup",
+        "message" : "Please select camera and choose your camera settings",
+        "startExercise" : "Start exercise",
+        "tasks" : "Your objective is to cut out the circle as precisely and in as little time as possible",
+        "ulText1" : "Make sure your setup and equipment are ready",
+        "ulText2" : "Make sure your camera is selected and your view is centered",
+        "ulText3" : "When you are ready to start, press Start exercise.",
+        "note": "Note: your time will start once you press Start exercise and the 3 second countdown is done."
+    },
+    "recordingPage": {
+        "finishRecording" : "Finish recording",
+        "screenShotText" : "Take a screenshot of your result.",
+        "retake" : "Retake",
+        "done" : "Done",
+        "exercise" : "Exercise",
+        "yourTasks" : "Your tasks",
+        "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
+        "ulText1" : "Perform the exercise as described in the tutorial video",
+        "ulText2" : "If you like, you can take screenshots during the exercise by pressing the screenshot button",
+        "ulText3" : "When you are finished the exercise, press the Finish recording button",
+        "ulText4" : "Press the Stop button to cancel this recording and go back to the set up",
+        "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
+        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
+    },
+    "takescreenshot":{
+        "screenShotText" : "Take a screenshot of your result to proceed.",
+        "previewText" : "Screenshot preview",
+        "retake" : "Retake screenshot",
+        "proceed" : "Proceed",
+        "cancelText" :" Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled."
+    },
+    "chooseScreenshot" :{
+        "chooseResult" : "Choose the screenshot showing your result the best.",
+        "chooseBtn" : "Choose this screenshot"
+    },
+    "selfassesment":{
+        "title": "Self assesment",
+        "resultTitle": "Your result",
+        "choice" : "Your choice",
+        "message" : "Select the example image that best matches your result",
+        "next" : "Next"
+    },
+    "selfassesmentquestions":{
+        "title" : "Self assessment questions",
+        "message" : "Please answer the questions to proceed",
+        "question1" : "I used my dominant hand to cut",
+        "question2" : "I used my non dominant hand to apply tension  ",
+        "question3" : "I switched hands during the exercise",
+        "yes" : "Yes",
+        "no" : "No"
+    },
+    "evaluation" : {
+        "title" : " Evaluation",
+        "score": "Scores",
+        "save" : "Save and Upload",
+        "quit" : "Quit without saving",
+        "feedback" : "Feedback",
+        "radioone" : "Goal",
+        "radiotwo" : "Your self assessment",
+        "feedbacktextone" : "Nice work. It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+        "feedbacktexttwo" : "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting. ",
+        "ratingtext" : "How was the case? Rate yourself",
+        "cancel" : "Cancel",
+        "confirm" : "Confirm",
+        "measured" : "Measured",
+        "goalValue" : "Goal Value",
+        "confirmation" : "Confirmation"
+    },
+    "end" : {
+        "success" : "Success",
+        "successMessage" : "Your results have been uploaded.",
+        "cancel" : "You cancelled the exercise.",
+        "cancelMessage" : "We would be pleased to welcome you back ",
+        "close" : "Close"
+    }
+}

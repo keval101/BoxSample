@@ -1,0 +1,157 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/button';
+@import '../../../assets/scss/mixin';
+
+.container {
+  width: 70.7174%;
+  height: calc(100vh - 6.4rem);
+  padding: 0 4.8rem;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+
+  &__title {
+    width: 100%;
+
+    &-text {
+      font-size: 4rem;
+      font-weight: 500;
+      color: $blue-color;
+      padding: 4.882rem 0 3rem 0;
+    }
+
+    &-description {
+      font-size: 2.4rem;
+      color: $black-color;
+    }
+    &-descriptionText {
+      font-size: 2.4rem;
+      font-family: 'Myriad Light';
+    }
+  }
+}
+
+.videoPreview {
+  margin-top: 3.2rem;
+  width: 100%;
+  height: 56.834rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-top: 5rem;
+  }
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 29.2825%;
+  z-index: 1;
+  background: $background-grey-color;
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 4rem;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 600px) {
+    width: 250px;
+  }
+  .close{
+    position: absolute;
+    right: 2.3rem;
+    top:2rem;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    img{
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
+  &__content {
+    position: relative;
+    flex-grow: 1;
+    
+    &-title {
+      font-size: 2.4rem;
+      color: $blue-color;
+      font-weight: 400;
+      margin: 0;
+      font-family: "Myriad Regular";
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.4rem;
+      }
+    }
+
+    &-text {
+      font-size: 2.8rem;
+      color: $black-color;
+      margin: 0;
+      font-weight: 300;
+      line-height: 3rem;
+      font-family: 'Myriad Light';
+
+      @media screen and (min-width: 768px) {
+        font-size: 2.4rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.1rem;
+        line-height: 3.6rem;
+      }
+    }
+
+    &-texDiv {
+      margin-bottom: 2rem;
+    }
+
+    .need {
+      list-style: none;
+      padding: 0;
+    }
+    .willdo {
+      padding-left: 2rem;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    img {
+      width: 31.939rem;
+      height: 3.019rem;
+      margin-top: 11.3rem;
+      margin-bottom: 6.667rem;
+    }
+  }
+
+  &__buttonGroup {
+    display: flex;
+    justify-content: center;
+    font-size: 2.4rem;
+    margin-bottom: 4rem
+  }
+}
+
+.rightReserved {
+  @include reservedText;
+}
+
+@include onMobileScreenButton;

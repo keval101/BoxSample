@@ -1,0 +1,34 @@
+<div class="header">
+  <app-header [onFinishRecording]="recording"></app-header>
+</div>
+
+<div class="chooseScreenshot">
+  <div class="carousel-images">
+    <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
+      <ng-template let-item pTemplate="item" >
+        <img
+          [src]="item"
+          class="screenShotImage"
+        />
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div class="chooseScreenshot__bottom">
+    <div class="chooseScreenshot__bottom--text">
+      <p>{{ 'chooseScreenshot.chooseResult' | translate }}</p>
+    </div>
+
+    <div class="chooseScreenshot__bottom--group">
+      <button
+        class="button button-exSmall button-outline backBtn"
+        (click)="backToScreenShot()"
+      >
+        <i class="pi pi-chevron-left"></i>
+      </button>
+      <button class="button button-big button-fill backBtn" (click)="redirectTo()">
+        {{ 'chooseScreenshot.chooseBtn' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
