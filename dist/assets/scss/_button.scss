@@ -1,0 +1,52 @@
+@import '../scss/variables';
+
+.button {
+  border: 1px solid transparent;
+  height: 4.8rem;
+  border-radius: 0.5rem;
+  font-size: 2.4rem;
+  background: transparent;
+  border: 0.2rem solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-big {
+    width: 32rem;
+  }
+
+  &-exSmall {
+    width: 8rem;
+  }
+
+  &-small {
+    width: 24rem;
+  }
+
+  &-fill {
+    background-color: $primary-color;
+    color: $white-color;
+    font-family: 'Myriad Light';
+  }
+
+  &-outline {
+    color: $primary-color;
+    border-color: $primary-color;
+
+    &:hover {
+      transform: translateY(0.2rem);
+      box-shadow: 0 0.2rem 0.2rem rbga(0, 0, 0, 0.25);
+      background-color: transparent !important;
+      transition: all 0.5s ease;
+    }
+  }
+
+  &:hover {
+    transform: translateY(0.2rem);
+    box-shadow: 0 0.2rem 0.2rem rbga(0, 0, 0, 0.25);
+    background-color: $dark-primary-color;
+    transition: all 0.5s ease;
+  }
+}
