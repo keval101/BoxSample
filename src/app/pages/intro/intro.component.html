@@ -1,7 +1,5 @@
 <div class="header">
-  <app-header
-    [onFinishRecording]="recording"
-  ></app-header>
+  <app-header [onFinishRecording]="recording"></app-header>
 </div>
 
 <div
@@ -25,12 +23,12 @@
   </div>
 
   <div class="videoPreview">
-    <img src="assets/images/Cover image.png" alt="coverImages">
+    <img src="assets/images/Cover image.png" alt="coverImages" />
   </div>
 
   <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
-    <button class="close"> 
-      <img src="assets/icnons/close.svg" alt="close">
+    <button class="close">
+      <img src="assets/icnons/close.svg" alt="close" />
     </button>
     <div class="sidebar__header">
       <img src="assets/images/logo.svg" alt="logo" />

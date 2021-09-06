@@ -114,11 +114,6 @@ export class SetupComponent implements OnInit, OnDestroy{
             )
           });
       }
-    
-      // iOS detection from: http://stackoverflow.com/a/9039885/177710
-      if (/iPad|iPhone|iPod/.test(this.userAgent) && !window.MSStream) {
-      }
-
       });
     });
   }

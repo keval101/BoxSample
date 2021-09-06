@@ -46,9 +46,9 @@ export class IntroComponent implements OnInit {
     this.router.navigate(['/video']);
   }
 
-  closeSidebar(){
+  closeSidebar() {
     if (window.innerWidth < 600) {
       this.sidebar = false;
-    } 
+    }
   }
 }

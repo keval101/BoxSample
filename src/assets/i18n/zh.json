@@ -58,6 +58,13 @@
         "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
         "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
     },
+    "takescreenshot":{
+        "screenShotText" : "Take a screenshot of your result to proceed.",
+        "previewText" : "Screenshot preview",
+        "retake" : "Retake screenshot",
+        "proceed" : "Proceed",
+        "cancelText" :" Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled."
+    },
     "chooseScreenshot" :{
         "chooseResult" : "Choose the screenshot showing your result the best.",
         "chooseBtn" : "Choose this screenshot"
@@ -72,8 +79,9 @@
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
         "message" : "Please answer the questions to proceed",
-        "question" : "My knot was tied tightly and in the correct location ",
-        "anotherquestion" : "Another question",
+        "question1" : "I used my dominant hand to cut",
+        "question2" : "I used my non dominant hand to apply tension  ",
+        "question3" : "I switched hands during the exercise",
         "yes" : "Yes",
         "no" : "No"
     },
@@ -85,7 +93,8 @@
         "feedback" : "Feedback",
         "radioone" : "Goal",
         "radiotwo" : "Your self assessment",
-        "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
+        "feedbacktextone" : "Nice work. It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+        "feedbacktexttwo" : "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting. ",
         "ratingtext" : "How was the case? Rate yourself",
         "cancel" : "Cancel",
         "confirm" : "Confirm",

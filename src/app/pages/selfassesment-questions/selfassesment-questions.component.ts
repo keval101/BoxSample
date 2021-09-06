@@ -9,10 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
-  answer1:any = "Yes";
-  answer2:any;
-  answer3:any;
-  
+  answer1: any = 'Yes';
+  answer2: any;
+  answer3: any;
+
   constructor(
     private router: Router,
     public TranslateService: TranslateService
@@ -23,7 +23,6 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   redirectTo() {
-
     this.router.navigate(['/evaluation']);
   }
 }

@@ -1,42 +1,50 @@
 <div class="header">
-    <app-header
-      [onFinishRecording]="recording"
-      [ontakeScreenshot]="takeScreenshot"
-    ></app-header>
+  <app-header
+    [onFinishRecording]="recording"
+    [ontakeScreenshot]="takeScreenshot"
+  ></app-header>
+</div>
+
+<div class="container">
+  <div class="snapshotContainer">
+    <video
+      #video
+      class="video"
+      width="640"
+      height="480"
+      autoplay
+      [ngClass]="{ zIndex: !imageCapture }"
+    ></video>
+    <canvas #canvas class="canvas" width="640" height="480"></canvas>
   </div>
 
-  <div class="container">
-    <div class="snapshotContainer">
-      <video #video class="video" width="640" height="480" autoplay [ngClass] = " {'zIndex' : !imageCapture}"></video>
-      <canvas #canvas class="canvas" width="640" height="480" ></canvas>
+  <div class="logo" [ngClass]="{ transformLogo: isFullScreen }">
+    <img src="assets/images/Logo2.svg" alt="logo" />
+  </div>
+
+  <div class="container__footer">
+    <div class="container__footer--camera">
+      <button
+        type="button"
+        class="cameraBtn"
+        (click)="takeScreenShot()"
+        [disabled]="isTaken"
+      >
+        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+      </button>
+
+      <p class="screenShotText">
+        {{ 'takescreenshot.screenShotText' | translate }}
+      </p>
     </div>
 
-    <div class="container__footer">
-      <div class="container__footer--camera">
-
-        <button
-          type="button"
-          class="cameraBtn"
-          (click)="takeScreenShot()"
-          [disabled]="isTaken"
-        >
-          <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
-        </button>
-
-        <p class="screenShotText">
-          {{ 'takescreenshot.screenShotText' | translate }}
-        </p>
-
-      </div>
-
-      <div class="container__footer--Btngroup" *ngIf="onCameraClick">
-        <button class="button button-small button-outline" (click)="onRetake()">
-          {{ 'recordingPage.retake' | translate }}
-        </button>
-        <button class="button button-small button-fill" (click)="onDone()">
-          {{ 'recordingPage.done' | translate }}
-        </button>
-      </div>
+    <div class="container__footer--Btngroup" *ngIf="onCameraClick">
+      <button class="button button-small button-outline" (click)="onRetake()">
+        {{ 'recordingPage.retake' | translate }}
+      </button>
+      <button class="button button-small button-fill" (click)="onDone()">
+        {{ 'recordingPage.done' | translate }}
+      </button>
     </div>
   </div>
-  
+</div>

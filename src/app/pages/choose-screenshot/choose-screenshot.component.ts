@@ -42,7 +42,7 @@ export class ChooseScreenshotComponent implements OnInit {
   }
 
   backToScreenShot() {
-    this.takescreenshotService.captures.pop()
+    this.takescreenshotService.captures.pop();
     this.router.navigate(['/takescreenshot']);
   }
 

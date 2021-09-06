@@ -23,6 +23,7 @@
 
 .content {
   width: 100%;
+  height: 100%;
   margin-top: 2.216rem;
   display: flex;
 }
@@ -47,16 +48,16 @@
     display: flex;
     flex-direction: column;
 
-    img{
+    img {
       border-radius: 0.5rem;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .resultImage{
+    .resultImage {
       margin-bottom: 3rem;
-      display:block;
+      display: block;
       width: 100%;
       height: 31.939rem;
     }
@@ -77,10 +78,11 @@
     .radioBtn {
       display: flex;
       align-items: center;
-      
-      &:not(:last-child){
+
+      &:not(:last-child) {
         margin-right: 4.4rem;
-      }}
+      }
+    }
   }
 
   label {
@@ -90,10 +92,12 @@
 }
 
 .score__container {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   width: 66.654rem;
   height: 100%;
-
+  padding: 0 0 7rem 0;
   .text-bold {
     font-weight: 400;
     color: $black-color;
@@ -115,6 +119,7 @@
 
   &-ratings {
     margin-top: 8.2rem;
+    flex-grow: 1;
 
     &-text {
       color: $primary-color;
@@ -122,6 +127,22 @@
     }
   }
 }
+
+.bottomContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  right: 0;
+
+  button:not(:last-child) {
+    width: 24.5rem;
+    margin-right: 1.6rem;
+  }
+}
+#quitBtn {
+  width: 27.6rem;
+}
+
 ::ng-deep .p-dialog-footer {
   display: flex !important;
   justify-content: flex-end;
@@ -130,12 +151,12 @@
   font-family: 'Myriad Regular' !important;
   text-align: left !important;
 }
-.score{
+.score {
   font-family: 'Myriad Regular' !important;
 }
 
 ::ng-deep .pi-star-o:before,
-::ng-deep .pi-star:before{
+::ng-deep .pi-star:before {
   margin-right: 4.1rem;
 }
 
@@ -189,23 +210,6 @@
   transition: box-shadow 0.2s;
 }
 
-.bottomContainer {
-  position: absolute;
-  display: flex;
-  justify-content: flex-end;
-  bottom: 4rem;
-  width: 100%;
-  right: 0;
-  padding: 0 4rem;
-
-  button:not(:last-child) {
-    width: 24.5rem;
-    margin-right: 1.6rem;
-  }
-}
-#quitBtn{
-  width: 27.6rem;
-}
 // Dailog Box CSS
 
 ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
