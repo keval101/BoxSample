@@ -58,6 +58,13 @@
         "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
         "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
     },
+    "takescreenshot":{
+        "screenShotText" : "Take a screenshot of your result to proceed.",
+        "previewText" : "Screenshot preview",
+        "retake" : "Retake screenshot",
+        "proceed" : "Proceed",
+        "cancelText" :" Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled."
+    },
     "chooseScreenshot" :{
         "chooseResult" : "Choose the screenshot showing your result the best.",
         "chooseBtn" : "Choose this screenshot"

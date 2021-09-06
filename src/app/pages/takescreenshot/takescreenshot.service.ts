@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TakescreenshotService {
-  captures = [];
+  captures:any[] = [];
   resultImageSource:any;
   constructor() {}
 }

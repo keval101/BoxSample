@@ -5,17 +5,17 @@
       [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
       (show)="onSlidebarOpen($event)"
-      [checkedMic] = micCheckedValue
-      [checkedFlash] = flashCheckedValue
+      [checkedMic]="micCheckedValue"
+      [checkedFlash]="flashCheckedValue"
     ></app-header>
   </div>
 
-  <div class="videoPreview" *ngIf = 'recordingFinish'>
+  <div class="videoPreview" *ngIf="recordingFinish">
     <video [src]="videoSource" playsinline controls #videoPreview></video>
     <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
 
-  <div class="recording__logo">
+  <div class="recording__logo" [ngClass]="{ transformLogo: isFullScreen }">
     <img src="assets/images/Logo2.svg" alt="logo" />
   </div>
 
@@ -24,23 +24,26 @@
   </div>
 
   <div
-  class="counter"
-  [ngClass]="{ goPadding: paddingClass }"
-  *ngIf="counterTime"
->
-  <p class="m-0">{{ counter }}</p>
-</div>
-
-<canvas #canvas class="canvas" id="canvas" width="640" height="480" [ngClass] ="{'zoomOutRight' : isScreenShot}" [ngStyle]="{'visibility' :isScreenShot ? 'visible' : 'hidden' }" ></canvas>
-  <div
-    class="recording__button"
+    class="counter"
+    [ngClass]="{ goPadding: paddingClass }"
+    *ngIf="counterTime"
   >
-    <div class="recording__button--camera">
-      <button
-        type="button"
-        class="cameraBtn"
-      >
-        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+    <p class="m-0">{{ counter }}</p>
+  </div>
+
+  <canvas
+    #canvas
+    class="canvas"
+    id="canvas"
+    width="640"
+    height="480"
+    [ngClass]="{ zoomOutRight: isScreenShot }"
+    [ngStyle]="{ visibility: isScreenShot ? 'visible' : 'hidden' }"
+  ></canvas>
+  <div class="recording__button">
+    <div class="recording__button--btnGroups">
+      <button type="button" class="recordingBtn" (click)="takescreenshot()">
+        <img src="assets/icnons/camera.png" alt="camera-icon" class="btnIcon" />
       </button>
     </div>
 
@@ -52,7 +55,6 @@
       >
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
-
     </div>
   </div>
 
@@ -69,9 +71,8 @@
 
         <button type="button" class="button" id="cross">
           <img src="assets/icnons/blueCros.svg" alt="cross" />
-          </button>
+        </button>
       </div>
-      
     </div>
 
     <div class="sidebar__content">

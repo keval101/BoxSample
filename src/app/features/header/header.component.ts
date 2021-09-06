@@ -15,17 +15,17 @@ export class HeaderComponent implements OnInit, OnChanges {
   showSide: boolean = true;
   fullScreen: boolean = false;
   val: number;
-  recordingDuration:any = "00:00";
+  recordingDuration: any = '00:00';
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
-  @Output() show = new Subject();
-  @Output() flashToggled = new Subject();
   @Input() checkedFlash: boolean = false;
   @Input() checkedMic: boolean = true;
   @Input() endscreen: boolean = false;
+  @Output() show = new Subject();
+  @Output() flashToggled = new Subject();
 
   constructor(
     public translate: TranslateService,
@@ -37,13 +37,11 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.fullScreen = this.recordingService.fullscreen;
-    
-    this.recordingService.recordTimeDuration.subscribe(
-      res => {
-        this.recordingDuration = res
-      }
-    )
-    this.muteUnmuteToggle()
+
+    this.recordingService.recordTimeDuration.subscribe((res) => {
+      this.recordingDuration = res;
+    });
+    this.muteUnmuteToggle();
   }
 
   onShow() {
@@ -60,12 +58,12 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.fullScreen = false;
   }
 
-  muteUnmuteToggle(){
+  muteUnmuteToggle() {
     this.headerService.muteMic = this.checkedMic;
     this.headerService.muteUnmuteMic.next(this.checkedMic);
   }
 
-  flashedToggle(){
+  flashedToggle() {
     this.headerService.flash = this.checkedFlash;
     this.headerService.flashToggled.next(this.checkedFlash);
   }

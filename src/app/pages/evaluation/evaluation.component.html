@@ -1,7 +1,5 @@
 <div class="header">
-  <app-header
-    [onFinishRecording]="recording"
-  ></app-header>
+  <app-header [onFinishRecording]="recording"></app-header>
 </div>
 
 <div class="container">
@@ -17,8 +15,12 @@
 
       <div class="result__container-result">
         <img [src]="resultImage" alt="resultImage" class="resultImage" />
-        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal"/>
-        <img src="assets/images/screenshot{{id}}.png" alt="selfassesment" *ngIf="!isGoal"/>
+        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+        <img
+          src="assets/images/screenshot{{ id }}.png"
+          alt="selfassesment"
+          *ngIf="!isGoal"
+        />
 
         <div class="result__container-radioGroup">
           <div class="p-field-radiobutton radioBtn">
@@ -27,7 +29,7 @@
               value="Goal"
               [(ngModel)]="ans"
               inputId="Goal"
-              (ngModelChange) = "ansChanged($event)"
+              (ngModelChange)="ansChanged($event)"
             ></p-radioButton>
             <label for="Goal">{{ 'evaluation.radioone' | translate }}</label>
           </div>
@@ -38,7 +40,7 @@
               value="Your self assessment"
               [(ngModel)]="ans"
               inputId="Selfassesment"
-              (ngModelChange) = "ansChanged($event)"
+              (ngModelChange)="ansChanged($event)"
             ></p-radioButton>
             <label for="Selfassesment">{{
               'evaluation.radiotwo' | translate
@@ -93,26 +95,26 @@
         </p>
         <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
       </div>
+
+      <div class="bottomContainer">
+        <button
+          class="button button-small button-outline"
+          type="button"
+          (click)="confirm()"
+          id="quitBtn"
+        >
+          {{ 'evaluation.quit' | translate }}
+        </button>
+
+        <button
+          class="button button-small button-fill"
+          type="button"
+          (click)="redirectTo()"
+        >
+          {{ 'evaluation.save' | translate }}
+        </button>
+      </div>
     </div>
-  </div>
-
-  <div class="bottomContainer">
-    <button
-      class="button button-small button-outline"
-      type="button"
-      (click)="confirm()"
-      id="quitBtn"
-    >
-      {{ 'evaluation.quit' | translate }}
-    </button>
-
-    <button
-      class="button button-small button-fill"
-      type="button"
-      (click)="redirectTo()"
-    >
-      {{ 'evaluation.save' | translate }}
-    </button>
   </div>
 </div>
 

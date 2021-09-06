@@ -1,79 +1,111 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
 
-.header{
-    z-index: 20;
+.header {
+  z-index: 20;
 }
-.container{
-    position: absolute;
-    height: 100vh;
-    top: 0;
+.container {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;
+  &__footer {
     width: 100%;
-    overflow: hidden;
-    z-index: -1;
-    &__footer{
-        width: 100%;
-        height: 12.8rem;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 0 4rem;
-        background-color: rgba($background-grey-color, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 10;
-        
-        &--camera{
-          display: flex;
-        }
-        #cameraIcon {
-            width: 7.7rem;
-          }
-      
-        .cameraBtn {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-        }
-        .screenShotText {
-          color: $primary-color;
-          font-size: 3.2rem;
-          margin-left: 1rem;
-        }
-
-        &--Btngroup{
-            display: flex;
-
-            button:not(:last-child){
-                margin-right: 1.6rem;
-            }
-        }
-    }
-}
-.snapshotContainer{
-    position: relative;
+    height: 12.8rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 4rem;
+    background-color: rgba($background-grey-color, 0.7);
     display: flex;
-    width: 100%;
-    height: 100%;
+    align-items: center;
     justify-content: space-between;
-}
-.video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.canvas{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    @media screen and (max-width:600px){
-        object-fit: none;
+    z-index: 10;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    &--camera {
+      width: 55%;
+      display: flex;
     }
+
+    #cameraIcon {
+      width: 7.7rem;
+    }
+
+    .cameraBtn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .screenShotText {
+      display: flex;
+      align-items: center;
+      color: $primary-color;
+      font-size: 3.2rem;
+      margin: 0 0 0 1rem;
+    }
+
+    &--Btngroup {
+      display: flex;
+
+      button:not(:last-child) {
+        margin-right: 1.6rem;
+      }
+    }
+  }
 }
-.zIndex{
-    z-index: 1;
+.snapshotContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+.logo {
+  position: absolute;
+  top: 9rem;
+  left: 4rem;
+  z-index: 1;
+
+  img {
+    @media screen and (max-width: 600px) {
+      width: 16rem;
+    }
+  }
 }
 
+.transformLogo {
+  top: 2.4rem;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  @media screen and (max-width: 600px) {
+    object-fit: none;
+  }
+}
+.zIndex {
+  z-index: 1;
+}
+.fullScreenbg {
+  background-color: transparent;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}

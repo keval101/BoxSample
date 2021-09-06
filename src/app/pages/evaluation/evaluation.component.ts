@@ -16,10 +16,10 @@ export class EvaluationComponent implements OnInit {
   ans: string = 'Goal';
   val: number = 3;
   cancelValue: boolean = true;
-  resultImage:any;
-  isGoal:boolean = true;
-  id:any;
-  scores = [
+  resultImage: any;
+  isGoal: boolean = true;
+  id: any;
+  scores:any[] = [
     {
       title: 'Exercise duration',
       measured: '01:33',
@@ -45,17 +45,17 @@ export class EvaluationComponent implements OnInit {
     public TranslateService: TranslateService,
     private evolutionService: EvolutionService,
     private confirmationService: ConfirmationService,
-    private takescreenshotService:TakescreenshotService,
-    private selfAssesmentService : SelfAssesmentService
+    private takescreenshotService: TakescreenshotService,
+    private selfAssesmentService: SelfAssesmentService
   ) {
-   this.id = this.selfAssesmentService.imageIndex
+    this.id = this.selfAssesmentService.imageIndex;
   }
 
   ngOnInit(): void {
     this.recording = true;
     this.evolutionService.cancelValue = false;
-    this.resultImage = this.takescreenshotService.resultImageSource
-    this.id = 0
+    this.resultImage = this.takescreenshotService.resultImageSource;
+    this.id = 0;
   }
 
   redirectTo() {
@@ -74,11 +74,11 @@ export class EvaluationComponent implements OnInit {
     });
   }
 
-  ansChanged(event){
-    if(event == "Goal"){
-      this.isGoal = true
-    }else {
-      this.isGoal = false
+  ansChanged(event) {
+    if (event == 'Goal') {
+      this.isGoal = true;
+    } else {
+      this.isGoal = false;
     }
   }
 }

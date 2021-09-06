@@ -5,11 +5,8 @@
 <div class="chooseScreenshot">
   <div class="carousel-images">
     <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
-      <ng-template let-item pTemplate="item" >
-        <img
-          [src]="item"
-          class="screenShotImage"
-        />
+      <ng-template let-item pTemplate="item">
+        <img [src]="item" class="screenShotImage" />
       </ng-template>
     </p-carousel>
   </div>
@@ -26,7 +23,10 @@
       >
         <i class="pi pi-chevron-left"></i>
       </button>
-      <button class="button button-big button-fill backBtn" (click)="redirectTo()">
+      <button
+        class="button button-big button-fill backBtn"
+        (click)="redirectTo()"
+      >
         {{ 'chooseScreenshot.chooseBtn' | translate }}
       </button>
     </div>

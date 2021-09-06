@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
+import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
@@ -26,7 +27,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoSource:any;
   paddingClass:boolean;
   recordingDurationTime:string;
-  data = [3,2,1,"go"]
+  data:any[] = [3,2,1,"go"]
   counter:any;
   micValue:boolean;
   mediaRecorder:any;
@@ -42,7 +43,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   deviceInfoId:any;
   videoTimer:Subscription;
   flashCheckedValue:boolean = false;
-
+  isFullScreen:boolean;
   @ViewChild('video') videoEle : ElementRef
   @ViewChild('videoPreview') recordedVideoEle : ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -54,7 +55,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private sanitizer : DomSanitizer,
     private headerService : HeaderService,
     private setupSerice:SetupService,
-    public platform: Platform
+    public platform: Platform,
+    private takescreenshotService:TakescreenshotService
   ) { 
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe(
@@ -64,6 +66,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         })
     }, 4000);  
     this.deviceInfoId = this.setupSerice.cameraIdInformation
+
+    this.headerService.videoFullscreen.subscribe(
+      fullscreenValue => {
+        this.isFullScreen = fullscreenValue
+      }
+    )
   }
 
   ngOnInit(): void {    
@@ -239,6 +247,16 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         this.micValue = res
       })
   }
+
+  takescreenshot(){
+    this.isScreenShot = true
+  
+    setTimeout(() => {
+      this.isScreenShot = false
+    }, 3000);
+     var context = this.canvas.nativeElement.getContext("2d").drawImage(this.videoEle.nativeElement, 0, 0, 640, 480);
+     this.takescreenshotService.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+    }
 
   redirectToPhoto(){
     this.router.navigate(['/takescreenshot']);

@@ -18,8 +18,7 @@
   <div class="bottomContainer">
     <div class="buttons">
       <div class="playedBtn">
-        <button class="playPauseBtn" (click)="onPlayPause()"
-        >
+        <button class="playPauseBtn" (click)="onPlayPause()">
           <img
             src="assets/icnons/play-solid.svg"
             alt="play"
@@ -71,7 +70,7 @@
 
   <div class="logo" [ngClass]="{ logoTop: videoFullScreen }">
     <img src="assets/images/Logo2.svg" alt="logo" />
-  </div> 
+  </div>
 
   <div class="slider" *ngIf="!videoFullScreen" @fadeAnimation>
     <img src="../../../assets/icnons/volume.svg" alt="" id="speaker" />
@@ -84,5 +83,4 @@
       (ngModelChange)="volumeChanged($event)"
     ></p-slider>
   </div>
-
 </div>
