@@ -21,11 +21,11 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
-  @Output() show = new Subject();
-  @Output() flashToggled = new Subject();
   @Input() checkedFlash: boolean = false;
   @Input() checkedMic: boolean = true;
   @Input() endscreen: boolean = false;
+  @Output() show = new Subject();
+  @Output() flashToggled = new Subject();
 
   constructor(
     public translate: TranslateService,

@@ -13,7 +13,7 @@
 }
 
 body .p-component {
-    font-family: "Myriad Regular" !important; 
+    font-family: "Myriad Regular" !important;
 }
 
 *{
@@ -27,8 +27,15 @@ body{
     overflow-x: hidden;
 }
 
+@media screen and (max-width:768px) {
+  body {
+    overflow: hidden !important;
+
+  }
+}
+
 html{
-    
+
     font-size: 62.5%;
 
       @media screen and (min-width : 1200px){
@@ -45,12 +52,12 @@ html{
         // font-size: 50%;
         font-size: 8px;
       }
-     
+
       @include respond(tab-land){  //width < 1200
         //   font-size: 45.50%; //1 rem = 7.28px; 7.28px/16px = 56.25%
           font-size: 7.28px; //1 rem = 7.28px; 7.28px/16px = 56.25%
         }
-      
+
       @include respond(tab-port){ //width < 900
         //   font-size: 42%; //1 rem = 6.72px; 6.72px/16px = 50%
           font-size: 6.72px; //1 rem = 6.72px; 6.72px/16px = 50%
@@ -63,7 +70,7 @@ html{
         //   font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
           font-size: 5.5px; //1 rem = 5.5px; 5.5px/16px = 34.375%
       }
-      
+
       @include respond(phone){ //width < 900
         font-size: 3.52px; //1 rem = 3.52px; 3.52px/16px = 22%
       }

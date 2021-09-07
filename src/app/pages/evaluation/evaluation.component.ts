@@ -19,7 +19,7 @@ export class EvaluationComponent implements OnInit {
   resultImage: any;
   isGoal: boolean = true;
   id: any;
-  scores = [
+  scores:any[] = [
     {
       title: 'Exercise duration',
       measured: '01:33',

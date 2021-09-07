@@ -27,7 +27,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoSource:any;
   paddingClass:boolean;
   recordingDurationTime:string;
-  data = [3,2,1,"go"]
+  data:any[] = [3,2,1,"go"]
   counter:any;
   micValue:boolean;
   mediaRecorder:any;
