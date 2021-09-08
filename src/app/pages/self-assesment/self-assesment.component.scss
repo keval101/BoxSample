@@ -28,9 +28,9 @@
 }
 
 .container {
-  position: relative;
+  position: absolute;
   width: 100%;
-  height: calc(100vh - 6.4rem);
+  height: calc(100% - 6.4rem);
   padding: 0 4rem;
   overflow: hidden;
 

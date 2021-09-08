@@ -4,9 +4,9 @@
 @import '../../../assets/scss/_radiobutton';
 
 .container {
-  position: relative;
+  position: absolute;
   width: 100%;
-  height: calc(100vh - 11.2rem);
+  height: calc(100% - 11.2rem);
   padding: 0 4rem;
 
   &__title {
