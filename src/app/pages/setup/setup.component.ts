@@ -7,8 +7,11 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
+import { Subject } from 'rxjs';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
+import { EvolutionService } from '../evaluation/evolution.service';
 import { SetupService } from './setup.service';
 declare var ImageCapture: any;
 @Component({
@@ -19,6 +22,7 @@ declare var ImageCapture: any;
 })
 export class SetupComponent implements OnInit, OnDestroy {
   recording: boolean;
+  isScreenShot: boolean;
   selectedCamera: boolean;
   checkedMic: boolean = true;
   checkedFlash: boolean = false;
@@ -31,23 +35,31 @@ export class SetupComponent implements OnInit, OnDestroy {
   deviceInfoId: any;
   track: any;
   deviceLabel: any;
+  flashSubject = new Subject();
+  cancelText: string;
   userAgent: any;
+
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
     private headerService: HeaderService,
-    private setupService: SetupService
+    private setupService: SetupService,
+    private confirmationService: ConfirmationService,
+    private evolutionService: EvolutionService
   ) {
+    this.TranslateService.get('setup.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
+
     this.headerService.muteUnmuteMic.subscribe(
       (res) => (this.checkedMic = res)
     );
 
     this.userAgent = navigator.userAgent;
-    if (/windows phone/i.test(this.userAgent)) {
-    }
   }
 
   ngOnInit(): void {
+    this.isScreenShot = true;
     this.recording = true;
 
     if (window.innerWidth > 600) {
@@ -113,6 +125,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           this.track = stream.getVideoTracks()[0];
           //Create image capture object and get camera capabilities
           if (/android/i.test(this.userAgent)) {
+            alert('Android');
             const imageCapture = new ImageCapture(this.track);
             const photoCapabilities = imageCapture
               .getPhotoCapabilities()
@@ -176,6 +189,18 @@ export class SetupComponent implements OnInit, OnDestroy {
       this.sidebar = false;
     }
   }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+
+      accept: () => {
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
   ngOnDestroy() {
     if ((<any>window).stream) {
       (<any>window).stream.getTracks().forEach((track) => {

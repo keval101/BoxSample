@@ -18,6 +18,10 @@ import { SelfassesmentQuestionsModule } from './pages/selfassesment-questions/se
 import { EvaluationModule } from './pages/evaluation/evaluation.module';
 import { EndScreenModule } from './pages/end-screen/end-screen.module';
 import { RecordingScreenModule } from './pages/recording-screen/recording-screen.module';
+import { ChooseScreenshotModule } from './pages/choose-screenshot/choose-screenshot.module';
+import { IntroModule } from './pages/intro/intro.module';
+import { TakescreenshotModule } from './pages/takescreenshot/takescreenshot.module';
+import { VideoscreenModule } from './pages/videoscreen/videoscreen.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,7 +44,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecordingScreenModule,
     SelfAssesmentModule,
     SelfassesmentQuestionsModule,
-
+    ChooseScreenshotModule,
+    IntroModule,
+    TakescreenshotModule,
+    VideoscreenModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,5 +1,5 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording"></app-header>
+  <app-header [onFinishRecording]="recording" (show)="slibar()"></app-header>
 </div>
 
 <div class="container">
@@ -33,7 +33,6 @@
             [numVisible]="1"
             [responsiveOptions]
             (onPage)="setPage($event)"
-            [ngClass]="{ touched: touchScreen }"
           >
             <ng-template let-item pTemplate="item" let-i="index">
               <img
@@ -44,6 +43,12 @@
               />
             </ng-template>
           </p-carousel>
+        </div>
+      </div>
+
+      <div class="imagessss">
+        <div *ngFor="let item of items; let i = index">
+          <img [src]="item.img" alt="" class="p" />
         </div>
       </div>
     </div>
@@ -57,5 +62,35 @@
     >
       {{ 'selfassesment.next' | translate }}
     </button>
+  </div>
+</div>
+
+<div class="sidebar" *ngIf="sidebarOpen" @fadeAnimation>
+  <button class="close" (click)="closeSidebar()">
+    <img src="assets/icnons/blueCros.svg" alt="close" />
+  </button>
+  <div class="sidebar__header">
+    <img src="assets/images/logo.svg" alt="logo" />
+  </div>
+
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'selfassesment.sidebarTitle' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.sidebarContent' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.compareResult' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.matches' | translate }}
+      </p>
+    </div>
   </div>
 </div>

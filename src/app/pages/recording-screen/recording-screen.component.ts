@@ -9,6 +9,7 @@ import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+import { ConfirmationService } from 'primeng/api';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
@@ -56,7 +57,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private headerService : HeaderService,
     private setupSerice:SetupService,
     public platform: Platform,
-    private takescreenshotService:TakescreenshotService
+    private takescreenshotService:TakescreenshotService,
+    private confirmationService: ConfirmationService,
   ) { 
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe(
@@ -260,6 +262,17 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   redirectToPhoto(){
     this.router.navigate(['/takescreenshot']);
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message:
+        'You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course. ',
+
+      accept: () => {
+        this.router.navigate(['/setup']);
+      },
+    });
   }
 
   ngOnDestroy(){

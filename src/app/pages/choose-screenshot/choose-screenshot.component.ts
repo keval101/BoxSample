@@ -10,12 +10,12 @@ import { TakescreenshotService } from '../takescreenshot/takescreenshot.service'
 export class ChooseScreenshotComponent implements OnInit {
   items: any[] = [];
   recording: boolean = false;
-  responsiveOptions:any;
+  responsiveOptions: any;
 
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
-    private takescreenshotService : TakescreenshotService
+    private takescreenshotService: TakescreenshotService
   ) {
     this.responsiveOptions = [
       {
@@ -38,7 +38,7 @@ export class ChooseScreenshotComponent implements OnInit {
 
   ngOnInit(): void {
     this.recording = true;
-    this.items = this.takescreenshotService.captures
+    this.items = this.takescreenshotService.captures;
   }
 
   backToScreenShot() {

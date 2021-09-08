@@ -1,5 +1,5 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording"></app-header>
+  <app-header [onFinishRecording]="recording" (show)="slibar()"></app-header>
 </div>
 
 <div class="container">
@@ -112,5 +112,30 @@
     >
       {{ 'selfassesment.next' | translate }}
     </button>
+  </div>
+</div>
+
+<div class="sidebar" *ngIf="sidebarOpen" @fadeAnimation>
+  <button class="close" (click)="closeSidebar()">
+    <img src="assets/icnons/blueCros.svg" alt="close" />
+  </button>
+  <div class="sidebar__header">
+    <img src="assets/images/logo.svg" alt="logo" />
+  </div>
+
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'selfassesmentquestions.sidebarTitle' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesmentquestions.sidebarContent' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesmentquestions.answeryes' | translate }}
+      </p>
+    </div>
   </div>
 </div>

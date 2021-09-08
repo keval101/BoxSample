@@ -41,13 +41,14 @@
         "ulText1" : "Make sure your setup and equipment are ready",
         "ulText2" : "Make sure your camera is selected and your view is centered",
         "ulText3" : "When you are ready to start, press Start exercise.",
-        "note": "Note: your time will start once you press Start exercise and the 3 second countdown is done."
+        "note": "Note: your time will start once you press Start exercise and the 3 second countdown is done.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "recordingPage": {
         "finishRecording" : "Finish recording",
-        "screenShotText" : "Take a screenshot of your result.",
-        "retake" : "Retake",
-        "done" : "Done",
         "exercise" : "Exercise",
         "yourTasks" : "Your tasks",
         "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
@@ -56,7 +57,10 @@
         "ulText3" : "When you are finished the exercise, press the Finish recording button",
         "ulText4" : "Press the Stop button to cancel this recording and go back to the set up",
         "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
-        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
+        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results.",
+        "cancelRecording": "Cancel recording",
+        "cancelText" : "Are you sure you want to cancel the recording?",
+        "cancelBtn": "Yes, cancel"
     },
     "takescreenshot":{
         "screenShotText" : "Take a screenshot of your result to proceed.",
@@ -74,7 +78,11 @@
         "resultTitle": "Your result",
         "choice" : "Your choice",
         "message" : "Select the example image that best matches your result",
-        "next" : "Next"
+        "next" : "Next",
+        "sidebarTitle":"Learn more about the self assessment:",
+        "sidebarContent" : "In this self assessment you will choose from a sample of images the one that most looks like your final result. Based on your selection, you will receive feedback on what you can do differently next time to improve.",
+        "compareResult" : "Compare your final result screenshot on the left to your choice sample image on the right.",
+        "matches": "Once you have selected the image that best matches, click Next."
     },
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
@@ -83,7 +91,10 @@
         "question2" : "I used my non dominant hand to apply tension  ",
         "question3" : "I switched hands during the exercise",
         "yes" : "Yes",
-        "no" : "No"
+        "no" : "No",
+        "sidebarTitle" : "Learn more about the questions:",
+        "sidebarContent": "At the end of the exercise you are asked to answer some yes or no questions regarding your performance and experience in this exercise. Your answsers wiill influence your score.",
+        "answeryes" : "Answer yes or no to the presented questions in order to proceed."
     },
     "evaluation" : {
         "title" : " Evaluation",
@@ -100,7 +111,8 @@
         "confirm" : "Confirm",
         "measured" : "Measured",
         "goalValue" : "Goal Value",
-        "confirmation" : "Confirmation"
+        "confirmation" : "Confirmation",
+        "cancelText" : "You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course."
     },
     "end" : {
         "success" : "Success",

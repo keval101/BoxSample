@@ -13,20 +13,21 @@ import { fadeAnimation } from '../../shared/app.animation';
 })
 export class HeaderComponent implements OnInit, OnChanges {
   showSide: boolean = true;
+  isCancel: boolean = true;
   fullScreen: boolean = false;
   val: number;
+
   recordingDuration: any = '00:00';
   @Input() onFinishRecording: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
-  @Input() checkedFlash: boolean = false;
-  @Input() checkedMic: boolean = true;
-  @Input() endscreen: boolean = false;
   @Output() show = new Subject();
-  @Output() flashToggled = new Subject();
-
+  @Input() checkedMic: boolean = true;
+  @Input() checkedFlash: boolean = false;
+  @Input() endscreen: boolean = false;
+  @Output() cancelExe = new Subject();
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,
@@ -46,6 +47,10 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   onShow() {
     this.show.next(this.showSide);
+  }
+
+  cancelExercise() {
+    this.cancelExe.next(this.isCancel);
   }
 
   fullscreen() {

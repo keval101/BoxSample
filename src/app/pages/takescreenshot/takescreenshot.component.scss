@@ -1,5 +1,6 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
+@import '../../../assets/scss/dialogBox';
 
 .header {
   z-index: 20;
@@ -23,16 +24,12 @@
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
+
     &--camera {
       width: 55%;
       display: flex;
+      justify-content: space-between;
     }
-
     #cameraIcon {
       width: 7.7rem;
     }
@@ -47,7 +44,7 @@
       align-items: center;
       color: $primary-color;
       font-size: 3.2rem;
-      margin: 0 0 0 1rem;
+      margin: 0 3rem 0 0;
     }
 
     &--Btngroup {
@@ -66,23 +63,6 @@
   height: 100%;
   justify-content: space-between;
 }
-.logo {
-  position: absolute;
-  top: 9rem;
-  left: 4rem;
-  z-index: 1;
-
-  img {
-    @media screen and (max-width: 600px) {
-      width: 16rem;
-    }
-  }
-}
-
-.transformLogo {
-  top: 2.4rem;
-}
-
 .video {
   width: 100%;
   height: 100%;
@@ -100,12 +80,4 @@
 }
 .zIndex {
   z-index: 1;
-}
-.fullScreenbg {
-  background-color: transparent;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
 }
