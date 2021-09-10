@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 
 @Component({
@@ -16,12 +17,32 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   answer2: any;
   answer3: any;
   sidebarOpen: boolean;
+
+  cancelText: string;
+
+  @ViewChild('sidenav') sidenav: ElementRef;
+
+
   constructor(
     private router: Router,
+    private confirmationService: ConfirmationService,
     public TranslateService: TranslateService
   ) {}
 
+  
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.sidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+      this.sidebarOpen = false;
+    }
+  }
+
   ngOnInit(): void {
+    this.TranslateService.get('selfassesmentquestions.cancelText').subscribe(
+      (text: string) => {
+        this.cancelText = text;
+      }
+    );
     this.isScreenShot = true;
     this.recording = true;
   }
@@ -36,4 +57,14 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   redirectTo() {
     this.router.navigate(['/evaluation']);
   }
+
+  onCancelExersice() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
 }

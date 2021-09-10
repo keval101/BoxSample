@@ -1,6 +1,7 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
 @import '../../../assets/scss/mixin';
+@import '../../../assets/scss/dialogBox';
 
 .container {
   position: absolute;
@@ -9,7 +10,7 @@
   overflow: hidden;
 }
 
-.header {
+.header.top {
   position: absolute;
   top: 0;
   width: 100%;

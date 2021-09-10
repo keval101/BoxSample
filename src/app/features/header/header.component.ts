@@ -45,7 +45,8 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.muteUnmuteToggle();
   }
 
-  onShow() {
+  onShow(event) {
+    event.stopPropagation();
     this.show.next(this.showSide);
   }
 

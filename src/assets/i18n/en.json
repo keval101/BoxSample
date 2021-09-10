@@ -22,12 +22,20 @@
         "recordExercise": " Record your exercise",
         "result": "Rate your result",
         "upload": "Review and upload result",
-        "watchMovie": "Watch movie"
+        "watchMovie": "Watch movie",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "video" : {
         "prepareSetup": "Prepare Setup",
         "title" : "Circular cutting",
-        "name": "by VirtaMed, Zurich, August 2021"
+        "name": "by VirtaMed, Zurich, August 2021",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "header": {
         "headerTitle" : "Essential skills - Circular cutting",
@@ -58,20 +66,28 @@
         "ulText4" : "Press the Stop button to cancel this recording and go back to the set up",
         "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
         "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results.",
-        "cancelRecording": "Cancel recording",
-        "cancelText" : "Are you sure you want to cancel the recording?",
-        "cancelBtn": "Yes, cancel"
+        "cancelText" :" You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course.",
+        "quitExe" : "Cancel recording",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "takescreenshot":{
         "screenShotText" : "Take a screenshot of your result to proceed.",
         "previewText" : "Screenshot preview",
         "retake" : "Retake screenshot",
         "proceed" : "Proceed",
-        "cancelText" :" Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled."
+        "cancelText" :" Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "chooseScreenshot" :{
         "chooseResult" : "Choose the screenshot showing your result the best.",
-        "chooseBtn" : "Choose this screenshot"
+        "chooseBtn" : "Choose this screenshot",
+        "cancelText" :" Are you sure you want to quit the exercise?",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "selfassesment":{
         "title": "Self assesment",
@@ -82,7 +98,11 @@
         "sidebarTitle":"Learn more about the self assessment:",
         "sidebarContent" : "In this self assessment you will choose from a sample of images the one that most looks like your final result. Based on your selection, you will receive feedback on what you can do differently next time to improve.",
         "compareResult" : "Compare your final result screenshot on the left to your choice sample image on the right.",
-        "matches": "Once you have selected the image that best matches, click Next."
+        "matches": "Once you have selected the image that best matches, click Next.",
+        "cancelText" :" Are you sure you want to quit the exercise?",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
@@ -94,7 +114,11 @@
         "no" : "No",
         "sidebarTitle" : "Learn more about the questions:",
         "sidebarContent": "At the end of the exercise you are asked to answer some yes or no questions regarding your performance and experience in this exercise. Your answsers wiill influence your score.",
-        "answeryes" : "Answer yes or no to the presented questions in order to proceed."
+        "answeryes" : "Answer yes or no to the presented questions in order to proceed.",
+        "cancelText" :" Are you sure you want to quit the exercise?",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "evaluation" : {
         "title" : " Evaluation",

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
 import { fadeAnimation } from '../../shared/app.animation';
+import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
   selector: 'app-intro',
@@ -12,14 +14,20 @@ import { fadeAnimation } from '../../shared/app.animation';
 export class IntroComponent implements OnInit {
   recording: boolean;
   sidebar: boolean = true;
+  cancelText: string;
   constructor(
     public TranslateService: TranslateService,
+    private confirmationService: ConfirmationService,
+    private evolutionService: EvolutionService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.recording = true;
 
+    this.TranslateService.get('intro.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
     if (window.innerWidth > 600) {
       this.sidebar = true;
     } else {
@@ -50,5 +58,14 @@ export class IntroComponent implements OnInit {
     if (window.innerWidth < 600) {
       this.sidebar = false;
     }
+  }
+  confirm() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
+      },
+    });
   }
 }

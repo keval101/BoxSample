@@ -8,10 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { HeaderModule } from 'src/app/features/header/header.module';
 
 import { CarouselModule } from 'primeng/carousel';
+import {GalleriaModule} from 'primeng/galleria';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TabViewModule } from 'primeng/tabview';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [SelfAssesmentComponent],
   imports: [
@@ -23,7 +26,10 @@ import { TabViewModule } from 'primeng/tabview';
     ButtonModule,
     ToastModule,
     TabViewModule,
+    GalleriaModule,
     SelfAssesmentRoutingModule,
+    ConfirmDialogModule
   ],
+  providers: [ConfirmationService],
 })
 export class SelfAssesmentModule {}

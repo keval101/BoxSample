@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
+  HostListener,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,11 +13,13 @@ import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from './takescreenshot.service';
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
+import { fadeAnimation } from 'src/app/shared/app.animation';
 
 @Component({
   selector: 'app-takescreenshot',
   templateUrl: './takescreenshot.component.html',
   styleUrls: ['./takescreenshot.component.scss'],
+  animations: [fadeAnimation],
 })
 export class TakescreenshotComponent implements OnInit, OnDestroy {
   recording: boolean;
@@ -25,10 +28,14 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
   onCameraClick: boolean = false;
   imageCapture: boolean = false;
   videoStream: any;
+  fullscreen: boolean = false;
   deviceInfoId: any;
   @ViewChild('video') video: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('sidenav') sidenav: ElementRef;
   cancelText: string;
+  isSidebarOpen: boolean = false;
+
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
@@ -43,11 +50,20 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
         this.cancelText = text;
       }
     );
-
     this.deviceInfoId = this.setupSerice.cameraIdInformation;
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+      this.isSidebarOpen = false;
+    }
+  }
+
   ngOnInit(): void {
+    this.headerService.videoFullscreen.subscribe(res => {
+      this.fullscreen = res
+    })
     this.recording = true;
     this.takeScreenshot = true;
   }
@@ -90,6 +106,20 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
     this.isScreenShot = true;
   }
 
+  onSlidebarOpen(value) {
+    this.isSidebarOpen = value;
+  }
+
+  onSlidebarClose() {
+    this.isSidebarOpen = false;
+  }
+  
+  sidebarClose(event) {
+    if (!event) {
+      this.isSidebarOpen = false;
+    }
+  }
+
   onDone() {
     this.router.navigate(['/choosescreenshot']);
     this.takescreenshotService.resultImageSource =
@@ -103,7 +133,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
       message: this.cancelText,
 
       accept: () => {
-        this.router.navigate(['/setup']);
+        this.router.navigate(['/end']);
       },
     });
   }
