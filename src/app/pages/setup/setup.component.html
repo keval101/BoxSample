@@ -1,5 +1,5 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording"></app-header>
+  <app-header [onFinishRecording]="recording" [setupScreen]="setupScreen"  (cancelExe)="onCancelExersice()" (show)="showDetail()"  ></app-header>
 </div>
 
 <div
@@ -72,7 +72,7 @@
     <video autoplay #video id="video"></video>
   </div>
 
-  <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
+  <div class="sidebar" #sidenav *ngIf="sidebar" @fadeAnimation>
     <button class="close">
       <img src="assets/icnons/blueCros.svg" alt="close" (click)="confirm()" />
     </button>
@@ -127,12 +127,6 @@
   </div>
 </div>
 
-<div class="buttonContainer" (click)="showDetail()">
-  <button>
-    <i class="pi pi-chevron-circle-left" *ngIf="!sidebar" @fadeAnimation></i>
-    <i class="pi pi-chevron-circle-right" *ngIf="sidebar" @fadeAnimation></i>
-  </button>
-</div>
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">

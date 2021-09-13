@@ -6,7 +6,7 @@
   <div class="container__title">
     <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
     <p class="container__title-message m-0">
-      {{ 'selfassesment.message' | translate }}
+      {{ 'selfassesment.message' | translate }} <span class="learnMoreText" (click)="sidebarOpenData($event)">Learn more <i class="pi pi-question-circle" ></i></span>
     </p>
   </div>
 
@@ -57,10 +57,16 @@
   </div>
 </div>
 
-<div class="sidebar" #sidenav  *ngIf="sidebarOpen" @fadeAnimation>
-  <button class="close" (click)="closeSidebar()">
-    <img src="assets/icnons/blueCros.svg" alt="close" />
-  </button>
+<div class="sidebar" #sidenav  *ngIf="sidebarOpen || sidebarOpenText" @fadeAnimation>
+  <div class="sidebarHeader">
+    <button class="close" (click)="closeSidebar()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+    <button class="close" (click)="confirm()">
+      <img src="assets/icnons/blueCros.svg" alt="close" />
+    </button>
+  </div>
+ 
   <div class="sidebar__header">
     <img src="assets/images/logo.svg" alt="logo" />
   </div>

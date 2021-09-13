@@ -10,7 +10,7 @@
     <canvas #canvas class="canvas" width="640" height="480"></canvas>
   </div>
 
-  <div [ngClass]="fullscreen ? 'removeBg container__footer' : 'container__footer'">
+  <div [ngClass]="fullscreen && !onCameraClick ? 'removeBg container__footer' : 'container__footer'">
     <div class="container__footer--camera">
       <p class="screenShotText" *ngIf="isScreenShot">
         {{ fullscreen ? '' : 'takescreenshot.screenShotText' | translate }}
@@ -49,15 +49,9 @@
       <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
     </button>
 
-    <div>
-      <button type="button">
-        <i class="pi pi-question-circle"></i>
-      </button>
-
-      <button type="button" class="button" id="cross">
+      <button type="button" class="button" id="cross" (click)="confirm()">
         <img src="assets/icnons/blueCros.svg" alt="cross" />
       </button>
-    </div>
   </div>
   <div class="sidebar__content">
     <p class="sidebar__content-title">

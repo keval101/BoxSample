@@ -116,9 +116,14 @@
 </div>
 
 <div class="sidebar" #sidenav *ngIf="sidebarOpen" @fadeAnimation>
-  <button class="close" (click)="closeSidebar()">
-    <img src="assets/icnons/blueCros.svg" alt="close" />
-  </button>
+  <div class="sidebarHeader">
+    <button class="close" (click)="closeSidebar()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+    <button class="close" (click)="confirm()">
+      <img src="assets/icnons/blueCros.svg" alt="close" />
+    </button>
+  </div>
   <div class="sidebar__header">
     <img src="assets/images/logo.svg" alt="logo" />
   </div>

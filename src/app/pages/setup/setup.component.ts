@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -39,6 +40,8 @@ export class SetupComponent implements OnInit, OnDestroy {
   cancelText: string;
   userAgent: any;
 
+  setupScreen:boolean = true;
+  @ViewChild('sidenav') sidenav: ElementRef;
   constructor(
     private router: Router,
     public TranslateService: TranslateService,
@@ -74,6 +77,14 @@ export class SetupComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (window.innerWidth < 600) {
+      if (this.sidebar && !this.sidenav.nativeElement.contains(event.target)) {
+        this.sidebar = false;
+      }
+    }
+  }
   dropValue(event) {
     this.setupService.cameraId.next(event.Id);
     this.setupService.cameraIdInformation = event.Id;
@@ -201,6 +212,14 @@ export class SetupComponent implements OnInit, OnDestroy {
     });
   }
 
+  onCancelExersice() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
   ngOnDestroy() {
     if ((<any>window).stream) {
       (<any>window).stream.getTracks().forEach((track) => {

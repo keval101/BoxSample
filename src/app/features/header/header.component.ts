@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   recordingDuration: any = '00:00';
   @Input() onFinishRecording: boolean;
+  @Input() introScreen: boolean;
+  @Input() setupScreen: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;

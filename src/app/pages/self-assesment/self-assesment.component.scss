@@ -26,8 +26,14 @@
   height: 10rem;
   position: absolute;
   bottom: -10rem;
-}
+  @media (max-width:600px){
+    bottom: -25rem;
+  }
 
+  @media (min-width:601px) and (max-width : 767px){
+    bottom: -10rem;
+  }
+}
 .container {
   position: absolute;
   width: 100%;
@@ -61,6 +67,12 @@
       color: $primary-color;
     }
   }
+
+  @media (min-width: 601px) and (max-width: 768px) {
+    // height: 54rem;
+    height: calc(100% - 6.4rem);
+    overflow: auto;
+  }
 }
 
 .selfassesment__result {
@@ -73,6 +85,11 @@
 
   @media screen and (max-width: 768px) {
     display: block;
+  }
+
+  @media (min-width: 601px) and (max-width: 768px) {
+    display: flex;
+    margin-top: 6rem !important;
   }
 
   &-title {
@@ -107,13 +124,16 @@
       width: 100%;
       margin-top: 10rem;
     }
+    @media (min-width: 601px) and (max-width: 767px) {
+      margin-top: 0rem;
+    }
   }
 
   &-image {
     margin-right: 3rem;
 
     @media screen and (max-width: 768px) {
-      margin-bottom: 22rem;
+      margin-bottom: 10rem;
     }
 
     p {
@@ -128,6 +148,9 @@
       @media screen and (max-width: 768px) {
         width: 100%;
         height: 54rem;
+      }
+      @media (min-width: 601px) and (max-width: 767px) {
+        height: 40.6rem !important;
       }
     }
   }
@@ -145,10 +168,41 @@
       @media screen and (max-width: 768px) {
         height: 54rem !important;
       }
+      @media (min-width: 601px) and (max-width: 767px) {
+        height: 40.6rem !important;
+      }
     }
   }
 }
 
+.sidebar .close{
+  width: unset !important;
+  height: unset !important;
+}
+.sidebar__header img{
+    margin-top: 6.9rem !important;
+    margin-bottom: 6.783rem !important;
+}
+
+#closeBtn {
+  width: 4rem;
+  height: unset !important;
+}
+.sidebarHeader{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 6rem;
+  position: relative;
+  justify-content: space-between;
+
+  button{
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+}
 .bottomContainer {
   position: absolute;
   display: flex;
@@ -195,6 +249,14 @@
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-next.leval,
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev.leval {
   display: none;
+}
+
+.learnMoreText{
+  color: #707172 !important;
+}
+
+.pi {
+  font-size: 3.2rem;
 }
 
 @include sidebarStyles;

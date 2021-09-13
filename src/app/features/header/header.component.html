@@ -67,10 +67,31 @@
 
       <div
         class="header__right--icons-group"
-        *ngIf="!videoScreen"
+        *ngIf="!videoScreen && !setupScreen && !introScreen"
       >
         <button class="button" type="button" (click)="onShow($event)" *ngIf="!endscreen">
           <i class="pi pi-question-circle"></i>
+        </button>
+        <button
+          type="button"
+          class="button"
+          id="cross"
+          (click)="cancelExercise()"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
+        </button>
+      </div>
+
+      <div
+        class="header__right--icons-group"
+        *ngIf="(onFinishRecording && introScreen) || (onFinishRecording && setupScreen)"
+      >
+        <button class="button" type="button"  *ngIf="!endscreen">
+          <i class="pi pi-bars" *ngIf="introScreen || setupScreen" (click)="onShow($event)"></i>
+          <i class="pi pi-question-circle" (click)="onShow($event)" *ngIf="!introScreen && !setupScreen"></i>
         </button>
         <button
           type="button"

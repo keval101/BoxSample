@@ -22,7 +22,8 @@ export class SelfAssesmentComponent implements OnInit {
   resultImage: any;
   touchScreen: boolean;
   imagePreviews: any;
-  sidebarOpen: boolean;
+  sidebarOpen: boolean = false;
+  sidebarOpenText: boolean = false;
   cancelText:string;
 
   itemImage = '';
@@ -95,8 +96,9 @@ export class SelfAssesmentComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (this.sidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+    if ((this.sidebarOpen || this.sidebarOpenText) && !this.sidenav.nativeElement.contains(event.target)) {
       this.sidebarOpen = false;
+      this.sidebarOpenText = false;
     }
   }
 
@@ -105,6 +107,15 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   onCancelExersice() {   
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
+  confirm() {   
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -136,19 +147,21 @@ export class SelfAssesmentComponent implements OnInit {
     this.itemImage = '';
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].classList.remove('active')
-    }
-    if(this.pageIndex){
       this.itemImage = item.img
-      for (let i = 0; i <= this.imagePreviews.length; i++) {
-        this.imagePreviews[ids].classList.add('active')
-      }
+      this.imagePreviews[ids].classList.add('active')
     }
   }
 
   slibar() {
     this.sidebarOpen = true;
   }
+  
+  sidebarOpenData(event) {
+    event.stopPropagation();
+    this.sidebarOpenText = true;
+  }
   closeSidebar() {
+    this.sidebarOpenText = false;
     this.sidebarOpen = false;
   }
   redirectTo() {

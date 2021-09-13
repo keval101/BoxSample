@@ -100,6 +100,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
   }
 
   onRetake() {
+    this.fullscreen = false
     this.takeScreenshot = true;
     this.onCameraClick = false;
     this.imageCapture = false;
@@ -138,6 +139,14 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
     });
   }
 
+  confirm() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
   ngOnDestroy() {
     if ((<any>window).stream) {
       (<any>window).stream.getTracks().forEach((track) => {

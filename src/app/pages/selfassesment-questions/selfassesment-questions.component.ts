@@ -67,4 +67,13 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     });
   }
 
+  confirm() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
 }
