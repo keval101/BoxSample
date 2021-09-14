@@ -1,18 +1,27 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json", "e2e/tsconfig.e2e.json"],
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.e2e.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "prettier",
+        "plugin:ngrx/recommended",
+        "plugin:ngrx/recommended"
       ],
       "rules": {
         "jsdoc/check-alignment": "off",
@@ -23,7 +32,11 @@
           "error",
           {
             "type": "element",
-            "prefix": ["app", "vm", "virtamed"],
+            "prefix": [
+              "app",
+              "vm",
+              "virtamed"
+            ],
             "style": "kebab-case"
           }
         ],
@@ -31,7 +44,11 @@
           "error",
           {
             "type": "attribute",
-            "prefix": ["app", "vm", "virtamed"],
+            "prefix": [
+              "app",
+              "vm",
+              "virtamed"
+            ],
             "style": "camelCase"
           }
         ],
@@ -60,8 +77,12 @@
         "@typescript-eslint/naming-convention": [
           "error",
           {
-            "selector": ["class"],
-            "format": ["PascalCase"]
+            "selector": [
+              "class"
+            ],
+            "format": [
+              "PascalCase"
+            ]
           }
         ],
         "@typescript-eslint/member-ordering": [
@@ -78,7 +99,10 @@
         "no-whitespace-before-property": "error",
         "block-spacing": "error",
         "no-multi-spaces": "error",
-        "array-bracket-spacing": ["error", "never"],
+        "array-bracket-spacing": [
+          "error",
+          "never"
+        ],
         "comma-spacing": [
           "error",
           {
@@ -86,8 +110,16 @@
             "after": true
           }
         ],
-        "func-call-spacing": ["error", "never"],
-        "keyword-spacing": ["error", { "after": true }],
+        "func-call-spacing": [
+          "error",
+          "never"
+        ],
+        "keyword-spacing": [
+          "error",
+          {
+            "after": true
+          }
+        ],
         "space-infix-ops": "error",
         "@typescript-eslint/consistent-type-assertions": "off",
         "arrow-body-style": "off",
@@ -122,11 +154,19 @@
             ]
           }
         ]
-      }
+      },
+      "plugins": [
+        "ngrx",
+        "ngrx"
+      ]
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {
         "@angular-eslint/template/no-negated-async": "off"
       }
