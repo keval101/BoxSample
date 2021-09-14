@@ -106,7 +106,7 @@ stages:
                 $appVersion = $environment + $major + "." + $minor + "." + $patch
                 Write-Host "appVersion:"$appVersion
 
-                $path = "./tag.js"
+                $path = "./azure/tag.js"
                 $word = "%TAG"
                 $text = Get-Content -path $path -Raw
                 ($text -replace $word, $appVersion) | Set-Content $path
@@ -123,23 +123,13 @@ stages:
               workingDir: '$(System.DefaultWorkingDirectory)'
               verbose: false
 
-          - ${{ if ne(parameters.environment, 'Production') }}:
-              - task: Npm@1
-                displayName: 'npm run build'
-                inputs:
-                  command: custom
-                  workingDir: '$(System.DefaultWorkingDirectory)'
-                  verbose: false
-                  customCommand: 'run build_${{ lower(parameters.environment) }}'
-
-          - ${{ if eq(parameters.environment, 'Production') }}:
-              - task: Npm@1
-                displayName: 'npm run build'
-                inputs:
-                  command: custom
-                  workingDir: '$(System.DefaultWorkingDirectory)'
-                  verbose: false
-                  customCommand: 'run build'
+          - task: Npm@1
+            displayName: 'npm run build'
+            inputs:
+              command: custom
+              workingDir: '$(System.DefaultWorkingDirectory)'
+              verbose: false
+              customCommand: 'run build_${{ lower(parameters.environment) }}'
 
           - task: CopyFiles@2
             displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
@@ -150,11 +140,11 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy ARM_templates to: $(Build.ArtifactStagingDirectory)'
             inputs:
-              SourceFolder: 'ARM_Templates'
+              SourceFolder: './azure/ARM_Templates'
               Contents: |
                 **
 
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/ARM_Templates'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/azure/ARM_Templates'
 
           - ${{ if ne(variables['Build.Reason'], 'PullRequest')}}:
               - task: PublishBuildArtifacts@1

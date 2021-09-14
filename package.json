@@ -2,9 +2,12 @@
   "name": "online-box-trainer",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
+    "hot": "ng serve --hmr",
     "build": "ng build",
+    "build_develop": "node ./azure/tag.js && ng build --configuration develop --aot",
+    "build_demo": "node ./azure/tag.js && ng build --configuration demo --aot",
+    "build_production": "node ./azure/tag.js && ng build --configuration production --aot",
     "watch": "ng build --watch --configuration development",
     "prettier:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.css,.scss,.html}\"",
     "prettier:write": "prettier --config --write ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.css,.scss,.html}\"",
