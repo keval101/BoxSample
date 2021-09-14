@@ -55,15 +55,18 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+    if (
+      this.isSidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.isSidebarOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.headerService.videoFullscreen.subscribe(res => {
-      this.fullscreen = res
-    })
+    this.headerService.videoFullscreen.subscribe((res) => {
+      this.fullscreen = res;
+    });
     this.recording = true;
     this.takeScreenshot = true;
   }
@@ -100,7 +103,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
   }
 
   onRetake() {
-    this.fullscreen = false
+    this.fullscreen = false;
     this.takeScreenshot = true;
     this.onCameraClick = false;
     this.imageCapture = false;
@@ -114,7 +117,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
   onSlidebarClose() {
     this.isSidebarOpen = false;
   }
-  
+
   sidebarClose(event) {
     if (!event) {
       this.isSidebarOpen = false;

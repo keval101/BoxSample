@@ -14,7 +14,7 @@ import { ConfirmationService } from 'primeng/api';
     TranslateModule,
     RecordingScreenRoutingModule,
     HeaderModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
   providers: [ConfirmationService],
 })

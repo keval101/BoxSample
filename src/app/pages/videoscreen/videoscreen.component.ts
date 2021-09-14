@@ -114,5 +114,4 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
       },
     });
   }
-
 }

@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -33,7 +39,7 @@ export class IntroComponent implements OnInit {
     });
     if (window.innerWidth > 600) {
       this.sidebar = true;
-      this.mobile = true
+      this.mobile = true;
     } else {
       this.sidebar = false;
       this.mobile = false;
@@ -49,7 +55,7 @@ export class IntroComponent implements OnInit {
       this.sidebar = false;
     } else {
       this.sidebar = true;
-      this.mobile = true
+      this.mobile = true;
     }
   }
 

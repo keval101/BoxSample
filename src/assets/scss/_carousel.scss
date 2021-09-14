@@ -32,7 +32,10 @@
   color: $white-color;
 }
 
-::ng-deep .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight
+::ng-deep
+  .p-carousel
+  .p-carousel-indicators
+  .p-carousel-indicator.p-highlight
   button {
   background-color: $primary-color;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
@@ -54,11 +57,11 @@
 }
 
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev:enabled:hover,
-::ng-deep .p-carousel .p-carousel-content .p-carousel-next:enabled:hover{
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
   background: $primary-color;
 }
 
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev:focus,
-::ng-deep .p-carousel .p-carousel-content .p-carousel-next:focus{
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next:focus {
   box-shadow: none;
 }

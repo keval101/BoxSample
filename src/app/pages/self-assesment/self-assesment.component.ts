@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -6,13 +12,11 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
 
-
 @Component({
   selector: 'app-self-assesment',
   templateUrl: './self-assesment.component.html',
   styleUrls: ['./self-assesment.component.scss'],
   animations: [fadeAnimation],
-
 })
 export class SelfAssesmentComponent implements OnInit {
   recording: boolean;
@@ -24,7 +28,7 @@ export class SelfAssesmentComponent implements OnInit {
   imagePreviews: any;
   sidebarOpen: boolean = false;
   sidebarOpenText: boolean = false;
-  cancelText:string;
+  cancelText: string;
 
   itemImage = '';
 
@@ -41,7 +45,6 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = true;
 
       setTimeout(() => {
-        
         this.imagePreviews = document.getElementsByClassName('p');
         this.imagePreviews[0].classList.add();
         var btnNext = document.querySelector('.p-carousel-next');
@@ -54,30 +57,27 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = false;
     }
 
-    
-
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
         numVisible: 3,
         numScroll: 3,
-        effect : 'fade'
+        effect: 'fade',
       },
       {
         breakpoint: '768px',
         numVisible: 2,
         numScroll: 2,
-        effect : 'fade'
+        effect: 'fade',
       },
       {
         breakpoint: '560px',
         numVisible: 1,
         numScroll: 1,
-        effect : 'fade'
+        effect: 'fade',
       },
     ];
   }
-
 
   pageIndex: any;
   setPage(indexOf) {
@@ -96,7 +96,10 @@ export class SelfAssesmentComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if ((this.sidebarOpen || this.sidebarOpenText) && !this.sidenav.nativeElement.contains(event.target)) {
+    if (
+      (this.sidebarOpen || this.sidebarOpenText) &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.sidebarOpen = false;
       this.sidebarOpenText = false;
     }
@@ -106,7 +109,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.sidebarOpen = value;
   }
 
-  onCancelExersice() {   
+  onCancelExersice() {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -115,7 +118,7 @@ export class SelfAssesmentComponent implements OnInit {
     });
   }
 
-  confirm() {   
+  confirm() {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -123,13 +126,13 @@ export class SelfAssesmentComponent implements OnInit {
       },
     });
   }
-
 
   ngOnInit(): void {
-
-    this.TranslateService.get('selfassesment.cancelText').subscribe((text: string) => {
-      this.cancelText = text;
-    });
+    this.TranslateService.get('selfassesment.cancelText').subscribe(
+      (text: string) => {
+        this.cancelText = text;
+      }
+    );
 
     // this.imagePreviews[0].classList.add('active')
     this.isScreenShot = true;
@@ -143,19 +146,19 @@ export class SelfAssesmentComponent implements OnInit {
     let array = this.takescreenshotService.captures;
     this.resultImage = this.takescreenshotService.resultImageSource;
   }
-  active(item,ids){
+  active(item, ids) {
     this.itemImage = '';
     for (let i = 0; i < this.imagePreviews.length; i++) {
-      this.imagePreviews[i].classList.remove('active')
-      this.itemImage = item.img
-      this.imagePreviews[ids].classList.add('active')
+      this.imagePreviews[i].classList.remove('active');
+      this.itemImage = item.img;
+      this.imagePreviews[ids].classList.add('active');
     }
   }
 
   slibar() {
     this.sidebarOpen = true;
   }
-  
+
   sidebarOpenData(event) {
     event.stopPropagation();
     this.sidebarOpenText = true;
