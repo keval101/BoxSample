@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
@@ -9,6 +9,7 @@ import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+import { ConfirmationService } from 'primeng/api';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
@@ -44,9 +45,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoTimer:Subscription;
   flashCheckedValue:boolean = false;
   isFullScreen:boolean;
+
+  cancelText: string;
+
+
   @ViewChild('video') videoEle : ElementRef
   @ViewChild('videoPreview') recordedVideoEle : ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
     public TranslateService: TranslateService,
@@ -56,7 +62,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private headerService : HeaderService,
     private setupSerice:SetupService,
     public platform: Platform,
-    private takescreenshotService:TakescreenshotService
+    private takescreenshotService:TakescreenshotService,
+    private confirmationService: ConfirmationService,
   ) { 
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe(
@@ -74,7 +81,18 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     )
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+      this.isSidebarOpen = false;
+    }
+  }
+
   ngOnInit(): void {    
+    this.TranslateService.get('recordingPage.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
+
     const obs = interval(1000)
     const timer:Subscription = obs.subscribe( (d) => {
       this.counterTime = true;
@@ -171,6 +189,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     };
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;
     this.mediaRecorder.start();
+
+    
   }
 
   stopwatch() {
@@ -210,6 +230,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   stopRecording(){
     this.mediaRecorder.stop();
+  }
+
+  pauseRecording(){
+    this.mediaRecorder.pause()
+  }
+
+  resumeRecording(){
+    this.mediaRecorder.start()
   }
 
   handleSuccess(stream) {
@@ -260,6 +288,39 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   redirectToPhoto(){
     this.router.navigate(['/takescreenshot']);
+  }
+
+  confirm() {   
+    this.videoTimer.unsubscribe();
+    this.mediaRecorder.pause();
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/setup']);
+      },
+      reject: () => {
+        this.mediaRecorder.resume();
+        setTimeout(() => {
+          this.stopwatch()
+        }, 2000);
+      }
+    });
+  }
+  onCancelExersice() {   
+    this.videoTimer.unsubscribe()
+    this.mediaRecorder.pause();
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/setup']);
+      },
+      reject: () => {
+        this.mediaRecorder.resume();
+        setTimeout(() => {
+          this.stopwatch()
+        }, 2000);
+      }
+    });
   }
 
   ngOnDestroy(){

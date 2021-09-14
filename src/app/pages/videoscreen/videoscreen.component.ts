@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
+import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
   selector: 'app-videoscreen',
@@ -23,13 +25,16 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   videoFullScreen: boolean = false;
   width: number;
   val: number = 30;
+  cancelText: string;
 
   @ViewChild('video') video: ElementRef;
 
   constructor(
     private router: Router,
     private headerService: HeaderService,
-    private Translateservice: TranslateService
+    private Translateservice: TranslateService,
+    private confirmationService: ConfirmationService,
+    private evolutionService: EvolutionService
   ) {
     this.headerService.videoFullscreen.subscribe((res) => {
       if (res == true) {
@@ -41,6 +46,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.Translateservice.get('video.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth;
@@ -96,4 +104,15 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.video.nativeElement.pause();
     this.router.navigate(['/setup']);
   }
+
+  onCancelExersice() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+
+      accept: () => {
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
 }

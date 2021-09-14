@@ -1,6 +1,8 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
+@import '../../../assets/scss/mixin';
 @import '../../../assets/scss/_radiobutton';
+@import '../../../assets/scss/dialogBox';
 
 .container {
   position: absolute;
@@ -44,11 +46,11 @@
 
     &-text {
       flex-grow: 1;
+      flex: 0.8;
       color: $black-color;
       font-size: 3.2rem;
       font-weight: 400;
       margin: 0;
-      width: 75%;
     }
 
     &-radioGroup {
@@ -58,8 +60,8 @@
       .radioBtn {
         margin-right: 7.3rem;
 
-        @media screen and (max-width: 420px) {
-          margin-right: 6.3rem;
+        @media (max-width: 320px){
+          margin-right: 5rem;
         }
       }
       label {
@@ -68,6 +70,36 @@
       }
     }
   }
+}
+
+.sidebar .close{
+  width: unset !important;
+  height: unset !important;
+}
+
+.sidebar__header img{
+    margin-top: 6.9rem !important;
+    margin-bottom: 6.783rem !important;
+}
+
+#closeBtn {
+  width: 4rem;
+  height: unset !important;
+}
+.sidebarHeader{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 6rem;
+  position: relative;
+  justify-content: space-between;
+
+  button{
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
 }
 
 .bottomContainer {
@@ -79,3 +111,6 @@
   right: 0;
   padding: 0 4rem;
 }
+
+//sidebar
+@include sidebarStyles;

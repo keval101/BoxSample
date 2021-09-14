@@ -7,6 +7,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from 'src/app/features/header/header.module';
 import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [SetupComponent],
@@ -17,6 +19,8 @@ import { DropdownModule } from 'primeng/dropdown';
     HeaderModule,
     SetupRoutingModule,
     DropdownModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
 })
 export class SetupModule {}

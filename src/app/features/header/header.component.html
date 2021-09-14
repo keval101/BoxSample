@@ -11,8 +11,7 @@
       >
         <p class="pi pi-circle-on header__left--duration-icon"></p>
         <p class="header__left--duration-time">
-          {{ 'header.duration' | translate }}
-          <span>{{ recordingDuration }}</span>
+          {{ 'header.duration' | translate }} <span>{{recordingDuration}}</span>
         </p>
       </span>
     </div>
@@ -29,20 +28,12 @@
           }"
         >
           <img src="assets/icnons/mic.png" alt="mic" id="mic" />
-          <p-inputSwitch
-            [(ngModel)]="checkedMic"
-            (ngModelChange)="muteUnmuteToggle()"
-            class="inputSwitch"
-          ></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedMic" (ngModelChange)="muteUnmuteToggle()" class="inputSwitch"></p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
           <img src="assets/icnons/flash.png" alt="flash" id="flash" />
-          <p-inputSwitch
-            [(ngModel)]="checkedFlash"
-            (ngModelChange)="flashedToggle()"
-            class="inputSwitch"
-          ></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="checkedFlash" (ngModelChange)="flashedToggle()" class="inputSwitch"></p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
@@ -74,35 +65,55 @@
         </div>
       </div>
 
-      <div class="header__right--icons-group" *ngIf="!videoScreen">
-        <button
-          class="button sidebarBtn"
-          type="button"
-          (click)="onShow()"
-          *ngIf="!endscreen"
-        >
+      <div
+        class="header__right--icons-group"
+        *ngIf="!videoScreen && !setupScreen && !introScreen"
+      >
+        <button class="button" type="button" (click)="onShow($event)" *ngIf="!endscreen">
           <i class="pi pi-question-circle"></i>
         </button>
-        <button type="button" class="button" id="cross">
-          <img src="assets/icnons/whiteCros.svg" alt="cross" />
+        <button
+          type="button"
+          class="button"
+          id="cross"
+          (click)="cancelExercise()"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
         </button>
       </div>
 
       <div
-        class="header__right--icons-group videoScreenIcons"
-        *ngIf="videoScreen"
+        class="header__right--icons-group"
+        *ngIf="(onFinishRecording && introScreen) || (onFinishRecording && setupScreen)"
       >
+        <button class="button" type="button"  *ngIf="!endscreen">
+          <i class="pi pi-bars" *ngIf="introScreen || setupScreen" (click)="onShow($event)"></i>
+          <i class="pi pi-question-circle" (click)="onShow($event)" *ngIf="!introScreen && !setupScreen"></i>
+        </button>
+        <button
+          type="button"
+          class="button"
+          id="cross"
+          (click)="cancelExercise()"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
+        </button>
+      </div>
+
+      <div class="header__right--icons-group videoScreenIcons" *ngIf="videoScreen">
         <button
           type="button"
           class="button"
           (click)="fullscreen()"
           [ngStyle]="{ display: fullScreen ? 'none' : 'block' }"
         >
-          <img
-            src="assets/icnons/fullscreen.png"
-            alt="fullscreen"
-            id="fullscreen"
-          />
+          <img src="assets/icnons/fullscreen.png" alt="fullscreen" id="fullscreen" />
         </button>
 
         <button
@@ -118,9 +129,18 @@
           />
         </button>
 
-        <button type="button" class="button" id="cross">
-          <img src="assets/icnons/whiteCros.svg" alt="cross" />
+        <button
+          type="button"
+          class="button"
+          id="cross"
+          (click)="cancelExercise()"
+        >
+          <img
+            src="assets/icnons/whiteCros.svg"
+            alt="cross"
+          />
         </button>
+
       </div>
     </div>
   </div>
