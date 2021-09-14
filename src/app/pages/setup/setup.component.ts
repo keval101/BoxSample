@@ -40,7 +40,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   cancelText: string;
   userAgent: any;
 
-  setupScreen:boolean = true;
+  setupScreen: boolean = true;
   @ViewChild('sidenav') sidenav: ElementRef;
   constructor(
     private router: Router,

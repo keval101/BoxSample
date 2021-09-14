@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SelfAssesmentService {
-
-  constructor() { }
-  imageIndex:any;
+  constructor() {}
+  imageIndex: any;
 }

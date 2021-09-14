@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -22,17 +28,18 @@ export class SelfassesmentQuestionsComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
-
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
     public TranslateService: TranslateService
   ) {}
 
-  
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (this.sidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+    if (
+      this.sidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.sidebarOpen = false;
     }
   }
@@ -75,5 +82,4 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       },
     });
   }
-
 }

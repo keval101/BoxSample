@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class RecordingService {
   fullscreen: boolean = false;
-  cameraidValue:any;
-  recordTimeDuration = new Subject()
+  cameraidValue: any;
+  recordTimeDuration = new Subject();
   constructor() {}
 }

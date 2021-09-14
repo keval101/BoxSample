@@ -6,14 +6,12 @@ import { VideoscreenComponent } from './videoscreen.component';
 import { HeaderModule } from 'src/app/features/header/header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import {SliderModule} from 'primeng/slider';
+import { SliderModule } from 'primeng/slider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
-  declarations: [
-    VideoscreenComponent
-  ],
+  declarations: [VideoscreenComponent],
   imports: [
     CommonModule,
     VideoscreenRoutingModule,
@@ -26,4 +24,4 @@ import { ConfirmationService } from 'primeng/api';
   ],
   providers: [ConfirmationService],
 })
-export class VideoscreenModule { }
+export class VideoscreenModule {}

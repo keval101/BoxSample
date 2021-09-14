@@ -4,13 +4,13 @@ import { EndScreenComponent } from './end-screen.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component: EndScreenComponent
-  }
+    path: '',
+    component: EndScreenComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EndScreenRoutingModule { }
+export class EndScreenRoutingModule {}

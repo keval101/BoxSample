@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -47,7 +53,10 @@ export class ChooseScreenshotComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+    if (
+      this.isSidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.isSidebarOpen = false;
     }
   }

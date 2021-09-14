@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -26,8 +32,7 @@ export class EvaluationComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
-
-  scores:any[] = [
+  scores: any[] = [
     {
       title: 'Exercise duration',
       measured: '01:33',
@@ -58,19 +63,23 @@ export class EvaluationComponent implements OnInit {
   ) {
     this.id = this.selfAssesmentService.imageIndex;
   }
-  
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+    if (
+      this.isSidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.isSidebarOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('evaluation.cancelText').subscribe((text: string) => {
-      this.cancelText = text;
-    });
+    this.TranslateService.get('evaluation.cancelText').subscribe(
+      (text: string) => {
+        this.cancelText = text;
+      }
+    );
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;
@@ -88,7 +97,6 @@ export class EvaluationComponent implements OnInit {
   onSlidebarClose() {
     this.isSidebarOpen = false;
   }
-
 
   confirm() {
     this.confirmationService.confirm({

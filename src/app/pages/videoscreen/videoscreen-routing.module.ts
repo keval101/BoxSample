@@ -4,13 +4,13 @@ import { VideoscreenComponent } from './videoscreen.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:VideoscreenComponent
-  }
+    path: '',
+    component: VideoscreenComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class VideoscreenRoutingModule { }
+export class VideoscreenRoutingModule {}
