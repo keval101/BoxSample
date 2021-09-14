@@ -2,10 +2,11 @@
 @import '../../../assets/scss/button';
 @import '../../../assets/scss/_radiobutton';
 @import '../../../assets/scss/mixin';
+@import '../../../assets/scss/dialogBox';
 
 .container {
   width: 70.7174%;
-  height: calc(100vh - 6.4rem);
+  height: calc(100% - 6.4rem);
 
   @media screen and (max-width: 600px) {
     width: 100%;
@@ -74,149 +75,8 @@
   }
 }
 
-.sidebar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 29.2825%;
-  z-index: 1;
-  background: radial-gradient(
-    266.77% 97.9% at 1.86% 0.8%,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0.9) 100%
-  );
-  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
-  padding: 0 4rem;
-  backdrop-filter: blur(20px);
-  display: flex;
-  flex-direction: column;
-
-  @media screen and (max-width: 600px) {
-    width: 250px;
-  }
-  
-  .close{
-    position: absolute;
-    right: 2.3rem;
-    top:2rem;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 2.4rem;
-    height: 2.4rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    img{
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-  }
-
-  &__content {
-    position: relative;
-    flex-grow: 1;
-    vertical-align: top;
-
-    &-title {
-      font-size: 3.2rem;
-      color: $blue-color;
-      font-weight: 500;
-      margin: 0 0 3rem 0;
-
-      @media screen and (max-width: 768px) {
-        font-size: 2.8rem;
-      }
-
-      @media screen and (max-width: 600px) {
-        font-size: 5.4rem;
-      }
-    }
-
-    &-title2 {
-      font-size: 2.4rem;
-      color: $blue-color;
-      font-weight: 400;
-      margin: 0;
-      font-family: "Myriad Regular";
-
-      @media screen and (max-width: 768px) {
-        font-size: 2.4rem;
-      }
-
-      @media screen and (max-width: 600px) {
-        font-size: 3.6rem;
-      }
-    }
-
-    &-text {
-      font-size: 2.4rem;
-      color: $black-color;
-      margin: 0;
-      line-height: 3rem;
-      font-weight: 300;
-      font-family: 'Myriad Light';
-
-      @media screen and (max-width: 768px) {
-        font-size: 2.4rem;
-      }
-
-      @media screen and (max-width: 600px) {
-        font-size: 3.8rem;
-      }
-    }
-
-    &-goal {
-      margin-bottom: 2rem;
-    }
-
-    ul {
-      font-size: 2.4rem;
-      font-weight: 300;
-      font-family: 'Myriad Light';
-      @media screen and (max-width: 768px) {
-        font-size: 2.4rem;
-      }
-
-      @media screen and (max-width: 600px) {
-        font-size: 3.8rem;
-      }
-
-      li{
-        margin-bottom: 0.8rem;
-      }
-    }
-  }
-
-  &__header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-    img {
-      width: 31.939rem;
-      height: 3.019rem;
-      margin-top: 11.3rem;
-      margin-bottom: 6.667rem;
-    }
-  }
-
-  &__buttonGroup {
-    font-size: 2.4rem;
-    display: flex;
-    margin-bottom: 4rem;
-    button:not(:last-child) {
-      margin-right: 1.6rem;
-    }
-  }
-
-  .pi-chevron-left:before {
-    font-size: 2.4rem;
-  }
-}
+//sidebar
+@include sidebarStyles;
 
 ::ng-deep .p-inputswitch {
   width: 3.4rem;
@@ -229,7 +89,7 @@
   background: $element-grey-color !important;
   left: -0.5rem;
 
-  @media screen and (max-width:600px){
+  @media screen and (max-width: 600px) {
     top: 0.5rem;
   }
 }

@@ -12,21 +12,24 @@ import { fadeAnimation } from '../../shared/app.animation';
   animations: [fadeAnimation],
 })
 export class HeaderComponent implements OnInit, OnChanges {
-  
- 
-  checkedFlash: boolean = false;
   showSide: boolean = true;
+  isCancel: boolean = true;
   fullScreen: boolean = false;
   val: number;
-  
-  recordingDuration:any = "00:00";
+
+  recordingDuration: any = '00:00';
   @Input() onFinishRecording: boolean;
+  @Input() introScreen: boolean;
+  @Input() setupScreen: boolean;
   @Input() onScreenShot: boolean;
   @Input() sidebarOpen: boolean;
   @Input() ontakeScreenshot: boolean;
   @Input() videoScreen: boolean = false;
   @Output() show = new Subject();
-  @Input()  checkedMic: boolean = true;
+  @Input() checkedMic: boolean = true;
+  @Input() checkedFlash: boolean = false;
+  @Input() endscreen: boolean = false;
+  @Output() cancelExe = new Subject();
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,
@@ -37,17 +40,20 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.fullScreen = this.recordingService.fullscreen;
-    
-    this.recordingService.recordTimeDuration.subscribe(
-      res => {
-        this.recordingDuration = res
-      }
-    )
-    this.muteUnmuteToggle()
+
+    this.recordingService.recordTimeDuration.subscribe((res) => {
+      this.recordingDuration = res;
+    });
+    this.muteUnmuteToggle();
   }
 
-  onShow() {
+  onShow(event) {
+    event.stopPropagation();
     this.show.next(this.showSide);
+  }
+
+  cancelExercise() {
+    this.cancelExe.next(this.isCancel);
   }
 
   fullscreen() {
@@ -60,8 +66,13 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.fullScreen = false;
   }
 
-  muteUnmuteToggle(){
+  muteUnmuteToggle() {
     this.headerService.muteMic = this.checkedMic;
     this.headerService.muteUnmuteMic.next(this.checkedMic);
+  }
+
+  flashedToggle() {
+    this.headerService.flash = this.checkedFlash;
+    this.headerService.flashToggled.next(this.checkedFlash);
   }
 }

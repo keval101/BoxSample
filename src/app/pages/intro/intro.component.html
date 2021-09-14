@@ -1,14 +1,11 @@
 <div class="header">
-  <app-header
-    [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"
-  ></app-header>
+  <app-header [onFinishRecording]="recording" [introScreen]="introScreen" (cancelExe)="onCancelExersice()" (show)="showDetail()" ></app-header>
 </div>
 
 <div
   class="container"
   (window:resize)="onResize($event)"
-  (click)="closeSidebar()"
+
 >
   <div class="container__title">
     <p class="container__title-text m-0">
@@ -26,12 +23,12 @@
   </div>
 
   <div class="videoPreview">
-    <img src="assets/images/Cover image.png" alt="coverImages">
+    <img src="assets/images/Cover image.png" alt="coverImages" />
   </div>
 
-  <div class="sidebar" *ngIf="sidebar" @fadeAnimation>
-    <button class="close"> 
-      <img src="assets/icnons/close.svg" alt="close">
+  <div class="sidebar" #sidenav *ngIf="sidebar" @fadeAnimation>
+    <button class="close">
+      <img src="assets/icnons/close.svg" alt="close" (click)="confirm()" />
     </button>
     <div class="sidebar__header">
       <img src="assets/images/logo.svg" alt="logo" />
@@ -93,9 +90,26 @@
   {{ 'home.rightReserved' | translate }}
 </p>
 
-<div class="buttonContainer" (click)="showDetail()">
-  <button>
-    <i class="pi pi-chevron-circle-left" *ngIf="!sidebar" @fadeAnimation></i>
-    <i class="pi pi-chevron-circle-right" *ngIf="sidebar" @fadeAnimation></i>
-  </button>
-</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'intro.quitExe' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'intro.goback' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'intro.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

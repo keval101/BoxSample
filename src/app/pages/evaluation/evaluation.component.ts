@@ -1,26 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { EvolutionService } from './evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
+import { fadeAnimation } from 'src/app/shared/app.animation';
 
 @Component({
   selector: 'app-evaluation',
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.scss'],
+  animations: [fadeAnimation],
 })
 export class EvaluationComponent implements OnInit {
   recording: boolean;
-  isScreenShot: boolean;
   ans: string = 'Goal';
   val: number = 3;
+  isSidebarOpen: boolean = false;
   cancelValue: boolean = true;
-  resultImage:any;
-  isGoal:boolean = true;
-  id:any;
-  scores = [
+  resultImage: any;
+  isGoal: boolean = true;
+  id: any;
+  cancelText: string;
+
+  @ViewChild('sidenav') sidenav: ElementRef;
+
+
+  scores:any[] = [
     {
       title: 'Exercise duration',
       measured: '01:33',
@@ -46,29 +53,46 @@ export class EvaluationComponent implements OnInit {
     public TranslateService: TranslateService,
     private evolutionService: EvolutionService,
     private confirmationService: ConfirmationService,
-    private takescreenshotService:TakescreenshotService,
-    private selfAssesmentService : SelfAssesmentService
+    private takescreenshotService: TakescreenshotService,
+    private selfAssesmentService: SelfAssesmentService
   ) {
-   this.id = this.selfAssesmentService.imageIndex
+    this.id = this.selfAssesmentService.imageIndex;
+  }
+  
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+      this.isSidebarOpen = false;
+    }
   }
 
   ngOnInit(): void {
+    this.TranslateService.get('evaluation.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
     this.recording = true;
-    this.isScreenShot = true;
     this.evolutionService.cancelValue = false;
-    this.resultImage = this.takescreenshotService.captures[0]
-    this.id = 0
+    this.resultImage = this.takescreenshotService.resultImageSource;
+    this.id = 0;
   }
 
   redirectTo() {
     this.router.navigate(['/end']);
   }
 
+  onSlidebarOpen(value) {
+    this.isSidebarOpen = value;
+  }
+
+  onSlidebarClose() {
+    this.isSidebarOpen = false;
+  }
+
+
   confirm() {
     this.confirmationService.confirm({
-      message:
-        'You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course. ',
-
+      message: this.cancelText,
       accept: () => {
         this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
@@ -76,11 +100,20 @@ export class EvaluationComponent implements OnInit {
     });
   }
 
-  ansChanged(event){
-    if(event == "Goal"){
-      this.isGoal = true
-    }else {
-      this.isGoal = false
+  onCancelExersice() {
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+  ansChanged(event) {
+    if (event == 'Goal') {
+      this.isGoal = true;
+    } else {
+      this.isGoal = false;
     }
   }
 }

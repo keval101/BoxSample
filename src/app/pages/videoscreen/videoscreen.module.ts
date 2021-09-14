@@ -7,6 +7,8 @@ import { HeaderModule } from 'src/app/features/header/header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {SliderModule} from 'primeng/slider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {SliderModule} from 'primeng/slider';
     FormsModule,
     TranslateModule,
     ReactiveFormsModule,
-    SliderModule
-  ]
+    SliderModule,
+    ConfirmDialogModule,
+  ],
+  providers: [ConfirmationService],
 })
 export class VideoscreenModule { }

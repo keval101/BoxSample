@@ -22,12 +22,20 @@
         "recordExercise": " Record your exercise",
         "result": "Rate your result",
         "upload": "Review and upload result",
-        "watchMovie": "Watch movie"
+        "watchMovie": "Watch movie",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "video" : {
         "prepareSetup": "Prepare Setup",
         "title" : "Circular cutting",
-        "name": "by VirtaMed, Zurich, August 2021"
+        "name": "by VirtaMed, Zurich, August 2021",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "header": {
         "headerTitle" : "Essential skills - Circular cutting",
@@ -41,13 +49,14 @@
         "ulText1" : "Make sure your setup and equipment are ready",
         "ulText2" : "Make sure your camera is selected and your view is centered",
         "ulText3" : "When you are ready to start, press Start exercise.",
-        "note": "Note: your time will start once you press Start exercise and the 3 second countdown is done."
+        "note": "Note: your time will start once you press Start exercise and the 3 second countdown is done.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit",
+        "cancelText" :"Are you sure you want to quit the exercise?"
     },
     "recordingPage": {
         "finishRecording" : "Finish recording",
-        "screenShotText" : "Take a screenshot of your result.",
-        "retake" : "Retake",
-        "done" : "Done",
         "exercise" : "Exercise",
         "yourTasks" : "Your tasks",
         "taskText" : " Surgical suture is a medical device used to hold body tissues together after an injury or surgery. Application generally involves using a needle with an attached length of thread. A number of different shapes, sizes, and thread materials have been developed over its millennia of history.",
@@ -56,26 +65,60 @@
         "ulText3" : "When you are finished the exercise, press the Finish recording button",
         "ulText4" : "Press the Stop button to cancel this recording and go back to the set up",
         "ulText5" : "Press the Quit button to cancel this recordning and quit the exercise",
-        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results."
+        "sidebarmsg" : " When you are ready, please press «Start recording»  to record your results.",
+        "cancelText" :"Are you sure you want to cancel the recording?",
+        "quitExe" : "Cancel recording",
+        "goback":"No, go back",
+        "quit": "Yes, Cancel"
+    },
+    "takescreenshot":{
+        "screenShotText" : "Take a screenshot of your result to proceed.",
+        "previewText" : "Screenshot preview",
+        "retake" : "Retake screenshot",
+        "proceed" : "Proceed",
+        "cancelText" :"Are you sure you want to quit the exercise? <br> Your recording will not be logged and the exercice will be marked as cancelled.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "chooseScreenshot" :{
         "chooseResult" : "Choose the screenshot showing your result the best.",
-        "chooseBtn" : "Choose this screenshot"
+        "chooseBtn" : "Choose this screenshot",
+        "cancelText" :"Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "selfassesment":{
         "title": "Self assesment",
         "resultTitle": "Your result",
         "choice" : "Your choice",
-        "message" : "Select the example image that best matches your result",
-        "next" : "Next"
+        "message" : "Select the example image that best matches your result.",
+        "next" : "Next",
+        "sidebarTitle":"Learn more about the self assessment:",
+        "sidebarContent" : "In this self assessment you will choose from a sample of images the one that most looks like your final result. Based on your selection, you will receive feedback on what you can do differently next time to improve.",
+        "compareResult" : "Compare your final result screenshot on the left to your choice sample image on the right.",
+        "matches": "Once you have selected the image that best matches, click Next.",
+        "cancelText" :"Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
         "message" : "Please answer the questions to proceed",
-        "question" : "My knot was tied tightly and in the correct location ",
-        "anotherquestion" : "Another question",
+        "question1" : "I used my dominant hand to cut",
+        "question2" : "I used my non dominant hand to apply tension  ",
+        "question3" : "I switched hands during the exercise",
         "yes" : "Yes",
-        "no" : "No"
+        "no" : "No",
+        "sidebarTitle" : "Learn more about the questions:",
+        "sidebarContent": "At the end of the exercise you are asked to answer some yes or no questions regarding your performance and experience in this exercise. Your answsers wiill influence your score.",
+        "answeryes" : "Answer yes or no to the presented questions in order to proceed.",
+        "cancelText" :"Are you sure you want to quit the exercise? Your recording will not be logged and the exercice will be marked as cancelled.",
+        "quitExe" : "Quit exercise",
+        "goback":"No, go back",
+        "quit": "Yes, quit"
     },
     "evaluation" : {
         "title" : " Evaluation",
@@ -85,13 +128,15 @@
         "feedback" : "Feedback",
         "radioone" : "Goal",
         "radiotwo" : "Your self assessment",
-        "feedbacktext" : "Not bad. Next time try doing this and this to improve your technique. Next time try performing 2 left loops and 1 right loop.",
+        "feedbacktextone" : "Nice work. It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+        "feedbacktexttwo" : "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting. ",
         "ratingtext" : "How was the case? Rate yourself",
         "cancel" : "Cancel",
         "confirm" : "Confirm",
         "measured" : "Measured",
         "goalValue" : "Goal Value",
-        "confirmation" : "Confirmation"
+        "confirmation" : "Confirmation",
+        "cancelText" : "You are going to quit without saving your exercise data. The exercise will be marked as cancelled trial in your course."
     },
     "end" : {
         "success" : "Success",

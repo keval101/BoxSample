@@ -1,9 +1,10 @@
 @import '../../../assets/scss/button';
-
+@import '../../../assets/scss/dialogBox';
 .recording {
   width: 100%;
-  height: 100vh;
-  position: relative;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
 
   .header {
     position: absolute;
@@ -17,8 +18,8 @@
     left: 4rem;
     z-index: 1;
 
-    img{
-      @media screen and (max-width:600px){
+    img {
+      @media screen and (max-width: 600px) {
         width: 16rem;
       }
     }
@@ -29,9 +30,9 @@
     height: 100%;
     position: relative;
 
-    video{
+    video {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       object-fit: cover;
     }
   }
@@ -51,14 +52,16 @@
       background-color: rgba($background-grey-color, 0.7);
     }
 
-    &--camera {
+    &--btnGroups {
+      width: 50%;
       display: flex;
+      justify-content: space-between;
     }
-    #cameraIcon {
+    .btnIcon {
       width: 7.7rem;
     }
 
-    .cameraBtn {
+    .recordingBtn {
       background-color: transparent;
       border: none;
       cursor: pointer;
@@ -105,7 +108,9 @@
   }
 
   &__content {
-    margin-top: 3.6rem;
+    overflow-y: auto;
+    max-height: calc(100% - 15rem);
+    margin-bottom: 2rem;
 
     &-title {
       font-size: 3.2rem;
@@ -141,7 +146,7 @@
       color: $black-color;
       margin: 1.2rem 0 0 0;
       font-weight: 300;
-      font-family: "Myriad Light";
+      font-family: 'Myriad Light';
       @media screen and (min-width: 768px) {
         font-size: 2.4rem;
       }
@@ -162,7 +167,7 @@
     ul {
       font-size: 2.8rem;
       font-weight: 300;
-      font-family: "Myriad Light";
+      font-family: 'Myriad Light';
       margin-top: 0.5rem;
       @media screen and (min-width: 768px) {
         font-size: 2.4rem;
@@ -179,15 +184,26 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 6.4rem;
+    height: 6rem;
 
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     button {
       padding: 0;
       border: none;
       background: none;
       cursor: pointer;
     }
-
+    #cross {
+      margin-left: 2.5rem;
+      img {
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+    }
     #closeBtn {
       width: 4rem;
     }
@@ -199,12 +215,16 @@
   font-size: 3.2rem;
 }
 
-.counter{
+.counter {
   position: absolute;
   width: 40rem;
   height: 40rem;
-  opacity: 0.5;
-  background: radial-gradient(266.77% 97.9% at 1.86% 0.8%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  opacity: 0.7;
+  background: radial-gradient(
+    266.77% 97.9% at 1.86% 0.8%,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
   box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   border-radius: 6.4rem;
@@ -215,30 +235,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  p{
+  p {
     font-size: 33.33rem;
     color: $primary-color;
     text-align: center;
     font-weight: 700;
   }
 }
-.goPadding{
+.goPadding {
   padding-bottom: 12rem;
   background: $primary-color;
-  p{
+  p {
     color: $white-color;
   }
 }
 
-::ng-deep .vjs-record .vjs-device-button.vjs-control {
-  display: none !important;
-}
-
-::ng-deep .vjs-control-bar{
-  z-index: 100;
-}
-
-.videoPreview{
+.videoPreview {
   position: absolute;
   top: 0;
   left: 0;
@@ -250,13 +262,13 @@
   justify-content: center;
   align-items: center;
 
-  video{
+  video {
     width: 80%;
     height: 80%;
   }
 }
 
-.close{
+.close {
   position: absolute;
   width: 4rem;
   height: 4rem;
@@ -272,4 +284,45 @@
   align-items: center;
   justify-content: center;
   z-index: 2000;
+}
+
+.canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.zoomOutBottom {
+  -webkit-animation-name: zoomOutBottom;
+  animation-name: zoomOutBottom;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes zoomOutBottom {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+    -moz-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+    -ms-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+    -o-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.1) translate3d(-42px, 0, 0);
+    -webkit-transform: scale(0.1) translate3d(-42px, 0, 0);
+    -moz-transform: scale(0.1) translate3d(-42px, 0, 0);
+    -ms-transform: scale(0.1) translate3d(-42px, 0, 0);
+    -o-transform: scale(0.1) translate3d(-42px, 0, 0);
+    transform-origin: bottom left;
+    -webkit-transform-origin: bottom left;
+  }
 }

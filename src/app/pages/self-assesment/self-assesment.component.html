@@ -1,15 +1,12 @@
 <div class="header">
-  <app-header
-    [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"
-  ></app-header>
+  <app-header [onFinishRecording]="recording"  (show)="slibar()" (cancelExe)="onCancelExersice()"></app-header>
 </div>
 
 <div class="container">
   <div class="container__title">
     <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
     <p class="container__title-message m-0">
-      {{ 'selfassesment.message' | translate }}
+      {{ 'selfassesment.message' | translate }} <span class="learnMoreText" (click)="sidebarOpenData($event)">Learn more <i class="pi pi-question-circle" ></i></span>
     </p>
   </div>
 
@@ -31,28 +28,90 @@
 
       <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
-          <p-carousel [value]="items" [numVisible]="1" [responsiveOptions] (onPage)="setPage($event)">
+          <p-carousel  
+          [value]="items" 
+          [numVisible]="1" 
+          [numScroll]="1" 
+          effect="fade" 
+          [responsiveOptions] 
+          (onPage)="setPage($event)">
             <ng-template let-item pTemplate="item" let-i="index">
-              <img
-                style="height: 100%"
-                [src]="item.img"
-                class="screenShotImage"
-                id="index"
-              />
+              <img style="height: 100%"  [src]="itemImage !== '' ? itemImage : item.img" class="screenShotImage" id="index" />
             </ng-template>
           </p-carousel>
+        </div>
+      </div>
+      
+      <div class="imagessss">
+        <div *ngFor="let item of items; let i = index">
+          <img [src]="item.img" alt="" (click)="active(item,i)" class="p" />
         </div>
       </div>
     </div>
   </div>
 
   <div class="bottomContainer">
-    <button
-      class="button button-small button-fill"
-      type="button"
-      (click)="redirectTo()"
-    >
+    <button class="button button-small button-fill" type="button" (click)="redirectTo()">
       {{ 'selfassesment.next' | translate }}
     </button>
   </div>
 </div>
+
+<div class="sidebar" #sidenav  *ngIf="sidebarOpen || sidebarOpenText" @fadeAnimation>
+  <div class="sidebarHeader">
+    <button class="close" (click)="closeSidebar()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+    <button class="close" (click)="confirm()">
+      <img src="assets/icnons/blueCros.svg" alt="close" />
+    </button>
+  </div>
+ 
+  <div class="sidebar__header">
+    <img src="assets/images/logo.svg" alt="logo" />
+  </div>
+
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'selfassesment.sidebarTitle' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.sidebarContent' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.compareResult' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-text">
+        {{ 'selfassesment.matches' | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'selfassesment.quitExe' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'selfassesment.goback' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'selfassesment.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

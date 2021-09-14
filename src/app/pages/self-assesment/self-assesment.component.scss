@@ -1,15 +1,47 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
 @import '../../../assets/scss/carousel';
+@import '../../../assets/scss/mixin';
+@import '../../../assets/scss/dialogBox';
 
-.container {
-  position: relative;
+.p {
+  margin-right: 10px;
+  width: 10.8rem;
+  height: 6.8rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  object-fit: cover;
+}
+.active {
+  border: 2px solid red;
+}
+.imagessss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: calc(100vh - 6.4rem);
+  height: 10rem;
+  position: absolute;
+  bottom: -10rem;
+  @media (max-width:600px){
+    bottom: -25rem;
+  }
+
+  @media (min-width:601px) and (max-width : 767px){
+    bottom: -10rem;
+  }
+}
+.container {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 6.4rem);
   padding: 0 4rem;
   overflow: hidden;
 
-  .carousel-images{
+  .carousel-images {
     width: 100%;
     height: 40.6rem;
     object-fit: cover;
@@ -18,7 +50,7 @@
       height: 54rem;
     }
   }
-  
+
   &__title {
     width: 100%;
 
@@ -35,6 +67,12 @@
       color: $primary-color;
     }
   }
+
+  @media (min-width: 601px) and (max-width: 768px) {
+    // height: 54rem;
+    height: calc(100% - 6.4rem);
+    overflow: auto;
+  }
 }
 
 .selfassesment__result {
@@ -47,6 +85,11 @@
 
   @media screen and (max-width: 768px) {
     display: block;
+  }
+
+  @media (min-width: 601px) and (max-width: 768px) {
+    display: flex;
+    margin-top: 6rem !important;
   }
 
   &-title {
@@ -62,7 +105,7 @@
     width: 100%;
     height: 40.6rem;
 
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
@@ -81,13 +124,16 @@
       width: 100%;
       margin-top: 10rem;
     }
+    @media (min-width: 601px) and (max-width: 767px) {
+      margin-top: 0rem;
+    }
   }
 
   &-image {
     margin-right: 3rem;
 
     @media screen and (max-width: 768px) {
-      margin-bottom:22rem;
+      margin-bottom: 10rem;
     }
 
     p {
@@ -102,6 +148,9 @@
       @media screen and (max-width: 768px) {
         width: 100%;
         height: 54rem;
+      }
+      @media (min-width: 601px) and (max-width: 767px) {
+        height: 40.6rem !important;
       }
     }
   }
@@ -119,10 +168,41 @@
       @media screen and (max-width: 768px) {
         height: 54rem !important;
       }
+      @media (min-width: 601px) and (max-width: 767px) {
+        height: 40.6rem !important;
+      }
     }
   }
 }
 
+.sidebar .close{
+  width: unset !important;
+  height: unset !important;
+}
+.sidebar__header img{
+    margin-top: 6.9rem !important;
+    margin-bottom: 6.783rem !important;
+}
+
+#closeBtn {
+  width: 4rem;
+  height: unset !important;
+}
+.sidebarHeader{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 6rem;
+  position: relative;
+  justify-content: space-between;
+
+  button{
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+}
 .bottomContainer {
   position: absolute;
   display: flex;
@@ -136,11 +216,19 @@
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
   top: 46%;
   left: 2rem;
+
+  @media screen and (max-width: 600px) {
+    top: 60%;
+  }
 }
 
 ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
   top: 46%;
   right: 1.7rem;
+
+  @media screen and (max-width: 600px) {
+    top: 60%;
+  }
 }
 
 ::ng-deep .p-carousel .p-carousel-indicators {
@@ -148,8 +236,27 @@
   bottom: -4rem;
   left: 45% !important;
   z-index: 1;
-  
+
   @media screen and (max-width: 600px) {
     bottom: -20rem;
   }
 }
+
+::ng-deep .p-carousel .p-carousel-indicators {
+  display: none;
+}
+
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next.leval,
+::ng-deep .p-carousel .p-carousel-content .p-carousel-prev.leval {
+  display: none;
+}
+
+.learnMoreText{
+  color: #707172 !important;
+}
+
+.pi {
+  font-size: 3.2rem;
+}
+
+@include sidebarStyles;

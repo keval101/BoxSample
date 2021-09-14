@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
@@ -7,6 +7,9 @@ import { interval, Subscription, timer } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
+import { SetupService } from '../setup/setup.service';
+import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
+import { ConfirmationService } from 'primeng/api';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-recording-screen',
@@ -25,7 +28,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoSource:any;
   paddingClass:boolean;
   recordingDurationTime:string;
-  data = [3,2,1,"go"]
+  data:any[] = [3,2,1,"go"]
   counter:any;
   micValue:boolean;
   mediaRecorder:any;
@@ -38,16 +41,29 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   time:number = 0;
   displayTimer:any;
   videoType:any;
+  deviceInfoId:any;
   videoTimer:Subscription;
+  flashCheckedValue:boolean = false;
+  isFullScreen:boolean;
+
+  cancelText: string;
+
+
   @ViewChild('video') videoEle : ElementRef
   @ViewChild('videoPreview') recordedVideoEle : ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('sidenav') sidenav: ElementRef;
+
   constructor(
     public TranslateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
     private sanitizer : DomSanitizer,
     private headerService : HeaderService,
-    public platform: Platform
+    private setupSerice:SetupService,
+    public platform: Platform,
+    private takescreenshotService:TakescreenshotService,
+    private confirmationService: ConfirmationService,
   ) { 
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe(
@@ -56,10 +72,27 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           this.muteVideo()
         })
     }, 4000);  
-    
+    this.deviceInfoId = this.setupSerice.cameraIdInformation
+
+    this.headerService.videoFullscreen.subscribe(
+      fullscreenValue => {
+        this.isFullScreen = fullscreenValue
+      }
+    )
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+      this.isSidebarOpen = false;
+    }
   }
 
   ngOnInit(): void {    
+    this.TranslateService.get('recordingPage.cancelText').subscribe((text: string) => {
+      this.cancelText = text;
+    });
+
     const obs = interval(1000)
     const timer:Subscription = obs.subscribe( (d) => {
       this.counterTime = true;
@@ -84,6 +117,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.startCamera();
     },500)
     this.micCheckedValue = this.headerService.muteMic
+    this.flashCheckedValue = this.headerService.flash
     this.recordingDurationTime = "00:00"  
   }
 
@@ -155,6 +189,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     };
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;
     this.mediaRecorder.start();
+
+    
   }
 
   stopwatch() {
@@ -196,6 +232,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.mediaRecorder.stop();
   }
 
+  pauseRecording(){
+    this.mediaRecorder.pause()
+  }
+
+  resumeRecording(){
+    this.mediaRecorder.start()
+  }
+
   handleSuccess(stream) {
     (<any>window).stream = stream;
     const gumVideo = this.videoEle.nativeElement;
@@ -215,27 +259,68 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   
   async startCamera(){
     this.videoEle.nativeElement.volume = 0
+    let tempThis = this;
     const constraints = {
       audio: {
         echoCancellation: true
       },
-      video: {
-        width: 1280, height: 720
-      }
+      video: {deviceId: tempThis.deviceInfoId ? {exact: tempThis.deviceInfoId} : undefined}
     };
     await this.init(constraints);
   }
 
   videoInitialize(){
-    let el = 'video';
       this.headerService.muteUnmuteMic.subscribe(
       res =>{
         this.micValue = res
       })
   }
 
+  takescreenshot(){
+    this.isScreenShot = true
+  
+    setTimeout(() => {
+      this.isScreenShot = false
+    }, 3000);
+     var context = this.canvas.nativeElement.getContext("2d").drawImage(this.videoEle.nativeElement, 0, 0, 640, 480);
+     this.takescreenshotService.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+    }
+
   redirectToPhoto(){
     this.router.navigate(['/takescreenshot']);
+  }
+
+  confirm() {   
+    this.videoTimer.unsubscribe();
+    this.mediaRecorder.pause();
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/setup']);
+      },
+      reject: () => {
+        this.mediaRecorder.resume();
+        setTimeout(() => {
+          this.stopwatch()
+        }, 2000);
+      }
+    });
+  }
+  onCancelExersice() {   
+    this.videoTimer.unsubscribe()
+    this.mediaRecorder.pause();
+    this.confirmationService.confirm({
+      message: this.cancelText,
+      accept: () => {
+        this.router.navigate(['/setup']);
+      },
+      reject: () => {
+        this.mediaRecorder.resume();
+        setTimeout(() => {
+          this.stopwatch()
+        }, 2000);
+      }
+    });
   }
 
   ngOnDestroy(){

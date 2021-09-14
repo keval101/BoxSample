@@ -8,6 +8,8 @@ import { HeaderModule } from 'src/app/features/header/header.module';
 
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [SelfassesmentQuestionsComponent],
@@ -18,6 +20,8 @@ import { FormsModule } from '@angular/forms';
     HeaderModule,
     RadioButtonModule,
     SelfassesmentQuestionsRoutingModule,
+    ConfirmDialogModule
   ],
+  providers: [ConfirmationService],
 })
 export class SelfassesmentQuestionsModule {}

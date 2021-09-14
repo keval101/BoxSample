@@ -13,6 +13,8 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TabViewModule } from 'primeng/tabview';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [ChooseScreenshotComponent],
   imports: [
@@ -25,6 +27,8 @@ import { TabViewModule } from 'primeng/tabview';
     HeaderModule,
     ChooseScreenshotRoutingModule,
     TranslateModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
 })
 export class ChooseScreenshotModule {}

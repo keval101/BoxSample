@@ -2,15 +2,15 @@
   <div class="header">
     <app-header
       [onFinishRecording]="recording"
-      [onScreenShot]="isScreenShot"
-      [sidebarOpen]="isSidebarOpen"
       [ontakeScreenshot]="!takeScreenshot"
       (show)="onSlidebarOpen($event)"
-      [checkedMic] = micCheckedValue
+      [checkedMic]="micCheckedValue"
+      [checkedFlash]="flashCheckedValue"
+      (cancelExe)="onCancelExersice()"
     ></app-header>
   </div>
 
-  <div class="videoPreview" *ngIf = 'recordingFinish'>
+  <div class="videoPreview" *ngIf="recordingFinish">
     <video [src]="videoSource" playsinline controls #videoPreview></video>
     <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
@@ -24,23 +24,34 @@
   </div>
 
   <div
-  class="counter"
-  [ngClass]="{ goPadding: paddingClass }"
-  *ngIf="counterTime"
->
-  <p class="m-0">{{ counter }}</p>
-</div>
-
-  <div
-    class="recording__button"
-    [ngClass]="{ 'recording__button-bg': isScreenShot }"
+    class="counter"
+    [ngClass]="{ goPadding: paddingClass }"
+    *ngIf="counterTime"
   >
-    <div class="recording__button--camera">
-      <button
-        type="button"
-        class="cameraBtn"
-      >
-        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+    <p class="m-0">{{ counter }}</p>
+  </div>
+
+  <canvas
+    #canvas
+    class="canvas"
+    id="canvas"
+    width="640"
+    height="480"
+    [ngClass]="{ zoomOutBottom: isScreenShot }"
+    [ngStyle]="{ visibility: isScreenShot ? 'visible' : 'hidden' }"
+  ></canvas>
+  <div class="recording__button">
+    <div class="recording__button--btnGroups">
+      <button type="button" class="recordingBtn" (click)="confirm()">
+        <img
+          src="assets/icnons/cancelRecording.svg"
+          alt="camera-icon"
+          class="btnIcon"
+        />
+      </button>
+
+      <button type="button" class="recordingBtn" (click)="takescreenshot()">
+        <img src="assets/icnons/camera.png" alt="camera-icon" class="btnIcon" />
       </button>
     </div>
 
@@ -52,45 +63,69 @@
       >
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
-
-    </div>
-  </div>
-
-  <div class="sidebar" *ngIf="isSidebarOpen" @fadeAnimation>
-    <div class="sidebar__header">
-      <button type="button" (click)="onSlidebarClose()">
-        <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
-      </button>
-
-      <button type="button">
-        <i class="pi pi-question-circle"></i>
-      </button>
-    </div>
-
-    <div class="sidebar__content">
-      <p class="sidebar__content-title">
-        {{ 'recordingPage.exercise' | translate }}
-      </p>
-      <div class="sidebar__content-goal">
-        <p class="sidebar__content-title2">
-          {{ 'intro.goals' | translate }}
-        </p>
-        <p class="sidebar__content-text">
-          {{ 'intro.goalsText' | translate }}
-        </p>
-      </div>
-      <div class="sidebar__content-task">
-        <p class="sidebar__content-title2">
-          {{ 'recordingPage.yourTasks' | translate }}
-        </p>
-        <ul>
-          <li>{{ 'recordingPage.ulText1' | translate }}</li>
-          <li>{{ 'recordingPage.ulText2' | translate }}</li>
-          <li>{{ 'recordingPage.ulText3' | translate }}</li>
-          <li>{{ 'recordingPage.ulText4' | translate }}</li>
-          <li>{{ 'recordingPage.ulText5' | translate }}</li>
-        </ul>
-      </div>
     </div>
   </div>
 </div>
+
+<div class="sidebar" #sidenav *ngIf="isSidebarOpen" @fadeAnimation>
+  <div class="sidebar__header">
+    <button type="button" (click)="onSlidebarClose()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+
+    <div>
+      <button type="button" class="button" id="cross">
+        <img src="assets/icnons/blueCros.svg" (click)="confirm()" alt="cross" />
+      </button>
+    </div>
+  </div>
+
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'recordingPage.exercise' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-title2">
+        {{ 'intro.goals' | translate }}
+      </p>
+      <p class="sidebar__content-text">
+        {{ 'intro.goalsText' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-task">
+      <p class="sidebar__content-title2">
+        {{ 'recordingPage.yourTasks' | translate }}
+      </p>
+      <ul>
+        <li>{{ 'recordingPage.ulText1' | translate }}</li>
+        <li>{{ 'recordingPage.ulText2' | translate }}</li>
+        <li>{{ 'recordingPage.ulText3' | translate }}</li>
+        <li>{{ 'recordingPage.ulText4' | translate }}</li>
+        <li>{{ 'recordingPage.ulText5' | translate }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'recordingPage.quitExe' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'setup.goback' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'recordingPage.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

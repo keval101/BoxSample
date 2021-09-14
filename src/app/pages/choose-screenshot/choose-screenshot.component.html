@@ -1,16 +1,16 @@
-<div class="chooseScreenshot">
-  <div class="header">
-    <app-header [onFinishRecording]="recording"
-    [onScreenShot]="isScreenShot"></app-header>
-  </div>
+<div class="header">
+  <app-header
+    [onFinishRecording]="recording"
+    (show)="onSlidebarOpen($event)"
+    (cancelExe)="onCancelExersice()"
+  ></app-header>
+</div>
 
+<div class="chooseScreenshot">
   <div class="carousel-images">
     <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
-      <ng-template let-item pTemplate="item" >
-        <img
-          [src]="item"
-          class="screenShotImage"
-        />
+      <ng-template let-item pTemplate="item">
+        <img [src]="item" class="screenShotImage" />
       </ng-template>
     </p-carousel>
   </div>
@@ -27,9 +27,74 @@
       >
         <i class="pi pi-chevron-left"></i>
       </button>
-      <button class="button button-big button-fill backBtn" (click)="redirectTo()">
+      <button
+        class="button button-big button-fill backBtn"
+        (click)="redirectTo()"
+      >
         {{ 'chooseScreenshot.chooseBtn' | translate }}
       </button>
     </div>
   </div>
 </div>
+
+<div *ngIf="isSidebarOpen" #sidenav @fadeAnimation class="sidebar">
+  <div class="sidebar__header">
+    <button type="button" (click)="onSlidebarClose()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+
+    <div>
+      <button type="button" class="button" id="cross">
+        <img src="assets/icnons/blueCros.svg" (click)="confirm()" alt="cross" />
+      </button>
+    </div>
+  </div>
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'recordingPage.exercise' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-title2">
+        {{ 'intro.goals' | translate }}
+      </p>
+      <p class="sidebar__content-text">
+        {{ 'intro.goalsText' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-task">
+      <p class="sidebar__content-title2">
+        {{ 'recordingPage.yourTasks' | translate }}
+      </p>
+      <ul>
+        <li>{{ 'recordingPage.ulText1' | translate }}</li>
+        <li>{{ 'recordingPage.ulText2' | translate }}</li>
+        <li>{{ 'recordingPage.ulText3' | translate }}</li>
+        <li>{{ 'recordingPage.ulText4' | translate }}</li>
+        <li>{{ 'recordingPage.ulText5' | translate }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'chooseScreenshot.quitExe' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
+      {{ 'chooseScreenshot.goback' | translate }}
+    </button>
+
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
+      {{ 'chooseScreenshot.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>

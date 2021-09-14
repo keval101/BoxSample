@@ -1,42 +1,96 @@
 <div class="header">
-    <app-header
-      [onFinishRecording]="recording"
-      [onScreenShot]="isScreenShot"
-      [ontakeScreenshot]="takeScreenshot"
-    ></app-header>
+  <app-header [onFinishRecording]="recording" 
+  [ontakeScreenshot]="takeScreenshot" 
+  (cancelExe)="onCancelExersice()"
+  (show)="onSlidebarOpen($event)"></app-header>
+</div>
+<div class="container">
+  <div class="snapshotContainer">
+    <video #video class="video" width="640" height="480" autoplay [ngClass]="{ zIndex: !imageCapture }"></video>
+    <canvas #canvas class="canvas" width="640" height="480"></canvas>
   </div>
 
-  <div class="container">
-    <!-- <video autoplay #video id="video"></video> -->
-    <div class="snapshotContainer">
-      <video #video class="video" width="640" height="480" autoplay [ngClass] = " {'zIndex' : !imageCapture}"></video>
-      <canvas #canvas class="canvas" width="640" height="480" ></canvas>
+  <div [ngClass]="fullscreen && !onCameraClick ? 'removeBg container__footer' : 'container__footer'">
+    <div class="container__footer--camera">
+      <p class="screenShotText" *ngIf="isScreenShot">
+        {{ fullscreen ? '' : 'takescreenshot.screenShotText' | translate }}
+      </p>
+
+      <p class="screenShotText" *ngIf="!isScreenShot">
+        {{ 'takescreenshot.previewText' | translate }}
+      </p>
+
+      <button
+        type="button"
+        class="cameraBtn"
+        (click)="takeScreenShot()"
+        *ngIf="isScreenShot"
+      >
+        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+      </button>
     </div>
-    
 
-    <div class="container__footer">
-      <div class="container__footer--camera">
-        <button
-          type="button"
-          class="cameraBtn"
-          (click)="takeScreenShot()"
-          [disabled]="!recording"
-        >
-          <img src="../../../assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
-        </button>
-        <p class="screenShotText" *ngIf="isScreenShot">
-          {{ 'recordingPage.screenShotText' | translate }}
-        </p>
-      </div>
-
-      <div class="container__footer--Btngroup" *ngIf="onCameraClick">
-        <button class="button button-small button-outline" (click)="onRetake()">
-          {{ 'recordingPage.retake' | translate }}
-        </button>
-        <button class="button button-small button-fill" (click)="onDone()">
-          {{ 'recordingPage.done' | translate }}
-        </button>
-      </div>
+    <div class="container__footer--Btngroup" *ngIf="onCameraClick">
+      <button class="button button-small button-outline" (click)="onRetake()">
+        {{ 'takescreenshot.retake' | translate }}
+      </button>
+      <button class="button button-small button-fill" (click)="onDone()">
+        {{ 'takescreenshot.proceed' | translate }}
+      </button>
     </div>
   </div>
-  
+
+</div>
+
+
+<div *ngIf="isSidebarOpen" #sidenav @fadeAnimation class="sidebar">
+  <div class="sidebar__header">
+    <button type="button" (click)="onSlidebarClose()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    </button>
+
+      <button type="button" class="button" id="cross" (click)="confirm()">
+        <img src="assets/icnons/blueCros.svg" alt="cross" />
+      </button>
+  </div>
+  <div class="sidebar__content">
+    <p class="sidebar__content-title">
+      {{ 'recordingPage.exercise' | translate }}
+    </p>
+    <div class="sidebar__content-goal">
+      <p class="sidebar__content-title2">
+        {{ 'intro.goals' | translate }}
+      </p>
+      <p class="sidebar__content-text">
+        {{ 'intro.goalsText' | translate }}
+      </p>
+    </div>
+    <div class="sidebar__content-task">
+      <p class="sidebar__content-title2">
+        {{ 'recordingPage.yourTasks' | translate }}
+      </p>
+      <ul>
+        <li>{{ 'recordingPage.ulText1' | translate }}</li>
+        <li>{{ 'recordingPage.ulText2' | translate }}</li>
+        <li>{{ 'recordingPage.ulText3' | translate }}</li>
+        <li>{{ 'recordingPage.ulText4' | translate }}</li>
+        <li>{{ 'recordingPage.ulText5' | translate }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" #cd>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'takescreenshot.quitExe' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button class="button button-small button-outline" type="button" (click)="cd.reject()">
+      {{ 'takescreenshot.goback' | translate }}
+    </button>
+
+    <button class="button button-small button-fill" type="button" (click)="cd.accept()">
+      {{ 'takescreenshot.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>
