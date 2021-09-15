@@ -1,12 +1,13 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording" [introScreen]="introScreen" (cancelExe)="onCancelExersice()" (show)="showDetail()" ></app-header>
+  <app-header
+    [onFinishRecording]="recording"
+    [introScreen]="introScreen"
+    (cancelExe)="onCancelExersice()"
+    (show)="showDetail()"
+  ></app-header>
 </div>
 
-<div
-  class="container"
-  (window:resize)="onResize($event)"
-
->
+<div class="container" (window:resize)="onResize($event)">
   <div class="container__title">
     <p class="container__title-text m-0">
       {{ 'intro.title' | translate }}
@@ -89,7 +90,6 @@
 <p class="rightReserved">
   {{ 'home.rightReserved' | translate }}
 </p>
-
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">

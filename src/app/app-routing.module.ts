@@ -78,8 +78,10 @@ const routes: Routes = [
   {
     path: 'video',
     loadChildren: () =>
-      import('src/app/pages/videoscreen/videoscreen.module').then((m) => m.VideoscreenModule),
-  }
+      import('src/app/pages/videoscreen/videoscreen.module').then(
+        (m) => m.VideoscreenModule
+      ),
+  },
 ];
 
 @NgModule({

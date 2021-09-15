@@ -1,5 +1,9 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording" (show)="slibar()" (cancelExe)="onCancelExersice()"></app-header>
+  <app-header
+    [onFinishRecording]="recording"
+    (show)="slibar()"
+    (cancelExe)="onCancelExersice()"
+  ></app-header>
 </div>
 
 <div class="container">
@@ -144,8 +148,6 @@
     </div>
   </div>
 </div>
-
-
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">

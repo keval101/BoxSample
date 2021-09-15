@@ -81,23 +81,29 @@
       [max]="100"
       [step]="10"
       class="slideBar"
-      (ngModelChange)="volumeChanged($event)"
+      (onChange)="volumeChanged($event)"
     ></p-slider>
   </div>
 </div>
-
-
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
     <p class="header m-0">{{ 'video.quitExe' | translate }}</p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
-    <button class="button button-small button-outline" type="button" (click)="cd.reject()">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cd.reject()"
+    >
       {{ 'video.goback' | translate }}
     </button>
 
-    <button class="button button-small button-fill" type="button" (click)="cd.accept()">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="cd.accept()"
+    >
       {{ 'video.quit' | translate }}
     </button>
   </ng-template>

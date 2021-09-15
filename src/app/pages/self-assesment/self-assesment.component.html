@@ -1,12 +1,19 @@
 <div class="header">
-  <app-header [onFinishRecording]="recording"  (show)="slibar()" (cancelExe)="onCancelExersice()"></app-header>
+  <app-header
+    [onFinishRecording]="recording"
+    (show)="slibar()"
+    (cancelExe)="onCancelExersice()"
+  ></app-header>
 </div>
 
 <div class="container">
   <div class="container__title">
     <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
     <p class="container__title-message m-0">
-      {{ 'selfassesment.message' | translate }} <span class="learnMoreText" (click)="sidebarOpenData($event)">Learn more <i class="pi pi-question-circle" ></i></span>
+      {{ 'selfassesment.message' | translate }}
+      <span class="learnMoreText" (click)="sidebarOpenData($event)"
+        >Learn more <i class="pi pi-question-circle"></i
+      ></span>
     </p>
   </div>
 
@@ -28,36 +35,51 @@
 
       <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
-          <p-carousel  
-          [value]="items" 
-          [numVisible]="1" 
-          [numScroll]="1" 
-          effect="fade" 
-          [responsiveOptions] 
-          (onPage)="setPage($event)">
+          <p-carousel
+            [value]="items"
+            [numVisible]="1"
+            [numScroll]="1"
+            effect="fade"
+            [responsiveOptions]
+            (onPage)="setPage($event)"
+          >
             <ng-template let-item pTemplate="item" let-i="index">
-              <img style="height: 100%"  [src]="itemImage !== '' ? itemImage : item.img" class="screenShotImage" id="index" />
+              <img
+                style="height: 100%"
+                [src]="itemImage !== '' ? itemImage : item.img"
+                class="screenShotImage"
+                id="index"
+              />
             </ng-template>
           </p-carousel>
         </div>
       </div>
-      
+
       <div class="imagessss">
         <div *ngFor="let item of items; let i = index">
-          <img [src]="item.img" alt="" (click)="active(item,i)" class="p" />
+          <img [src]="item.img" alt="" (click)="active(item, i)" class="p" />
         </div>
       </div>
     </div>
   </div>
 
   <div class="bottomContainer">
-    <button class="button button-small button-fill" type="button" (click)="redirectTo()">
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="redirectTo()"
+    >
       {{ 'selfassesment.next' | translate }}
     </button>
   </div>
 </div>
 
-<div class="sidebar" #sidenav  *ngIf="sidebarOpen || sidebarOpenText" @fadeAnimation>
+<div
+  class="sidebar"
+  #sidenav
+  *ngIf="sidebarOpen || sidebarOpenText"
+  @fadeAnimation
+>
   <div class="sidebarHeader">
     <button class="close" (click)="closeSidebar()">
       <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
@@ -66,7 +88,7 @@
       <img src="assets/icnons/blueCros.svg" alt="close" />
     </button>
   </div>
- 
+
   <div class="sidebar__header">
     <img src="assets/images/logo.svg" alt="logo" />
   </div>

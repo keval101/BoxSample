@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderModule } from 'src/app/features/header/header.module';
 
 import { CarouselModule } from 'primeng/carousel';
-import {GalleriaModule} from 'primeng/galleria';
+import { GalleriaModule } from 'primeng/galleria';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TabViewModule } from 'primeng/tabview';
@@ -28,7 +28,7 @@ import { ConfirmationService } from 'primeng/api';
     TabViewModule,
     GalleriaModule,
     SelfAssesmentRoutingModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
   providers: [ConfirmationService],
 })

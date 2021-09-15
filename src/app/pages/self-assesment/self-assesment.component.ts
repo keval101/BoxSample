@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -6,25 +12,23 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
 
-
 @Component({
   selector: 'app-self-assesment',
   templateUrl: './self-assesment.component.html',
   styleUrls: ['./self-assesment.component.scss'],
   animations: [fadeAnimation],
-
 })
 export class SelfAssesmentComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-  items: any[] = [];
-  responsiveOptions: any;
-  resultImage: any;
+  items = [];
+  responsiveOptions;
+  resultImage;
   touchScreen: boolean;
-  imagePreviews: any;
-  sidebarOpen: boolean = false;
-  sidebarOpenText: boolean = false;
-  cancelText:string;
+  imagePreviews;
+  sidebarOpen = false;
+  sidebarOpenText = false;
+  cancelText: string;
 
   itemImage = '';
 
@@ -32,7 +36,7 @@ export class SelfAssesmentComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
     private selfAssesmentService: SelfAssesmentService
@@ -41,11 +45,10 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = true;
 
       setTimeout(() => {
-        
         this.imagePreviews = document.getElementsByClassName('p');
         this.imagePreviews[0].classList.add();
-        var btnNext = document.querySelector('.p-carousel-next');
-        var btnPrev = document.querySelector('.p-carousel-prev');
+        const btnNext = document.querySelector('.p-carousel-next');
+        const btnPrev = document.querySelector('.p-carousel-prev');
         btnNext.classList.add('leval');
         btnPrev.classList.add('leval');
         // this.imagePreviews[this.pageIndex].className += " active";
@@ -54,33 +57,30 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = false;
     }
 
-    
-
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
         numVisible: 3,
         numScroll: 3,
-        effect : 'fade'
+        effect: 'fade',
       },
       {
         breakpoint: '768px',
         numVisible: 2,
         numScroll: 2,
-        effect : 'fade'
+        effect: 'fade',
       },
       {
         breakpoint: '560px',
         numVisible: 1,
         numScroll: 1,
-        effect : 'fade'
+        effect: 'fade',
       },
     ];
   }
 
-
-  pageIndex: any;
-  setPage(indexOf) {
+  pageIndex;
+  setPage(indexOf: { page: number }): void {
     this.itemImage = '';
     this.pageIndex = indexOf.page;
     this.selfAssesmentService.imageIndex = this.pageIndex;
@@ -95,18 +95,21 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if ((this.sidebarOpen || this.sidebarOpenText) && !this.sidenav.nativeElement.contains(event.target)) {
+  clickout(event: Event): void {
+    if (
+      (this.sidebarOpen || this.sidebarOpenText) &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.sidebarOpen = false;
       this.sidebarOpenText = false;
     }
   }
 
-  onSlidebarOpen(value) {
+  onSlidebarOpen(value: boolean): void {
     this.sidebarOpen = value;
   }
 
-  onCancelExersice() {   
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -115,7 +118,7 @@ export class SelfAssesmentComponent implements OnInit {
     });
   }
 
-  confirm() {   
+  confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -123,13 +126,13 @@ export class SelfAssesmentComponent implements OnInit {
       },
     });
   }
-
 
   ngOnInit(): void {
-
-    this.TranslateService.get('selfassesment.cancelText').subscribe((text: string) => {
-      this.cancelText = text;
-    });
+    this.translateService.get('selfassesment.cancelText').subscribe(
+      (text: string) => {
+        this.cancelText = text;
+      }
+    );
 
     // this.imagePreviews[0].classList.add('active')
     this.isScreenShot = true;
@@ -140,31 +143,30 @@ export class SelfAssesmentComponent implements OnInit {
       { img: '../../../assets/images/screenshot2.png' },
       { img: '../../../assets/images/screenshot3.png' },
     ];
-    let array = this.takescreenshotService.captures;
     this.resultImage = this.takescreenshotService.resultImageSource;
   }
-  active(item,ids){
+  active(item: { img }, ids: number): void {
     this.itemImage = '';
     for (let i = 0; i < this.imagePreviews.length; i++) {
-      this.imagePreviews[i].classList.remove('active')
-      this.itemImage = item.img
-      this.imagePreviews[ids].classList.add('active')
+      this.imagePreviews[i].classList.remove('active');
+      this.itemImage = item.img;
+      this.imagePreviews[ids].classList.add('active');
     }
   }
 
-  slibar() {
+  slibar(): void {
     this.sidebarOpen = true;
   }
-  
-  sidebarOpenData(event) {
+
+  sidebarOpenData(event: Event): void {
     event.stopPropagation();
     this.sidebarOpenText = true;
   }
-  closeSidebar() {
+  closeSidebar(): void {
     this.sidebarOpenText = false;
     this.sidebarOpen = false;
   }
-  redirectTo() {
+  redirectTo(): void {
     this.router.navigate(['/self-assesment-questions']);
   }
 }

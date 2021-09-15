@@ -14,7 +14,11 @@ import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { SetupService } from './setup.service';
-declare var ImageCapture: any;
+declare let ImageCapture;
+declare const window: Window &
+  typeof globalThis & {
+    stream: MediaStream;
+  };
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.component.html',
@@ -25,32 +29,44 @@ export class SetupComponent implements OnInit, OnDestroy {
   recording: boolean;
   isScreenShot: boolean;
   selectedCamera: boolean;
-  checkedMic: boolean = true;
-  checkedFlash: boolean = false;
+  checkedMic = true;
+  checkedFlash = false;
   sidebar: boolean;
-  deviceID: any;
-  videoStream: any;
-  camera: any[] = [];
-  @ViewChild('video') video: any;
+  deviceID;
+  videoStream;
+  camera = [];
+  @ViewChild('video') video;
   @ViewChild('value') drop: ElementRef;
-  deviceInfoId: any;
-  track: any;
-  deviceLabel: any;
+  deviceInfoId;
+  track;
+  deviceLabel;
   flashSubject = new Subject();
   cancelText: string;
-  userAgent: any;
+  userAgent;
 
-  setupScreen:boolean = true;
+  setupScreen = true;
   @ViewChild('sidenav') sidenav: ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: UIEvent): void {
+    const w = event.target as Window;
+    const width = w.innerWidth;
+    if (width <= 600) {
+      this.sidebar = false;
+    } else {
+      this.sidebar = true;
+    }
+  }
+
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private headerService: HeaderService,
     private setupService: SetupService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService
   ) {
-    this.TranslateService.get('setup.cancelText').subscribe((text: string) => {
+    this.translateService.get('setup.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
 
@@ -70,7 +86,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     } else {
       this.sidebar = false;
     }
-    this.onResize(window.innerWidth);
+    this.checkDeviceWidth(window.innerWidth);
 
     setTimeout(() => {
       this.cameraChange();
@@ -78,45 +94,45 @@ export class SetupComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
+  clickout(event: Event): void {
     if (window.innerWidth < 600) {
       if (this.sidebar && !this.sidenav.nativeElement.contains(event.target)) {
         this.sidebar = false;
       }
     }
   }
-  dropValue(event) {
+  dropValue(event: { Id }): void {
     this.setupService.cameraId.next(event.Id);
     this.setupService.cameraIdInformation = event.Id;
   }
 
-  getDevice() {
-    let _video = this.video.nativeElement;
-    let tempThis = this;
+  getDevice(): void {
+    const _video = this.video.nativeElement;
+    const deviceInfoId = this.deviceInfoId;
+    const camera = this.camera;
+    let deviceID = this.deviceID;
 
-    if ((<any>window).stream) {
-      (<any>window).stream.getTracks().forEach((track) => {
+    if (window.stream) {
+      window.stream.getTracks().forEach((track) => {
         track.stop();
       });
     }
 
-    navigator.mediaDevices.enumerateDevices().then((devices) => {
+    navigator.mediaDevices.enumerateDevices().then(() => {
       // Create stream and get video track
       navigator.mediaDevices
         .getUserMedia({
           audio: true,
           video: {
-            deviceId: tempThis.deviceInfoId
-              ? { exact: tempThis.deviceInfoId }
-              : undefined,
+            deviceId: deviceInfoId ? { exact: deviceInfoId } : undefined,
           },
         })
         .then((stream) => {
           _video.volume = 0;
-          (<any>window).stream = stream;
+          window.stream = stream;
           this.videoStream = stream;
           _video.srcObject = stream;
-          _video.onloadedmetadata = function (e: any) {};
+          // _video.onloadedmetadata = function () {};
           _video.play();
 
           this.camera = [];
@@ -124,11 +140,11 @@ export class SetupComponent implements OnInit, OnDestroy {
           navigator.mediaDevices.enumerateDevices().then((devices) => {
             devices.forEach(function (device) {
               if (device.kind === 'videoinput') {
-                tempThis.camera.push({
+                camera.push({
                   label: device.label,
                   Id: device.deviceId,
                 });
-                tempThis.deviceID = device.deviceId;
+                deviceID = device.deviceId;
               }
             });
           });
@@ -138,23 +154,21 @@ export class SetupComponent implements OnInit, OnDestroy {
           if (/android/i.test(this.userAgent)) {
             alert('Android');
             const imageCapture = new ImageCapture(this.track);
-            const photoCapabilities = imageCapture
-              .getPhotoCapabilities()
-              .then(() => {
-                let tempThis = this;
-
-                this.headerService.flashToggled.subscribe((flashValue) => {
-                  tempThis.track.applyConstraints({
-                    advanced: [{ torch: flashValue }],
-                  });
+            imageCapture.getPhotoCapabilities().then(() => {
+              // let tempThis = this;
+              const track = this.track;
+              this.headerService.flashToggled.subscribe((flashValue) => {
+                track.applyConstraints({
+                  advanced: [{ torch: flashValue }],
                 });
               });
+            });
           }
         });
     });
   }
 
-  cameraChange() {
+  cameraChange(): void {
     this.setupService.cameraId.subscribe((res) => {
       this.deviceInfoId = res;
       this.getDevice();
@@ -164,12 +178,11 @@ export class SetupComponent implements OnInit, OnDestroy {
     }
   }
 
-  showDetail() {
+  showDetail(): void {
     this.sidebar = !this.sidebar;
   }
 
-  onResize(event) {
-    let width = event;
+  checkDeviceWidth(width: number): void {
     if (width <= 600) {
       this.sidebar = false;
     } else {
@@ -177,31 +190,31 @@ export class SetupComponent implements OnInit, OnDestroy {
     }
   }
 
-  muteUnmuteToggle() {
+  muteUnmuteToggle(): void {
     this.headerService.muteMic = this.checkedMic;
     this.headerService.muteUnmuteMic.next(this.checkedMic);
   }
 
-  flashToggle() {
+  flashToggle(): void {
     this.headerService.flash = this.checkedFlash;
     this.headerService.flashToggled.next(this.checkedFlash);
   }
 
-  redirectTo() {
+  redirectTo(): void {
     this.router.navigate(['/recording']);
   }
 
-  redirectToBack() {
+  redirectToBack(): void {
     this.router.navigate(['/video']);
   }
 
-  closeSidebar() {
+  closeSidebar(): void {
     if (window.innerWidth < 600) {
       this.sidebar = false;
     }
   }
 
-  confirm() {
+  confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
 
@@ -212,7 +225,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCancelExersice() {
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -220,9 +233,9 @@ export class SetupComponent implements OnInit, OnDestroy {
       },
     });
   }
-  ngOnDestroy() {
-    if ((<any>window).stream) {
-      (<any>window).stream.getTracks().forEach((track) => {
+  ngOnDestroy(): void {
+    if (window.stream) {
+      window.stream.getTracks().forEach((track) => {
         track.stop();
       });
     }

@@ -22,9 +22,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   recording: boolean;
   isVideoScreen: boolean;
   playVideo: boolean;
-  videoFullScreen: boolean = false;
+  videoFullScreen = false;
   width: number;
-  val: number = 30;
+  val = 30;
   cancelText: string;
 
   @ViewChild('video') video: ElementRef;
@@ -37,7 +37,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     private evolutionService: EvolutionService
   ) {
     this.headerService.videoFullscreen.subscribe((res) => {
-      if (res == true) {
+      if (res === true) {
         this.videoFullScreen = true;
       } else {
         this.videoFullScreen = false;
@@ -54,7 +54,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.width = window.innerWidth;
   }
 
-  togglePlayPause() {
+  togglePlayPause(): void {
     if (this.video.nativeElement.paused) {
       this.playVideo = true;
       this.video.nativeElement.play();
@@ -64,10 +64,10 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.video.nativeElement.addEventListener('timeupdate', () => {
-      var progressBar = document.getElementById('progressBar');
-      var time =
+      const progressBar = document.getElementById('progressBar');
+      const time =
         this.video.nativeElement.currentTime /
         this.video.nativeElement.duration;
       progressBar.style.width = time * 100 + '%';
@@ -83,11 +83,11 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onPlayPause() {
+  onPlayPause(): void {
     this.togglePlayPause();
   }
 
-  volumeChanged(e) {
+  volumeChanged(e): void {
     if (e.cancelable) {
       e.preventDefault();
     }
@@ -95,17 +95,17 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.video.nativeElement.volume = this.val / 100;
   }
 
-  redirectToBack() {
+  redirectToBack(): void {
     this.router.navigate(['/intro']);
   }
 
-  redirectTo() {
+  redirectTo(): void {
     this.playVideo = false;
     this.video.nativeElement.pause();
     this.router.navigate(['/setup']);
   }
 
-  onCancelExersice() {
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
 
@@ -114,5 +114,4 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
       },
     });
   }
-
 }
