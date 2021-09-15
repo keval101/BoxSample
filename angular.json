@@ -86,7 +86,7 @@
                 }
               ]
             },
-            "develop": {
+            "development": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
