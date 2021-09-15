@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -13,11 +19,24 @@ import { EvolutionService } from '../evaluation/evolution.service';
 })
 export class IntroComponent implements OnInit {
   recording: boolean;
-  sidebar: boolean = true;
+  sidebar = true;
   cancelText: string;
-  introScreen: boolean = true;
-  mobile: boolean = false;
+  introScreen = true;
+  mobile = false;
   @ViewChild('sidenav') sidenav: ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: UIEvent): void {
+    const w = event.target as Window;
+    const width = w.innerWidth;
+    if (width <= 600) {
+      this.mobile = false;
+      this.sidebar = false;
+    } else {
+      this.sidebar = true;
+      this.mobile = true;
+    }
+  }
   constructor(
     public TranslateService: TranslateService,
     private confirmationService: ConfirmationService,
@@ -33,32 +52,30 @@ export class IntroComponent implements OnInit {
     });
     if (window.innerWidth > 600) {
       this.sidebar = true;
-      this.mobile = true
+      this.mobile = true;
     } else {
       this.sidebar = false;
       this.mobile = false;
     }
-    this.onResize(window.innerWidth);
+    this.checkDeviceWidth(window.innerWidth);
   }
 
-  onResize(event) {
-    let width = event;
-
+  checkDeviceWidth(width: number): void {
     if (width <= 600) {
       this.mobile = false;
       this.sidebar = false;
     } else {
       this.sidebar = true;
-      this.mobile = true
+      this.mobile = true;
     }
   }
 
-  showDetail() {
+  showDetail(): void {
     this.sidebar = !this.sidebar;
   }
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
+  clickout(event: Event): void {
     if (window.innerWidth < 600) {
       if (this.sidebar && !this.sidenav.nativeElement.contains(event.target)) {
         this.sidebar = false;
@@ -66,16 +83,16 @@ export class IntroComponent implements OnInit {
     }
   }
 
-  redirectTo() {
+  redirectTo(): void {
     this.router.navigate(['/video']);
   }
 
-  closeSidebar() {
+  closeSidebar(): void {
     if (window.innerWidth < 600) {
       this.sidebar = false;
     }
   }
-  confirm() {
+  confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -85,7 +102,7 @@ export class IntroComponent implements OnInit {
     });
   }
 
-  onCancelExersice() {
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {

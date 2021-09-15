@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -11,12 +17,12 @@ import { TakescreenshotService } from '../takescreenshot/takescreenshot.service'
   animations: [fadeAnimation],
 })
 export class ChooseScreenshotComponent implements OnInit {
-  items: any[] = [];
-  recording: boolean = false;
-  responsiveOptions: any;
+  items = [];
+  recording = false;
+  responsiveOptions;
   cancelText: string;
 
-  isSidebarOpen: boolean = false;
+  isSidebarOpen = false;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -46,8 +52,11 @@ export class ChooseScreenshotComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+  clickout(event: Event): void {
+    if (
+      this.isSidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.isSidebarOpen = false;
     }
   }
@@ -62,23 +71,23 @@ export class ChooseScreenshotComponent implements OnInit {
     this.items = this.takescreenshotService.captures;
   }
 
-  backToScreenShot() {
+  backToScreenShot(): void {
     this.takescreenshotService.captures.pop();
     this.router.navigate(['/takescreenshot']);
   }
 
-  onSlidebarOpen(value) {
+  onSlidebarOpen(value: boolean): void {
     this.isSidebarOpen = value;
   }
 
-  onSlidebarClose() {
+  onSlidebarClose(): void {
     this.isSidebarOpen = false;
   }
 
-  redirectTo() {
+  redirectTo(): void {
     this.router.navigate(['/self-assesment']);
   }
-  onCancelExersice() {
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -86,7 +95,7 @@ export class ChooseScreenshotComponent implements OnInit {
       },
     });
   }
-  confirm() {
+  confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {

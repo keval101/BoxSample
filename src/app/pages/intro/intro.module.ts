@@ -11,8 +11,14 @@ import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [IntroComponent],
-  imports: [CommonModule, IntroRoutingModule, TranslateModule, HeaderModule, DropdownModule,
-    ConfirmDialogModule,  ],
-    providers: [ConfirmationService],
+  imports: [
+    CommonModule,
+    IntroRoutingModule,
+    TranslateModule,
+    HeaderModule,
+    DropdownModule,
+    ConfirmDialogModule,
+  ],
+  providers: [ConfirmationService],
 })
-export class IntroModule { }
+export class IntroModule {}

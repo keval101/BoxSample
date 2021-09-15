@@ -6,11 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: TakescreenshotComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TakescreenshotRoutingModule { }
+export class TakescreenshotRoutingModule {}

@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -15,19 +21,18 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 })
 export class EvaluationComponent implements OnInit {
   recording: boolean;
-  ans: string = 'Goal';
-  val: number = 3;
-  isSidebarOpen: boolean = false;
-  cancelValue: boolean = true;
-  resultImage: any;
-  isGoal: boolean = true;
-  id: any;
+  ans = 'Goal';
+  val = 3;
+  isSidebarOpen = false;
+  cancelValue = true;
+  resultImage;
+  isGoal = true;
+  id;
   cancelText: string;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
-
-  scores:any[] = [
+  scores = [
     {
       title: 'Exercise duration',
       measured: '01:33',
@@ -58,39 +63,42 @@ export class EvaluationComponent implements OnInit {
   ) {
     this.id = this.selfAssesmentService.imageIndex;
   }
-  
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.isSidebarOpen && !this.sidenav.nativeElement.contains(event.target)) {
+  clickout(event: Event): void {
+    if (
+      this.isSidebarOpen &&
+      !this.sidenav.nativeElement.contains(event.target)
+    ) {
       this.isSidebarOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('evaluation.cancelText').subscribe((text: string) => {
-      this.cancelText = text;
-    });
+    this.TranslateService.get('evaluation.cancelText').subscribe(
+      (text: string) => {
+        this.cancelText = text;
+      }
+    );
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;
     this.id = 0;
   }
 
-  redirectTo() {
+  redirectTo(): void {
     this.router.navigate(['/end']);
   }
 
-  onSlidebarOpen(value) {
+  onSlidebarOpen(value: boolean): void {
     this.isSidebarOpen = value;
   }
 
-  onSlidebarClose() {
+  onSlidebarClose(): void {
     this.isSidebarOpen = false;
   }
 
-
-  confirm() {
+  confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -100,7 +108,7 @@ export class EvaluationComponent implements OnInit {
     });
   }
 
-  onCancelExersice() {
+  onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
@@ -109,7 +117,7 @@ export class EvaluationComponent implements OnInit {
       },
     });
   }
-  ansChanged(event) {
+  ansChanged(event: string): void {
     if (event == 'Goal') {
       this.isGoal = true;
     } else {

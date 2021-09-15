@@ -9,8 +9,8 @@ import { EvolutionService } from '../evaluation/evolution.service';
 })
 export class EndScreenComponent implements OnInit {
   recording: boolean;
-  cancel: boolean = false;
-  isEndScreen:boolean;
+  cancel = false;
+  isEndScreen: boolean;
   constructor(
     public TranslateService: TranslateService,
     private evolutionService: EvolutionService
@@ -19,6 +19,6 @@ export class EndScreenComponent implements OnInit {
   ngOnInit(): void {
     this.recording = true;
     this.cancel = this.evolutionService.cancelValue;
-    this.isEndScreen = true
+    this.isEndScreen = true;
   }
 }

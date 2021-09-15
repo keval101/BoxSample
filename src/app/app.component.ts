@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     translate.use('en');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.primengConfig.ripple = true;
   }
 }
