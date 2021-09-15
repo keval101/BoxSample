@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class EndScreenComponent implements OnInit {
   cancel = false;
   isEndScreen: boolean;
   constructor(
-    public TranslateService: TranslateService,
     private evolutionService: EvolutionService
   ) {}
 

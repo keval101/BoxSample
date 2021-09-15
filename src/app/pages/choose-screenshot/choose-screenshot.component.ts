@@ -27,7 +27,7 @@ export class ChooseScreenshotComponent implements OnInit {
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService
@@ -62,7 +62,7 @@ export class ChooseScreenshotComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('chooseScreenshot.cancelText').subscribe(
+    this.translateService.get('chooseScreenshot.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }

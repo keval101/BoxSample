@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnDestroy,
   HostListener,
+  AfterViewInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,7 +27,7 @@ declare const window: Window &
   styleUrls: ['./takescreenshot.component.scss'],
   animations: [fadeAnimation],
 })
-export class TakescreenshotComponent implements OnInit, OnDestroy {
+export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit {
   recording: boolean;
   isScreenShot = true;
   takeScreenshot = false;
@@ -43,14 +44,14 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private evolutionService: EvolutionService,
     private takescreenshotService: TakescreenshotService,
     private setupSerice: SetupService,
     private confirmationService: ConfirmationService,
     private headerService: HeaderService
   ) {
-    this.TranslateService.get('takescreenshot.cancelText').subscribe(
+    this.translateService.get('takescreenshot.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }

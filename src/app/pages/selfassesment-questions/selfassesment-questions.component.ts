@@ -31,7 +31,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    public TranslateService: TranslateService
+    public translateService: TranslateService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -45,7 +45,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('selfassesmentquestions.cancelText').subscribe(
+    this.translateService.get('selfassesmentquestions.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }

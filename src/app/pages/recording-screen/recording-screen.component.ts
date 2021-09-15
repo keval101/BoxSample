@@ -66,7 +66,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private router: Router,
     private recordingService: RecordingService,
     private sanitizer: DomSanitizer,
@@ -100,27 +100,27 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('recordingPage.cancelText').subscribe(
+    this.translateService.get('recordingPage.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }
     );
 
     const obs = interval(1000);
-    const timer: Subscription = obs.subscribe((d) => {
+    const timerSub: Subscription = obs.subscribe((d) => {
       this.counterTime = true;
       const counterText = this.data[d];
       this.counter = counterText;
 
-      if (d == 3) {
+      if (d === 3) {
         this.paddingClass = true;
       }
     });
     setTimeout(() => {
-      timer.unsubscribe();
+      timerSub.unsubscribe();
       this.startRecording();
       this.counterTime = false;
-      if (this.headerService.muteMic == false) {
+      if (this.headerService.muteMic === false) {
         if (window.stream.getAudioTracks().length > 0) {
           window.stream.getAudioTracks()[0].enabled = false;
         }

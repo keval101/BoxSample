@@ -36,7 +36,7 @@ export class SelfAssesmentComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
     private selfAssesmentService: SelfAssesmentService
@@ -128,7 +128,7 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('selfassesment.cancelText').subscribe(
+    this.translateService.get('selfassesment.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }
@@ -143,7 +143,6 @@ export class SelfAssesmentComponent implements OnInit {
       { img: '../../../assets/images/screenshot2.png' },
       { img: '../../../assets/images/screenshot3.png' },
     ];
-    this.takescreenshotService.captures;
     this.resultImage = this.takescreenshotService.resultImageSource;
   }
   active(item: { img }, ids: number): void {

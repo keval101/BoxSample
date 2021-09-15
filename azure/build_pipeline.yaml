@@ -86,33 +86,6 @@ stages:
     jobs:
       - job: Build
         steps:
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: |
-                $environment="${{ parameters.environment }} "
-                if ($environment -eq "Production ") {
-                  $environment = ""
-                }
-                $gitVersion= git.exe "describe"
-                $major,$minor,$patchWithChanges = $gitVersion.split('.')
-                $patch,$patchDifference,$patchChangeHash = $patchWithChanges.split('-')
-
-                Write-Host "major:"$major
-                Write-Host "minor:"$minor
-                Write-Host "patch:"$patch
-                Write-Host "buildNumber:"$(Build.BuildNumber)
-
-                $appVersion = $environment + $major + "." + $minor + "." + $patch
-                Write-Host "appVersion:"$appVersion
-
-                $path = "./azure/tag.js"
-                $word = "%TAG"
-                $text = Get-Content -path $path -Raw
-                ($text -replace $word, $appVersion) | Set-Content $path
-              errorActionPreference: 'continue'
-            displayName: 'Prepare tag number'
-
           - task: NodeTool@0
             inputs:
               versionSpec: ${{ variables.node_version }}
