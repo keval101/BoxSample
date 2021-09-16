@@ -27,7 +27,9 @@ declare const window: Window &
   styleUrls: ['./takescreenshot.component.scss'],
   animations: [fadeAnimation],
 })
-export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TakescreenshotComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   recording: boolean;
   isScreenShot = true;
   takeScreenshot = false;
@@ -51,11 +53,11 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
     private confirmationService: ConfirmationService,
     private headerService: HeaderService
   ) {
-    this.translateService.get('takescreenshot.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('takescreenshot.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.deviceInfoId = this.setupSerice.cameraIdInformation;
   }
 

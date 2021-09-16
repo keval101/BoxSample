@@ -10,9 +10,7 @@ export class EndScreenComponent implements OnInit {
   recording: boolean;
   cancel = false;
   isEndScreen: boolean;
-  constructor(
-    private evolutionService: EvolutionService
-  ) {}
+  constructor(private evolutionService: EvolutionService) {}
 
   ngOnInit(): void {
     this.recording = true;

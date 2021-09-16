@@ -32,7 +32,7 @@ export class ChooseScreenshotComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
-    private headerService:HeaderService
+    private headerService: HeaderService
   ) {
     this.responsiveOptions = [
       {
@@ -65,18 +65,18 @@ export class ChooseScreenshotComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.get('chooseScreenshot.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('chooseScreenshot.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.recording = true;
     this.items = this.takescreenshotService.captures;
   }
 
   backToScreenShot(): void {
     this.takescreenshotService.captures.pop();
-    this.router.navigate(['/takescreenshot'])
+    this.router.navigate(['/takescreenshot']);
   }
 
   onSlidebarOpen(value: boolean): void {

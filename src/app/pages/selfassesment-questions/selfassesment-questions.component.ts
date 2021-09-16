@@ -33,7 +33,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     public translateService: TranslateService,
-    private headerService : HeaderService
+    private headerService: HeaderService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -48,13 +48,13 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.get('selfassesmentquestions.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('selfassesmentquestions.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.isScreenShot = true;
-    this.recording = true; 
+    this.recording = true;
   }
 
   slibar(): void {

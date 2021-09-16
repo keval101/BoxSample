@@ -61,7 +61,7 @@ export class EvaluationComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
     private selfAssesmentService: SelfAssesmentService,
-    private headerService:HeaderService
+    private headerService: HeaderService
   ) {
     this.id = this.selfAssesmentService.imageIndex;
   }
@@ -78,11 +78,11 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.get('evaluation.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('evaluation.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;

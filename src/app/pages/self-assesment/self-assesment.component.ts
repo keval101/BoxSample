@@ -106,7 +106,6 @@ export class SelfAssesmentComponent implements OnInit {
       this.sidebarOpenText = false;
       this.headerService.isInfoOpen = false;
     }
-    
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -132,11 +131,11 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.get('selfassesment.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('selfassesment.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
 
     // this.imagePreviews[0].classList.add('active')
     this.isScreenShot = true;
@@ -152,9 +151,9 @@ export class SelfAssesmentComponent implements OnInit {
   active(item: { img }, ids: number): void {
     this.itemImage = '';
     for (let i = 0; i < this.imagePreviews.length; i++) {
-          this.imagePreviews[i].classList.remove('active');
-          this.itemImage = item.img;
-          this.imagePreviews[ids].classList.add('active');
+      this.imagePreviews[i].classList.remove('active');
+      this.itemImage = item.img;
+      this.imagePreviews[ids].classList.add('active');
     }
   }
 

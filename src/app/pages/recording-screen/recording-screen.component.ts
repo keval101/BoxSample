@@ -101,11 +101,11 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.translateService.get('recordingPage.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('recordingPage.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
 
     const obs = interval(1000);
     const timerSub: Subscription = obs.subscribe((d) => {
