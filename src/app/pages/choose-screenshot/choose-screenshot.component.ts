@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 @Component({
@@ -30,7 +31,8 @@ export class ChooseScreenshotComponent implements OnInit {
     public TranslateService: TranslateService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private takescreenshotService: TakescreenshotService
+    private takescreenshotService: TakescreenshotService,
+    private headerService:HeaderService
   ) {
     this.responsiveOptions = [
       {
@@ -73,7 +75,7 @@ export class ChooseScreenshotComponent implements OnInit {
 
   backToScreenShot(): void {
     this.takescreenshotService.captures.pop();
-    this.router.navigate(['/takescreenshot']);
+    this.router.navigate(['/takescreenshot'])
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -82,6 +84,7 @@ export class ChooseScreenshotComponent implements OnInit {
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   redirectTo(): void {

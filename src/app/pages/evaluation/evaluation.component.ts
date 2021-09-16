@@ -12,6 +12,7 @@ import { EvolutionService } from './evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { HeaderService } from 'src/app/features/header/header.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -59,7 +60,8 @@ export class EvaluationComponent implements OnInit {
     private evolutionService: EvolutionService,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
-    private selfAssesmentService: SelfAssesmentService
+    private selfAssesmentService: SelfAssesmentService,
+    private headerService:HeaderService
   ) {
     this.id = this.selfAssesmentService.imageIndex;
   }
@@ -96,6 +98,7 @@ export class EvaluationComponent implements OnInit {
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   confirm(): void {

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 
 @Component({
@@ -31,7 +32,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    public TranslateService: TranslateService
+    public TranslateService: TranslateService,
+    private headerService:HeaderService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -51,7 +53,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       }
     );
     this.isScreenShot = true;
-    this.recording = true;
+    this.recording = true; 
   }
 
   slibar(): void {
@@ -59,8 +61,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
   closeSidebar(): void {
     this.sidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
-
   redirectTo(): void {
     this.router.navigate(['/evaluation']);
   }

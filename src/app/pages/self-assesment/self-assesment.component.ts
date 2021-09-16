@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
@@ -39,7 +40,8 @@ export class SelfAssesmentComponent implements OnInit {
     public TranslateService: TranslateService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
-    private selfAssesmentService: SelfAssesmentService
+    private selfAssesmentService: SelfAssesmentService,
+    private headerService: HeaderService
   ) {
     if (window.matchMedia('(pointer: coarse)').matches) {
       this.touchScreen = true;
@@ -166,6 +168,7 @@ export class SelfAssesmentComponent implements OnInit {
   closeSidebar(): void {
     this.sidebarOpenText = false;
     this.sidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
     this.router.navigate(['/self-assesment-questions']);

@@ -152,6 +152,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   playVideo(): void {

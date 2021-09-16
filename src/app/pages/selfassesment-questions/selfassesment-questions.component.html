@@ -107,12 +107,16 @@
       </div>
     </div>
   </div>
-
   <div class="bottomContainer">
     <button
       class="button button-small button-fill"
       type="button"
       (click)="redirectTo()"
+      [ngStyle]="{
+        opacity:
+          answer1 == null || answer2 == null || answer3 == null ? '0.5' : '1'
+      }"
+      [disabled]="answer1 == null || answer2 == null || answer3 == null"
     >
       {{ 'selfassesment.next' | translate }}
     </button>

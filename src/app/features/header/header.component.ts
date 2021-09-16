@@ -47,10 +47,15 @@ export class HeaderComponent implements OnChanges {
   onShow(event: Event): void {
     event.stopPropagation();
     this.show.next(this.showSide);
+    this.headerService.isInfoOpen = true;
   }
 
   cancelExercise(): void {
     this.cancelExe.next(this.isCancel);
+  }
+
+  get showInfo(): boolean {
+    return this.headerService.isInfoOpen;
   }
 
   fullscreen(): void {

@@ -119,6 +119,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy {
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   sidebarClose(event: boolean): void {
