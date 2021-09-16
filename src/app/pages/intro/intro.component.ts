@@ -38,7 +38,7 @@ export class IntroComponent implements OnInit {
     }
   }
   constructor(
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
     private router: Router
@@ -47,7 +47,7 @@ export class IntroComponent implements OnInit {
   ngOnInit(): void {
     this.recording = true;
 
-    this.TranslateService.get('intro.cancelText').subscribe((text: string) => {
+    this.translateService.get('intro.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
     if (window.innerWidth > 600) {

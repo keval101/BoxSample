@@ -32,8 +32,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    public TranslateService: TranslateService,
-    private headerService:HeaderService
+    public translateService: TranslateService,
+    private headerService : HeaderService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -43,11 +43,12 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.sidebarOpen = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('selfassesmentquestions.cancelText').subscribe(
+    this.translateService.get('selfassesmentquestions.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }

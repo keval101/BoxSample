@@ -56,7 +56,7 @@ export class EvaluationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private evolutionService: EvolutionService,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
@@ -73,11 +73,12 @@ export class EvaluationComponent implements OnInit {
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.isSidebarOpen = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.TranslateService.get('evaluation.cancelText').subscribe(
+    this.translateService.get('evaluation.cancelText').subscribe(
       (text: string) => {
         this.cancelText = text;
       }
@@ -121,7 +122,7 @@ export class EvaluationComponent implements OnInit {
     });
   }
   ansChanged(event: string): void {
-    if (event == 'Goal') {
+    if (event === 'Goal') {
       this.isGoal = true;
     } else {
       this.isGoal = false;

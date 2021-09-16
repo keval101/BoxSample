@@ -37,7 +37,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     private evolutionService: EvolutionService
   ) {
     this.headerService.videoFullscreen.subscribe((res) => {
-      if (res == true) {
+      if (res === true) {
         this.videoFullScreen = true;
       } else {
         this.videoFullScreen = false;

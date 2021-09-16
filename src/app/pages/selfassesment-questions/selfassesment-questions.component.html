@@ -114,9 +114,9 @@
       (click)="redirectTo()"
       [ngStyle]="{
         opacity:
-          answer1 == null || answer2 == null || answer3 == null ? '0.5' : '1'
+          answer1 === undefined || answer2 === undefined || answer3 === undefined ? '0.5' : '1'
       }"
-      [disabled]="answer1 == null || answer2 == null || answer3 == null"
+      [disabled]="answer1 === undefined || answer2 === undefined || answer3 === undefined"
     >
       {{ 'selfassesment.next' | translate }}
     </button>

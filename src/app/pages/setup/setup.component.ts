@@ -60,13 +60,13 @@ export class SetupComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    public TranslateService: TranslateService,
+    public translateService: TranslateService,
     private headerService: HeaderService,
     private setupService: SetupService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService
   ) {
-    this.TranslateService.get('setup.cancelText').subscribe((text: string) => {
+    this.translateService.get('setup.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
 
