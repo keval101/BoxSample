@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { RecordingService } from 'src/app/pages/recording-screen/recording.service';
@@ -11,10 +11,11 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./header.component.scss'],
   animations: [fadeAnimation],
 })
-export class HeaderComponent implements OnChanges {
+export class HeaderComponent implements OnChanges, OnInit {
   showSide = true;
   isCancel = true;
   fullScreen = false;
+  flashoff: boolean;
   val: number;
 
   recordingDuration = '00:00';
@@ -42,6 +43,15 @@ export class HeaderComponent implements OnChanges {
       this.recordingDuration = res;
     });
     this.muteUnmuteToggle();
+  }
+
+  ngOnInit() {
+    if (
+      navigator.platform.search('iOS') !== -1 ||
+      navigator.platform.search('Mac') !== -1
+    ) {
+      this.flashoff = true;
+    }
   }
 
   onShow(event: Event): void {

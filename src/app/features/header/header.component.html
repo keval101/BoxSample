@@ -33,16 +33,21 @@
             [(ngModel)]="checkedMic"
             (ngModelChange)="muteUnmuteToggle()"
             class="inputSwitch"
-          ></p-inputSwitch>
+          >
+          </p-inputSwitch>
         </div>
 
-        <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
+        <div
+          class="header__right--icons-group"
+          *ngIf="ontakeScreenshot && !flashoff"
+        >
           <img src="assets/icnons/flash.png" alt="flash" id="flash" />
           <p-inputSwitch
             [(ngModel)]="checkedFlash"
             (ngModelChange)="flashedToggle()"
             class="inputSwitch"
-          ></p-inputSwitch>
+          >
+          </p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">

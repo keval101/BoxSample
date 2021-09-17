@@ -15,6 +15,7 @@ import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { SetupService } from './setup.service';
 declare let ImageCapture;
+
 declare const window: Window &
   typeof globalThis & {
     stream: MediaStream;
@@ -34,6 +35,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   sidebar: boolean;
   deviceID;
   videoStream;
+  flashoff: boolean;
   camera = [];
   @ViewChild('video') video;
   @ViewChild('value') drop: ElementRef;
@@ -73,11 +75,16 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.headerService.muteUnmuteMic.subscribe(
       (res) => (this.checkedMic = res)
     );
-
     this.userAgent = navigator.userAgent;
   }
 
   ngOnInit(): void {
+    if (
+      navigator.platform.search('iOS') !== -1 ||
+      navigator.platform.search('Mac') !== -1
+    ) {
+      this.flashoff = true;
+    }
     this.isScreenShot = true;
     this.recording = true;
 
@@ -110,7 +117,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     const _video = this.video.nativeElement;
     const deviceInfoId = this.deviceInfoId;
     let deviceID = this.deviceID;
-    let tempThis = this;
+    const tempThis = this;
     if (window.stream) {
       window.stream.getTracks().forEach((track) => {
         track.stop();
