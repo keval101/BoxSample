@@ -27,7 +27,7 @@
         *ngIf="camera.length"
         [options]="camera"
         [(ngModel)]="selectedCamera"
-        [placeholder]="camera[0].label"
+        [placeholder]="camera[camera.length-1].label"
         (ngModelChange)="dropValue($event)"
       ></p-dropdown>
     </div>

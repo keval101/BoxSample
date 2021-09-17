@@ -109,9 +109,8 @@ export class SetupComponent implements OnInit, OnDestroy {
   getDevice(): void {
     const _video = this.video.nativeElement;
     const deviceInfoId = this.deviceInfoId;
-    const camera = this.camera;
     let deviceID = this.deviceID;
-
+    let tempThis = this;
     if (window.stream) {
       window.stream.getTracks().forEach((track) => {
         track.stop();
@@ -124,6 +123,7 @@ export class SetupComponent implements OnInit, OnDestroy {
         .getUserMedia({
           audio: true,
           video: {
+            facingMode: 'environment',
             deviceId: deviceInfoId ? { exact: deviceInfoId } : undefined,
           },
         })
@@ -140,7 +140,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           navigator.mediaDevices.enumerateDevices().then((devices) => {
             devices.forEach(function (device) {
               if (device.kind === 'videoinput') {
-                camera.push({
+                tempThis.camera.push({
                   label: device.label,
                   Id: device.deviceId,
                 });
