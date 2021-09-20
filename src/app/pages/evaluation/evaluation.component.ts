@@ -13,6 +13,7 @@ import { TakescreenshotService } from '../takescreenshot/takescreenshot.service'
 import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { HeaderService } from 'src/app/features/header/header.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -63,7 +64,8 @@ export class EvaluationComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
     private selfAssesmentService: SelfAssesmentService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    public utility: UtilityService
   ) {
     this.id = this.selfAssesmentService.imageIndex;
     this.responsiveOptions = [
@@ -150,5 +152,11 @@ export class EvaluationComponent implements OnInit {
     } else {
       this.isGoal = false;
     }
+  }
+  goalImage(): void {
+    this.isGoal = true;
+  }
+  selfAssest(): void {
+    this.isGoal = false;
   }
 }

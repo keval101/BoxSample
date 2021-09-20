@@ -315,36 +315,20 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
-    this.videoTimer.unsubscribe();
-    this.mediaRecorder.pause();
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
         this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
-      },
-      reject: () => {
-        this.mediaRecorder.resume();
-        setTimeout(() => {
-          this.stopwatch();
-        }, 2000);
       },
     });
   }
   onCancelExersice(): void {
-    this.videoTimer.unsubscribe();
-    this.mediaRecorder.pause();
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
         this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
-      },
-      reject: () => {
-        this.mediaRecorder.resume();
-        setTimeout(() => {
-          this.stopwatch();
-        }, 2000);
       },
     });
   }

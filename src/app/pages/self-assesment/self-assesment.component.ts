@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
@@ -31,7 +32,7 @@ export class SelfAssesmentComponent implements OnInit {
   sidebarOpen = false;
   sidebarOpenText = false;
   cancelText: string;
-
+  pageIndex: number;
   itemImage = '';
 
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -43,7 +44,8 @@ export class SelfAssesmentComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    public utility: UtilityService
   ) {
     if (window.matchMedia('(pointer: coarse)').matches) {
       this.touchScreen = true;
@@ -83,12 +85,10 @@ export class SelfAssesmentComponent implements OnInit {
     ];
   }
 
-  pageIndex;
   setPage(indexOf: { page: number }): void {
     this.itemImage = '';
     this.pageIndex = indexOf.page;
     this.selfAssesmentService.imageIndex = this.pageIndex;
-
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].className = this.imagePreviews[i].className.replace(
         ' active',

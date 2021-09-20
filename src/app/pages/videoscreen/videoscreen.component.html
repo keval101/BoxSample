@@ -8,12 +8,12 @@
 
 <div class="container">
   <div class="videoContainer">
-    <!-- src="assets/video/video.mp4" -->
     <video
-      src="assets/video/videoplayback.mp4"
+      src="assets/video/video.mp4#t=0.001"
       #video
       id="myvideo"
       type="video/mp4"
+      preload="auto"
     ></video>
   </div>
 
@@ -31,7 +31,7 @@
           <img
             src="assets/icnons/pause-solid.svg"
             alt="pause"
-            class="icon"
+            class="icon pause"
             id="playpause"
             *ngIf="playVideo"
           />

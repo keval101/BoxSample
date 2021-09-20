@@ -52,7 +52,10 @@
         ></p-inputSwitch>
       </div>
 
-      <div class="dropdown__div-butonGroup--iconsGroup">
+      <div
+        *ngIf="!this.utility.iosDetector()"
+        class="dropdown__div-butonGroup--iconsGroup"
+      >
         <img
           src="assets/icnons/greyFlash.png"
           alt="flash"

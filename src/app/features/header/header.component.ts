@@ -1,9 +1,10 @@
-import { Component, Input, Output, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { RecordingService } from 'src/app/pages/recording-screen/recording.service';
 import { HeaderService } from './header.service';
 import { fadeAnimation } from '../../shared/app.animation';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,11 @@ import { fadeAnimation } from '../../shared/app.animation';
   styleUrls: ['./header.component.scss'],
   animations: [fadeAnimation],
 })
-export class HeaderComponent implements OnChanges {
+export class HeaderComponent implements OnChanges, OnInit {
   showSide = true;
   isCancel = true;
   fullScreen = false;
+  flashoff: boolean;
   val: number;
 
   recordingDuration = '00:00';
@@ -33,7 +35,8 @@ export class HeaderComponent implements OnChanges {
   constructor(
     public translate: TranslateService,
     private recordingService: RecordingService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    public utility: UtilityService
   ) {}
 
   ngOnChanges(): void {
@@ -43,6 +46,8 @@ export class HeaderComponent implements OnChanges {
     });
     this.muteUnmuteToggle();
   }
+
+  ngOnInit() {}
 
   onShow(event: Event): void {
     event.stopPropagation();

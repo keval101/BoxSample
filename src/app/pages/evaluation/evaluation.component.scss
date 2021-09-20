@@ -1,22 +1,43 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/button';
-// @import '../../../assets/scss/carousel';
+@import '../../../assets/scss/carousel';
 @import '../../../assets/scss/_radiobutton';
 
+:host {
+  ::ng-deep .p-carousel .p-carousel-indicators {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: block;
+    transform: rotate(270deg);
+    bottom: -4rem;
+  }
+  ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
+    right: 1rem;
+    margin-top: -3rem;
+  }
 
-::ng-deep .p-carousel .p-carousel-content .p-carousel-next,
-::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
-  display: none !important;
+  ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
+    left: 2rem;
+    margin-top: -3rem;
+  }
+  ::ng-deep .p-carousel-items-content {
+    height: 32rem !important;
+  }
+
+  ::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight,
+  .p-radiobutton-icon {
+    visibility: hidden;
+    position: absolute;
+    display: none;
+  }
+  ::ng-deep .p-radiobutton {
+    visibility: hidden;
+    position: absolute;
+    display: none;
+  }
 }
-
-::ng-deep .p-carousel .p-carousel-indicators {
-  display: block !important;
-}
-
-::ng-deep .p-carousel-items-container,.p-carousel, .p-carousel-content {
-  height: 100% !important;
-}
-
 
 .container {
   position: absolute;
@@ -190,56 +211,56 @@
   &-result {
     width: 100%;
     height: 31.939rem;
-    // height: 100rem;
-    display: flex;
-    flex-direction: column;
-
-    // .screenShotImage{
-    //   height: 50%;
-    //   object-fit: cover;
-    //   margin: 2rem 0;
-    // }
-    &-container{
-
-      .carousel-images{
-        height: 40%;
+    &-container {
+      .carousel-images {
+        position: relative;
+        height: 35rem;
+        margin-bottom: 1rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 0.5rem;
+        }
       }
-
-      img {
-        border-radius: 0.5rem;
-        width: 100%;
-        height: 40%;
-        object-fit: cover;
+      .goalImage {
+        position: relative;
+        height: 30rem;
+        overflow: hidden;
+        border: 3px solid $primary-color;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        img {
+          border-radius: 0.5rem;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
-    
   }
-
-  &-radioGroup {
+  .radio-group {
     display: flex;
     width: 100%;
-
-    @media screen and (min-width: 1366px) {
-      margin-top: 0.1rem;
+    .radio-right-tab {
+      border-bottom-right-radius: 1rem;
     }
-
-    @media screen and (max-width: 1367px) {
-      margin-top: 1.6rem;
+    .radio-left-tab {
+      border-bottom-left-radius: 1rem;
     }
-
-    .radioBtn {
+    .radio-left-tab,
+    .radio-right-tab {
+      cursor: pointer;
+      font-size: 2.5rem;
+      width: 50%;
+      background: $bright-grey-color;
+      color: $primary-color;
+      padding: 1.2rem;
+      text-align: center;
       display: flex;
+      justify-content: center;
       align-items: center;
-
-      &:not(:last-child) {
-        margin-right: 4.4rem;
-      }
     }
-  }
-
-  label {
-    font-size: 3.2rem;
-    margin-left: 1.46rem;
   }
 }
 
@@ -416,4 +437,3 @@
     margin-right: 1.6rem;
   }
 }
-

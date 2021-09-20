@@ -95,6 +95,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     // }
     this.val = e;
     this.video.nativeElement.volume = this.val / 100;
+    if (this.val === 0) {
+      this.isMuted = true;
+    }
   }
 
   muteVolume(): void {
