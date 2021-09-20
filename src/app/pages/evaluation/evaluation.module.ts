@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [EvaluationComponent],
@@ -19,6 +20,7 @@ import { ConfirmationService } from 'primeng/api';
     CommonModule,
     HeaderModule,
     FormsModule,
+    CarouselModule,
     TableModule,
     RatingModule,
     TranslateModule,

@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 @Component({
   selector: 'app-choose-screenshot',
@@ -32,7 +33,8 @@ export class ChooseScreenshotComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private evolutionService: EvolutionService
   ) {
     this.responsiveOptions = [
       {
@@ -95,6 +97,7 @@ export class ChooseScreenshotComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -103,6 +106,7 @@ export class ChooseScreenshotComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

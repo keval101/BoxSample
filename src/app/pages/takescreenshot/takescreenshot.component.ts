@@ -133,7 +133,7 @@ export class TakescreenshotComponent
   }
 
   onDone(): void {
-    this.router.navigate(['/choosescreenshot']);
+    this.router.navigate(['/self-assesment']);
     this.takescreenshotService.resultImageSource =
       this.canvas.nativeElement.toDataURL('image/png');
     this.takescreenshotService.captures.push(
@@ -143,8 +143,8 @@ export class TakescreenshotComponent
   onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
-
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -154,6 +154,7 @@ export class TakescreenshotComponent
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

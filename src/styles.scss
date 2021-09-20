@@ -3,129 +3,128 @@
 @import 'assets/scss/mixin';
 
 @font-face {
-    font-family:"Myriad Regular";
-    src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF")format('opentype');
+  font-family: 'Myriad Regular';
+  src: url('./assets/fonts/MYRIADPRO-REGULAR.OTF') format('opentype');
 }
 
 @font-face {
-    font-family:"Myriad Light";
-    src: url("./assets/fonts/MyriadPro-Light.otf")format('opentype');
+  font-family: 'Myriad Light';
+  src: url('./assets/fonts/MyriadPro-Light.otf') format('opentype');
 }
 
 body .p-component {
-    font-family: "Myriad Regular" !important;
+  font-family: 'Myriad Regular' !important;
 }
 
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    font-family: "Myriad Regular" !important;
-    overflow-x: hidden;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Myriad Regular' !important;
+  overflow-x: hidden;
 }
 
-html{
+html {
+  font-size: 62.5%;
 
-    font-size: 62.5%;
+  @media screen and (min-width: 1200px) {
+    // font-size: 50%;
+    font-size: 7.5px;
+  }
 
-      @media screen and (min-width : 1200px){
-        // font-size: 50%;
-        font-size: 7.5px;
-      }
+  @media screen and (min-width: 1366px) {
+    // font-size: 50%;
+    font-size: 10px;
+  }
 
-      @media screen and (min-width : 1366px){
-        // font-size: 50%;
-        font-size: 10px;
-      }
+  @media screen and (min-width: 1367px) {
+    // font-size: 50%;
+    font-size: 8px;
+  }
 
-      @media screen and (min-width : 1367px){
-        // font-size: 50%;
-        font-size: 8px;
-      }
+  @include respond(tab-land) {
+    //width < 1200
+    //   font-size: 45.50%; //1 rem = 7.28px; 7.28px/16px = 56.25%
+    font-size: 7.28px; //1 rem = 7.28px; 7.28px/16px = 56.25%
+  }
 
-      @include respond(tab-land){  //width < 1200
-        //   font-size: 45.50%; //1 rem = 7.28px; 7.28px/16px = 56.25%
-          font-size: 7.28px; //1 rem = 7.28px; 7.28px/16px = 56.25%
-        }
+  @include respond(tab-port) {
+    //width < 900
+    //   font-size: 42%; //1 rem = 6.72px; 6.72px/16px = 50%
+    font-size: 6.72px; //1 rem = 6.72px; 6.72px/16px = 50%
+  }
+  @media (max-height: 768px) {
+    font-size: 7.5px; //1 rem = 7.5px; 7.5px/16px = 46.875%
+  }
 
-      @include respond(tab-port){ //width < 900
-        //   font-size: 42%; //1 rem = 6.72px; 6.72px/16px = 50%
-          font-size: 6.72px; //1 rem = 6.72px; 6.72px/16px = 50%
-      }
-      @media (max-height:768px){
-          font-size: 7.5px; //1 rem = 7.5px; 7.5px/16px = 46.875%
-      }
+  @media (max-width: 768px) {
+    //   font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
+    font-size: 5.5px; //1 rem = 5.5px; 5.5px/16px = 34.375%
+  }
 
-      @media (max-width:768px){
-        //   font-size: 34.375%; //1 rem = 5.5px; 5.5px/16px = 34.375%
-          font-size: 5.5px; //1 rem = 5.5px; 5.5px/16px = 34.375%
-      }
+  @include respond(phone) {
+    //width < 900
+    font-size: 3.52px; //1 rem = 3.52px; 3.52px/16px = 22%
+  }
 
-      @include respond(phone){ //width < 900
-        font-size: 3.52px; //1 rem = 3.52px; 3.52px/16px = 22%
-      }
-
-      @media screen and (max-width : 411px) {
-          font-size: 3.2px;
-      }
+  @media screen and (max-width: 411px) {
+    font-size: 3.2px;
+  }
 }
 
+.p-inputswitch {
+  width: 4.69rem;
+  height: 1.675rem;
 
-.p-inputswitch{
-    width: 4.69rem;
-    height: 1.675rem;
+  @media screen and (max-width: 768px) {
+    width: 3.5rem;
+  }
 
-    @media  screen and (max-width:768px) {
-        width: 3.5rem;
+  @media screen and (max-width: 600px) {
+    width: 2.5rem;
+    height: 1.2rem;
+  }
+
+  &.p-inputswitch-checked .p-inputswitch-slider:before {
+    background-color: $primary-color !important;
+    transform: translateX(2.75rem);
+
+    @media screen and (max-width: 768px) {
+      transform: translateX(2.25rem);
     }
+    @media screen and (max-width: 600px) {
+      transform: translateX(1.75rem);
+    }
+  }
+  &.p-inputswitch-checked:not(p-disabled):hover .p-inputswitch-slider {
+    background-color: $bright-grey-color !important;
+  }
+
+  &.p-focus .p-inputswitch-slider {
+    box-shadow: none !important;
+  }
+
+  &-slider:before {
+    background: $bright-grey-color !important;
+    width: 2.23rem !important;
+    height: 2.23rem !important;
+    left: -0.25rem !important;
+    margin-top: -1.1rem !important;
+    border-radius: 50%;
+    box-shadow: 0 0.2rem 0.2rem $dark-grey-color;
+    transition-duration: 0.2s;
 
     @media screen and (max-width: 600px) {
-        width: 2.5rem;
-        height: 1.2rem;
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+      margin-top: -0.75rem !important;
     }
+  }
 
-
-    &.p-inputswitch-checked .p-inputswitch-slider:before {
-        background-color: $primary-color !important;
-        transform: translateX(2.75rem);
-
-        @media  screen and (max-width:768px) {
-            transform: translateX(2.25rem) ;
-        }
-        @media  screen and (max-width:600px) {
-            transform: translateX(1.75rem) ;
-        }
-    }
-    &.p-inputswitch-checked:not(p-disabled):hover .p-inputswitch-slider{
-        background-color: $bright-grey-color !important;
-    }
-
-    &.p-focus .p-inputswitch-slider{
-        box-shadow: none !important;
-    }
-
-
-    &-slider:before {
-        background: $bright-grey-color !important;
-        width: 2.23rem !important;
-        height: 2.23rem !important;
-        left: -0.25rem !important;
-        margin-top: -1.1rem !important;
-        border-radius: 50%;
-        box-shadow: 0 0.2rem 0.2rem $dark-grey-color ;
-        transition-duration: 0.2s;
-
-        @media screen and (max-width: 600px) {
-            width: 1.5rem  !important;
-            height: 1.5rem !important;
-            margin-top: -0.75rem !important;
-        }
-    }
-
-    &.p-inputswitch-checked .p-inputswitch-slider {
-        background: $bright-grey-color;
-    }
+  &.p-inputswitch-checked .p-inputswitch-slider {
+    background: $bright-grey-color;
+  }
 }

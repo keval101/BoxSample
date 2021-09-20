@@ -18,8 +18,19 @@
       </p>
 
       <div class="result__container-result">
-        <img [src]="resultImage" alt="resultImage" class="resultImage" />
-        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+        <div class="result__container-result-container">
+          <div class="carousel-images" *ngIf="items.length > 0">
+            <p-carousel [value]="items" [numVisible]="1" [responsiveOptions]>
+              <ng-template let-item pTemplate="item">
+                <img [src]="item" class="screenShotImage" />
+              </ng-template>
+            </p-carousel>
+          </div>
+          <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+        </div>
+
+        <!-- <img [src]="resultImage" alt="resultImage" class="resultImage" /> -->
+
         <img
           src="assets/images/screenshot{{ id }}.png"
           alt="selfassesment"

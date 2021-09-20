@@ -8,8 +8,9 @@
 
 <div class="container">
   <div class="videoContainer">
+    <!-- src="assets/video/video.mp4" -->
     <video
-      src="assets/video/video.mp4"
+      src="assets/video/videoplayback.mp4"
       #video
       id="myvideo"
       type="video/mp4"
@@ -74,14 +75,28 @@
   </div>
 
   <div class="slider" *ngIf="!videoFullScreen" @fadeAnimation>
-    <img src="../../../assets/icnons/volume.svg" alt="" id="speaker" />
+    <img
+      *ngIf="!isMuted"
+      src="../../../assets/icnons/volume.svg"
+      (click)="muteVolume()"
+      alt=""
+      id="speaker"
+    />
+    <img
+      *ngIf="isMuted"
+      src="../../../assets/icnons/mute.svg"
+      (click)="unMuteVolume()"
+      alt=""
+      id="speakerMute"
+    />
     <p-slider
       [(ngModel)]="val"
       [min]="0"
       [max]="100"
       [step]="10"
       class="slideBar"
-      (onChange)="volumeChanged($event)"
+      [disabled]="isMuted"
+      (ngModelChange)="volumeChanged($event)"
     ></p-slider>
   </div>
 </div>

@@ -17,6 +17,7 @@ import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { ConfirmationService } from 'primeng/api';
+import { EvolutionService } from '../evaluation/evolution.service';
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -74,7 +75,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private setupSerice: SetupService,
     public platform: Platform,
     private takescreenshotService: TakescreenshotService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private evolutionService: EvolutionService
   ) {
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
@@ -318,7 +320,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.router.navigate(['/setup']);
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
       },
       reject: () => {
         this.mediaRecorder.resume();
@@ -334,7 +337,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.router.navigate(['/setup']);
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
       },
       reject: () => {
         this.mediaRecorder.resume();

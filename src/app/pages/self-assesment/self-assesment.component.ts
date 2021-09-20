@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
 
@@ -41,7 +42,8 @@ export class SelfAssesmentComponent implements OnInit {
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
     private selfAssesmentService: SelfAssesmentService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private evolutionService: EvolutionService
   ) {
     if (window.matchMedia('(pointer: coarse)').matches) {
       this.touchScreen = true;
@@ -116,6 +118,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -125,6 +128,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

@@ -29,7 +29,9 @@ export class EvaluationComponent implements OnInit {
   resultImage;
   isGoal = true;
   id;
+  items = [];
   cancelText: string;
+  responsiveOptions;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -64,6 +66,26 @@ export class EvaluationComponent implements OnInit {
     private headerService: HeaderService
   ) {
     this.id = this.selfAssesmentService.imageIndex;
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 1,
+        numScroll: 3,
+        dots: true,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 2,
+        dots: true,
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1,
+        dots: true,
+      },
+    ];
   }
 
   @HostListener('document:click', ['$event'])
@@ -83,6 +105,7 @@ export class EvaluationComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
+    this.items = this.takescreenshotService.captures;
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;

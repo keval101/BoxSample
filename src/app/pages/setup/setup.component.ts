@@ -229,6 +229,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
