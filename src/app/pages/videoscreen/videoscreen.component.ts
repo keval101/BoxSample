@@ -29,6 +29,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   isMuted = false;
   cancelText: string;
   isVideoLoaded: boolean;
+  vid;
 
   @ViewChild('video') video: ElementRef;
 
@@ -55,16 +56,25 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth;
+    this.vid = document.createElement('video');
+    console.log(this.vid);
+    this.vid.src = 'assets/video/video.mp4#t=0.001';
+    document.getElementById('video-holder').appendChild(this.vid);
   }
 
   PlayVideo(): void {
     this.playVideo = false;
-    this.video.nativeElement.pause();
+    this.vid.pause();
+    // this.video.nativeElement.pause();
   }
   PauseVideo(): void {
     this.isVideoLoaded = true;
     this.playVideo = true;
-    this.video.nativeElement.play();
+    this.vid.play();
+    this.vid.onplaying = (e) => {
+      this.isVideoLoaded = false;
+    };
+    // this.video.nativeElement.play();
     this.video.nativeElement.onplaying = (e) => {
       this.isVideoLoaded = false;
     };
@@ -90,6 +100,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
         (e.offsetX / this.width) * this.video.nativeElement.duration;
       this.video.nativeElement.currentTime = progressTime;
     });
+
+    // this.initVideo();
   }
 
   volumeChanged(e: number): void {
@@ -100,6 +112,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.video.nativeElement.volume = this.val / 100;
     if (this.val === 0) {
       this.isMuted = true;
+    } else {
+      this.isMuted = false;
     }
   }
 
@@ -134,5 +148,27 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  //this function should be called on a click event handler otherwise video won't start loading
+  initVideo() {
+    this.vid.play(); //start loading, didn't used `vid.load()` since it causes problems with the `ended` event
+
+    if (this.vid.readyState !== 4) {
+      //HAVE_ENOUGH_DATA
+      this.vid.addEventListener('canplaythrough', this.onCanPlay, false);
+      this.vid.addEventListener('load', this.onCanPlay, false); //add load event as well to avoid errors, sometimes 'canplaythrough' won't dispatch.
+      setTimeout(function () {
+        this.vid.pause(); //block play so it buffers before playing
+      }, 1);
+    } else {
+    }
+  }
+
+  onCanPlay() {
+    this.vid.removeEventListener('canplaythrough', this.onCanPlay, false);
+    this.vid.removeEventListener('load', this.onCanPlay, false);
+    //vithis.viddeo is ready
+    this.vid.play();
   }
 }
