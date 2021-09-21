@@ -7,9 +7,14 @@
 </div>
 <p-progressSpinner *ngIf="isVideoLoaded"></p-progressSpinner>
 <div class="container">
-  <div class="videoContainer" id="video-holder">
-    <!-- src="assets/video/video.mp4#t=0.001" -->
-    <!-- <video src="" #video id="myvideo" type="video/mp4" preload="auto"></video> -->
+  <div class="videoContainer">
+    <video
+      src="assets/video/video.mp4#t=0.001"
+      #video
+      id="myvideo"
+      type="video/mp4"
+      preload="auto"
+    ></video>
   </div>
 
   <div class="bottomContainer">
