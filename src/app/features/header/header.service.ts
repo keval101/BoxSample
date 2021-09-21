@@ -10,4 +10,5 @@ export class HeaderService {
   flashToggled = new Subject<boolean>();
   muteMic = false;
   flash = false;
+  isInfoOpen: boolean;
 }

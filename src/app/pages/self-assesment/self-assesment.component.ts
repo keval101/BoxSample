@@ -8,7 +8,10 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
 
@@ -29,7 +32,7 @@ export class SelfAssesmentComponent implements OnInit {
   sidebarOpen = false;
   sidebarOpenText = false;
   cancelText: string;
-
+  pageIndex: number;
   itemImage = '';
 
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -39,7 +42,10 @@ export class SelfAssesmentComponent implements OnInit {
     public translateService: TranslateService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
-    private selfAssesmentService: SelfAssesmentService
+    private selfAssesmentService: SelfAssesmentService,
+    private headerService: HeaderService,
+    private evolutionService: EvolutionService,
+    public utility: UtilityService
   ) {
     if (window.matchMedia('(pointer: coarse)').matches) {
       this.touchScreen = true;
@@ -79,12 +85,10 @@ export class SelfAssesmentComponent implements OnInit {
     ];
   }
 
-  pageIndex;
   setPage(indexOf: { page: number }): void {
     this.itemImage = '';
     this.pageIndex = indexOf.page;
     this.selfAssesmentService.imageIndex = this.pageIndex;
-
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].className = this.imagePreviews[i].className.replace(
         ' active',
@@ -102,6 +106,7 @@ export class SelfAssesmentComponent implements OnInit {
     ) {
       this.sidebarOpen = false;
       this.sidebarOpenText = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
@@ -113,6 +118,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -122,17 +128,18 @@ export class SelfAssesmentComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
   }
 
   ngOnInit(): void {
-    this.translateService.get('selfassesment.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('selfassesment.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
 
     // this.imagePreviews[0].classList.add('active')
     this.isScreenShot = true;
@@ -165,6 +172,7 @@ export class SelfAssesmentComponent implements OnInit {
   closeSidebar(): void {
     this.sidebarOpenText = false;
     this.sidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
     this.router.navigate(['/self-assesment-questions']);

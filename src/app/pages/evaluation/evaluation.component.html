@@ -18,37 +18,51 @@
       </p>
 
       <div class="result__container-result">
-        <img [src]="resultImage" alt="resultImage" class="resultImage" />
-        <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
-        <img
-          src="assets/images/screenshot{{ id }}.png"
-          alt="selfassesment"
-          *ngIf="!isGoal"
-        />
+        <div class="result__container-result-container">
+          <div class="carousel-images" *ngIf="items.length > 0">
+            <p-carousel
+              [value]="items"
+              (touchmove)="this.utility.iosScrollDis($event)"
+              [numVisible]="1"
+              [responsiveOptions]
+            >
+              <ng-template let-item pTemplate="item">
+                <img [src]="item" class="screenShotImage" />
+              </ng-template>
+            </p-carousel>
+          </div>
+          <div class="goalImage">
+            <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+            <img
+              src="assets/images/screenshot{{ id }}.png"
+              alt="selfassesment"
+              *ngIf="!isGoal"
+            />
+          </div>
+        </div>
 
         <div class="result__container-radioGroup">
-          <div class="p-field-radiobutton radioBtn">
-            <p-radioButton
-              name="ans"
-              value="Goal"
-              [(ngModel)]="ans"
-              inputId="Goal"
-              (ngModelChange)="ansChanged($event)"
-            ></p-radioButton>
-            <label for="Goal">{{ 'evaluation.radioone' | translate }}</label>
-          </div>
-
-          <div class="p-field-radiobutton radioBtn">
-            <p-radioButton
-              name="ans"
-              value="Your self assessment"
-              [(ngModel)]="ans"
-              inputId="Selfassesment"
-              (ngModelChange)="ansChanged($event)"
-            ></p-radioButton>
-            <label for="Selfassesment">{{
-              'evaluation.radiotwo' | translate
-            }}</label>
+          <div class="radio-group">
+            <div
+              class="radio-left-tab"
+              [ngStyle]="{
+                background: isGoal ? '#b41513' : '',
+                color: isGoal ? 'white' : ''
+              }"
+              (click)="goalImage()"
+            >
+              Goal
+            </div>
+            <div
+              class="radio-right-tab"
+              [ngStyle]="{
+                background: !isGoal ? '#b41513' : '',
+                color: !isGoal ? 'white' : ''
+              }"
+              (click)="selfAssest()"
+            >
+              Your self assessment
+            </div>
           </div>
         </div>
       </div>

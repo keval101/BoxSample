@@ -22,6 +22,7 @@ import { ChooseScreenshotModule } from './pages/choose-screenshot/choose-screens
 import { IntroModule } from './pages/intro/intro.module';
 import { TakescreenshotModule } from './pages/takescreenshot/takescreenshot.module';
 import { VideoscreenModule } from './pages/videoscreen/videoscreen.module';
+import { SharedModule } from '../app/shared/shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -48,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     IntroModule,
     TakescreenshotModule,
     VideoscreenModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

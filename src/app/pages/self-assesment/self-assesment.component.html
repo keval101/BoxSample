@@ -36,6 +36,7 @@
       <div class="selfassesment__result-content carousel-div">
         <div class="carousel-images">
           <p-carousel
+            (touchmove)="this.utility.iosScrollDis($event)"
             [value]="items"
             [numVisible]="1"
             [numScroll]="1"

@@ -86,7 +86,7 @@
   display: flex;
   align-items: center;
   padding-right: 4rem;
-  width: 56%;
+  width: 55%;
   z-index: 1;
 }
 
@@ -139,6 +139,12 @@
 .icon {
   width: 2.5rem;
   height: 2.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-36%, 0);
+}
+.pause {
+  transform: translate(-45%, 0);
 }
 .pi-chevron-left {
   font-size: 2.4rem;
@@ -190,6 +196,10 @@
 }
 #speaker {
   width: 3rem;
+}
+#speakerMute {
+  width: 4rem;
+  margin-left: -1rem;
 }
 .slideBar {
   margin-left: 1.882rem;

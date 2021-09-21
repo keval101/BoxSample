@@ -17,6 +17,7 @@ import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { ConfirmationService } from 'primeng/api';
+import { EvolutionService } from '../evaluation/evolution.service';
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -74,7 +75,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private setupSerice: SetupService,
     public platform: Platform,
     private takescreenshotService: TakescreenshotService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private evolutionService: EvolutionService
   ) {
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
@@ -96,15 +98,16 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.isSidebarOpen = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.translateService.get('recordingPage.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('recordingPage.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
 
     const obs = interval(1000);
     const timerSub: Subscription = obs.subscribe((d) => {
@@ -152,6 +155,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   playVideo(): void {
@@ -311,34 +315,20 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
-    this.videoTimer.unsubscribe();
-    this.mediaRecorder.pause();
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.router.navigate(['/setup']);
-      },
-      reject: () => {
-        this.mediaRecorder.resume();
-        setTimeout(() => {
-          this.stopwatch();
-        }, 2000);
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
       },
     });
   }
   onCancelExersice(): void {
-    this.videoTimer.unsubscribe();
-    this.mediaRecorder.pause();
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.router.navigate(['/setup']);
-      },
-      reject: () => {
-        this.mediaRecorder.resume();
-        setTimeout(() => {
-          this.stopwatch();
-        }, 2000);
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
       },
     });
   }

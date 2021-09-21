@@ -8,7 +8,9 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
   selector: 'app-selfassesment-questions',
@@ -31,7 +33,9 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private headerService: HeaderService,
+    private evolutionService: EvolutionService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -41,15 +45,16 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.sidebarOpen = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
   ngOnInit(): void {
-    this.translateService.get('selfassesmentquestions.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('selfassesmentquestions.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.isScreenShot = true;
     this.recording = true;
   }
@@ -59,8 +64,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
   closeSidebar(): void {
     this.sidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
-
   redirectTo(): void {
     this.router.navigate(['/evaluation']);
   }
@@ -69,6 +74,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -78,6 +84,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

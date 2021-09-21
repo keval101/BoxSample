@@ -11,10 +11,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { HeaderService } from 'src/app/features/header/header.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { SetupService } from './setup.service';
 declare let ImageCapture;
+
 declare const window: Window &
   typeof globalThis & {
     stream: MediaStream;
@@ -34,6 +36,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   sidebar: boolean;
   deviceID;
   videoStream;
+  flashoff: boolean;
   camera = [];
   @ViewChild('video') video;
   @ViewChild('value') drop: ElementRef;
@@ -64,7 +67,8 @@ export class SetupComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private setupService: SetupService,
     private confirmationService: ConfirmationService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    public utility: UtilityService
   ) {
     this.translateService.get('setup.cancelText').subscribe((text: string) => {
       this.cancelText = text;
@@ -73,7 +77,6 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.headerService.muteUnmuteMic.subscribe(
       (res) => (this.checkedMic = res)
     );
-
     this.userAgent = navigator.userAgent;
   }
 
@@ -109,9 +112,8 @@ export class SetupComponent implements OnInit, OnDestroy {
   getDevice(): void {
     const _video = this.video.nativeElement;
     const deviceInfoId = this.deviceInfoId;
-    const camera = this.camera;
     let deviceID = this.deviceID;
-
+    const tempThis = this;
     if (window.stream) {
       window.stream.getTracks().forEach((track) => {
         track.stop();
@@ -124,6 +126,7 @@ export class SetupComponent implements OnInit, OnDestroy {
         .getUserMedia({
           audio: true,
           video: {
+            facingMode: 'environment',
             deviceId: deviceInfoId ? { exact: deviceInfoId } : undefined,
           },
         })
@@ -140,7 +143,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           navigator.mediaDevices.enumerateDevices().then((devices) => {
             devices.forEach(function (device) {
               if (device.kind === 'videoinput') {
-                camera.push({
+                tempThis.camera.push({
                   label: device.label,
                   Id: device.deviceId,
                 });
@@ -229,6 +232,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

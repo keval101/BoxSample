@@ -37,19 +37,22 @@
   &-outline {
     color: $primary-color;
     border-color: $primary-color;
-
+    box-shadow: none;
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(0.2rem);
+        box-shadow: 0 0.2rem 0.2rem rbga(0, 0, 0, 0.25);
+        background-color: transparent !important;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+  @media (hover: hover) {
     &:hover {
       transform: translateY(0.2rem);
       box-shadow: 0 0.2rem 0.2rem rbga(0, 0, 0, 0.25);
-      background-color: transparent !important;
+      background-color: $dark-primary-color;
       transition: all 0.5s ease;
     }
-  }
-
-  &:hover {
-    transform: translateY(0.2rem);
-    box-shadow: 0 0.2rem 0.2rem rbga(0, 0, 0, 0.25);
-    background-color: $dark-primary-color;
-    transition: all 0.5s ease;
   }
 }

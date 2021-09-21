@@ -33,16 +33,21 @@
             [(ngModel)]="checkedMic"
             (ngModelChange)="muteUnmuteToggle()"
             class="inputSwitch"
-          ></p-inputSwitch>
+          >
+          </p-inputSwitch>
         </div>
 
-        <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
+        <div
+          class="header__right--icons-group"
+          *ngIf="ontakeScreenshot && !this.utility.iosDetector()"
+        >
           <img src="assets/icnons/flash.png" alt="flash" id="flash" />
           <p-inputSwitch
             [(ngModel)]="checkedFlash"
             (ngModelChange)="flashedToggle()"
             class="inputSwitch"
-          ></p-inputSwitch>
+          >
+          </p-inputSwitch>
         </div>
 
         <div class="header__right--icons-group" *ngIf="ontakeScreenshot">
@@ -82,7 +87,7 @@
           class="button"
           type="button"
           (click)="onShow($event)"
-          *ngIf="!endscreen"
+          *ngIf="!endscreen && !showInfo"
         >
           <i class="pi pi-question-circle"></i>
         </button>
@@ -92,7 +97,7 @@
           id="cross"
           (click)="cancelExercise()"
         >
-          <img src="assets/icnons/whiteCros.svg" alt="cross" />
+          <i class="pi pi-times"></i>
         </button>
       </div>
 
@@ -121,7 +126,7 @@
           id="cross"
           (click)="cancelExercise()"
         >
-          <img src="assets/icnons/whiteCros.svg" alt="cross" />
+          <i class="pi pi-times"></i>
         </button>
       </div>
 
@@ -161,7 +166,7 @@
           id="cross"
           (click)="cancelExercise()"
         >
-          <img src="assets/icnons/whiteCros.svg" alt="cross" />
+          <i class="pi pi-times"></i>
         </button>
       </div>
     </div>

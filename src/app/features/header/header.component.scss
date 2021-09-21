@@ -164,12 +164,13 @@
     display: flex;
   }
 }
-#cross {
-  margin-left: 2.5rem;
-  img {
-    width: 2.8rem;
-    height: 2.8rem;
-  }
+
+.pi-times {
+  margin-left: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 3.5rem;
+  color: white;
 }
 ::ng-deep .p-inputswitch .p-inputswitch-slider:before {
   background: $white-color;
@@ -178,6 +179,9 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .buttonMargin {
   padding-left: 6rem;

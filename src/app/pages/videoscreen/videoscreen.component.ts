@@ -25,6 +25,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   videoFullScreen = false;
   width: number;
   val = 30;
+  mute = 0;
+  isMuted = false;
   cancelText: string;
 
   @ViewChild('video') video: ElementRef;
@@ -87,11 +89,26 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.togglePlayPause();
   }
 
-  volumeChanged(e): void {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+  volumeChanged(e: number): void {
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
     this.val = e;
+    this.video.nativeElement.volume = this.val / 100;
+    if (this.val === 0) {
+      this.isMuted = true;
+    }
+  }
+
+  muteVolume(): void {
+    this.isMuted = true;
+    this.val = 0;
+    this.video.nativeElement.volume = 0;
+  }
+
+  unMuteVolume(): void {
+    this.isMuted = false;
+    this.val = 30;
     this.video.nativeElement.volume = this.val / 100;
   }
 
@@ -110,6 +127,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
       message: this.cancelText,
 
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });

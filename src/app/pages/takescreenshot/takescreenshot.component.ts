@@ -27,7 +27,9 @@ declare const window: Window &
   styleUrls: ['./takescreenshot.component.scss'],
   animations: [fadeAnimation],
 })
-export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TakescreenshotComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   recording: boolean;
   isScreenShot = true;
   takeScreenshot = false;
@@ -51,11 +53,11 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
     private confirmationService: ConfirmationService,
     private headerService: HeaderService
   ) {
-    this.translateService.get('takescreenshot.cancelText').subscribe(
-      (text: string) => {
+    this.translateService
+      .get('takescreenshot.cancelText')
+      .subscribe((text: string) => {
         this.cancelText = text;
-      }
-    );
+      });
     this.deviceInfoId = this.setupSerice.cameraIdInformation;
   }
 
@@ -66,6 +68,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.isSidebarOpen = false;
+      this.headerService.isInfoOpen = false;
     }
   }
 
@@ -120,6 +123,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
 
   onSlidebarClose(): void {
     this.isSidebarOpen = false;
+    this.headerService.isInfoOpen = false;
   }
 
   sidebarClose(event: boolean): void {
@@ -129,7 +133,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   onDone(): void {
-    this.router.navigate(['/choosescreenshot']);
+    this.router.navigate(['/self-assesment']);
     this.takescreenshotService.resultImageSource =
       this.canvas.nativeElement.toDataURL('image/png');
     this.takescreenshotService.captures.push(
@@ -139,8 +143,8 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
   onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
-
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
@@ -150,6 +154,7 @@ export class TakescreenshotComponent implements OnInit, OnDestroy, AfterViewInit
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
+        this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
     });
