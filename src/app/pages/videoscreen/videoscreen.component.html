@@ -5,7 +5,7 @@
     (cancelExe)="onCancelExersice()"
   ></app-header>
 </div>
-
+<p-progressSpinner *ngIf="isVideoLoaded"></p-progressSpinner>
 <div class="container">
   <div class="videoContainer">
     <video
@@ -20,20 +20,20 @@
   <div class="bottomContainer">
     <div class="buttons">
       <div class="playedBtn">
-        <button class="playPauseBtn" (click)="onPlayPause()">
-          <img
-            src="assets/icnons/play-solid.svg"
-            alt="play"
-            class="icon"
-            id="playpause"
-            *ngIf="!playVideo"
-          />
+        <button class="playPauseBtn" (click)="PlayVideo()" *ngIf="playVideo">
           <img
             src="assets/icnons/pause-solid.svg"
             alt="pause"
             class="icon pause"
             id="playpause"
-            *ngIf="playVideo"
+          />
+        </button>
+        <button class="playPauseBtn" (click)="PauseVideo()" *ngIf="!playVideo">
+          <img
+            src="assets/icnons/play-solid.svg"
+            alt="play"
+            class="icon"
+            id="playpause"
           />
         </button>
       </div>

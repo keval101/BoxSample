@@ -28,6 +28,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   mute = 0;
   isMuted = false;
   cancelText: string;
+  isVideoLoaded: boolean;
 
   @ViewChild('video') video: ElementRef;
 
@@ -56,17 +57,23 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.width = window.innerWidth;
   }
 
-  togglePlayPause(): void {
-    if (this.video.nativeElement.paused) {
-      this.playVideo = true;
-      this.video.nativeElement.play();
-    } else {
-      this.playVideo = false;
-      this.video.nativeElement.pause();
-    }
+  PlayVideo(): void {
+    this.playVideo = false;
+    this.video.nativeElement.pause();
+  }
+  PauseVideo(): void {
+    this.isVideoLoaded = true;
+    this.playVideo = true;
+    this.video.nativeElement.play();
+    this.video.nativeElement.onplaying = (e) => {
+      this.isVideoLoaded = false;
+    };
   }
 
   ngAfterViewInit(): void {
+    if (this.video.nativeElement.pause) {
+      this.playVideo = false;
+    }
     this.video.nativeElement.addEventListener('timeupdate', () => {
       const progressBar = document.getElementById('progressBar');
       const time =
@@ -83,10 +90,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
         (e.offsetX / this.width) * this.video.nativeElement.duration;
       this.video.nativeElement.currentTime = progressTime;
     });
-  }
-
-  onPlayPause(): void {
-    this.togglePlayPause();
   }
 
   volumeChanged(e: number): void {

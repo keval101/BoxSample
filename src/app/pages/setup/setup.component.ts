@@ -141,7 +141,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           this.camera = [];
 
           navigator.mediaDevices.enumerateDevices().then((devices) => {
-            devices.forEach(function (device) {
+            devices.forEach((device) => {
               if (device.kind === 'videoinput') {
                 tempThis.camera.push({
                   label: device.label,
