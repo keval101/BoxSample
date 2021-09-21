@@ -8,21 +8,14 @@
 <p-progressSpinner *ngIf="isVideoLoaded"></p-progressSpinner>
 <div class="container">
   <div class="videoContainer">
-    <picture>
-      <source srcset="assets/video/video.mp4#t=0.001" type="video/mp4" />
-      <img
-        src="assets/images/screenshot0.png"
-        alt="An image of an explosion."
-      />
-    </picture>
-    <!-- <video
+    <video
       src="assets/video/video.mp4#t=0.001"
       #video
       id="myvideo"
       type="video/mp4"
       preload="metadata"
       playsinline
-    ></video> -->
+    ></video>
   </div>
 
   <div class="bottomContainer">

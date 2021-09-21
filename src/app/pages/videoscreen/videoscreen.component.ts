@@ -71,9 +71,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.video.nativeElement.pause) {
-      this.playVideo = false;
-    }
     this.video.nativeElement.addEventListener('timeupdate', () => {
       const progressBar = document.getElementById('progressBar');
       const time =
