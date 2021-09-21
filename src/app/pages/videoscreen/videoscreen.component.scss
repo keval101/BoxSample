@@ -241,3 +241,20 @@
   background: $primary-color;
   border-color: transparent;
 }
+
+:host {
+  ::ng-deep p-progressspinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11111111;
+    display: block;
+    transform: translate(-50%, -50%);
+    background: #ffffff47;
+    width: 100%;
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
