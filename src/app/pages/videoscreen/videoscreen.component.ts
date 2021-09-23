@@ -55,6 +55,14 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth;
+    const video = document.getElementById('myvideo');
+
+    video.addEventListener('loadstart', () => {
+      this.isVideoLoaded = true;
+    });
+    video.addEventListener('canplay', () => {
+      this.isVideoLoaded = false;
+    });
   }
 
   PlayVideo(): void {
@@ -63,12 +71,12 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   }
 
   PauseVideo(): void {
-    // this.isVideoLoaded = true;
+    this.isVideoLoaded = true;
     this.playVideo = true;
     this.video.nativeElement.play();
-    // this.video.nativeElement.onplaying = (e) => {
-    //   this.isVideoLoaded = false;
-    // };
+    this.video.nativeElement.onplaying = (e) => {
+       this.isVideoLoaded = false;
+    };
   }
 
   ngAfterViewInit(): void {

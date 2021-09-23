@@ -131,13 +131,12 @@ export class SetupComponent implements OnInit, OnDestroy {
           },
         })
         .then((stream) => {
-          _video.volume = 0;
           window.stream = stream;
           this.videoStream = stream;
           _video.srcObject = stream;
           // _video.onloadedmetadata = function () {};
           _video.play();
-
+          this.video.nativeElement.volume = 0;
           this.camera = [];
 
           navigator.mediaDevices.enumerateDevices().then((devices) => {
