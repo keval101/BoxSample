@@ -61,13 +61,14 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.playVideo = false;
     this.video.nativeElement.pause();
   }
+
   PauseVideo(): void {
-    this.isVideoLoaded = true;
+    // this.isVideoLoaded = true;
     this.playVideo = true;
     this.video.nativeElement.play();
-    this.video.nativeElement.onplaying = (e) => {
-      this.isVideoLoaded = false;
-    };
+    // this.video.nativeElement.onplaying = (e) => {
+    //   this.isVideoLoaded = false;
+    // };
   }
 
   ngAfterViewInit(): void {
