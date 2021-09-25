@@ -131,13 +131,12 @@ export class SetupComponent implements OnInit, OnDestroy {
           },
         })
         .then((stream) => {
-          _video.volume = 0;
           window.stream = stream;
           this.videoStream = stream;
           _video.srcObject = stream;
           // _video.onloadedmetadata = function () {};
           _video.play();
-
+          this.video.nativeElement.volume = 0;
           this.camera = [];
 
           navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -155,7 +154,6 @@ export class SetupComponent implements OnInit, OnDestroy {
           this.track = stream.getVideoTracks()[0];
           //Create image capture object and get camera capabilities
           if (/android/i.test(this.userAgent)) {
-            alert('Android');
             const imageCapture = new ImageCapture(this.track);
             imageCapture.getPhotoCapabilities().then(() => {
               // let tempThis = this;

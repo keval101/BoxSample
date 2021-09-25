@@ -55,6 +55,15 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth;
+
+  const video = document.getElementById('myvideo');
+  
+  video.addEventListener('loadstart', () => {
+    this.isVideoLoaded = true;
+  });
+  video.addEventListener('canplay', () => {
+    this.isVideoLoaded = false;
+  });
   }
 
   PlayVideo(): void {
@@ -71,6 +80,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if (this.video.nativeElement.pause) {
+      this.playVideo = false;
+    }
     this.video.nativeElement.addEventListener('timeupdate', () => {
       const progressBar = document.getElementById('progressBar');
       const time =

@@ -27,7 +27,7 @@
         *ngIf="camera.length"
         [options]="camera"
         [(ngModel)]="selectedCamera"
-        [placeholder]="camera[0].label"
+        [placeholder]="camera[camera.length - 1].label"
         (ngModelChange)="dropValue($event)"
       ></p-dropdown>
     </div>
@@ -77,7 +77,7 @@
   </div>
 
   <div class="recordingPreview">
-    <video autoplay #video id="video"></video>
+    <video playsinline muted autoplay #video id="video"></video>
   </div>
 
   <div class="sidebar" #sidenav *ngIf="sidebar" @fadeAnimation>
