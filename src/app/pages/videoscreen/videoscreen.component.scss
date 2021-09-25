@@ -219,9 +219,6 @@
   @media (max-width: 420px) {
     width: 10rem;
   }
-  @supports (-webkit-touch-callout: none) {
-    width: 10rem;
-  }
 }
 ::ng-deep .p-slider .p-slider-handle {
   background-color: $primary-color;
