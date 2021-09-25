@@ -52,7 +52,9 @@
 
     &--Btngroup {
       display: flex;
-
+      button:first-child {
+        width: 27rem !important;
+      }
       button:not(:last-child) {
         margin-right: 1.6rem;
       }

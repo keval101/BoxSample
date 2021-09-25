@@ -190,8 +190,11 @@
   height: 3.601rem;
   z-index: 1000;
 
-  @media screen and (max-width: 420px) {
+  @media (max-width: 360px) {
     right: 15rem;
+  }
+  @media (min-width: 361px) and (max-width: 420px) {
+    right: 23rem;
   }
 }
 #speaker {
@@ -217,7 +220,6 @@
     width: 10rem;
   }
 }
-
 ::ng-deep .p-slider .p-slider-handle {
   background-color: $primary-color;
   border: none;
@@ -241,7 +243,6 @@
   background: $primary-color;
   border-color: transparent;
 }
-
 :host {
   ::ng-deep p-progressspinner {
     position: absolute;

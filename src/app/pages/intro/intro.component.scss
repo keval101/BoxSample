@@ -46,12 +46,22 @@ ol {
   @media (max-width: 1250px) {
     margin-top: 0;
   }
+
+  @media (min-width: 1450px) {
+    height: auto;
+  }
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     margin-top: 5rem;
     @media (max-width: 1250px) {
+      margin-top: 1rem;
+    }
+    @media (min-width: 1310px) {
+      margin-top: 1rem;
+    }
+    @supports (-webkit-touch-callout: none) {
       margin-top: 1rem;
     }
   }

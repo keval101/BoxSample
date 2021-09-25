@@ -87,6 +87,7 @@ export class TakescreenshotComponent
       navigator.mediaDevices
         .getUserMedia({
           video: {
+            facingMode: 'environment',
             deviceId: deviceInfoId ? { exact: deviceInfoId } : undefined,
           },
         })
