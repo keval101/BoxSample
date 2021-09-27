@@ -20,6 +20,7 @@ import { EvolutionService } from '../evaluation/evolution.service';
 })
 export class VideoscreenComponent implements OnInit, AfterViewInit {
   recording: boolean;
+  loaderStart: boolean;
   isVideoScreen: boolean;
   playVideo: boolean;
   videoFullScreen = false;
@@ -58,9 +59,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
 
     const video = document.getElementById('myvideo');
 
-    video.addEventListener('loadstart', () => {
-      this.isVideoLoaded = true;
-    });
     video.addEventListener('canplay', () => {
       this.isVideoLoaded = false;
     });
@@ -71,12 +69,12 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     this.video.nativeElement.pause();
   }
   PauseVideo(): void {
-    this.isVideoLoaded = true;
+    if (!this.loaderStart) {
+      this.isVideoLoaded = true;
+      this.loaderStart = true;
+    }
     this.playVideo = true;
     this.video.nativeElement.play();
-    this.video.nativeElement.onplaying = (e) => {
-      this.isVideoLoaded = false;
-    };
   }
 
   ngAfterViewInit(): void {
@@ -102,9 +100,6 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
   }
 
   volumeChanged(e: number): void {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
     this.val = e;
     this.video.nativeElement.volume = this.val / 100;
     if (this.val === 0) {
