@@ -7,7 +7,6 @@
   ::ng-deep .p-carousel .p-carousel-indicators {
     display: flex;
     bottom: -1rem;
-    transform: translateX(-50%);
 
     @media (min-width: 1200px) {
       bottom: -4rem;
@@ -17,11 +16,17 @@
   ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
     right: 1rem;
     top: calc(50% - 24px);
+    @media (max-width: 600px) {
+      top: calc(50% - 14px);
+    }
   }
 
   ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
     left: 2rem;
     top: calc(50% - 24px);
+    @media (max-width: 600px) {
+      top: calc(50% - 14px);
+    }
   }
   ::ng-deep .p-carousel-items-content {
     height: 32rem !important;
