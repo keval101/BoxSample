@@ -284,7 +284,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         echoCancellation: true,
       },
       video: {
-        facingMode: 'environment', 
+        facingMode: 'environment',
         deviceId: this.deviceInfoId ? { exact: this.deviceInfoId } : undefined,
       },
     };
