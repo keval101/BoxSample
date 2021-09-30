@@ -14,6 +14,8 @@ import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { RecordingService } from '../recording-screen/recording.service';
+import { DataService } from 'src/app/shared/shared/data.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -39,7 +41,7 @@ export class EvaluationComponent implements OnInit {
   scores = [
     {
       title: 'Exercise duration',
-      measured: '01:33',
+      measured: this.recordingService.finalRecordDuration,
       goalvalue: '< 02.00',
       score: 50,
     },
@@ -60,12 +62,14 @@ export class EvaluationComponent implements OnInit {
   constructor(
     private router: Router,
     public translateService: TranslateService,
+    private recordingService: RecordingService,
     private evolutionService: EvolutionService,
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
-    public utility: UtilityService
+    public utility: UtilityService,
+    private dataservice: DataService
   ) {
     this.id = this.selfAssesmentService.imageIndex;
     this.responsiveOptions = [
@@ -107,15 +111,13 @@ export class EvaluationComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
-    this.items = this.takescreenshotService.captures;
+    this.items = this.moveLastArrayElementToFirstIndex(
+      this.takescreenshotService.captures
+    );
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;
     this.id = 0;
-  }
-
-  redirectTo(): void {
-    this.router.navigate(['/end']);
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -158,5 +160,17 @@ export class EvaluationComponent implements OnInit {
   }
   selfAssest(): void {
     this.isGoal = false;
+  }
+
+  moveLastArrayElementToFirstIndex(this_array) {
+    this_array.splice(0, 0, this_array[this_array.length - 1]);
+    this_array.pop();
+    return this_array;
+  }
+
+  onSubmit() {
+    this.dataservice.submitData('12345', {}).subscribe((res) => {});
+
+    this.router.navigate(['/end']);
   }
 }

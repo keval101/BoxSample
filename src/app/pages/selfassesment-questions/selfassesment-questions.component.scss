@@ -111,5 +111,14 @@
   padding: 0 4rem;
 }
 
+.learnMoreText {
+  color: #707172 !important;
+  cursor: pointer;
+}
+
+.pi {
+  font-size: 3.2rem;
+}
+
 //sidebar
 @include sidebarStyles;

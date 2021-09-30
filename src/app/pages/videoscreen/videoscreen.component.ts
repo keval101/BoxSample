@@ -4,6 +4,7 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/features/header/header.service';
@@ -18,7 +19,7 @@ import { EvolutionService } from '../evaluation/evolution.service';
   styleUrls: ['./videoscreen.component.scss'],
   animations: [fadeAnimation],
 })
-export class VideoscreenComponent implements OnInit, AfterViewInit {
+export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   recording: boolean;
   loaderStart: boolean;
   isVideoScreen: boolean;
@@ -62,6 +63,10 @@ export class VideoscreenComponent implements OnInit, AfterViewInit {
     video.addEventListener('canplay', () => {
       this.isVideoLoaded = false;
     });
+  }
+
+  ngOnDestroy() {
+    this.headerService.videoFullscreen.next(false);
   }
 
   PlayVideo(): void {

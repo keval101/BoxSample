@@ -101,6 +101,7 @@ export class TakescreenshotComponent
   }
 
   takeScreenShot(): void {
+    this.headerService.videoFullscreen.next(false);
     this.onCameraClick = true;
     this.takeScreenshot = false;
     this.imageCapture = true;
@@ -111,6 +112,7 @@ export class TakescreenshotComponent
   }
 
   onRetake(): void {
+    this.headerService.videoFullscreen.next(false);
     this.fullscreen = false;
     this.takeScreenshot = true;
     this.onCameraClick = false;
@@ -161,6 +163,7 @@ export class TakescreenshotComponent
     });
   }
   ngOnDestroy(): void {
+    this.headerService.videoFullscreen.next(false);
     if (window.stream) {
       window.stream.getTracks().forEach((track) => {
         track.stop();

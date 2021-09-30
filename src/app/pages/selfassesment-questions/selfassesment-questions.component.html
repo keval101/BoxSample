@@ -13,6 +13,9 @@
     </p>
     <p class="container__title-message m-0">
       {{ 'selfassesmentquestions.message' | translate }}
+      <span class="learnMoreText" (click)="sidebarOpenData($event)"
+        >Learn more <i class="pi pi-question-circle"></i
+      ></span>
     </p>
   </div>
 
@@ -129,7 +132,12 @@
   </div>
 </div>
 
-<div class="sidebar" #sidenav *ngIf="sidebarOpen" @fadeAnimation>
+<div
+  class="sidebar"
+  #sidenav
+  *ngIf="sidebarOpen || sidebarOpenText"
+  @fadeAnimation
+>
   <div class="sidebarHeader">
     <button class="close" (click)="closeSidebar()">
       <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />

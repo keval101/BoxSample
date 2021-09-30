@@ -243,6 +243,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
     this.displayTimer = minutes + ':' + seconds;
     this.recordingDurationTime = this.displayTimer;
+    this.recordingService.finalRecordDuration = this.displayTimer;
     this.recordingService.recordTimeDuration.next(this.displayTimer);
   }
 
@@ -335,6 +336,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.headerService.videoFullscreen.next(false);
     window.stream.getTracks()[0].stop();
     setTimeout(() => {
       this.videoTimer.unsubscribe();

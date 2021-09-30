@@ -25,7 +25,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   answer2;
   answer3;
   sidebarOpen: boolean;
-
+  sidebarOpenText = false;
   cancelText: string;
 
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -41,10 +41,11 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event: Event): void {
     if (
-      this.sidebarOpen &&
+      (this.sidebarOpen || this.sidebarOpenText) &&
       !this.sidenav.nativeElement.contains(event.target)
     ) {
       this.sidebarOpen = false;
+      this.sidebarOpenText = false;
       this.headerService.isInfoOpen = false;
     }
   }
@@ -78,6 +79,11 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  sidebarOpenData(event: Event): void {
+    event.stopPropagation();
+    this.sidebarOpenText = true;
   }
 
   confirm(): void {
