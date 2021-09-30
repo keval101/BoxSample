@@ -176,8 +176,4 @@ ol {
   }
 }
 
-.rightReserved {
-  @include reservedText;
-}
-
 @include onMobileScreenButton;

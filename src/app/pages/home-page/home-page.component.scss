@@ -119,8 +119,3 @@
     width: 100%;
   }
 }
-
-.rightReserved {
-  @include reservedText;
-  color: $white-color !important;
-}

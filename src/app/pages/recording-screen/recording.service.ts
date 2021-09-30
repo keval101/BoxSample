@@ -8,4 +8,5 @@ export class RecordingService {
   fullscreen = false;
   cameraidValue;
   recordTimeDuration = new Subject();
+  finalRecordDuration;
 }

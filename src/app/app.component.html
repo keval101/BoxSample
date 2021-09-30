@@ -1,1 +1,14 @@
 <router-outlet></router-outlet>
+
+<p
+  class="rightReserved m-0"
+  [ngClass]="{
+    rightReservedTop: videoFullScreen
+  }"
+  [ngStyle]="{
+    transform: recordingScreen ? 'translateY(0rem)' : '',
+    color: recordingScreen ? 'white' : '#707172'
+  }"
+>
+  {{ 'home.rightReserved' | translate }}
+</p>
