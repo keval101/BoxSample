@@ -43,22 +43,20 @@
     display: flex;
     align-items: stretch;
     justify-content: flex-end;
-    width: 42%;
+    width: 39.5%;
     height: 6.4rem;
-    clip-path: polygon(0 0%, 99.8% 0%, 92% 100%, 0% 100%);
-    -webkit-clip-path: polygon(0 0%, 99.8% 0%, 92% 100%, 0% 100%);
-    padding-right: 5.7rem;
-    margin-right: -3.3%;
+    padding-right: 0;
     background: $blue-color;
     opacity: 0.8;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 
     &--text {
       display: flex;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 7rem;
       font-size: 3.2rem;
-      color: $white-color;
+      color: #ffffff;
       margin: 0;
     }
   }
@@ -66,21 +64,32 @@
   &__right {
     display: flex;
     justify-content: flex-start;
-    width: 75%;
+    width: 60.5%;
     height: 6.4rem;
-    left: 55.4rem;
+    left: -31.6rem;
     top: 37.127rem;
-    clip-path: polygon(4.8% 0, 100% 0%, 100% 100%, 0 100%);
-    -webkit-clip-path: polygon(4.8% 0, 100% 0%, 100% 100%, 0 100%);
-    padding-left: 6.4rem;
-    background: $element-grey-color;
-    opacity: 0.8;
+    padding-left: 4rem;
+    background: #707172;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 100000;
+      top: 0;
+      left: -46px;
+      margin: 0;
+      padding: 0;
+      border-left: 46px solid transparent;
+      border-right: 0px solid transparent;
+      border-bottom: 6.4rem solid #707172;
+    }
 
     &--text {
       display: flex;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 0rem;
       font-size: 3.2rem;
       color: $white-color;
       margin: 0;

@@ -38,6 +38,7 @@
     color: $primary-color;
     border-color: $primary-color;
     box-shadow: none;
+    font-family: 'Myriad Light';
     @media (hover: hover) {
       &:hover {
         transform: translateY(0.2rem);
