@@ -21,7 +21,7 @@ import { EvolutionService } from '../evaluation/evolution.service';
 export class SelfassesmentQuestionsComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-  answer1 = 'Yes';
+  answer1;
   answer2;
   answer3;
   sidebarOpen: boolean;

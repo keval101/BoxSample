@@ -41,6 +41,10 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: 2rem;
     }
     .screenShotText {
       display: flex;
