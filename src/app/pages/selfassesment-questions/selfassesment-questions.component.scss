@@ -56,12 +56,16 @@
     &-radioGroup {
       width: 30%;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       .radioBtn {
-        margin-right: 7.3rem;
+        margin-left: 7.3rem;
+        display: flex;
+        align-items: center;
 
         @media (max-width: 320px) {
-          margin-right: 5rem;
+          margin-left: 5rem;
+          display: flex;
+          align-items: center;
         }
       }
       label {
