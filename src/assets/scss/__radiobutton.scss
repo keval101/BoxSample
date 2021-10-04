@@ -1,6 +1,8 @@
 ::ng-deep .p-radiobutton {
   width: 3.2rem;
   height: 3.2rem;
+  position: relative;
+  display: block;
 }
 
 ::ng-deep .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
