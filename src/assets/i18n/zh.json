@@ -106,7 +106,7 @@
     },
     "selfassesmentquestions":{
         "title" : "Self assessment questions",
-        "message" : "Please answer the questions to proceed",
+        "message" : "Please answer the questions to proceed.",
         "question1" : "I used my dominant hand to cut",
         "question2" : "I used my non dominant hand to apply tension  ",
         "question3" : "I switched hands during the exercise",
