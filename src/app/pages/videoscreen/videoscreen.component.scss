@@ -102,7 +102,6 @@
 }
 
 .playPauseBtn {
-  position: relative;
   background: $primary-color;
   border-radius: 50%;
   border: none;
@@ -114,6 +113,9 @@
   justify-content: center;
   align-items: center;
   margin-right: 6.565rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 
   &:not(:last-child)::before {
     content: '';
@@ -180,7 +182,7 @@
   align-items: center;
   position: absolute;
   top: 1.345rem;
-  right: 21.008rem;
+  right: 26.008rem;
   width: 17.959rem;
   height: 3.601rem;
   z-index: 1000;

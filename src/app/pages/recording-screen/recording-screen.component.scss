@@ -65,6 +65,14 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
+      z-index: 9999;
+    }
+    .cameraBtn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 2.2rem;
+      z-index: 9999;
     }
 
     .screenShotText {
