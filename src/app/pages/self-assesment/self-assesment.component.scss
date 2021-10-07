@@ -86,7 +86,7 @@
 
 .selfassesment__result {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   height: auto;
   margin-top: 8.8rem;
@@ -125,6 +125,7 @@
 
   &-image,
   &-choise {
+    margin-left: 3rem;
     flex-grow: 0.5;
     width: 62.8rem;
     max-width: 360px;
