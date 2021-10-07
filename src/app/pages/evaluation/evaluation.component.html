@@ -32,11 +32,19 @@
             </p-carousel>
           </div>
           <div class="goalImage">
-            <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+            <img
+              src="assets/images/goalImage.png"
+              alt="goal"
+              [ngStyle]="{
+                display: isGoal ? 'block' : 'none'
+              }"
+            />
             <img
               src="assets/images/screenshot{{ id }}.png"
               alt="selfassesment"
-              *ngIf="!isGoal"
+              [ngStyle]="{
+                display: !isGoal ? 'block' : 'none'
+              }"
             />
           </div>
         </div>
