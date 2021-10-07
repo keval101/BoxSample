@@ -1,0 +1,75 @@
+{
+  "case": {
+    "id": "",
+    "title": "Essential skills - Circular cutting",
+    "shortDescription": "Precisely cut out the circle pattern from the gauze",
+    "detailedDescription": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible."
+  },
+  "productFamily": "LaparoS",
+  "section": "Essential skills",
+  "coverImage": "",
+  "video": {
+    "fileName": "",
+    "Title": "Circular cutting",
+    "copyright": "by VirtaMed, Zurich, August 2021"
+  },
+  "selfAssessmentImage1": {
+    "url": "",
+    "score": 40,
+    "tip": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+  },
+  "selfAssessmentImage2": {
+    "url": "",
+    "score": 60,
+    "tip": "Nice job. Keep on practicing to improve your accuracy"
+  },
+  "selfAssessmentImage3": {
+    "url": "",
+    "score": 100,
+    "tip": "Great work!"
+  },
+  "selfAssessmentImage4": {
+    "url": "",
+    "score": 50,
+    "tip": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+  },
+  "selfAssessment": [
+    {
+      "question": "Did you complete the task as described?",
+      "answer": 1
+    },
+    {
+      "question": "I used my dominant hand to cut",
+      "answer": 1
+    },
+    {
+      "question": "I used my non dominant hand to apply tension",
+      "answer": 1
+    },
+    {
+      "question": "I switched hands during the exercise",
+      "answer": 1,
+      "tip": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected."
+    }
+  ],
+
+  "goals": {
+    "exerciseDuration": "1:30 minutes",
+    "selfAssessment": 100,
+    "questions": 100
+  },
+  "time": {
+    "tip": "Keep practicing to improve your time"
+  },
+  "whatYouNeed1": "Your choice of box trainer",
+  "whatYouNeed2": "Grasper",
+  "whatYouNeed3": "Scissors",
+  "whatYouNeed4": "Gauze with circle pattern",
+  "task1": "Your objective is to cut out the circle as precisely and in as little time as possible",
+  "reportItem": {
+    "exerciceDuration": 90,
+    "selfAssessment": 0,
+    "questions": 0,
+    "rating": 1
+  }
+}

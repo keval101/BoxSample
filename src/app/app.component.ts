@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 export class AppComponent implements OnInit {
   videoFullScreen = false;
   recordingScreen = false;
-
+  appData;
   constructor(
     private primengConfig: PrimeNGConfig,
     public translate: TranslateService,
@@ -40,5 +40,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.dataservice.getScene('12345jj').subscribe(() => {});
+    this.dataservice.getData().subscribe((res) => {
+      if (res) {
+        this.appData = res;
+        this.headerService.appData.next(res);
+      }
+    });
   }
 }

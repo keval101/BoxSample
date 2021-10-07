@@ -35,29 +35,10 @@ export class EvaluationComponent implements OnInit {
   items = [];
   cancelText: string;
   responsiveOptions;
-
+  appData;
   @ViewChild('sidenav') sidenav: ElementRef;
 
-  scores = [
-    {
-      title: 'Exercise duration',
-      measured: this.recordingService.finalRecordDuration,
-      goalvalue: '< 02.00',
-      score: 50,
-    },
-    {
-      title: 'Self assessment',
-      measured: '50%',
-      goalvalue: '100%',
-      score: 25,
-    },
-    {
-      title: 'Questions',
-      measured: '80%',
-      goalvalue: '100%',
-      score: 40,
-    },
-  ];
+  scores;
 
   constructor(
     private router: Router,
@@ -118,6 +99,31 @@ export class EvaluationComponent implements OnInit {
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;
     this.id = 0;
+
+    this.headerService.appData.subscribe((res) => {
+      this.appData = res;
+    });
+
+    this.scores = [
+      {
+        title: 'Exercise duration',
+        measured: this.recordingService.finalRecordDuration,
+        goalvalue: this.appData.goals.exerciseDuration,
+        score: 50,
+      },
+      {
+        title: 'Self assessment',
+        measured: '50%',
+        goalvalue: this.appData.goals.selfAssessment,
+        score: 25,
+      },
+      {
+        title: 'Questions',
+        measured: '80%',
+        goalvalue: this.appData.goals.questions,
+        score: 40,
+      },
+    ];
   }
 
   onSlidebarOpen(value: boolean): void {

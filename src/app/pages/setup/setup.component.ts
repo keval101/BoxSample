@@ -46,6 +46,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   flashSubject = new Subject();
   cancelText: string;
   userAgent;
+  appData;
 
   setupScreen = true;
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -73,6 +74,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.translateService.get('setup.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
+    this.appData = this.headerService.appData;
 
     this.headerService.muteUnmuteMic.subscribe(
       (res) => (this.checkedMic = res)

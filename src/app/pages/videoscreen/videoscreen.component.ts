@@ -31,7 +31,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   isMuted = false;
   cancelText: string;
   isVideoLoaded: boolean;
-
+  appData;
   @ViewChild('video') video: ElementRef;
 
   constructor(
@@ -54,6 +54,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     this.Translateservice.get('video.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
+    this.appData = this.headerService.appData;
     this.recording = true;
     this.isVideoScreen = true;
     this.width = window.innerWidth;

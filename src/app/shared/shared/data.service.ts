@@ -15,6 +15,9 @@ export class DataService {
   getScene(sceneId: string): Observable<any> {
     return this.http.get(this.baseUrl + `Scene/${sceneId}/details`);
   }
+  getData(): Observable<any> {
+    return this.http.get('../../../assets/data/caseOne.json');
+  }
   submitData(contextId: string, data): Observable<any> {
     return this.http.post(this.baseUrl + `user/reports/${contextId}`, data);
   }

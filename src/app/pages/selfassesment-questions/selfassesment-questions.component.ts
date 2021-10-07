@@ -27,6 +27,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   sidebarOpen: boolean;
   sidebarOpenText = false;
   cancelText: string;
+  appData;
+  disabled = true;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -56,8 +58,16 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
+    this.appData = this.headerService.appData;
     this.isScreenShot = true;
     this.recording = true;
+    this.appData.selfAssessment.forEach((element) => {
+      if (element.answer === 'Yes' || element.answer === 'No') {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
+    });
   }
 
   slibar(): void {
@@ -78,6 +88,19 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);
       },
+    });
+  }
+
+  handleChange(e) {
+    this.appData.selfAssessment.forEach((element) => {
+      if (
+        e.type === 'click' &&
+        (element.answer === 'Yes' || element.answer === 'No')
+      ) {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
     });
   }
 

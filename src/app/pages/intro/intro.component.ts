@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 
@@ -23,6 +24,7 @@ export class IntroComponent implements OnInit {
   cancelText: string;
   introScreen = true;
   mobile = false;
+  appData;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   @HostListener('window:resize', ['$event'])
@@ -41,12 +43,15 @@ export class IntroComponent implements OnInit {
     public translateService: TranslateService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {}
 
   ngOnInit(): void {
     this.recording = true;
-
+    this.headerService.appData.subscribe((res) => {
+      this.appData = res;
+    });
     this.translateService.get('intro.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
