@@ -212,15 +212,22 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 100vh;
-  justify-content: center;
-  background-color: #000000;
+  height: 100%;
+  justify-content: space-between;
 }
 .video {
-  object-fit: contain;
+  position: absolute;
+  min-width: 100vw;
+  overflow: hidden;
+  height: auto;
+  width: auto
 }
 .canvas {
   position: absolute;
+  min-width: 100vw;
+  overflow: hidden;
+  height:auto;
+  width:auto
 }
 .zIndex {
   z-index: 1;
