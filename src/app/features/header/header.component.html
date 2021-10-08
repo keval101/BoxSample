@@ -24,7 +24,6 @@
       >
         <div
           class="header__right--icons-group"
-          *ngIf="!showInfo"
           [ngStyle]="{
             visibility: onFinishRecording || sidebarOpen ? 'hidden' : 'visible'
           }"
@@ -40,7 +39,7 @@
 
         <div
           class="header__right--icons-group"
-          *ngIf="ontakeScreenshot && !this.utility.iosDetector() && !showInfo"
+          *ngIf="ontakeScreenshot && !this.utility.iosDetector()"
         >
           <img src="assets/icnons/flash.png" alt="flash" id="flash" />
           <p-inputSwitch
@@ -57,7 +56,6 @@
             class="button"
             (click)="fullscreen()"
             [ngStyle]="{ display: fullScreen ? 'none' : 'block' }"
-            *ngIf="!showInfo"
           >
             <img
               src="assets/icnons/fullscreen.png"
@@ -98,7 +96,7 @@
           class="button"
           id="cross"
           (click)="cancelExercise()"
-          *ngIf="!endscreen && !showInfo"
+          *ngIf="!endscreen"
         >
           <i class="pi pi-times"></i>
         </button>
@@ -135,7 +133,7 @@
 
       <div
         class="header__right--icons-group videoScreenIcons"
-        *ngIf="videoScreen && !showInfo"
+        *ngIf="videoScreen"
       >
         <button
           type="button"
