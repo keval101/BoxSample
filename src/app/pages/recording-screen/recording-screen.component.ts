@@ -310,6 +310,11 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.takescreenshotService.captures.push(
       this.canvas.nativeElement.toDataURL('image/png')
     );
+    const vidStyleData = this.videoEle.nativeElement.getBoundingClientRect();
+    this.canvas.nativeElement.style.width = vidStyleData.width + 'px';
+    this.canvas.nativeElement.style.height = vidStyleData.height + 'px';
+    this.canvas.nativeElement.style.left = vidStyleData.left + 'px';
+    this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
   }
 
   redirectToPhoto(): void {

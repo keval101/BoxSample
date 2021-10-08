@@ -87,6 +87,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
       this.playVideo = false;
     }
     this.video.nativeElement.addEventListener('timeupdate', () => {
+      if (this.video.nativeElement.currentTime > 0) {
+        this.isVideoLoaded = false;
+      }
       const progressBar = document.getElementById('progressBar');
       const time =
         this.video.nativeElement.currentTime /
