@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
       }
     });
 
-    router.events.subscribe(event => {
+    router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
-        let anyCase = this.route.snapshot.queryParams["sceneId"];
+        const anyCase = this.route.snapshot.queryParams['sceneId'];
         this.getAppData(anyCase ? anyCase : null);
       }
     });

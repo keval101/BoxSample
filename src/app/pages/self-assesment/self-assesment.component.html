@@ -39,6 +39,7 @@
             (touchmove)="this.utility.iosScrollDis($event)"
             [value]="appData?.selfAssessmentImages"
             [numVisible]="1"
+            [page]="selectedPage"
             [numScroll]="1"
             effect="fade"
             [responsiveOptions]
@@ -47,7 +48,7 @@
             <ng-template let-item pTemplate="item" let-i="index">
               <img
                 style="height: 100%"
-                [src]="itemImage !== '' ? itemImage : item.url"
+                [src]="item.url"
                 class="screenShotImage"
                 [title]="item.tip"
                 id="index"
@@ -59,7 +60,7 @@
 
       <div class="imagessss">
         <div *ngFor="let item of appData?.selfAssessmentImages; let i = index">
-          <img [src]="item.url" alt="" (click)="active(item?.url, i)" class="p" />
+          <img [src]="item.url" alt="" (click)="active(i)" class="p" />
         </div>
       </div>
     </div>

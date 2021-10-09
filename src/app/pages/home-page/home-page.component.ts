@@ -12,7 +12,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private router: Router,
     public translate: TranslateService,
-    private dataService: DataService) {}
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {

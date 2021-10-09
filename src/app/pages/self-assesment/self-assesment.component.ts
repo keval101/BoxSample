@@ -33,7 +33,7 @@ export class SelfAssesmentComponent implements OnInit {
   sidebarOpenText = false;
   cancelText: string;
   pageIndex: number;
-  itemImage = '';
+  selectedPage = 0;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -52,7 +52,9 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = true;
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
-        this.imagePreviews[0].classList.add();
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
         const btnNext = document.querySelector('.p-carousel-next');
         const btnPrev = document.querySelector('.p-carousel-prev');
         if (btnNext && btnPrev) {
@@ -64,6 +66,9 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = false;
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
       }, 1);
     }
 
@@ -90,7 +95,6 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   setPage(indexOf: { page: number }): void {
-    this.itemImage = '';
     this.pageIndex = indexOf.page;
     this.selfAssesmentService.imageIndex = this.pageIndex;
     for (let i = 0; i < this.imagePreviews.length; i++) {
@@ -152,13 +156,13 @@ export class SelfAssesmentComponent implements OnInit {
     this.recording = true;
     this.resultImage = this.takescreenshotService.resultImageSource;
   }
-  active(url: string, ids: number): void {
-    this.itemImage = '';
+
+  active(index: number): void {
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].classList.remove('active');
-      this.itemImage = url;
-      this.imagePreviews[ids].classList.add('active');
     }
+    this.imagePreviews[index].classList.add('active');
+    this.selectedPage = index;
   }
 
   slibar(): void {

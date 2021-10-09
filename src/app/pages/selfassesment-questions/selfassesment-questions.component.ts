@@ -109,7 +109,13 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   isDisable() {
-    return !this.appData || (this.appData && !!this.appData.selfAssessment.find(x => x.answer === 1 || x.answer === 0));
+    return (
+      !this.appData ||
+      (this.appData &&
+        !!this.appData.selfAssessment.find(
+          (x) => x.answer === 1 || x.answer === 0
+        ))
+    );
   }
 
   sidebarOpenData(event: Event): void {
