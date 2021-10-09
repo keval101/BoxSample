@@ -106,9 +106,14 @@ export class TakescreenshotComponent
     this.takeScreenshot = false;
     this.imageCapture = true;
     this.isScreenShot = false;
+    const vidStyleData = this.video.nativeElement.getBoundingClientRect();
     this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.video.nativeElement, 0, 0, 640, 480);
+    this.canvas.nativeElement.style.width = vidStyleData.width + 'px';
+    this.canvas.nativeElement.style.height = vidStyleData.height + 'px';
+    this.canvas.nativeElement.style.left = vidStyleData.left + 'px';
+    this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
   }
 
   onRetake(): void {

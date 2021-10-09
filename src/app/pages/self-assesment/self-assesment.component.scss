@@ -86,7 +86,7 @@
 
 .selfassesment__result {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   height: auto;
   margin-top: 8.8rem;
@@ -125,6 +125,7 @@
 
   &-image,
   &-choise {
+    margin-left: 3rem;
     flex-grow: 0.5;
     width: 62.8rem;
     max-width: 360px;
@@ -197,16 +198,22 @@
   }
 }
 
-.sidebar .close {
+.sidebar .closed {
+  border: none;
+  background: transparent;
   width: unset !important;
   height: unset !important;
+}
+.sidebar .closed img {
+  margin-right: -4px !important;
+  top: 1px !important;
 }
 .sidebar__header img {
   margin-top: 6.9rem !important;
   margin-bottom: 6.783rem !important;
 }
 
-#closeBtn {
+#closedBtn {
   width: 4rem;
   height: unset !important;
 }
@@ -215,10 +222,9 @@
   width: 100%;
   align-items: center;
   height: 6rem;
-  position: relative;
   justify-content: space-between;
 
-  button {
+  .closed {
     position: relative !important;
     right: 0 !important;
     top: 0 !important;

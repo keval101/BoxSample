@@ -60,25 +60,29 @@
 
       <div class="questions__ques-radioGroup">
         <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer"
-            value="Yes"
-            [(ngModel)]="answer2"
-            id="yes"
-          ></p-radioButton>
-          <label for="yes">{{
-            'selfassesmentquestions.yes' | translate
-          }}</label>
+          <label for="ans3">
+            <p-radioButton
+              name="answer"
+              value="Yes"
+              [(ngModel)]="answer2"
+              id="yes"
+              inputId="ans3"
+            ></p-radioButton>
+            {{ 'selfassesmentquestions.yes' | translate }}</label
+          >
         </div>
 
         <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer"
-            value="No"
-            [(ngModel)]="answer2"
-            id="no"
-          ></p-radioButton>
-          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
+          <label for="ans4">
+            <p-radioButton
+              name="answer"
+              value="No"
+              [(ngModel)]="answer2"
+              id="no"
+              inputId="ans4"
+            ></p-radioButton>
+            {{ 'selfassesmentquestions.no' | translate }}</label
+          >
         </div>
       </div>
     </div>
@@ -90,25 +94,29 @@
 
       <div class="questions__ques-radioGroup">
         <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer"
-            value="Yes"
-            [(ngModel)]="answer3"
-            id="yes"
-          ></p-radioButton>
-          <label for="yes">{{
-            'selfassesmentquestions.yes' | translate
-          }}</label>
+          <label for="ans5">
+            <p-radioButton
+              name="answer"
+              value="Yes"
+              [(ngModel)]="answer3"
+              id="yes"
+              inputId="ans5"
+            ></p-radioButton>
+            {{ 'selfassesmentquestions.yes' | translate }}</label
+          >
         </div>
 
         <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer"
-            value="No"
-            [(ngModel)]="answer3"
-            id="no"
-          ></p-radioButton>
-          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
+          <label for="ans6">
+            <p-radioButton
+              name="answer"
+              value="No"
+              [(ngModel)]="answer3"
+              id="no"
+              inputId="ans6"
+            ></p-radioButton>
+            {{ 'selfassesmentquestions.no' | translate }}</label
+          >
         </div>
       </div>
     </div> -->
@@ -135,11 +143,11 @@
   @fadeAnimation
 >
   <div class="sidebarHeader">
-    <button class="close" (click)="closeSidebar()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+    <button class="closed" (click)="closeSidebar()">
+      <img src="assets/icnons/close.png" alt="closebtn" id="closedBtn" />
     </button>
     <button class="close" (click)="confirm()">
-      <img src="assets/icnons/blueCros.svg" alt="close" />
+      <i class="pi pi-times" alt="cross"></i>
     </button>
   </div>
   <div class="sidebar__header">

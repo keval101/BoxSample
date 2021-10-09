@@ -71,22 +71,30 @@
       label {
         font-size: 3.2rem;
         margin-left: 1.46rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
 }
 
-.sidebar .close {
+.sidebar .closed {
+  border: none;
+  background: transparent;
   width: unset !important;
   height: unset !important;
 }
-
+.sidebar .closed img {
+  margin-right: -4px !important;
+  top: 1px !important;
+}
 .sidebar__header img {
   margin-top: 6.9rem !important;
   margin-bottom: 6.783rem !important;
 }
 
-#closeBtn {
+#closedBtn {
   width: 4rem;
   height: unset !important;
 }
@@ -95,10 +103,9 @@
   width: 100%;
   align-items: center;
   height: 6rem;
-  position: relative;
   justify-content: space-between;
 
-  button {
+  .closed {
     position: relative !important;
     right: 0 !important;
     top: 0 !important;

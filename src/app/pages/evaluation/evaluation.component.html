@@ -32,11 +32,19 @@
             </p-carousel>
           </div>
           <div class="goalImage">
-            <img src="assets/images/goalImage.png" alt="goal" *ngIf="isGoal" />
+            <img
+              src="assets/images/goalImage.png"
+              alt="goal"
+              [ngStyle]="{
+                display: isGoal ? 'block' : 'none'
+              }"
+            />
             <img
               src="assets/images/screenshot{{ id }}.png"
               alt="selfassesment"
-              *ngIf="!isGoal"
+              [ngStyle]="{
+                display: !isGoal ? 'block' : 'none'
+              }"
             />
           </div>
         </div>
@@ -143,8 +151,8 @@
     </button>
 
     <div>
-      <button type="button" class="button" id="cross">
-        <img src="assets/icnons/blueCros.svg" (click)="confirm()" alt="cross" />
+      <button type="button" (click)="confirm()" class="button" id="cross">
+        <i class="pi pi-times" alt="cross"></i>
       </button>
     </div>
   </div>
