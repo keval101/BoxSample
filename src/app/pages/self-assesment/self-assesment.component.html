@@ -37,7 +37,7 @@
         <div class="carousel-images">
           <p-carousel
             (touchmove)="this.utility.iosScrollDis($event)"
-            [value]="items"
+            [value]="appData?.selfAssessmentImages"
             [numVisible]="1"
             [numScroll]="1"
             effect="fade"
@@ -47,8 +47,9 @@
             <ng-template let-item pTemplate="item" let-i="index">
               <img
                 style="height: 100%"
-                [src]="itemImage !== '' ? itemImage : item.img"
+                [src]="itemImage !== '' ? itemImage : item.url"
                 class="screenShotImage"
+                [title]="item.tip"
                 id="index"
               />
             </ng-template>
@@ -57,8 +58,8 @@
       </div>
 
       <div class="imagessss">
-        <div *ngFor="let item of items; let i = index">
-          <img [src]="item.img" alt="" (click)="active(item, i)" class="p" />
+        <div *ngFor="let item of appData?.selfAssessmentImages; let i = index">
+          <img [src]="item.url" alt="" (click)="active(item?.url, i)" class="p" />
         </div>
       </div>
     </div>

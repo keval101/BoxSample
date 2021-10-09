@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 
 @Component({
@@ -27,7 +28,6 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   sidebarOpen: boolean;
   sidebarOpenText = false;
   cancelText: string;
-  appData;
   disabled = true;
 
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -37,7 +37,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public translateService: TranslateService,
     private headerService: HeaderService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    private dataService: DataService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -58,7 +59,6 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
-    this.appData = this.headerService.appData;
     this.isScreenShot = true;
     this.recording = true;
     this.appData.selfAssessment.forEach((element) => {
@@ -68,6 +68,10 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         this.disabled = true;
       }
     });
+  }
+
+  get appData() {
+    return this.dataService.appData;
   }
 
   slibar(): void {
@@ -102,6 +106,10 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         this.disabled = true;
       }
     });
+  }
+
+  isDisable() {
+    return !this.appData || (this.appData && !!this.appData.selfAssessment.find(x => x.answer === 1 || x.answer === 0));
   }
 
   sidebarOpenData(event: Event): void {

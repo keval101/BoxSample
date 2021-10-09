@@ -5,6 +5,7 @@ import { RecordingService } from 'src/app/pages/recording-screen/recording.servi
 import { HeaderService } from './header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { DataService } from '../../shared/shared/data.service';
 
 @Component({
   selector: 'app-header',
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnChanges, OnInit {
     public translate: TranslateService,
     private recordingService: RecordingService,
     private headerService: HeaderService,
+    private dataService: DataService,
     public utility: UtilityService
   ) {}
 
@@ -61,6 +63,10 @@ export class HeaderComponent implements OnChanges, OnInit {
 
   get showInfo(): boolean {
     return this.headerService.isInfoOpen;
+  }
+
+  get appData() {
+    return this.dataService.appData;
   }
 
   fullscreen(): void {

@@ -35,7 +35,6 @@ export class EvaluationComponent implements OnInit {
   items = [];
   cancelText: string;
   responsiveOptions;
-  appData;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   scores;
@@ -100,10 +99,6 @@ export class EvaluationComponent implements OnInit {
     this.resultImage = this.takescreenshotService.resultImageSource;
     this.id = 0;
 
-    this.headerService.appData.subscribe((res) => {
-      this.appData = res;
-    });
-
     this.scores = [
       {
         title: 'Exercise duration',
@@ -166,6 +161,10 @@ export class EvaluationComponent implements OnInit {
   }
   selfAssest(): void {
     this.isGoal = false;
+  }
+
+  get appData() {
+    return this.dataservice.appData;
   }
 
   moveLastArrayElementToFirstIndex(this_array) {

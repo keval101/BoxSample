@@ -1,17 +1,17 @@
 {
   "case": {
     "id": "",
-    "title": "Essential skills - Circular cutting",
-    "shortDescription": "Precisely cut out the circle pattern from the gauze",
-    "detailedDescription": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible."
+    "title": "Essential skills - Peg transfer",
+    "shortDescription": "Transfer the triangles mid air from the left side to the right side and back again.",
+    "detailedDescription": "Using graspers, pick up a triangle from a peg on the left side with your left hand and transfer in mid air to your right hand and place down on a right side peg. Repeat for all triangles. Once all triangles are on the right side, repeat the whole process but from right to left. If you drop a triangle, pick it back up using the last hand that was holding it. "
   },
   "productFamily": "LaparoS",
   "section": "Essential skills",
   "coverImage": "assets/images/Cover image.png",
   "video": {
     "fileName": "",
-    "Title": "Circular cutting",
-    "copyright": "by VirtaMed, Zurich, August 2021"
+    "Title": "Peg Transfer",
+    "copyright": "by Fernando Santos, June 2017"
   },
   "selfAssessmentImages": [
     {
@@ -41,11 +41,11 @@
       "answer": 1
     },
     {
-      "question": "I used my dominant hand to cut",
+      "question": "I dropped a piece INSIDE of view during the exercise",
       "answer": 1
     },
     {
-      "question": "I used my non dominant hand to apply tension",
+      "question": "I dropped a piece OUTSIDE of view during the exercise",
       "answer": 1
     },
     {
@@ -56,18 +56,18 @@
   ],
 
   "goals": {
-    "exerciseDuration": "1:30 minutes",
+    "exerciseDuration": "48 seconds",
     "selfAssessment": 100,
     "questions": 100
   },
   "time": {
-    "tip": "Keep practicing to improve your time"
+    "tip": "To help improve accuracy and efficiency, develop a consistent (clockwise) pattern and work both hands simultaneously."
   },
   "whatYouNeed1": "Your choice of box trainer",
   "whatYouNeed2": "Grasper",
-  "whatYouNeed3": "Scissors",
-  "whatYouNeed4": "Gauze with circle pattern",
-  "task1": "Your objective is to cut out the circle as precisely and in as little time as possible",
+  "whatYouNeed3": "Peg board",
+  "whatYouNeed4": "Peg pieces",
+  "task1": "Your objective is to pass the triangles in midair from the left side to the right and back in as little time as possible without dropping the triangle out of view. ",
   "reportItem": {
     "exerciceDuration": 90,
     "selfAssessment": 0,

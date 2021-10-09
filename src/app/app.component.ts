@@ -4,6 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { HeaderService } from './features/header/header.service';
 import { DataService } from './shared/shared/data.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +19,8 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     private dataservice: DataService,
     private headerService: HeaderService,
+    private route: ActivatedRoute,
+    router: Router,
     private location: Location
   ) {
     translate.setDefaultLang('en');
@@ -35,15 +38,24 @@ export class AppComponent implements OnInit {
         this.videoFullScreen = false;
       }
     });
+
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && !this.appData) {
+        let anyCase = this.route.snapshot.queryParams["sceneId"];
+        this.getAppData(anyCase ? anyCase : null);
+      }
+    });
   }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    this.dataservice.getScene('12345jj').subscribe(() => {});
-    this.dataservice.getData().subscribe((res) => {
+  }
+
+  getAppData(params) {
+    this.dataservice.getData(params).subscribe((res) => {
       if (res) {
         this.appData = res;
-        this.headerService.appData.next(res);
+        this.dataservice.appData = res;
       }
     });
   }

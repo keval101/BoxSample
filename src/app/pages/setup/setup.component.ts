@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { HeaderService } from 'src/app/features/header/header.service';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
@@ -46,7 +47,6 @@ export class SetupComponent implements OnInit, OnDestroy {
   flashSubject = new Subject();
   cancelText: string;
   userAgent;
-  appData;
 
   setupScreen = true;
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -69,12 +69,12 @@ export class SetupComponent implements OnInit, OnDestroy {
     private setupService: SetupService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
+    private dataservice: DataService,
     public utility: UtilityService
   ) {
     this.translateService.get('setup.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
-    this.appData = this.headerService.appData;
 
     this.headerService.muteUnmuteMic.subscribe(
       (res) => (this.checkedMic = res)
@@ -109,6 +109,10 @@ export class SetupComponent implements OnInit, OnDestroy {
   dropValue(event: { Id }): void {
     this.setupService.cameraId.next(event.Id);
     this.setupService.cameraIdInformation = event.Id;
+  }
+
+  get appData() {
+    return this.dataservice.appData;
   }
 
   getDevice(): void {

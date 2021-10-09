@@ -22,7 +22,7 @@
   <div class="questions">
     <div
       class="questions__ques"
-      *ngFor="let queArr of appData.selfAssessment; let i = index"
+      *ngFor="let queArr of appData?.selfAssessment; let i = index"
     >
       <p class="questions__ques-text">{{ i + 1 }}. {{ queArr.question }}</p>
 
@@ -33,7 +33,6 @@
             value="Yes"
             [(ngModel)]="queArr.answer"
             id="yes"
-            (click)="handleChange($event)"
           ></p-radioButton>
           <label for="yes">{{
             'selfassesmentquestions.yes' | translate
@@ -46,13 +45,12 @@
             value="No"
             [(ngModel)]="queArr.answer"
             id="no"
-            (click)="handleChange($event)"
           ></p-radioButton>
           <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
         </div>
       </div>
     </div>
-    <!-- 
+    <!--
     <div class="questions__ques">
       <p class="questions__ques-text">
         2. {{ 'selfassesmentquestions.question2' | translate }}
@@ -127,9 +125,9 @@
       type="button"
       (click)="redirectTo()"
       [ngStyle]="{
-        opacity: disabled ? '0.5' : '1'
+        opacity: isDisable() ? '0.5' : '1'
       }"
-      [disabled]="disabled"
+      [disabled]="isDisable()"
     >
       {{ 'selfassesment.next' | translate }}
     </button>

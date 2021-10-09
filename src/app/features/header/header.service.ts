@@ -11,5 +11,4 @@ export class HeaderService {
   muteMic = false;
   flash = false;
   isInfoOpen: boolean;
-  appData = new BehaviorSubject<any>('');
 }
