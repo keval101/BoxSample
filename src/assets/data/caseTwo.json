@@ -1,7 +1,7 @@
 {
   "case": {
     "id": "",
-    "title": "Essential skills - Peg transfer",
+    "title": "Peg transfer",
     "shortDescription": "Transfer the triangles mid air from the left side to the right side and back again.",
     "detailedDescription": "Using graspers, pick up a triangle from a peg on the left side with your left hand and transfer in mid air to your right hand and place down on a right side peg. Repeat for all triangles. Once all triangles are on the right side, repeat the whole process but from right to left. If you drop a triangle, pick it back up using the last hand that was holding it. "
   },
@@ -57,8 +57,8 @@
 
   "goals": {
     "exerciseDuration": "48 seconds",
-    "selfAssessment": 100,
-    "questions": 100
+    "selfAssessment": "100%",
+    "questions": "100%"
   },
   "time": {
     "tip": "To help improve accuracy and efficiency, develop a consistent (clockwise) pattern and work both hands simultaneously."

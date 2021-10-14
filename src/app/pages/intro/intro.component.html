@@ -15,7 +15,7 @@
 
     <div>
       <p class="container__title-description m-0">
-        {{ appData?.case.shortDescription }}
+        {{ 'intro.description' | translate }}
       </p>
       <p class="container__title-descriptionText m-0">
         {{ appData?.case.detailedDescription }}
@@ -41,7 +41,7 @@
           {{ 'intro.goals' | translate }}
         </p>
         <p class="sidebar__content-text">
-          {{ 'intro.goalsText' | translate }}
+          {{ appData?.case.shortDescription }}
         </p>
       </div>
 
@@ -50,7 +50,7 @@
           {{ 'intro.duration' | translate }}
         </p>
         <p class="sidebar__content-text">
-          {{ 'intro.durationTime' | translate }}
+          {{ appData?.goals.exerciseDuration }}
         </p>
       </div>
 

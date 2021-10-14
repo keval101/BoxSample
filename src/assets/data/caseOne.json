@@ -1,7 +1,7 @@
 {
   "case": {
     "id": "",
-    "title": "Essential skills - Circular cutting",
+    "title": "Circular cutting",
     "shortDescription": "Precisely cut out the circle pattern from the gauze",
     "detailedDescription": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible."
   },
@@ -57,8 +57,8 @@
 
   "goals": {
     "exerciseDuration": "1:30 minutes",
-    "selfAssessment": 100,
-    "questions": 100
+    "selfAssessment": "100%",
+    "questions": "100%"
   },
   "time": {
     "tip": "Keep practicing to improve your time"

@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header__left" [ngClass]="{ fullscreen: fullScreen }">
       <span class="header__left--text" *ngIf="!fullScreen" @fadeAnimation
-        >{{ appData?.case.title }}
+        >{{ appData?.section + ' - ' + appData?.case.title }}
       </span>
 
       <span
