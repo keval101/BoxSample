@@ -29,6 +29,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   sidebarOpenText = false;
   cancelText: string;
   disabled = true;
+  radioData;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -61,12 +62,16 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       });
     this.isScreenShot = true;
     this.recording = true;
-    this.appData.selfAssessment.forEach((element) => {
-      if (element.answer === 'Yes' || element.answer === 'No') {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
+    this.radioData = this.appData.questionnaire.pages[1].sections[0].questions;
+
+    this.radioData.forEach((element) => {
+      element.answers.forEach((elementAns) => {
+        if (elementAns.name === 'Yes' || elementAns.name === 'No') {
+          this.disabled = false;
+        } else {
+          this.disabled = true;
+        }
+      });
     });
   }
 
@@ -95,26 +100,11 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     });
   }
 
-  handleChange(e) {
-    this.appData.selfAssessment.forEach((element) => {
-      if (
-        e.type === 'click' &&
-        (element.answer === 'Yes' || element.answer === 'No')
-      ) {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
-    });
-  }
-
   isDisable() {
     return (
-      !this.appData ||
-      (this.appData &&
-        !!this.appData.selfAssessment.find(
-          (x) => x.answer === 1 || x.answer === 0
-        ))
+      !this.radioData ||
+      (this.radioData &&
+        this.radioData.find((x) => x.selectedAnswer === undefined))
     );
   }
 

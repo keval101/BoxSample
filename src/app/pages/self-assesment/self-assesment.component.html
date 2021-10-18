@@ -37,7 +37,7 @@
         <div class="carousel-images">
           <p-carousel
             (touchmove)="this.utility.iosScrollDis($event)"
-            [value]="appData?.selfAssessmentImages"
+            [value]="appData?.questionnaire?.pages[0]?.screenshots"
             [numVisible]="1"
             [page]="selectedPage"
             [numScroll]="1"
@@ -50,7 +50,7 @@
                 style="height: 100%"
                 [src]="item.url"
                 class="screenShotImage"
-                [title]="item.tip"
+                [title]="item?.hint"
                 id="index"
               />
             </ng-template>
@@ -59,7 +59,12 @@
       </div>
 
       <div class="imagessss">
-        <div *ngFor="let item of appData?.selfAssessmentImages; let i = index">
+        <div
+          *ngFor="
+            let item of appData?.questionnaire?.pages[0]?.screenshots;
+            let i = index
+          "
+        >
           <img [src]="item.url" alt="" (click)="active(i)" class="p" />
         </div>
       </div>
@@ -96,26 +101,12 @@
     <img src="assets/images/logo.svg" alt="logo" />
   </div>
 
-  <div class="sidebar__content">
-    <p class="sidebar__content-title">
-      {{ 'selfassesment.sidebarTitle' | translate }}
-    </p>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-text">
-        {{ 'selfassesment.sidebarContent' | translate }}
-      </p>
-    </div>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-text">
-        {{ 'selfassesment.compareResult' | translate }}
-      </p>
-    </div>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-text">
-        {{ 'selfassesment.matches' | translate }}
-      </p>
-    </div>
-  </div>
+  <div
+    class="sidebar__content"
+    id="sidebar__content"
+    *ngIf="appData"
+    [innerHTML]="appData?.descriptionItems[3]?.content"
+  ></div>
 </div>
 
 <p-confirmDialog header="Confirmation" #cd>

@@ -9,8 +9,8 @@
 <div class="container">
   <div class="videoContainer">
     <video
-      poster="assets/images/Cover image.png"
-      src="https://github.com/rushit-virta/rushit-virta.github.io/blob/master/assets/video/video.mp4?raw=true"
+      [poster]="appData?.descriptionItems[0]?.imageUrl"
+      [src]="appData?.movies[0]?.Url"
       #video
       id="myvideo"
       type="video/mp4"
@@ -60,17 +60,12 @@
     </div>
 
     <div class="footer__text">
-      <p class="footer__text-bold m-0">{{ appData?.video?.Title }}</p>
-      <p class="footer__text-light m-0">{{ appData?.video?.copyright }}</p>
+      <p class="footer__text-bold m-0">{{ appData?.movies[0]?.FileName }}</p>
+      <p class="footer__text-light m-0">
+        {{ appData?.movies[0]?.CopyrightInfo }}
+      </p>
     </div>
   </div>
-
-  <!-- <p
-    class="rightReserved m-0"
-    [ngClass]="{ rightReservedTop: videoFullScreen }"
-  >
-    {{ 'home.rightReserved' | translate }}
-  </p> -->
 
   <div class="logo" [ngClass]="{ logoTop: videoFullScreen }">
     <img src="assets/images/Logo2.svg" alt="logo" />

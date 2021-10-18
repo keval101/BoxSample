@@ -1,77 +1,305 @@
 {
-  "case": {
-    "id": "",
-    "title": "Circular cutting",
-    "shortDescription": "Precisely cut out the circle pattern from the gauze",
-    "detailedDescription": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible."
-  },
-  "productFamily": "LaparoS",
-  "section": "Essential skills",
-  "coverImage": "assets/images/Cover image.png",
-  "video": {
-    "fileName": "",
-    "Title": "Circular cutting",
-    "copyright": "by VirtaMed, Zurich, August 2021"
-  },
-  "selfAssessmentImages": [
+  "name": "Circular cutting",
+  "description": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible.",
+  "groupName": "HINT: Scenes can be logicaly grouped and displayed together",
+  "sceneSectionName": "Essential skills",
+  "imageBlobUrl": "ImageBlobUrl1",
+  "reportSections": [
     {
-      "url": "../../../assets/images/screenshot0.png",
-      "score": 40,
-      "tip": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
-    },
-    {
-      "url": "../../../assets/images/screenshot1.png",
-      "score": 60,
-      "tip": "Nice job. Keep on practicing to improve your accuracy"
-    },
-    {
-      "url": "../../../assets/images/screenshot2.png",
-      "score": 100,
-      "tip": "Great work!"
-    },
-    {
-      "url": "../../../assets/images/screenshot3.png",
-      "score": 50,
-      "tip": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+      "reportItems": [
+        {
+          "maxValue": 6000,
+          "minValue": 90,
+          "maxScore": 50,
+          "noScore": false,
+          "goalValueString": "< 02:00",
+          "noEvalString": "NoEvalString1",
+          "descriptionLanguageKey": "DescriptionLanguageKey1",
+          "unitIdentifier": "00000000-0000-0000-0000-000000000001",
+          "bestIs": "MaxValue",
+          "displayStringFormat": "DisplayStringFormat1",
+          "displayMode": "Default",
+          "reportMode": "Required",
+          "name": "Exercice duration",
+          "identifier": "00000000-0000-0000-0000-000000000001"
+        }
+      ],
+      "name": "Name1",
+      "sortId": 1,
+      "nameLanguageKey": "NameLanguageKey1",
+      "identifier": "00000000-0000-0000-0000-000000000001"
     }
   ],
-  "selfAssessment": [
+  "descriptionItems": [
     {
-      "question": "Did you complete the task as described?",
-      "answer": 1
+      "header": "",
+      "content": "<div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Average duration</h2><p>1:30 minutes</p></div><div><h2>What you need</h2><ul><li>Your choice of box trainer</li><li>Grasper</li><li>Scissors</li><li>Gauze with circle pattern</li></ul></div><div><h2>What you will do</h2><ul><li>1. Watch a tutorial video</li><li>2. Record your exercise</li><li>3. Rate your result</li><li>4. Review and upload result</li></ul></div>",
+      "imageUrl": "assets/images/Cover image.png",
+      "movieUrl": "N/A",
+      "tag": "IntroPage"
     },
     {
-      "question": "I used my dominant hand to cut",
-      "answer": 1
+      "header": "<h1>Excercise</h1>",
+      "content": "<h1>Exercise</h1><div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Your tasks</h2><p>Your objective is to cut out the circle as precisely and in as little time as possible</p><ul><li>Make sure your setup and equipment are ready</li><li>Make sure your camera is selected and your view is centered</li><li>When you are ready to start, press Start exercise.</li></ul><p>Note: your time will start once you press Start exercise and the 3 second countdown is done.</p></div>",
+      "imageUrl": "N/A",
+      "movieUrl": "N/A",
+      "tag": "SetupPage"
     },
     {
-      "question": "I used my non dominant hand to apply tension",
-      "answer": 1
+      "header": "<h1>Excercise</h1>",
+      "content": "<h1>Exercise</h1><div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Your tasks</h2><ul><li>Perform the exercise as described in the tutorial video</li><li>If you like, you can take screenshots during the exercise by pressing the screenshot button</li><li>When you are finished the exercise, press the Finish recording button</li><li>Press the Stop button to cancel this recording and go back to the set up</li><li>Press the Quit button to cancel this recordning and quit the exercise</li></ul></div>",
+      "imageUrl": "N/A",
+      "movieUrl": "N/A",
+      "tag": "RecordingPage,TakescreenshotPage,EvaluationPage"
     },
     {
-      "question": "I switched hands during the exercise",
-      "answer": 1,
-      "tip": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected."
+      "header": "<h1>Learn more about the self assessment:</h1>",
+      "content": " <h1>Learn more about the self assessment:</h1><div><p>In this self assessment you will choose from a sample of images the one that most looks like your final result. Based on your selection, you will receive feedback on what you can do differently next time to improve.</p></div><div><p>Compare your final result screenshot on the left to your choice sample image on the right.</p></div><div><p>Once you have selected the image that best matches, click Next.</p></div>",
+      "imageUrl": "N/A",
+      "movieUrl": "N/A",
+      "tag": "SelfAssesment"
+    },
+    {
+      "header": "<h1>Learn more about the questions:</h1>",
+      "content": " <h1>Learn more about the questions:</h1><div><p>At the end of the exercise you are asked to answer some yes or no questions regarding your performance and experience in this exercise. Your answsers wiill influence your score.</p></div><div><p>Answer yes or no to the presented questions in order to proceed.</p></div>",
+      "imageUrl": "N/A",
+      "movieUrl": "N/A",
+      "tag": "SelfAssesmentQuestionsPage"
     }
   ],
-
-  "goals": {
-    "exerciseDuration": "1:30 minutes",
-    "selfAssessment": "100%",
-    "questions": "100%"
+  "movies": [
+    {
+      "FileName": "Circular cutting",
+      "CopyrightInfo": "by VirtaMed, Zurich, August 2021",
+      "Url": "https://github.com/rushit-virta/rushit-virta.github.io/blob/master/assets/video/video.mp4?raw=true"
+    }
+  ],
+  "questionnaire": {
+    "maxScore": 50,
+    "pages": [
+      {
+        "screenshots": [
+          {
+            "url": "../../../assets/images/screenshot0.png",
+            "score": 40,
+            "hint": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+          },
+          {
+            "url": "../../../assets/images/screenshot1.png",
+            "score": 30,
+            "hint": "Next time"
+          },
+          {
+            "url": "../../../assets/images/screenshot2.png",
+            "score": 20,
+            "hint": "you can work ."
+          },
+          {
+            "url": "../../../assets/images/screenshot3.png",
+            "score": 50,
+            "hint": "on using your grasping."
+          }
+        ],
+        "maxScore": 50,
+        "reportItemIdentifier": "00000000-0000-0000-0000-000000000001",
+        "identifier": "00000000-0000-0000-0000-000000000001",
+        "name": "Self assessment",
+        "description": "Description1"
+      },
+      {
+        "rows": 1,
+        "columns": 1,
+        "sections": [
+          {
+            "rows": 1,
+            "columns": 1,
+            "column": 1,
+            "columnSpan": 1,
+            "row": 1,
+            "rowSpan": 1,
+            "questions": [
+              {
+                "minScore": 1,
+                "maxScore": 10,
+                "row": 1,
+                "column": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single",
+                "answers": [
+                  {
+                    "isCorrect": true,
+                    "score": 10,
+                    "penaltyScore": 1,
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "Yes",
+                    "description": "Description1"
+                  },
+                  {
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 1,
+                    "hint": "",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "No",
+                    "description": "Description1"
+                  }
+                ],
+                "identifier": "00000000-0000-0000-0000-000000000001",
+                "name": "I switched hands during the exercise",
+                "description": "Description1"
+              },
+              {
+                "minScore": 1,
+                "maxScore": 15,
+                "row": 1,
+                "column": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single",
+                "answers": [
+                  {
+                    "isCorrect": true,
+                    "score": 15,
+                    "penaltyScore": 1,
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "Yes",
+                    "description": "Description1"
+                  },
+                  {
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 1,
+                    "hint": "",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "No",
+                    "description": "Description2"
+                  }
+                ],
+                "identifier": "00000000-0000-0000-0000-000000000001",
+                "name": "I used my non dominant hand to apply tension",
+                "description": "Description2"
+              },
+              {
+                "minScore": 1,
+                "maxScore": 15,
+                "row": 1,
+                "column": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single",
+                "answers": [
+                  {
+                    "isCorrect": true,
+                    "score": 0,
+                    "penaltyScore": 1,
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "Yes",
+                    "description": "Description3"
+                  },
+                  {
+                    "isCorrect": false,
+                    "score": 15,
+                    "penaltyScore": 1,
+                    "hint": "",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "No",
+                    "description": "Description3"
+                  }
+                ],
+                "identifier": "00000000-0000-0000-0000-000000000001",
+                "name": "I switched hands during the exercise",
+                "description": "Description1"
+              },
+              {
+                "minScore": 1,
+                "maxScore": 10,
+                "row": 1,
+                "column": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single",
+                "answers": [
+                  {
+                    "isCorrect": true,
+                    "score": 0,
+                    "penaltyScore": 1,
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "Yes",
+                    "description": "Description4"
+                  },
+                  {
+                    "isCorrect": false,
+                    "score": 10,
+                    "penaltyScore": 1,
+                    "hint": "",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "No",
+                    "description": "Description4"
+                  }
+                ],
+                "identifier": "00000000-0000-0000-0000-000000000001",
+                "name": "I switched hands during the exercise",
+                "description": "Description1"
+              },
+              {
+                "minScore": 1,
+                "maxScore": 15,
+                "row": 1,
+                "column": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single",
+                "answers": [
+                  {
+                    "isCorrect": true,
+                    "score": 15,
+                    "penaltyScore": 1,
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "Yes",
+                    "description": "Description4"
+                  },
+                  {
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 1,
+                    "hint": "",
+                    "identifier": "00000000-0000-0000-0000-000000000001",
+                    "name": "No",
+                    "description": "Description4"
+                  }
+                ],
+                "identifier": "00000000-0000-0000-0000-000000000001",
+                "name": "I switched hands during the exercise",
+                "description": "Description1"
+              }
+            ],
+            "identifier": "00000000-0000-0000-0000-000000000001",
+            "name": "Name1",
+            "description": "Description1"
+          }
+        ],
+        "identifier": "00000000-0000-0000-0000-000000000001",
+        "name": "Questions",
+        "description": "Description1"
+      }
+    ],
+    "identifier": "00000000-0000-0000-0000-000000000000"
   },
-  "time": {
-    "tip": "Keep practicing to improve your time"
-  },
-  "whatYouNeed1": "Your choice of box trainer",
-  "whatYouNeed2": "Grasper",
-  "whatYouNeed3": "Scissors",
-  "whatYouNeed4": "Gauze with circle pattern",
-  "task1": "Your objective is to cut out the circle as precisely and in as little time as possible",
-  "reportItem": {
-    "exerciceDuration": 90,
-    "selfAssessment": 0,
-    "questions": 0,
-    "rating": 1
-  }
+  "identifier": "00000000-0000-0000-0000-000000000001"
 }

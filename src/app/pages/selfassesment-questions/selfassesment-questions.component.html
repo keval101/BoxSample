@@ -19,105 +19,41 @@
     </p>
   </div>
 
-  <div class="questions">
+  <div class="questions" *ngIf="radioData">
     <div
       class="questions__ques"
-      *ngFor="let queArr of appData?.selfAssessment; let i = index"
+      *ngFor="let queArr of radioData; let i = index"
     >
-      <p class="questions__ques-text">{{ i + 1 }}. {{ queArr.question }}</p>
+      <p class="questions__ques-text">{{ i + 1 }}. {{ queArr.name }}</p>
 
       <div class="questions__ques-radioGroup">
         <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer{{ i + 1 }}"
-            value="Yes"
-            [(ngModel)]="queArr.answer"
-            id="yes"
-          ></p-radioButton>
-          <label for="yes">{{
-            'selfassesmentquestions.yes' | translate
-          }}</label>
-        </div>
-
-        <div class="p-field-radiobutton radioBtn">
-          <p-radioButton
-            name="answer{{ i + 1 }}"
-            value="No"
-            [(ngModel)]="queArr.answer"
-            id="no"
-          ></p-radioButton>
-          <label for="no">{{ 'selfassesmentquestions.no' | translate }}</label>
-        </div>
-      </div>
-    </div>
-    <!--
-    <div class="questions__ques">
-      <p class="questions__ques-text">
-        2. {{ 'selfassesmentquestions.question2' | translate }}
-      </p>
-
-      <div class="questions__ques-radioGroup">
-        <div class="p-field-radiobutton radioBtn">
-          <label for="ans3">
+          <label for="ans{{ i }}">
             <p-radioButton
-              name="answer"
-              value="Yes"
-              [(ngModel)]="answer2"
+              name="answer{{ i }}"
+              [value]="queArr?.answers[0]?.isCorrect"
+              [(ngModel)]="queArr.selectedAnswer"
               id="yes"
-              inputId="ans3"
+              inputId="ans{{ i }}"
             ></p-radioButton>
-            {{ 'selfassesmentquestions.yes' | translate }}</label
+            {{ queArr?.answers[0]?.name }}</label
           >
         </div>
 
         <div class="p-field-radiobutton radioBtn">
-          <label for="ans4">
+          <label for="ans{{ i + 10 }}">
             <p-radioButton
-              name="answer"
-              value="No"
-              [(ngModel)]="answer2"
+              name="answer{{ i }}"
+              [value]="queArr?.answers[1]?.isCorrect"
+              [(ngModel)]="queArr.selectedAnswer"
               id="no"
-              inputId="ans4"
+              inputId="ans{{ i + 10 }}"
             ></p-radioButton>
-            {{ 'selfassesmentquestions.no' | translate }}</label
+            {{ queArr?.answers[1]?.name }}</label
           >
         </div>
       </div>
     </div>
-
-    <div class="questions__ques">
-      <p class="questions__ques-text">
-        3. {{ 'selfassesmentquestions.question3' | translate }}
-      </p>
-
-      <div class="questions__ques-radioGroup">
-        <div class="p-field-radiobutton radioBtn">
-          <label for="ans5">
-            <p-radioButton
-              name="answer"
-              value="Yes"
-              [(ngModel)]="answer3"
-              id="yes"
-              inputId="ans5"
-            ></p-radioButton>
-            {{ 'selfassesmentquestions.yes' | translate }}</label
-          >
-        </div>
-
-        <div class="p-field-radiobutton radioBtn">
-          <label for="ans6">
-            <p-radioButton
-              name="answer"
-              value="No"
-              [(ngModel)]="answer3"
-              id="no"
-              inputId="ans6"
-            ></p-radioButton>
-            {{ 'selfassesmentquestions.no' | translate }}</label
-          >
-        </div>
-      </div>
-    </div> -->
   </div>
   <div class="bottomContainer">
     <button
@@ -152,42 +88,33 @@
     <img src="assets/images/logo.svg" alt="logo" />
   </div>
 
-  <div class="sidebar__content">
-    <p class="sidebar__content-title">
-      {{ 'selfassesmentquestions.sidebarTitle' | translate }}
-    </p>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-text">
-        {{ 'selfassesmentquestions.sidebarContent' | translate }}
-      </p>
-    </div>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-text">
-        {{ 'selfassesmentquestions.answeryes' | translate }}
-      </p>
-    </div>
-  </div>
+  <div
+    class="sidebar__content"
+    id="sidebar__content"
+    *ngIf="appData"
+    [innerHTML]="appData?.descriptionItems[4]?.content"
+  ></div>
+
+  <p-confirmDialog header="Confirmation" #cd>
+    <ng-template pTemplate="header">
+      <p class="header m-0">{{ 'chooseScreenshot.quitExe' | translate }}</p>
+    </ng-template>
+    <ng-template pTemplate="footer" class="footer">
+      <button
+        class="button button-small button-outline"
+        type="button"
+        (click)="cd.reject()"
+      >
+        {{ 'chooseScreenshot.goback' | translate }}
+      </button>
+
+      <button
+        class="button button-small button-fill"
+        type="button"
+        (click)="cd.accept()"
+      >
+        {{ 'chooseScreenshot.quit' | translate }}
+      </button>
+    </ng-template>
+  </p-confirmDialog>
 </div>
-
-<p-confirmDialog header="Confirmation" #cd>
-  <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'chooseScreenshot.quitExe' | translate }}</p>
-  </ng-template>
-  <ng-template pTemplate="footer" class="footer">
-    <button
-      class="button button-small button-outline"
-      type="button"
-      (click)="cd.reject()"
-    >
-      {{ 'chooseScreenshot.goback' | translate }}
-    </button>
-
-    <button
-      class="button button-small button-fill"
-      type="button"
-      (click)="cd.accept()"
-    >
-      {{ 'chooseScreenshot.quit' | translate }}
-    </button>
-  </ng-template>
-</p-confirmDialog>
