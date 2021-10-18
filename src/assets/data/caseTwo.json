@@ -113,29 +113,29 @@
         "screenshots": [
           {
             "url": "../../../assets/images/screenshot0.png",
-            "score": 40,
+            "score": 10,
             "hint": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
           },
           {
             "url": "../../../assets/images/screenshot1.png",
-            "score": 30,
-            "hint": "Next time"
+            "score": 20,
+            "hint": "Next time Tip from 2nd image"
           },
           {
             "url": "../../../assets/images/screenshot2.png",
-            "score": 20,
-            "hint": "you can work ."
+            "score": 30,
+            "hint": "you can work time Tip from 3rd image ."
           },
           {
             "url": "../../../assets/images/screenshot3.png",
-            "score": 60,
-            "hint": "on using your grasping."
+            "score": 40,
+            "hint": "on using your grasping time Tip from 4rd image ."
           }
         ],
         "maxScore": 50,
         "reportItemIdentifier": "00000000-0000-0000-0000-000000000001",
         "identifier": "00000000-0000-0000-0000-000000000001",
-        "name": "Name1",
+        "name": "Self assessment",
         "description": "Description1"
       },
       {
@@ -163,18 +163,18 @@
                 "answers": [
                   {
                     "isCorrect": true,
-                    "score": 10,
+                    "score": 15,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected tip from 1st question.",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
                     "description": "Description1"
                   },
                   {
                     "isCorrect": false,
-                    "score": 10,
+                    "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": " tip from 1st question no answer",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description1"
@@ -197,18 +197,18 @@
                 "answers": [
                   {
                     "isCorrect": true,
-                    "score": 10,
+                    "score": 15,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected 2nd answer.",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
                     "description": "Description1"
                   },
                   {
                     "isCorrect": false,
-                    "score": 10,
+                    "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": " tip from 2st question no answer",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description2"
@@ -233,16 +233,16 @@
                     "isCorrect": true,
                     "score": 10,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "hint": "It’s ok to .",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
                     "description": "Description3"
                   },
                   {
                     "isCorrect": false,
-                    "score": 10,
+                    "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "tip from 3rd no answser",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description3"
@@ -254,12 +254,12 @@
               }
             ],
             "identifier": "00000000-0000-0000-0000-000000000001",
-            "name": "Name1",
+            "name": "Questions",
             "description": "Description1"
           }
         ],
         "identifier": "00000000-0000-0000-0000-000000000001",
-        "name": "Name1",
+        "name": "Questions",
         "description": "Description1"
       }
     ],
