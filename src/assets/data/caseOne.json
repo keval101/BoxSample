@@ -142,7 +142,7 @@
                     "isCorrect": false,
                     "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "It’s ok to switch",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description1"
@@ -176,7 +176,7 @@
                     "isCorrect": false,
                     "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "switch",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description2"
@@ -210,14 +210,14 @@
                     "isCorrect": false,
                     "score": 15,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "It’s ok",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description3"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands during the exercise",
+                "name": "I switched",
                 "description": "Description1"
               },
               {
@@ -244,14 +244,14 @@
                     "isCorrect": false,
                     "score": 10,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "complete the exercis",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description4"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands during the exercise",
+                "name": "I switched hands",
                 "description": "Description1"
               },
               {
@@ -278,19 +278,19 @@
                     "isCorrect": false,
                     "score": 0,
                     "penaltyScore": 1,
-                    "hint": "",
+                    "hint": "but your overall speed will be affected",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description4"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands during the exercise",
+                "name": "I switched hands during",
                 "description": "Description1"
               }
             ],
             "identifier": "00000000-0000-0000-0000-000000000001",
-            "name": "Name1",
+            "name": "Questions",
             "description": "Description1"
           }
         ],

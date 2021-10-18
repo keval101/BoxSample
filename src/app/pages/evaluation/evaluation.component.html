@@ -11,7 +11,7 @@
     <p class="container__title-text">{{ 'evaluation.title' | translate }}</p>
   </div>
 
-  <div class="content">
+  <div class="content" *ngIf="this.appData">
     <div class="result__container">
       <p class="result__container-title">
         {{ 'selfassesment.resultTitle' | translate }}
@@ -40,7 +40,7 @@
               }"
             />
             <img
-              src="assets/images/screenshot{{ id }}.png"
+              src="{{ selfAssessImage.url }}"
               alt="selfassesment"
               [ngStyle]="{
                 display: !isGoal ? 'block' : 'none'
@@ -98,7 +98,7 @@
             </td>
             <td>{{ score.measured }}</td>
             <td>{{ score.goalvalue }}</td>
-            <td class="score">{{ score.score }} /50</td>
+            <td class="score">{{ score.score }}</td>
           </tr>
         </ng-template>
       </p-table>
@@ -107,12 +107,17 @@
         <p class="result__container-title">
           {{ 'evaluation.feedback' | translate }}
         </p>
-        <p class="score__container-feedback-text">
-          {{ 'evaluation.feedbacktextone' | translate }}
-        </p>
-        <p class="score__container-feedback-text">
-          {{ 'evaluation.feedbacktexttwo' | translate }}
-        </p>
+        <div class="feedbackcontainer">
+          <p class="score__container-feedback-text">
+            {{ selfAssessImage.hint }}
+          </p>
+          <p
+            class="score__container-feedback-text"
+            *ngFor="let data of allHint"
+          >
+            {{ data }}
+          </p>
+        </div>
       </div>
 
       <div class="score__container-ratings">

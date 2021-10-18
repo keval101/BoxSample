@@ -34,6 +34,7 @@
               [value]="queArr?.answers[0]?.isCorrect"
               [(ngModel)]="queArr.selectedAnswer"
               id="yes"
+              (click)="handleChange($event, queArr)"
               inputId="ans{{ i }}"
             ></p-radioButton>
             {{ queArr?.answers[0]?.name }}</label
@@ -47,6 +48,7 @@
               [value]="queArr?.answers[1]?.isCorrect"
               [(ngModel)]="queArr.selectedAnswer"
               id="no"
+              (click)="handleChange($event, queArr)"
               inputId="ans{{ i + 10 }}"
             ></p-radioButton>
             {{ queArr?.answers[1]?.name }}</label

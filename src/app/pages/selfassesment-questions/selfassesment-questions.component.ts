@@ -12,6 +12,7 @@ import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { EvolutionService } from '../evaluation/evolution.service';
+import { SelfAssesmentQuestionService } from './self-assesment-questions.service';
 
 @Component({
   selector: 'app-selfassesment-questions',
@@ -29,7 +30,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   sidebarOpenText = false;
   cancelText: string;
   disabled = true;
-  radioData;
+  radioData = [];
+  radioDatas = [];
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -39,7 +41,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     public translateService: TranslateService,
     private headerService: HeaderService,
     private evolutionService: EvolutionService,
-    private dataService: DataService
+    private dataService: DataService,
+    private selfAssesQueSer: SelfAssesmentQuestionService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -79,6 +82,49 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     return this.dataService.appData;
   }
 
+  handleChange(e, data) {
+    if (this.radioDatas.length > 0) {
+      const idx = this.radioDatas.findIndex((idxs) => idxs.name === data.name);
+      if (idx !== -1) {
+        if (data.selectedAnswer === true) {
+          this.radioDatas[idx].score = data.answers[0].score;
+          this.radioDatas[idx].hint = data.answers[0].hint;
+        } else {
+          this.radioDatas[idx].score = data.answers[1].score;
+          this.radioDatas[idx].hint = data.answers[1].hint;
+        }
+      } else {
+        if (data.selectedAnswer === true) {
+          this.radioDatas.push({
+            name: data.name,
+            score: data.answers[0].score,
+            hint: data.answers[0].hint,
+          });
+        } else {
+          this.radioDatas.push({
+            name: data.name,
+            score: data.answers[1].score,
+            hint: data.answers[1].hint,
+          });
+        }
+      }
+    } else {
+      if (data.selectedAnswer === true) {
+        this.radioDatas.push({
+          name: data.name,
+          score: data.answers[0].score,
+          hint: data.answers[0].hint,
+        });
+      } else {
+        this.radioDatas.push({
+          name: data.name,
+          score: data.answers[1].score,
+          hint: data.answers[1].hint,
+        });
+      }
+    }
+  }
+
   slibar(): void {
     this.sidebarOpen = true;
   }
@@ -87,6 +133,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
+    this.selfAssesQueSer.screenShotData = this.radioDatas;
     this.router.navigate(['/evaluation']);
   }
 

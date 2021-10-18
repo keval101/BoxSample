@@ -34,6 +34,7 @@ export class SelfAssesmentComponent implements OnInit {
   cancelText: string;
   pageIndex: number;
   selectedPage = 0;
+  screenShots = this.appData.questionnaire.pages[0].screenshots;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -52,6 +53,7 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = true;
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
         setTimeout(() => {
           this.imagePreviews[0].classList.add('active');
         }, 100);
@@ -66,6 +68,7 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = false;
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
         setTimeout(() => {
           this.imagePreviews[0].classList.add('active');
         }, 100);
@@ -96,7 +99,12 @@ export class SelfAssesmentComponent implements OnInit {
 
   setPage(indexOf: { page: number }): void {
     this.pageIndex = indexOf.page;
-    this.selfAssesmentService.imageIndex = this.pageIndex;
+    this.screenShots.forEach((element, index) => {
+      if (index === this.pageIndex) {
+        this.selfAssesmentService.imageIndex = element;
+      }
+    });
+
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].className = this.imagePreviews[i].className.replace(
         ' active',

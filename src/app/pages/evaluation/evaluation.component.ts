@@ -16,6 +16,7 @@ import { HeaderService } from 'src/app/features/header/header.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { RecordingService } from '../recording-screen/recording.service';
 import { DataService } from 'src/app/shared/shared/data.service';
+import { SelfAssesmentQuestionService } from '../selfassesment-questions/self-assesment-questions.service';
 
 @Component({
   selector: 'app-evaluation',
@@ -31,13 +32,20 @@ export class EvaluationComponent implements OnInit {
   cancelValue = true;
   resultImage;
   isGoal = true;
-  id;
+  selfAssessImage;
   items = [];
   cancelText: string;
-  responsiveOptions;
+  responsiveOptions = [];
   @ViewChild('sidenav') sidenav: ElementRef;
 
   scores = [];
+
+  exerciseData;
+  screenshotsData;
+  totalScore = 0;
+  totalMaxScore = 0;
+  allHint = [];
+  questionData = this.appData.questionnaire.pages[1].sections[0];
 
   constructor(
     private router: Router,
@@ -49,9 +57,10 @@ export class EvaluationComponent implements OnInit {
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
     public utility: UtilityService,
-    private dataservice: DataService
+    private dataservice: DataService,
+    private selfAssesQueSer: SelfAssesmentQuestionService
   ) {
-    this.id = this.selfAssesmentService.imageIndex;
+    this.selfAssessImage = this.selfAssesmentService.imageIndex;
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -94,18 +103,45 @@ export class EvaluationComponent implements OnInit {
     this.items = this.moveLastArrayElementToFirstIndex(
       this.takescreenshotService.captures
     );
+    this.exerciseData = this.appData.reportSections[0].reportItems[0];
+    this.screenshotsData = this.appData.questionnaire.pages[0];
     this.recording = true;
     this.evolutionService.cancelValue = false;
     this.resultImage = this.takescreenshotService.resultImageSource;
-    this.id = 0;
-    this.appData.reportSections[0].reportItems.forEach((element) => {
-      this.scores.push({
-        title: element.name,
-        measured: this.recordingService.finalRecordDuration,
-        goalvalue: element.goalValueString,
-        score: element.maxScore,
-      });
+
+    this.selfAssesQueSer.screenShotData.forEach((element) => {
+      this.totalScore = this.totalScore + element.score;
+      this.allHint.push(element.hint);
     });
+
+    this.questionData.questions.forEach((element) => {
+      this.totalMaxScore = this.totalMaxScore + element.maxScore;
+    });
+
+    const totalScoreforQue = (this.totalScore * 100) / this.totalMaxScore;
+    const totalScoreforScreenShot =
+      (this.selfAssessImage.score * 100) / this.screenshotsData.maxScore;
+    this.scores = [
+      {
+        title: this.exerciseData.name,
+        measured: this.recordingService.finalRecordDuration,
+        goalvalue: this.exerciseData.goalValueString,
+        score: this.exerciseData.maxScore + ' / ' + '50',
+      },
+      {
+        title: this.screenshotsData.name,
+        measured: totalScoreforScreenShot.toFixed(2) + '%',
+        goalvalue: '100%',
+        score:
+          this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
+      },
+      {
+        title: this.questionData.name,
+        measured: totalScoreforQue.toFixed(2) + '%',
+        goalvalue: '100%',
+        score: this.totalScore + ' / ' + this.totalMaxScore,
+      },
+    ];
   }
 
   onSlidebarOpen(value: boolean): void {
