@@ -71,7 +71,12 @@
   </div>
 </div>
 
-<div class="sidebar" #sidenav *ngIf="isSidebarOpen" @fadeAnimation>
+<div
+  class="sidebar recording-sidebar"
+  #sidenav
+  *ngIf="isSidebarOpen"
+  @fadeAnimation
+>
   <div class="sidebar__header">
     <button type="button" (click)="onSlidebarClose()">
       <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
@@ -84,31 +89,12 @@
     </div>
   </div>
 
-  <div class="sidebar__content">
-    <p class="sidebar__content-title">
-      {{ 'recordingPage.exercise' | translate }}
-    </p>
-    <div class="sidebar__content-goal">
-      <p class="sidebar__content-title2">
-        {{ 'intro.goals' | translate }}
-      </p>
-      <p class="sidebar__content-text">
-        {{ 'intro.goalsText' | translate }}
-      </p>
-    </div>
-    <div class="sidebar__content-task">
-      <p class="sidebar__content-title2">
-        {{ 'recordingPage.yourTasks' | translate }}
-      </p>
-      <ul>
-        <li>{{ 'recordingPage.ulText1' | translate }}</li>
-        <li>{{ 'recordingPage.ulText2' | translate }}</li>
-        <li>{{ 'recordingPage.ulText3' | translate }}</li>
-        <li>{{ 'recordingPage.ulText4' | translate }}</li>
-        <li>{{ 'recordingPage.ulText5' | translate }}</li>
-      </ul>
-    </div>
-  </div>
+  <div
+    class="sidebar__content"
+    id="sidebar__content"
+    *ngIf="appData"
+    [innerHTML]="appData?.descriptionItems[2]?.content"
+  ></div>
 </div>
 
 <p-confirmDialog header="Confirmation" #cd>

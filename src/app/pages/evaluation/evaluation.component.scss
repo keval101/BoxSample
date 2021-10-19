@@ -332,6 +332,24 @@
   &-feedback {
     margin-top: 6rem;
 
+    .feedbackcontainer {
+      overflow-y: auto;
+      max-height: 100px;
+
+      @media only screen and (min-width: 834px) and (max-width: 1194px) {
+        max-height: 110px;
+      }
+      @media only screen and (min-width: 1366px) and (height: 768px) {
+        max-height: 110px;
+      }
+      @media (min-width: 1366px) and (height: 1024px) {
+        max-height: 225px;
+      }
+      @media (min-width: 1400px) and (min-height: 1024px) {
+        max-height: 100px;
+      }
+    }
+
     &-text {
       font-family: 'Myriad Light';
       font-size: 2.4rem;

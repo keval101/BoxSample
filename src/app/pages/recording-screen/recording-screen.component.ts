@@ -18,6 +18,7 @@ import { SetupService } from '../setup/setup.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
+import { DataService } from 'src/app/shared/shared/data.service';
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -74,6 +75,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private setupSerice: SetupService,
     public platform: Platform,
+    private dataservice: DataService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService
@@ -346,5 +348,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.videoTimer.unsubscribe();
     }, 4000);
+  }
+
+  get appData() {
+    return this.dataservice.appData;
   }
 }

@@ -15,6 +15,7 @@ import { TakescreenshotService } from './takescreenshot.service';
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { DataService } from 'src/app/shared/shared/data.service';
 
 declare const window: Window &
   typeof globalThis & {
@@ -51,7 +52,8 @@ export class TakescreenshotComponent
     private takescreenshotService: TakescreenshotService,
     private setupSerice: SetupService,
     private confirmationService: ConfirmationService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private dataservice: DataService
   ) {
     this.translateService
       .get('takescreenshot.cancelText')
@@ -174,5 +176,9 @@ export class TakescreenshotComponent
         track.stop();
       });
     }
+  }
+
+  get appData() {
+    return this.dataservice.appData;
   }
 }

@@ -14,7 +14,9 @@
       </div>
 
       <div class="header__right">
-        <span class="header__right--text">{{ 'home.title' | translate }}</span>
+        <span class="header__right--text">{{
+          appData?.sceneSectionName + ' - ' + appData?.name
+        }}</span>
       </div>
     </div>
 
