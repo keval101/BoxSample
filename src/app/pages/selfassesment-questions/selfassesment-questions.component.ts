@@ -10,7 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { EvolutionService } from '../evaluation/evolution.service';
+import { SelfAssesmentQuestionService } from './self-assesment-questions.service';
 
 @Component({
   selector: 'app-selfassesment-questions',
@@ -27,6 +29,9 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   sidebarOpen: boolean;
   sidebarOpenText = false;
   cancelText: string;
+  disabled = true;
+  radioData = [];
+  radioDatas = [];
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -35,7 +40,9 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public translateService: TranslateService,
     private headerService: HeaderService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    private dataService: DataService,
+    private selfAssesQueSer: SelfAssesmentQuestionService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -58,6 +65,64 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       });
     this.isScreenShot = true;
     this.recording = true;
+    this.radioData = this.appData.questionnaire.pages[1].sections[0].questions;
+
+    this.radioData.forEach((element) => {
+      element.answers.forEach((elementAns) => {
+        if (elementAns.name === 'Yes' || elementAns.name === 'No') {
+          this.disabled = false;
+        } else {
+          this.disabled = true;
+        }
+      });
+    });
+  }
+
+  get appData() {
+    return this.dataService.appData;
+  }
+
+  handleChange(e, data) {
+    if (this.radioDatas.length > 0) {
+      const idx = this.radioDatas.findIndex((idxs) => idxs.name === data.name);
+      if (idx !== -1) {
+        if (data.selectedAnswer === true) {
+          this.radioDatas[idx].score = data.answers[0].score;
+          this.radioDatas[idx].hint = data.answers[0].hint;
+        } else {
+          this.radioDatas[idx].score = data.answers[1].score;
+          this.radioDatas[idx].hint = data.answers[1].hint;
+        }
+      } else {
+        if (data.selectedAnswer === true) {
+          this.radioDatas.push({
+            name: data.name,
+            score: data.answers[0].score,
+            hint: data.answers[0].hint,
+          });
+        } else {
+          this.radioDatas.push({
+            name: data.name,
+            score: data.answers[1].score,
+            hint: data.answers[1].hint,
+          });
+        }
+      }
+    } else {
+      if (data.selectedAnswer === true) {
+        this.radioDatas.push({
+          name: data.name,
+          score: data.answers[0].score,
+          hint: data.answers[0].hint,
+        });
+      } else {
+        this.radioDatas.push({
+          name: data.name,
+          score: data.answers[1].score,
+          hint: data.answers[1].hint,
+        });
+      }
+    }
   }
 
   slibar(): void {
@@ -68,6 +133,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
+    this.selfAssesQueSer.screenShotData = this.radioDatas;
     this.router.navigate(['/evaluation']);
   }
 
@@ -79,6 +145,14 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  isDisable() {
+    return (
+      !this.radioData ||
+      (this.radioData &&
+        this.radioData.find((x) => x.selectedAnswer === undefined))
+    );
   }
 
   sidebarOpenData(event: Event): void {

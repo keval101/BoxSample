@@ -112,51 +112,9 @@ ol {
   &__content {
     position: relative;
     flex-grow: 1;
-
     overflow-y: auto;
     max-height: calc(100% - 20rem);
     margin-bottom: 2rem;
-    &-title {
-      font-size: 2.4rem;
-      color: $blue-color;
-      font-weight: 400;
-      margin: 0;
-      font-family: 'Myriad Regular';
-
-      @media screen and (max-width: 600px) {
-        font-size: 3.4rem;
-      }
-    }
-
-    &-text {
-      font-size: 2.8rem;
-      color: $black-color;
-      margin: 0;
-      font-weight: 300;
-      line-height: 3rem;
-      font-family: 'Myriad Light';
-
-      @media screen and (min-width: 768px) {
-        font-size: 2.4rem;
-      }
-
-      @media screen and (max-width: 600px) {
-        font-size: 3.1rem;
-        line-height: 3.6rem;
-      }
-    }
-
-    &-texDiv {
-      margin-bottom: 2rem;
-    }
-
-    .need {
-      list-style: none;
-      padding: 0;
-    }
-    .willdo {
-      // padding-left: 2rem;
-    }
   }
 
   &__header {

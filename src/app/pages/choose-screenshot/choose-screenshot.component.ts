@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 @Component({
@@ -34,6 +35,7 @@ export class ChooseScreenshotComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private takescreenshotService: TakescreenshotService,
     private headerService: HeaderService,
+    private dataservice: DataService,
     private evolutionService: EvolutionService
   ) {
     this.responsiveOptions = [
@@ -110,5 +112,9 @@ export class ChooseScreenshotComponent implements OnInit {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  get appData() {
+    return this.dataservice.appData;
   }
 }

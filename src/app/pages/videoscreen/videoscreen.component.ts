@@ -7,11 +7,12 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeaderService } from 'src/app/features/header/header.service';
+import { HeaderService } from '../../features/header/header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
+import { DataService } from '../../shared/shared/data.service';
 
 @Component({
   selector: 'app-videoscreen',
@@ -31,12 +32,12 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   isMuted = false;
   cancelText: string;
   isVideoLoaded: boolean;
-
   @ViewChild('video') video: ElementRef;
 
   constructor(
     private router: Router,
     private headerService: HeaderService,
+    private dataService: DataService,
     private Translateservice: TranslateService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService
@@ -63,6 +64,10 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     video.addEventListener('canplay', () => {
       this.isVideoLoaded = false;
     });
+  }
+
+  get appData() {
+    return this.dataService.appData;
   }
 
   ngOnDestroy() {

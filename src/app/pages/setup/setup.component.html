@@ -88,37 +88,12 @@
       <img src="assets/images/logo.svg" alt="logo" />
     </div>
 
-    <div class="sidebar__content">
-      <p class="sidebar__content-title">
-        {{ 'recordingPage.exercise' | translate }}
-      </p>
-      <div class="sidebar__content-goal">
-        <p class="sidebar__content-title2">
-          {{ 'intro.goals' | translate }}
-        </p>
-        <p class="sidebar__content-text">
-          {{ 'intro.goalsText' | translate }}
-        </p>
-      </div>
-      <div class="sidebar__content-task">
-        <p class="sidebar__content-title2">
-          {{ 'recordingPage.yourTasks' | translate }}
-        </p>
-        <p class="sidebar__content-text">
-          {{ 'setup.tasks' | translate }}
-        </p>
-
-        <ul>
-          <li>{{ 'setup.ulText1' | translate }}</li>
-          <li>{{ 'setup.ulText2' | translate }}</li>
-          <li>{{ 'setup.ulText3' | translate }}</li>
-        </ul>
-
-        <p class="sidebar__content-text">
-          {{ 'setup.note' | translate }}
-        </p>
-      </div>
-    </div>
+    <div
+      class="sidebar__content"
+      id="sidebar__content"
+      *ngIf="appData"
+      [innerHTML]="appData?.descriptionItems[1]?.content"
+    ></div>
 
     <div class="sidebar__buttonGroup">
       <button

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 
@@ -41,12 +42,12 @@ export class IntroComponent implements OnInit {
     public translateService: TranslateService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
-    private router: Router
+    private router: Router,
+    private dataService: DataService
   ) {}
 
   ngOnInit(): void {
     this.recording = true;
-
     this.translateService.get('intro.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
@@ -81,6 +82,10 @@ export class IntroComponent implements OnInit {
         this.sidebar = false;
       }
     }
+  }
+
+  get appData() {
+    return this.dataService.appData;
   }
 
   redirectTo(): void {

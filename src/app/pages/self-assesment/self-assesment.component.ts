@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
+import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
@@ -24,7 +25,6 @@ import { SelfAssesmentService } from './self-assesment.service';
 export class SelfAssesmentComponent implements OnInit {
   recording: boolean;
   isScreenShot: boolean;
-  items = [];
   responsiveOptions;
   resultImage;
   touchScreen: boolean;
@@ -33,7 +33,8 @@ export class SelfAssesmentComponent implements OnInit {
   sidebarOpenText = false;
   cancelText: string;
   pageIndex: number;
-  itemImage = '';
+  selectedPage = 0;
+  screenShots = this.appData.questionnaire.pages[0].screenshots;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -45,22 +46,33 @@ export class SelfAssesmentComponent implements OnInit {
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
     private evolutionService: EvolutionService,
-    public utility: UtilityService
+    public utility: UtilityService,
+    private dataService: DataService
   ) {
     if (window.matchMedia('(pointer: coarse)').matches) {
       this.touchScreen = true;
-
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
-        this.imagePreviews[0].classList.add();
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
         const btnNext = document.querySelector('.p-carousel-next');
         const btnPrev = document.querySelector('.p-carousel-prev');
-        btnNext.classList.add('leval');
-        btnPrev.classList.add('leval');
-        // this.imagePreviews[this.pageIndex].className += " active";
+        if (btnNext && btnPrev) {
+          btnNext.classList.add('leval');
+          btnPrev.classList.add('leval');
+        }
       }, 1);
     } else {
       this.touchScreen = false;
+      setTimeout(() => {
+        this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
+      }, 1);
     }
 
     this.responsiveOptions = [
@@ -86,9 +98,13 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   setPage(indexOf: { page: number }): void {
-    this.itemImage = '';
     this.pageIndex = indexOf.page;
-    this.selfAssesmentService.imageIndex = this.pageIndex;
+    this.screenShots.forEach((element, index) => {
+      if (index === this.pageIndex) {
+        this.selfAssesmentService.imageIndex = element;
+      }
+    });
+
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].className = this.imagePreviews[i].className.replace(
         ' active',
@@ -108,6 +124,10 @@ export class SelfAssesmentComponent implements OnInit {
       this.sidebarOpenText = false;
       this.headerService.isInfoOpen = false;
     }
+  }
+
+  get appData() {
+    return this.dataService.appData;
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -140,25 +160,17 @@ export class SelfAssesmentComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
-
-    // this.imagePreviews[0].classList.add('active')
     this.isScreenShot = true;
     this.recording = true;
-    this.items = [
-      { img: '../../../assets/images/screenshot0.png' },
-      { img: '../../../assets/images/screenshot1.png' },
-      { img: '../../../assets/images/screenshot2.png' },
-      { img: '../../../assets/images/screenshot3.png' },
-    ];
     this.resultImage = this.takescreenshotService.resultImageSource;
   }
-  active(item: { img }, ids: number): void {
-    this.itemImage = '';
+
+  active(index: number): void {
     for (let i = 0; i < this.imagePreviews.length; i++) {
       this.imagePreviews[i].classList.remove('active');
-      this.itemImage = item.img;
-      this.imagePreviews[ids].classList.add('active');
     }
+    this.imagePreviews[index].classList.add('active');
+    this.selectedPage = index;
   }
 
   slibar(): void {
