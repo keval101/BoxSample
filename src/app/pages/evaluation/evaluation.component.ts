@@ -130,14 +130,14 @@ export class EvaluationComponent implements OnInit {
       },
       {
         title: this.screenshotsData.name,
-        measured: totalScoreforScreenShot.toFixed(2) + '%',
+        measured: totalScoreforScreenShot.toFixed(0) + '%',
         goalvalue: '100%',
         score:
           this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
       },
       {
         title: this.questionData.name,
-        measured: totalScoreforQue.toFixed(2) + '%',
+        measured: totalScoreforQue.toFixed(0) + '%',
         goalvalue: '100%',
         score: this.totalScore + ' / ' + this.totalMaxScore,
       },
