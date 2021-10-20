@@ -121,12 +121,13 @@ export class EvaluationComponent implements OnInit {
     const totalScoreforQue = (this.totalScore * 100) / this.totalMaxScore;
     const totalScoreforScreenShot =
       (this.selfAssessImage.score * 100) / this.screenshotsData.maxScore;
+    const recordinScore = this.recordingTime();
     this.scores = [
       {
         title: this.exerciseData.name,
         measured: this.recordingService.finalRecordDuration,
         goalvalue: this.exerciseData.goalValueString,
-        score: this.exerciseData.maxScore + ' / ' + '50',
+        score: recordinScore < 1 && recordinScore > 0 ? recordinScore.toFixed(2) : recordinScore + ' / ' + '50',
       },
       {
         title: this.screenshotsData.name,
@@ -201,4 +202,9 @@ export class EvaluationComponent implements OnInit {
 
     this.router.navigate(['/end']);
   }
+
+  recordingTime(): number {
+    return 0;
+  }
+
 }
