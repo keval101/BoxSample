@@ -187,6 +187,6 @@ export class SelfAssesmentComponent implements OnInit {
     this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
-    this.router.navigate(['/self-assesment-questions']);
+    this.dataService.preserveQueryParams('/self-assesment-questions');
   }
 }

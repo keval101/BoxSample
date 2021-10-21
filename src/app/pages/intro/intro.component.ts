@@ -89,7 +89,7 @@ export class IntroComponent implements OnInit {
   }
 
   redirectTo(): void {
-    this.router.navigate(['/video']);
+    this.dataService.preserveQueryParams('/video');
   }
 
   closeSidebar(): void {
