@@ -128,7 +128,10 @@ export class EvaluationComponent implements OnInit {
         title: this.exerciseData.name,
         measured: this.recordingService.finalRecordDuration,
         goalvalue: this.exerciseData.goalValueString,
-        score: recordinScore < 1 && recordinScore > 0 ? recordinScore.toFixed(2) : recordinScore + ' / ' + '50',
+        score:
+          recordinScore < 1 && recordinScore > 0
+            ? recordinScore.toFixed(2)
+            : recordinScore + ' / ' + '50',
       },
       {
         title: this.screenshotsData.name,
@@ -204,8 +207,6 @@ export class EvaluationComponent implements OnInit {
     this.router.navigate(['/end']);
   }
 
-
-
   recordingTime(): number {
     const time = this.recordingService.finalRecordDuration.split(':');
     const totalSeconds = Number(time[0]) * 60 + Number(time[1]);
@@ -242,5 +243,4 @@ export class EvaluationComponent implements OnInit {
       } else return 0;
     } else return this.exerciseData.maxScore;
   }
-
 }
