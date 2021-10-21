@@ -143,7 +143,7 @@ export class TakescreenshotComponent
   }
 
   onDone(): void {
-    this.router.navigate(['/self-assesment']);
+    this.dataservice.preserveQueryParams('/self-assesment');
     this.takescreenshotService.resultImageSource =
       this.canvas.nativeElement.toDataURL('image/png');
     this.takescreenshotService.captures.push(

@@ -208,11 +208,11 @@ export class SetupComponent implements OnInit, OnDestroy {
   }
 
   redirectTo(): void {
-    this.router.navigate(['/recording']);
+    this.dataservice.preserveQueryParams('/recording');
   }
 
   redirectToBack(): void {
-    this.router.navigate(['/video']);
+    this.dataservice.preserveQueryParams('/video');
   }
 
   closeSidebar(): void {

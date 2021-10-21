@@ -134,7 +134,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
   redirectTo(): void {
     this.selfAssesQueSer.screenShotData = this.radioDatas;
-    this.router.navigate(['/evaluation']);
+    this.dataService.preserveQueryParams('/evaluation');
   }
 
   onCancelExersice(): void {

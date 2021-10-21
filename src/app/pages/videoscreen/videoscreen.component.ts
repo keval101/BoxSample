@@ -135,13 +135,13 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   redirectToBack(): void {
-    this.router.navigate(['/intro']);
+    this.dataService.preserveQueryParams('/intro');
   }
 
   redirectTo(): void {
     this.playVideo = false;
     this.video.nativeElement.pause();
-    this.router.navigate(['/setup']);
+    this.dataService.preserveQueryParams('/setup');
   }
 
   onCancelExersice(): void {

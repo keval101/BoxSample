@@ -3,6 +3,7 @@ import { environment } from 'src/environments';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,17 @@ import { Observable } from 'rxjs';
 export class DataService {
   baseUrl = environment.API_HOST;
   appData;
+  activeParams: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private activeRouter: ActivatedRoute
+  ) {
+    this.activeRouter.queryParams.subscribe((params) => {
+      this.activeParams = params.sceneId;
+    });
+  }
 
   getScene(sceneId: string): Observable<any> {
     return this.http.get(this.baseUrl + `Scene/${sceneId}/details`);
@@ -24,5 +34,11 @@ export class DataService {
 
   submitData(contextId: string, data): Observable<any> {
     return this.http.post(this.baseUrl + `user/reports/${contextId}`, data);
+  }
+
+  preserveQueryParams(url: string) {
+    return this.router.navigate([url], {
+      queryParams: { sceneId: this.activeParams },
+    });
   }
 }

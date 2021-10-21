@@ -320,7 +320,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   redirectToPhoto(): void {
-    this.router.navigate(['/takescreenshot']);
+    this.dataservice.preserveQueryParams('/takescreenshot');
   }
 
   confirm(): void {
