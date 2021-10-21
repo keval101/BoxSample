@@ -17,6 +17,7 @@ import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { RecordingService } from '../recording-screen/recording.service';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { SelfAssesmentQuestionService } from '../selfassesment-questions/self-assesment-questions.service';
+import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
 
 @Component({
   selector: 'app-evaluation',
@@ -203,8 +204,43 @@ export class EvaluationComponent implements OnInit {
     this.router.navigate(['/end']);
   }
 
+
+
   recordingTime(): number {
-    return 0;
+    const time = this.recordingService.finalRecordDuration.split(':');
+    const totalSeconds = Number(time[0]) * 60 + Number(time[1]);
+    if (
+      this.exerciseData.bestIs === RecordingEnum.maxValue ||
+      this.exerciseData.bestIs === RecordingEnum.zaroMax
+    ) {
+      if (totalSeconds <= this.exerciseData.minValue) return 0;
+      else if (totalSeconds >= this.exerciseData.maxValue)
+        return this.exerciseData.maxScore;
+      else
+        return (
+          (this.exerciseData.maxScore *
+            (totalSeconds - this.exerciseData.minValue)) /
+          (this.exerciseData.maxValue - this.exerciseData.minValue)
+        );
+    } else if (
+      this.exerciseData.bestIs === RecordingEnum.minValue ||
+      this.exerciseData.bestIs === RecordingEnum.zeroMin
+    ) {
+      if (totalSeconds >= this.exerciseData.maxValue) return 0;
+      else if (totalSeconds <= this.exerciseData.minValue)
+        return this.exerciseData.maxScore;
+      else
+        return (
+          this.exerciseData.maxScore *
+          (1.0 -
+            (totalSeconds - this.exerciseData.minValue) /
+              (this.exerciseData.maxValue - this.exerciseData.minValue))
+        );
+    } else if (this.exerciseData.bestIs === RecordingEnum.minMax) {
+      if (totalSeconds === this.exerciseData.maxValue) {
+        return this.exerciseData.maxScore;
+      } else return 0;
+    } else return this.exerciseData.maxScore;
   }
 
 }
