@@ -66,6 +66,11 @@ export class IntroComponent implements OnInit {
         'caseData'
       );
       sessionStorage.removeItem('currentUrl');
+      if (!window.indexedDB) {
+        window.alert("Your browser doesn't support a stable version of IndexedDB.")
+      } else {
+        indexedDB.deleteDatabase('myDatabase');
+      }
     }
   }
 

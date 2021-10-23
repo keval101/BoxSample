@@ -70,6 +70,11 @@ export class AppComponent implements OnInit {
         this.appData = res;
         this.dataservice.appData = res;
         sessionStorage.clear();
+        if (!window.indexedDB) {
+          window.alert("Your browser doesn't support a stable version of IndexedDB.")
+        } else {
+          indexedDB.deleteDatabase('myDatabase');
+        }
         this.dataservice.setCaseData(res, 'case');
         if (params) {
           this.dataservice.setCaseData(params, 'sceneId');

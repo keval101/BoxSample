@@ -59,7 +59,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoTimer: Subscription;
   flashCheckedValue = false;
   isFullScreen: boolean;
-
+  indexDB;
   cancelText: string;
   totalScreenshot = [];
 
@@ -106,44 +106,143 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.appData.recordingPath) {
-      this.videoSource = this.appData.recordingPath;
-      this.recordingFinish = true;
-    } else {
-      this.translateService
-        .get('recordingPage.cancelText')
-        .subscribe((text: string) => {
-          this.cancelText = text;
-        });
 
-      const obs = interval(1000);
-      const timerSub: Subscription = obs.subscribe((d) => {
-        this.counterTime = true;
-        const counterText = this.data[d];
-        this.counter = counterText;
+    this.initDatabase();
+  }
 
-        if (d === 3) {
-          this.paddingClass = true;
-        }
+  initRecording() {
+    this.translateService
+      .get('recordingPage.cancelText')
+      .subscribe((text: string) => {
+        this.cancelText = text;
       });
-      setTimeout(() => {
-        timerSub.unsubscribe();
-        this.startRecording();
-        this.counterTime = false;
-        if (this.headerService.muteMic === false) {
-          if (window.stream.getAudioTracks().length > 0) {
-            window.stream.getAudioTracks()[0].enabled = false;
-          }
+
+    const obs = interval(1000);
+    const timerSub: Subscription = obs.subscribe((d) => {
+      this.counterTime = true;
+      const counterText = this.data[d];
+      this.counter = counterText;
+
+      if (d === 3) {
+        this.paddingClass = true;
+      }
+    });
+    setTimeout(() => {
+      timerSub.unsubscribe();
+      this.startRecording();
+      this.counterTime = false;
+      if (this.headerService.muteMic === false) {
+        if (window.stream.getAudioTracks().length > 0) {
+          window.stream.getAudioTracks()[0].enabled = false;
         }
-      }, 5000);
-      setTimeout(() => {
-        this.startCamera();
-      }, 500);
-      this.micCheckedValue = this.headerService.muteMic;
-      this.flashCheckedValue = this.headerService.flash;
-      this.recordingDurationTime = '00:00';
+      }
+    }, 5000);
+    setTimeout(() => {
+      this.startCamera();
+    }, 500);
+    this.micCheckedValue = this.headerService.muteMic;
+    this.flashCheckedValue = this.headerService.flash;
+    this.recordingDurationTime = '00:00';
+  }
+
+  initDatabase() {
+    let db;
+    let dbReq = indexedDB.open('myDatabase', 1);
+
+    dbReq.onupgradeneeded = (event: any) => {
+      // Set the db variable to our database so we can use it!
+      db = event.target.result;
+      // Create an object store named notes. Object stores
+      // in databases are where data are stored.
+      db.createObjectStore('recording', {autoIncrement: true});
+    }
+    dbReq.onsuccess = (event: any) => {
+      db = event.target.result;
+      this.indexDB = db;
+      // this.addStickyNote(db, 'text');
+      this.getAndDisplayNotes(db);
+    }
+    dbReq.onerror = (event: any) => {
+      alert('error opening database ' + event.target);
     }
   }
+
+  getAndDisplayNotes(db) {
+    let tx = db.transaction(['recording'], 'readonly');
+    let store = tx.objectStore('recording');
+    // Create a cursor request to get all items in the store, which
+    // we collect in the allNotes array
+    let req = store.openCursor();
+    let allNotes = [];
+
+    req.onsuccess = (event) => {
+      // The result of req.onsuccess is an IDBCursor
+      let cursor = event.target.result;
+      if (cursor != null) {
+        // If the cursor isn't null, we got an IndexedDB item.
+        // Add it to the note array and have the cursor continue!
+        allNotes.push(cursor.value);
+        cursor.continue();
+      } else {
+        // If we have a null cursor, it means we've gotten
+        // all the items in the store, so display the notes we got
+        // displayNotes(allNotes);
+        console.log(allNotes);
+        if (allNotes.length) {
+          this.videoSource = allNotes[0].recordingPath;
+          this.recordingFinish = true;
+        } else {
+          this.initRecording();
+        }
+      }
+    }
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    }
+  }
+
+  storeRecording(db, videoData) {
+    // Start a database transaction and get the notes object store
+    let tx = db.transaction(['recording'], 'readwrite');
+    let store = tx.objectStore('recording');
+    // Put the sticky note into the object store
+    let note = {recordingPath: videoData};
+    store.add(note);
+    // Wait for the database transaction to complete
+    tx.oncomplete = () => { console.log('stored note!') }
+    tx.onerror = (event) => {
+      alert('error storing Recording ' + event.target.errorCode);
+    }
+  }
+
+  resetVideoToModal(db) {
+    console.log(db);
+    const req = db.transaction(["employee"], "readwrite")
+    .objectStore("employee")
+    .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+
+    req.onsuccess = (event) => {
+       alert("Kenny has been added to your database.");
+    };
+
+    req.onerror = (event) => {
+       alert("Unable to add data\r\nKenny is aready exist in your database! ");
+    }
+  }
+
+  readAll(db) {
+    const objectStore = db.transaction("employee").objectStore("recording");
+
+    objectStore.openCursor().onsuccess = (event) => {
+       const cursor = event.target.result;
+       if (cursor) {
+          console.log(cursor);
+          cursor.continue();
+       } else {
+          alert("No more entries!");
+       }
+    };
+ }
 
   onFinish(): void {
     this.recordingService.fullscreen = false;
@@ -216,7 +315,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       reader.onloadend = () => {
         const base64data = reader.result;
         this.videoSource = base64data;
-        this.dataservice.setCaseData(base64data, 'recordingPath');
+        this.storeRecording(this.indexDB, base64data);
       };
 
       this.dataservice.setCaseData(this.totalScreenshot, 'recording');
@@ -279,16 +378,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   handleSuccess(stream: MediaStream): void {
     window.stream = stream;
     const gumVideo = this.videoEle.nativeElement;
-    // if (this.platform.SAFARI) {
-    //   this.options = { mimeType: 'video/mp4' };
-    //   this.videoType = { type: 'video/mp4' };
-    //   console.log(this.videoEle.nativeElement.toDataURL('video/mp4'));
-    // } else {
-    //   this.options = { mimeType: 'video/webm' };
-    //   this.videoType = { type: 'video/webm' };
-    //   console.log(this.videoEle.nativeElement.toDataURL('video/webm'));
-    // }
-
     gumVideo.srcObject = stream;
   }
 
