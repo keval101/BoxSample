@@ -9,8 +9,8 @@
 <div class="container">
   <div class="videoContainer">
     <video
-      [poster]="appData?.descriptionItems[0]?.imageUrl"
-      [src]="appData?.movies[0]?.Url"
+      [poster]="appData?.case?.descriptionItems[0]?.imageUrl"
+      [src]="appData?.case?.movies[0]?.Url"
       #video
       id="myvideo"
       type="video/mp4"
@@ -60,9 +60,11 @@
     </div>
 
     <div class="footer__text">
-      <p class="footer__text-bold m-0">{{ appData?.movies[0]?.FileName }}</p>
+      <p class="footer__text-bold m-0">
+        {{ appData?.case?.movies[0]?.FileName }}
+      </p>
       <p class="footer__text-light m-0">
-        {{ appData?.movies[0]?.CopyrightInfo }}
+        {{ appData?.case?.movies[0]?.CopyrightInfo }}
       </p>
     </div>
   </div>

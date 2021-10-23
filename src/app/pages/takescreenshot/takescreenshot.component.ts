@@ -144,11 +144,14 @@ export class TakescreenshotComponent
 
   onDone(): void {
     this.dataservice.preserveQueryParams('/self-assesment');
-    this.takescreenshotService.resultImageSource =
-      this.canvas.nativeElement.toDataURL('image/png');
-    this.takescreenshotService.captures.push(
-      this.canvas.nativeElement.toDataURL('image/png')
-    );
+    const data = [
+      ...this.appData.recording,
+      this.canvas.nativeElement.toDataURL('image/png'),
+    ];
+    this.dataservice.setCaseData(data, 'recording');
+
+    this.takescreenshotService.resultImageSource = this.appData.takeScreenShot;
+    this.takescreenshotService.captures = data;
   }
   onCancelExersice(): void {
     this.confirmationService.confirm({
@@ -179,6 +182,6 @@ export class TakescreenshotComponent
   }
 
   get appData() {
-    return this.dataservice.appData;
+    return JSON.parse(this.dataservice.getSessionData('caseData'));
   }
 }

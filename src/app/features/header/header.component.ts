@@ -66,7 +66,7 @@ export class HeaderComponent implements OnChanges, OnInit {
   }
 
   get appData() {
-    return this.dataService.appData;
+    return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
   fullscreen(): void {

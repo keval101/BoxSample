@@ -61,6 +61,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   isFullScreen: boolean;
 
   cancelText: string;
+  totalScreenshot = [];
 
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
@@ -105,38 +106,43 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.translateService
-      .get('recordingPage.cancelText')
-      .subscribe((text: string) => {
-        this.cancelText = text;
-      });
+    if (this.appData.recordingPath) {
+      this.videoSource = this.appData.recordingPath;
+      this.recordingFinish = true;
+    } else {
+      this.translateService
+        .get('recordingPage.cancelText')
+        .subscribe((text: string) => {
+          this.cancelText = text;
+        });
 
-    const obs = interval(1000);
-    const timerSub: Subscription = obs.subscribe((d) => {
-      this.counterTime = true;
-      const counterText = this.data[d];
-      this.counter = counterText;
+      const obs = interval(1000);
+      const timerSub: Subscription = obs.subscribe((d) => {
+        this.counterTime = true;
+        const counterText = this.data[d];
+        this.counter = counterText;
 
-      if (d === 3) {
-        this.paddingClass = true;
-      }
-    });
-    setTimeout(() => {
-      timerSub.unsubscribe();
-      this.startRecording();
-      this.counterTime = false;
-      if (this.headerService.muteMic === false) {
-        if (window.stream.getAudioTracks().length > 0) {
-          window.stream.getAudioTracks()[0].enabled = false;
+        if (d === 3) {
+          this.paddingClass = true;
         }
-      }
-    }, 5000);
-    setTimeout(() => {
-      this.startCamera();
-    }, 500);
-    this.micCheckedValue = this.headerService.muteMic;
-    this.flashCheckedValue = this.headerService.flash;
-    this.recordingDurationTime = '00:00';
+      });
+      setTimeout(() => {
+        timerSub.unsubscribe();
+        this.startRecording();
+        this.counterTime = false;
+        if (this.headerService.muteMic === false) {
+          if (window.stream.getAudioTracks().length > 0) {
+            window.stream.getAudioTracks()[0].enabled = false;
+          }
+        }
+      }, 5000);
+      setTimeout(() => {
+        this.startCamera();
+      }, 500);
+      this.micCheckedValue = this.headerService.muteMic;
+      this.flashCheckedValue = this.headerService.flash;
+      this.recordingDurationTime = '00:00';
+    }
   }
 
   onFinish(): void {
@@ -171,7 +177,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   muteVideo(): void {
-    if (window.stream.getAudioTracks().length > 0) {
+    if (window.stream && window.stream.getAudioTracks().length > 0) {
       window.stream.getAudioTracks()[0].enabled =
         !window.stream.getAudioTracks()[0].enabled;
     }
@@ -205,10 +211,19 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.mediaRecorder.onstop = (event) => {
       this.recordedBlobs = event.target.recordedBlobs;
       const superBuffer = new Blob(this.recordedBlobs, this.videoType);
-      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(
-        window.URL.createObjectURL(superBuffer)
-      );
+      const reader = new FileReader();
+      reader.readAsDataURL(superBuffer);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        this.videoSource = base64data;
+        this.dataservice.setCaseData(base64data, 'recordingPath');
+      };
+
+      this.dataservice.setCaseData(this.totalScreenshot, 'recording');
+      this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
+      this.takescreenshotService.captures = this.appData.recording.screenshots;
     };
+
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;
     this.mediaRecorder.start();
   }
@@ -264,6 +279,16 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   handleSuccess(stream: MediaStream): void {
     window.stream = stream;
     const gumVideo = this.videoEle.nativeElement;
+    // if (this.platform.SAFARI) {
+    //   this.options = { mimeType: 'video/mp4' };
+    //   this.videoType = { type: 'video/mp4' };
+    //   console.log(this.videoEle.nativeElement.toDataURL('video/mp4'));
+    // } else {
+    //   this.options = { mimeType: 'video/webm' };
+    //   this.videoType = { type: 'video/webm' };
+    //   console.log(this.videoEle.nativeElement.toDataURL('video/webm'));
+    // }
+
     gumVideo.srcObject = stream;
   }
 
@@ -309,14 +334,13 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.videoEle.nativeElement, 0, 0, 640, 480);
-    this.takescreenshotService.captures.push(
-      this.canvas.nativeElement.toDataURL('image/png')
-    );
+
     const vidStyleData = this.videoEle.nativeElement.getBoundingClientRect();
     this.canvas.nativeElement.style.width = vidStyleData.width + 'px';
     this.canvas.nativeElement.style.height = vidStyleData.height + 'px';
     this.canvas.nativeElement.style.left = vidStyleData.left + 'px';
     this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
+    this.totalScreenshot.push(this.canvas.nativeElement.toDataURL('image/png'));
   }
 
   redirectToPhoto(): void {
@@ -343,14 +367,16 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.headerService.videoFullscreen.next(false);
-    window.stream.getTracks()[0].stop();
-    setTimeout(() => {
-      this.videoTimer.unsubscribe();
-    }, 4000);
+    if (!this.appData.recordingPath) {
+      this.headerService.videoFullscreen.next(false);
+      window.stream.getTracks()[0].stop();
+      setTimeout(() => {
+        this.videoTimer.unsubscribe();
+      }, 4000);
+    }
   }
 
   get appData() {
-    return this.dataservice.appData;
+    return JSON.parse(this.dataservice.getSessionData('caseData'));
   }
 }

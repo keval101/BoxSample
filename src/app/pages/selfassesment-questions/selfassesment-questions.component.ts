@@ -65,7 +65,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       });
     this.isScreenShot = true;
     this.recording = true;
-    this.radioData = this.appData.questionnaire.pages[1].sections[0].questions;
+    this.radioData =
+      this.appData.case.questionnaire.pages[1].sections[0].questions;
 
     this.radioData.forEach((element) => {
       element.answers.forEach((elementAns) => {
@@ -79,7 +80,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   get appData() {
-    return this.dataService.appData;
+    return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
   handleChange(e, data) {
@@ -134,6 +135,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
   redirectTo(): void {
     this.selfAssesQueSer.screenShotData = this.radioDatas;
+    this.dataService.setCaseData(this.radioDatas, 'selfAssessmentQuestions');
     this.dataService.preserveQueryParams('/evaluation');
   }
 

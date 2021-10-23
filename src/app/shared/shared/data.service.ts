@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments';
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DataService {
   baseUrl = environment.API_HOST;
   appData;
+  currentUrl: string;
   activeParams: string;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private activeRouter: ActivatedRoute
+    private activeRouter: ActivatedRoute,
+    private location: Location
   ) {
     this.activeRouter.queryParams.subscribe((params) => {
       this.activeParams = params.sceneId;
@@ -37,8 +40,36 @@ export class DataService {
   }
 
   preserveQueryParams(url: string) {
-    return this.router.navigate([url], {
-      queryParams: { sceneId: this.activeParams },
-    });
+    if (this.activeParams) {
+      this.router.navigate([url], {
+        queryParams: { sceneId: this.activeParams },
+      });
+      this.setSessionData(`${url}?sceneId=caseTwo`, 'currentUrl');
+    } else {
+      this.router.navigate([url]);
+      this.setSessionData(url, 'currentUrl');
+    }
+  }
+
+  setCaseData(obj, key) {
+    if (this.getSessionData('caseData')) {
+      const data = JSON.parse(this.getSessionData('caseData'));
+      data[key] = obj;
+      this.setSessionData(data, 'caseData');
+    } else {
+      this.setSessionData({ case: obj }, 'caseData');
+    }
+  }
+
+  setSessionData(data: any, dataname) {
+    if (typeof data === 'string') {
+      sessionStorage.setItem(dataname, data);
+    } else {
+      sessionStorage.setItem(dataname, JSON.stringify(data));
+    }
+  }
+
+  getSessionData(dataname) {
+    return sessionStorage.getItem(dataname);
   }
 }

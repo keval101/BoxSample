@@ -34,8 +34,8 @@ export class SelfAssesmentComponent implements OnInit {
   cancelText: string;
   pageIndex: number;
   selectedPage = 0;
-  screenShots = this.appData.questionnaire.pages[0].screenshots;
-
+  screenShots;
+  selectedScreenShot: string;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
@@ -49,32 +49,6 @@ export class SelfAssesmentComponent implements OnInit {
     public utility: UtilityService,
     private dataService: DataService
   ) {
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      this.touchScreen = true;
-      setTimeout(() => {
-        this.imagePreviews = document.getElementsByClassName('p');
-        this.selfAssesmentService.imageIndex = this.screenShots[0];
-        setTimeout(() => {
-          this.imagePreviews[0].classList.add('active');
-        }, 100);
-        const btnNext = document.querySelector('.p-carousel-next');
-        const btnPrev = document.querySelector('.p-carousel-prev');
-        if (btnNext && btnPrev) {
-          btnNext.classList.add('leval');
-          btnPrev.classList.add('leval');
-        }
-      }, 1);
-    } else {
-      this.touchScreen = false;
-      setTimeout(() => {
-        this.imagePreviews = document.getElementsByClassName('p');
-        this.selfAssesmentService.imageIndex = this.screenShots[0];
-        setTimeout(() => {
-          this.imagePreviews[0].classList.add('active');
-        }, 100);
-      }, 1);
-    }
-
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -102,6 +76,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.screenShots.forEach((element, index) => {
       if (index === this.pageIndex) {
         this.selfAssesmentService.imageIndex = element;
+        this.selectedScreenShot = element;
       }
     });
 
@@ -127,7 +102,7 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   get appData() {
-    return this.dataService.appData;
+    return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -162,7 +137,10 @@ export class SelfAssesmentComponent implements OnInit {
       });
     this.isScreenShot = true;
     this.recording = true;
-    this.resultImage = this.takescreenshotService.resultImageSource;
+    this.screenShots = this.appData.case.questionnaire.pages[0].screenshots;
+    const arr = this.appData.recording;
+    this.resultImage = arr.slice(-1);
+    this.setScreenShots();
   }
 
   active(index: number): void {
@@ -177,6 +155,36 @@ export class SelfAssesmentComponent implements OnInit {
     this.sidebarOpen = true;
   }
 
+  setScreenShots() {
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      this.touchScreen = true;
+      setTimeout(() => {
+        this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
+        this.dataService.setCaseData(this.screenShots[0], 'selfAssessment');
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
+        const btnNext = document.querySelector('.p-carousel-next');
+        const btnPrev = document.querySelector('.p-carousel-prev');
+        if (btnNext && btnPrev) {
+          btnNext.classList.add('leval');
+          btnPrev.classList.add('leval');
+        }
+      }, 1);
+    } else {
+      this.touchScreen = false;
+      setTimeout(() => {
+        this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
+        this.dataService.setCaseData(this.screenShots[0], 'selfAssessment');
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
+      }, 1);
+    }
+  }
+
   sidebarOpenData(event: Event): void {
     event.stopPropagation();
     this.sidebarOpenText = true;
@@ -187,6 +195,10 @@ export class SelfAssesmentComponent implements OnInit {
     this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
+    if (!this.selectedScreenShot) {
+      this.selectedScreenShot = this.screenShots[0];
+    }
+    this.dataService.setCaseData(this.selectedScreenShot, 'selfAssessment');
     this.dataService.preserveQueryParams('/self-assesment-questions');
   }
 }
