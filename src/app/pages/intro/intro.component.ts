@@ -67,7 +67,9 @@ export class IntroComponent implements OnInit {
       );
       sessionStorage.removeItem('currentUrl');
       if (!window.indexedDB) {
-        window.alert("Your browser doesn't support a stable version of IndexedDB.")
+        window.alert(
+          "Your browser doesn't support a stable version of IndexedDB."
+        );
       } else {
         indexedDB.deleteDatabase('myDatabase');
       }

@@ -4,10 +4,12 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
@@ -22,7 +24,7 @@ import { SelfAssesmentService } from './self-assesment.service';
   styleUrls: ['./self-assesment.component.scss'],
   animations: [fadeAnimation],
 })
-export class SelfAssesmentComponent implements OnInit {
+export class SelfAssesmentComponent implements OnInit, OnDestroy {
   recording: boolean;
   isScreenShot: boolean;
   responsiveOptions;
@@ -36,6 +38,9 @@ export class SelfAssesmentComponent implements OnInit {
   selectedPage = 0;
   screenShots;
   selectedScreenShot: string;
+  totalScreenShot = [];
+  indexDB;
+  indexDbSubscription: Subscription;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
@@ -105,6 +110,24 @@ export class SelfAssesmentComponent implements OnInit {
     return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor(3);
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        this.totalScreenShot = cursor.value;
+        const arr = this.totalScreenShot;
+        this.resultImage = cursor.value.screenshotData;
+        cursor.continue();
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
+  }
+
   onSlidebarOpen(value: boolean): void {
     this.sidebarOpen = value;
   }
@@ -138,9 +161,19 @@ export class SelfAssesmentComponent implements OnInit {
     this.isScreenShot = true;
     this.recording = true;
     this.screenShots = this.appData.case.questionnaire.pages[0].screenshots;
-    const arr = this.appData.recording;
-    this.resultImage = arr.slice(-1);
-    this.setScreenShots();
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+        this.setScreenShots();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
   }
 
   active(index: number): void {
@@ -160,8 +193,7 @@ export class SelfAssesmentComponent implements OnInit {
       this.touchScreen = true;
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
-        this.selfAssesmentService.imageIndex = this.screenShots[0];
-        this.dataService.setCaseData(this.screenShots[0], 'selfAssessment');
+        this.selfAssesmentService.imageIndex = this.totalScreenShot[0];
         setTimeout(() => {
           this.imagePreviews[0].classList.add('active');
         }, 100);

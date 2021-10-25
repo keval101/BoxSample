@@ -71,7 +71,9 @@ export class AppComponent implements OnInit {
         this.dataservice.appData = res;
         sessionStorage.clear();
         if (!window.indexedDB) {
-          window.alert("Your browser doesn't support a stable version of IndexedDB.")
+          window.alert(
+            "Your browser doesn't support a stable version of IndexedDB."
+          );
         } else {
           indexedDB.deleteDatabase('myDatabase');
         }

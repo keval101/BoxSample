@@ -19,6 +19,7 @@ import { TakescreenshotService } from '../takescreenshot/takescreenshot.service'
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from 'src/app/shared/shared/data.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -59,9 +60,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoTimer: Subscription;
   flashCheckedValue = false;
   isFullScreen: boolean;
-  indexDB;
   cancelText: string;
   totalScreenshot = [];
+  indexDB;
+  indexDbSubscription: Subscription;
 
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
@@ -79,8 +81,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private dataservice: DataService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
+    private utility: UtilityService,
     private evolutionService: EvolutionService
   ) {
+    utility.initDatabase();
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
         this.micValue = res;
@@ -106,8 +110,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this.initDatabase();
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+      }
+    });
   }
 
   initRecording() {
@@ -145,104 +153,52 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.recordingDurationTime = '00:00';
   }
 
-  initDatabase() {
-    let db;
-    let dbReq = indexedDB.open('myDatabase', 1);
-
-    dbReq.onupgradeneeded = (event: any) => {
-      // Set the db variable to our database so we can use it!
-      db = event.target.result;
-      // Create an object store named notes. Object stores
-      // in databases are where data are stored.
-      db.createObjectStore('recording', {autoIncrement: true});
-    }
-    dbReq.onsuccess = (event: any) => {
-      db = event.target.result;
-      this.indexDB = db;
-      // this.addStickyNote(db, 'text');
-      this.getAndDisplayNotes(db);
-    }
-    dbReq.onerror = (event: any) => {
-      alert('error opening database ' + event.target);
-    }
-  }
-
-  getAndDisplayNotes(db) {
-    let tx = db.transaction(['recording'], 'readonly');
-    let store = tx.objectStore('recording');
-    // Create a cursor request to get all items in the store, which
-    // we collect in the allNotes array
-    let req = store.openCursor();
-    let allNotes = [];
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor();
+    const allRecording = [];
 
     req.onsuccess = (event) => {
-      // The result of req.onsuccess is an IDBCursor
-      let cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor != null) {
-        // If the cursor isn't null, we got an IndexedDB item.
-        // Add it to the note array and have the cursor continue!
-        allNotes.push(cursor.value);
+        allRecording.push(cursor.value);
         cursor.continue();
       } else {
-        // If we have a null cursor, it means we've gotten
-        // all the items in the store, so display the notes we got
-        // displayNotes(allNotes);
-        console.log(allNotes);
-        if (allNotes.length) {
-          this.videoSource = allNotes[0].recordingPath;
+        if (allRecording.length) {
+          this.videoSource = allRecording[0].recordingPath;
           this.recordingFinish = true;
         } else {
           this.initRecording();
         }
       }
-    }
+    };
     req.onerror = (event) => {
       alert('error in cursor request ' + event.target.errorCode);
-    }
+    };
   }
 
   storeRecording(db, videoData) {
-    // Start a database transaction and get the notes object store
-    let tx = db.transaction(['recording'], 'readwrite');
-    let store = tx.objectStore('recording');
-    // Put the sticky note into the object store
-    let note = {recordingPath: videoData};
-    store.add(note);
-    // Wait for the database transaction to complete
-    tx.oncomplete = () => { console.log('stored note!') }
+    const tx = db.transaction(['recording'], 'readwrite');
+    const store = tx.objectStore('recording');
+    const data = { recordingPath: videoData };
+    store.add(data);
+    tx.oncomplete = () => {};
     tx.onerror = (event) => {
       alert('error storing Recording ' + event.target.errorCode);
-    }
+    };
   }
 
-  resetVideoToModal(db) {
-    console.log(db);
-    const req = db.transaction(["employee"], "readwrite")
-    .objectStore("employee")
-    .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
-
-    req.onsuccess = (event) => {
-       alert("Kenny has been added to your database.");
+  storeScreenshots(db, screenshots) {
+    const tx = db.transaction(['recording'], 'readwrite');
+    const store = tx.objectStore('recording');
+    const data = { screenshots };
+    store.add(data);
+    tx.oncomplete = () => {};
+    tx.onerror = (event) => {
+      alert('error storing Recording ' + event.target.errorCode);
     };
-
-    req.onerror = (event) => {
-       alert("Unable to add data\r\nKenny is aready exist in your database! ");
-    }
   }
-
-  readAll(db) {
-    const objectStore = db.transaction("employee").objectStore("recording");
-
-    objectStore.openCursor().onsuccess = (event) => {
-       const cursor = event.target.result;
-       if (cursor) {
-          console.log(cursor);
-          cursor.continue();
-       } else {
-          alert("No more entries!");
-       }
-    };
- }
 
   onFinish(): void {
     this.recordingService.fullscreen = false;
@@ -316,11 +272,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         const base64data = reader.result;
         this.videoSource = base64data;
         this.storeRecording(this.indexDB, base64data);
+        this.storeScreenshots(this.indexDB, this.totalScreenshot);
       };
 
-      this.dataservice.setCaseData(this.totalScreenshot, 'recording');
       this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
-      this.takescreenshotService.captures = this.appData.recording.screenshots;
     };
 
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;
@@ -456,7 +411,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (!this.appData.recordingPath) {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
+    if (
+      !this.appData.recordingPath &&
+      window.stream &&
+      window.stream.getTracks()
+    ) {
       this.headerService.videoFullscreen.next(false);
       window.stream.getTracks()[0].stop();
       setTimeout(() => {

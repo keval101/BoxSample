@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -18,6 +19,7 @@ import { RecordingService } from '../recording-screen/recording.service';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { SelfAssesmentQuestionService } from '../selfassesment-questions/self-assesment-questions.service';
 import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-evaluation',
@@ -25,7 +27,7 @@ import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
   styleUrls: ['./evaluation.component.scss'],
   animations: [fadeAnimation],
 })
-export class EvaluationComponent implements OnInit {
+export class EvaluationComponent implements OnInit, OnDestroy {
   recording: boolean;
   ans = 'Goal';
   val = 0;
@@ -49,6 +51,8 @@ export class EvaluationComponent implements OnInit {
   questionData;
   questionName;
   exerciseName;
+  indexDB;
+  indexDbSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -97,6 +101,14 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+      } else if (!this.indexDB) {
+        this.utility.initDatabase();
+      }
+    });
     this.questionData = this.appData.selfAssessmentQuestions;
     this.selfAssessImage = this.appData.selfAssessment;
     this.questionName = this.appData.case.questionnaire.pages[1].sections[0];
@@ -105,7 +117,6 @@ export class EvaluationComponent implements OnInit {
       .subscribe((text: string) => {
         this.cancelText = text;
       });
-    this.items = this.moveLastArrayElementToFirstIndex(this.appData.recording);
     this.exerciseData = this.appData.case.reportSections[0].reportItems[0];
     this.screenshotsData = this.appData.case.questionnaire.pages[0];
     this.recording = true;
@@ -149,6 +160,40 @@ export class EvaluationComponent implements OnInit {
         score: this.totalScore + ' / ' + this.totalMaxScore,
       },
     ];
+  }
+
+  ngOnDestroy() {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
+  }
+
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor();
+    const allRecording = [];
+
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        allRecording.push(cursor.value);
+        cursor.continue();
+      } else {
+        if (allRecording.length) {
+          const arr = [];
+          arr.push(allRecording[2].screenshotData);
+          allRecording[1].screenshots.forEach((element) => {
+            arr.push(element);
+          });
+          this.items = arr;
+        } else {
+        }
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -195,12 +240,6 @@ export class EvaluationComponent implements OnInit {
 
   get appData() {
     return JSON.parse(this.dataservice.getSessionData('caseData'));
-  }
-
-  moveLastArrayElementToFirstIndex(this_array) {
-    this_array.splice(0, 0, this_array[this_array.length - 1]);
-    this_array.pop();
-    return this_array;
   }
 
   onSubmit() {
