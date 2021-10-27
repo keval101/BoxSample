@@ -4,10 +4,12 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
@@ -22,7 +24,7 @@ import { SelfAssesmentService } from './self-assesment.service';
   styleUrls: ['./self-assesment.component.scss'],
   animations: [fadeAnimation],
 })
-export class SelfAssesmentComponent implements OnInit {
+export class SelfAssesmentComponent implements OnInit, OnDestroy {
   recording: boolean;
   isScreenShot: boolean;
   responsiveOptions;
@@ -34,8 +36,11 @@ export class SelfAssesmentComponent implements OnInit {
   cancelText: string;
   pageIndex: number;
   selectedPage = 0;
-  screenShots = this.appData.questionnaire.pages[0].screenshots;
-
+  screenShots;
+  selectedScreenShot: string;
+  totalScreenShot = [];
+  indexDB;
+  indexDbSubscription: Subscription;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
@@ -49,32 +54,6 @@ export class SelfAssesmentComponent implements OnInit {
     public utility: UtilityService,
     private dataService: DataService
   ) {
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      this.touchScreen = true;
-      setTimeout(() => {
-        this.imagePreviews = document.getElementsByClassName('p');
-        this.selfAssesmentService.imageIndex = this.screenShots[0];
-        setTimeout(() => {
-          this.imagePreviews[0].classList.add('active');
-        }, 100);
-        const btnNext = document.querySelector('.p-carousel-next');
-        const btnPrev = document.querySelector('.p-carousel-prev');
-        if (btnNext && btnPrev) {
-          btnNext.classList.add('leval');
-          btnPrev.classList.add('leval');
-        }
-      }, 1);
-    } else {
-      this.touchScreen = false;
-      setTimeout(() => {
-        this.imagePreviews = document.getElementsByClassName('p');
-        this.selfAssesmentService.imageIndex = this.screenShots[0];
-        setTimeout(() => {
-          this.imagePreviews[0].classList.add('active');
-        }, 100);
-      }, 1);
-    }
-
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -102,6 +81,7 @@ export class SelfAssesmentComponent implements OnInit {
     this.screenShots.forEach((element, index) => {
       if (index === this.pageIndex) {
         this.selfAssesmentService.imageIndex = element;
+        this.selectedScreenShot = element;
       }
     });
 
@@ -127,7 +107,25 @@ export class SelfAssesmentComponent implements OnInit {
   }
 
   get appData() {
-    return this.dataService.appData;
+    return JSON.parse(this.dataService.getSessionData('caseData'));
+  }
+
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor(3);
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        this.totalScreenShot = cursor.value;
+        const arr = this.totalScreenShot;
+        this.resultImage = cursor.value.screenshotData;
+        cursor.continue();
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -162,7 +160,20 @@ export class SelfAssesmentComponent implements OnInit {
       });
     this.isScreenShot = true;
     this.recording = true;
-    this.resultImage = this.takescreenshotService.resultImageSource;
+    this.screenShots = this.appData.case.questionnaire.pages[0].screenshots;
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+        this.setScreenShots();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
   }
 
   active(index: number): void {
@@ -177,6 +188,35 @@ export class SelfAssesmentComponent implements OnInit {
     this.sidebarOpen = true;
   }
 
+  setScreenShots() {
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      this.touchScreen = true;
+      setTimeout(() => {
+        this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.totalScreenShot[0];
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
+        const btnNext = document.querySelector('.p-carousel-next');
+        const btnPrev = document.querySelector('.p-carousel-prev');
+        if (btnNext && btnPrev) {
+          btnNext.classList.add('leval');
+          btnPrev.classList.add('leval');
+        }
+      }, 1);
+    } else {
+      this.touchScreen = false;
+      setTimeout(() => {
+        this.imagePreviews = document.getElementsByClassName('p');
+        this.selfAssesmentService.imageIndex = this.screenShots[0];
+        this.dataService.setCaseData(this.screenShots[0], 'selfAssessment');
+        setTimeout(() => {
+          this.imagePreviews[0].classList.add('active');
+        }, 100);
+      }, 1);
+    }
+  }
+
   sidebarOpenData(event: Event): void {
     event.stopPropagation();
     this.sidebarOpenText = true;
@@ -187,6 +227,10 @@ export class SelfAssesmentComponent implements OnInit {
     this.headerService.isInfoOpen = false;
   }
   redirectTo(): void {
+    if (!this.selectedScreenShot) {
+      this.selectedScreenShot = this.screenShots[0];
+    }
+    this.dataService.setCaseData(this.selectedScreenShot, 'selfAssessment');
     this.dataService.preserveQueryParams('/self-assesment-questions');
   }
 }

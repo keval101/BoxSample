@@ -19,6 +19,7 @@ import { TakescreenshotService } from '../takescreenshot/takescreenshot.service'
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from 'src/app/shared/shared/data.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -59,8 +60,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   videoTimer: Subscription;
   flashCheckedValue = false;
   isFullScreen: boolean;
-
   cancelText: string;
+  totalScreenshot = [];
+  indexDB;
+  indexDbSubscription: Subscription;
 
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
@@ -78,8 +81,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private dataservice: DataService,
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
+    private utility: UtilityService,
     private evolutionService: EvolutionService
   ) {
+    utility.initDatabase();
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
         this.micValue = res;
@@ -105,6 +110,15 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+      }
+    });
+  }
+
+  initRecording() {
     this.translateService
       .get('recordingPage.cancelText')
       .subscribe((text: string) => {
@@ -139,6 +153,53 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.recordingDurationTime = '00:00';
   }
 
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor();
+    const allRecording = [];
+
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        allRecording.push(cursor.value);
+        cursor.continue();
+      } else {
+        if (allRecording.length) {
+          this.videoSource = allRecording[0].recordingPath;
+          this.recordingFinish = true;
+        } else {
+          this.initRecording();
+        }
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
+  }
+
+  storeRecording(db, videoData) {
+    const tx = db.transaction(['recording'], 'readwrite');
+    const store = tx.objectStore('recording');
+    const data = { recordingPath: videoData };
+    store.add(data);
+    tx.oncomplete = () => {};
+    tx.onerror = (event) => {
+      alert('error storing Recording ' + event.target.errorCode);
+    };
+  }
+
+  storeScreenshots(db, screenshots) {
+    const tx = db.transaction(['recording'], 'readwrite');
+    const store = tx.objectStore('recording');
+    const data = { screenshots };
+    store.add(data);
+    tx.oncomplete = () => {};
+    tx.onerror = (event) => {
+      alert('error storing Recording ' + event.target.errorCode);
+    };
+  }
+
   onFinish(): void {
     this.recordingService.fullscreen = false;
     this.isSidebarOpen = false;
@@ -171,7 +232,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   muteVideo(): void {
-    if (window.stream.getAudioTracks().length > 0) {
+    if (window.stream && window.stream.getAudioTracks().length > 0) {
       window.stream.getAudioTracks()[0].enabled =
         !window.stream.getAudioTracks()[0].enabled;
     }
@@ -205,10 +266,18 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.mediaRecorder.onstop = (event) => {
       this.recordedBlobs = event.target.recordedBlobs;
       const superBuffer = new Blob(this.recordedBlobs, this.videoType);
-      this.videoSource = this.sanitizer.bypassSecurityTrustUrl(
-        window.URL.createObjectURL(superBuffer)
-      );
+      const reader = new FileReader();
+      reader.readAsDataURL(superBuffer);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        this.videoSource = base64data;
+        this.storeRecording(this.indexDB, base64data);
+        this.storeScreenshots(this.indexDB, this.totalScreenshot);
+      };
+
+      this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
     };
+
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;
     this.mediaRecorder.start();
   }
@@ -309,14 +378,13 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement
       .getContext('2d')
       .drawImage(this.videoEle.nativeElement, 0, 0, 640, 480);
-    this.takescreenshotService.captures.push(
-      this.canvas.nativeElement.toDataURL('image/png')
-    );
+
     const vidStyleData = this.videoEle.nativeElement.getBoundingClientRect();
     this.canvas.nativeElement.style.width = vidStyleData.width + 'px';
     this.canvas.nativeElement.style.height = vidStyleData.height + 'px';
     this.canvas.nativeElement.style.left = vidStyleData.left + 'px';
     this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
+    this.totalScreenshot.push(this.canvas.nativeElement.toDataURL('image/png'));
   }
 
   redirectToPhoto(): void {
@@ -343,14 +411,23 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.headerService.videoFullscreen.next(false);
-    window.stream.getTracks()[0].stop();
-    setTimeout(() => {
-      this.videoTimer.unsubscribe();
-    }, 4000);
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
+    if (
+      !this.appData.recordingPath &&
+      window.stream &&
+      window.stream.getTracks()
+    ) {
+      this.headerService.videoFullscreen.next(false);
+      window.stream.getTracks()[0].stop();
+      setTimeout(() => {
+        this.videoTimer.unsubscribe();
+      }, 4000);
+    }
   }
 
   get appData() {
-    return this.dataservice.appData;
+    return JSON.parse(this.dataservice.getSessionData('caseData'));
   }
 }

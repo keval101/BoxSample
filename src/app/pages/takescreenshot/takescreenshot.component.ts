@@ -16,6 +16,8 @@ import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { Subscription } from 'rxjs';
 
 declare const window: Window &
   typeof globalThis & {
@@ -44,6 +46,9 @@ export class TakescreenshotComponent
   @ViewChild('sidenav') sidenav: ElementRef;
   cancelText: string;
   isSidebarOpen = false;
+  indexDB;
+  totalScreenShot = [];
+  indexDbSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -53,7 +58,8 @@ export class TakescreenshotComponent
     private setupSerice: SetupService,
     private confirmationService: ConfirmationService,
     private headerService: HeaderService,
-    private dataservice: DataService
+    private dataservice: DataService,
+    private utility: UtilityService
   ) {
     this.translateService
       .get('takescreenshot.cancelText')
@@ -80,6 +86,13 @@ export class TakescreenshotComponent
     });
     this.recording = true;
     this.takeScreenshot = true;
+
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -118,6 +131,33 @@ export class TakescreenshotComponent
     this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
   }
 
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor(2);
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        this.totalScreenShot = cursor.value;
+        cursor.continue();
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
+  }
+
+  storeScreenshots(db, screenshots) {
+    const tx = db.transaction(['recording'], 'readwrite');
+    const store = tx.objectStore('recording');
+    const data = { screenshotData: screenshots };
+    store.add(data);
+    tx.oncomplete = () => {};
+    tx.onerror = (event) => {
+      alert('error storing Recording ' + event.target.errorCode);
+    };
+  }
+
   onRetake(): void {
     this.headerService.videoFullscreen.next(false);
     this.fullscreen = false;
@@ -144,11 +184,11 @@ export class TakescreenshotComponent
 
   onDone(): void {
     this.dataservice.preserveQueryParams('/self-assesment');
-    this.takescreenshotService.resultImageSource =
-      this.canvas.nativeElement.toDataURL('image/png');
-    this.takescreenshotService.captures.push(
+    this.storeScreenshots(
+      this.indexDB,
       this.canvas.nativeElement.toDataURL('image/png')
     );
+    this.takescreenshotService.captures = this.totalScreenShot;
   }
   onCancelExersice(): void {
     this.confirmationService.confirm({
@@ -170,6 +210,9 @@ export class TakescreenshotComponent
     });
   }
   ngOnDestroy(): void {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
     this.headerService.videoFullscreen.next(false);
     if (window.stream) {
       window.stream.getTracks().forEach((track) => {
@@ -179,6 +222,6 @@ export class TakescreenshotComponent
   }
 
   get appData() {
-    return this.dataservice.appData;
+    return JSON.parse(this.dataservice.getSessionData('caseData'));
   }
 }

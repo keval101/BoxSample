@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     private dataservice: DataService,
     private headerService: HeaderService,
     private route: ActivatedRoute,
-    router: Router,
+    private router: Router,
     private location: Location
   ) {
     translate.setDefaultLang('en');
@@ -42,7 +42,20 @@ export class AppComponent implements OnInit {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
         const anyCase = this.route.snapshot.queryParams['sceneId'];
-        this.getAppData(anyCase ? anyCase : null);
+        if (dataservice.getSessionData('caseData')) {
+          const d = JSON.parse(dataservice.getSessionData('caseData'));
+          if (
+            (d.sceneId && d.sceneId === anyCase) ||
+            (!d.sceneId && (anyCase === 'caseOne' || !anyCase))
+          ) {
+            this.appData = d.case;
+            this.dataservice.appData = d.case;
+          } else {
+            this.getAppData(anyCase ? anyCase : null);
+          }
+        } else {
+          this.getAppData(anyCase ? anyCase : null);
+        }
       }
     });
   }
@@ -56,6 +69,18 @@ export class AppComponent implements OnInit {
       if (res) {
         this.appData = res;
         this.dataservice.appData = res;
+        sessionStorage.clear();
+        if (!window.indexedDB) {
+          window.alert(
+            "Your browser doesn't support a stable version of IndexedDB."
+          );
+        } else {
+          indexedDB.deleteDatabase('myDatabase');
+        }
+        this.dataservice.setCaseData(res, 'case');
+        if (params) {
+          this.dataservice.setCaseData(params, 'sceneId');
+        }
       }
     });
   }

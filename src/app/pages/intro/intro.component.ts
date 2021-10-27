@@ -59,6 +59,21 @@ export class IntroComponent implements OnInit {
       this.mobile = false;
     }
     this.checkDeviceWidth(window.innerWidth);
+    if (this.dataService.getSessionData('caseData')) {
+      const data = JSON.parse(this.dataService.getSessionData('caseData'));
+      this.dataService.setSessionData(
+        { case: data.case, sceneId: data.sceneId },
+        'caseData'
+      );
+      sessionStorage.removeItem('currentUrl');
+      if (!window.indexedDB) {
+        window.alert(
+          "Your browser doesn't support a stable version of IndexedDB."
+        );
+      } else {
+        indexedDB.deleteDatabase('myDatabase');
+      }
+    }
   }
 
   checkDeviceWidth(width: number): void {
@@ -85,7 +100,7 @@ export class IntroComponent implements OnInit {
   }
 
   get appData() {
-    return this.dataService.appData;
+    return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
   redirectTo(): void {

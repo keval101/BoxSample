@@ -37,7 +37,7 @@
         <div class="carousel-images">
           <p-carousel
             (touchmove)="this.utility.iosScrollDis($event)"
-            [value]="appData?.questionnaire?.pages[0]?.screenshots"
+            [value]="screenShots"
             [numVisible]="1"
             [page]="selectedPage"
             [numScroll]="1"
@@ -59,12 +59,7 @@
       </div>
 
       <div class="imagessss">
-        <div
-          *ngFor="
-            let item of appData?.questionnaire?.pages[0]?.screenshots;
-            let i = index
-          "
-        >
+        <div *ngFor="let item of screenShots; let i = index">
           <img [src]="item.url" alt="" (click)="active(i)" class="p" />
         </div>
       </div>
@@ -105,7 +100,7 @@
     class="sidebar__content"
     id="sidebar__content"
     *ngIf="appData"
-    [innerHTML]="appData?.descriptionItems[3]?.content"
+    [innerHTML]="appData?.case?.descriptionItems[3]?.content"
   ></div>
 </div>
 

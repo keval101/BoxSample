@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -18,6 +19,7 @@ import { RecordingService } from '../recording-screen/recording.service';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { SelfAssesmentQuestionService } from '../selfassesment-questions/self-assesment-questions.service';
 import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-evaluation',
@@ -25,10 +27,10 @@ import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
   styleUrls: ['./evaluation.component.scss'],
   animations: [fadeAnimation],
 })
-export class EvaluationComponent implements OnInit {
+export class EvaluationComponent implements OnInit, OnDestroy {
   recording: boolean;
   ans = 'Goal';
-  val = 3;
+  val = 0;
   isSidebarOpen = false;
   cancelValue = true;
   resultImage;
@@ -46,7 +48,11 @@ export class EvaluationComponent implements OnInit {
   totalScore = 0;
   totalMaxScore = 0;
   allHint = [];
-  questionData = this.appData.questionnaire.pages[1].sections[0];
+  questionData;
+  questionName;
+  exerciseName;
+  indexDB;
+  indexDbSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -61,7 +67,6 @@ export class EvaluationComponent implements OnInit {
     private dataservice: DataService,
     private selfAssesQueSer: SelfAssesmentQuestionService
   ) {
-    this.selfAssessImage = this.selfAssesmentService.imageIndex;
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -96,26 +101,34 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
+      if (res && !this.indexDB) {
+        this.indexDB = res;
+        this.getAndDisplayData(res);
+      } else if (!this.indexDB) {
+        this.utility.initDatabase();
+      }
+    });
+    this.questionData = this.appData.selfAssessmentQuestions;
+    this.selfAssessImage = this.appData.selfAssessment;
+    this.questionName = this.appData.case.questionnaire.pages[1].sections[0];
     this.translateService
       .get('evaluation.cancelText')
       .subscribe((text: string) => {
         this.cancelText = text;
       });
-    this.items = this.moveLastArrayElementToFirstIndex(
-      this.takescreenshotService.captures
-    );
-    this.exerciseData = this.appData.reportSections[0].reportItems[0];
-    this.screenshotsData = this.appData.questionnaire.pages[0];
+    this.exerciseData = this.appData.case.reportSections[0].reportItems[0];
+    this.screenshotsData = this.appData.case.questionnaire.pages[0];
     this.recording = true;
     this.evolutionService.cancelValue = false;
-    this.resultImage = this.takescreenshotService.resultImageSource;
+    this.resultImage = this.appData.takeScreenShot;
 
-    this.selfAssesQueSer.screenShotData.forEach((element) => {
+    this.questionData.forEach((element) => {
       this.totalScore = this.totalScore + element.score;
       this.allHint.push(element.hint);
     });
 
-    this.questionData.questions.forEach((element) => {
+    this.questionName.questions.forEach((element) => {
       this.totalMaxScore = this.totalMaxScore + element.maxScore;
     });
 
@@ -126,7 +139,7 @@ export class EvaluationComponent implements OnInit {
     this.scores = [
       {
         title: this.exerciseData.name,
-        measured: this.recordingService.finalRecordDuration,
+        measured: this.appData.recordingTime,
         goalvalue: this.exerciseData.goalValueString,
         score:
           recordinScore < 1 && recordinScore > 0
@@ -141,12 +154,46 @@ export class EvaluationComponent implements OnInit {
           this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
       },
       {
-        title: this.questionData.name,
+        title: this.questionName.name,
         measured: totalScoreforQue.toFixed(0) + '%',
         goalvalue: '100%',
         score: this.totalScore + ' / ' + this.totalMaxScore,
       },
     ];
+  }
+
+  ngOnDestroy() {
+    if (this.indexDbSubscription) {
+      this.indexDbSubscription.unsubscribe();
+    }
+  }
+
+  getAndDisplayData(db) {
+    const tx = db.transaction(['recording'], 'readonly');
+    const store = tx.objectStore('recording');
+    const req = store.openCursor();
+    const allRecording = [];
+
+    req.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor != null) {
+        allRecording.push(cursor.value);
+        cursor.continue();
+      } else {
+        if (allRecording.length) {
+          const arr = [];
+          arr.push(allRecording[2].screenshotData);
+          allRecording[1].screenshots.forEach((element) => {
+            arr.push(element);
+          });
+          this.items = arr;
+        } else {
+        }
+      }
+    };
+    req.onerror = (event) => {
+      alert('error in cursor request ' + event.target.errorCode);
+    };
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -192,13 +239,7 @@ export class EvaluationComponent implements OnInit {
   }
 
   get appData() {
-    return this.dataservice.appData;
-  }
-
-  moveLastArrayElementToFirstIndex(this_array) {
-    this_array.splice(0, 0, this_array[this_array.length - 1]);
-    this_array.pop();
-    return this_array;
+    return JSON.parse(this.dataservice.getSessionData('caseData'));
   }
 
   onSubmit() {
@@ -208,7 +249,7 @@ export class EvaluationComponent implements OnInit {
   }
 
   recordingTime(): number {
-    const time = this.recordingService.finalRecordDuration.split(':');
+    const time = this.appData.recordingTime.split(':');
     const totalSeconds = Number(time[0]) * 60 + Number(time[1]);
     if (
       this.exerciseData.bestIs === RecordingEnum.maxValue ||

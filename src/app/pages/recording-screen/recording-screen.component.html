@@ -10,7 +10,7 @@
     ></app-header>
   </div>
 
-  <div class="videoPreview" *ngIf="recordingFinish">
+  <div class="videoPreview" *ngIf="videoSource && recordingFinish">
     <video [src]="videoSource" playsinline controls #videoPreview></video>
     <button class="close" (click)="redirectToPhoto()">X</button>
   </div>
@@ -93,7 +93,7 @@
     class="sidebar__content"
     id="sidebar__content"
     *ngIf="appData"
-    [innerHTML]="appData?.descriptionItems[2]?.content"
+    [innerHTML]="appData?.case?.descriptionItems[2]?.content"
   ></div>
 </div>
 

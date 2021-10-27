@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilityService {
+  database;
+  indexDB = new BehaviorSubject(null);
+
   constructor() {}
 
   iosDetector(): boolean | void {
@@ -26,5 +30,22 @@ export class UtilityService {
       e.preventDefault();
       e.stopPropagation();
     }
+  }
+
+  initDatabase() {
+    let db;
+    const dbReq = indexedDB.open('myDatabase', 1);
+
+    dbReq.onupgradeneeded = (event: any) => {
+      db = event.target.result;
+      db.createObjectStore('recording', { autoIncrement: true });
+    };
+    dbReq.onsuccess = (event: any) => {
+      db = event.target.result;
+      this.indexDB.next(db);
+    };
+    dbReq.onerror = (event: any) => {
+      alert('error opening database ' + event.target);
+    };
   }
 }
