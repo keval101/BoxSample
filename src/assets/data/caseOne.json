@@ -2,7 +2,7 @@
   "name": "Circular cutting",
   "description": "Precisely cut out the circle from the gauze or medium. Your objective is to cut out the circle as precisely and in as little time as possible.",
   "groupName": "HINT: Scenes can be logicaly grouped and displayed together",
-  "sceneSectionName": "Essential skills",
+  "sceneSectionName": "LaparoS™ - Essential skills",
   "imageBlobUrl": "ImageBlobUrl1",
   "reportSections": [
     {
@@ -87,17 +87,17 @@
           {
             "url": "../../../assets/images/screenshot1.png",
             "score": 30,
-            "hint": "Next time"
+            "hint": "Nice job. Keep on practicing to improve your accuracy."
           },
           {
             "url": "../../../assets/images/screenshot2.png",
             "score": 20,
-            "hint": "you can work ."
+            "hint": "Great job cutting precisely!"
           },
           {
             "url": "../../../assets/images/screenshot3.png",
             "score": 50,
-            "hint": "on using your grasping."
+            "hint": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
           }
         ],
         "maxScore": 50,
@@ -133,91 +133,23 @@
                     "isCorrect": true,
                     "score": 10,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "hint": "If you're up for a challenge you can try cutting with your non-dominant hand.",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
                     "description": "Description1"
                   },
                   {
                     "isCorrect": false,
-                    "score": 0,
+                    "score": 10,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch",
+                    "hint": "",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
                     "description": "Description1"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands during the exercise",
-                "description": "Description1"
-              },
-              {
-                "minScore": 1,
-                "maxScore": 15,
-                "row": 1,
-                "column": 1,
-                "rowSpan": 1,
-                "columnSpan": 1,
-                "orientation": "Horizontal",
-                "answerMode": "Manual",
-                "selectionMode": "Single",
-                "answers": [
-                  {
-                    "isCorrect": true,
-                    "score": 15,
-                    "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
-                    "identifier": "00000000-0000-0000-0000-000000000001",
-                    "name": "Yes",
-                    "description": "Description1"
-                  },
-                  {
-                    "isCorrect": false,
-                    "score": 0,
-                    "penaltyScore": 1,
-                    "hint": "switch",
-                    "identifier": "00000000-0000-0000-0000-000000000001",
-                    "name": "No",
-                    "description": "Description2"
-                  }
-                ],
-                "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I used my non dominant hand to apply tension",
-                "description": "Description2"
-              },
-              {
-                "minScore": 1,
-                "maxScore": 15,
-                "row": 1,
-                "column": 1,
-                "rowSpan": 1,
-                "columnSpan": 1,
-                "orientation": "Horizontal",
-                "answerMode": "Manual",
-                "selectionMode": "Single",
-                "answers": [
-                  {
-                    "isCorrect": true,
-                    "score": 0,
-                    "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
-                    "identifier": "00000000-0000-0000-0000-000000000001",
-                    "name": "Yes",
-                    "description": "Description3"
-                  },
-                  {
-                    "isCorrect": false,
-                    "score": 15,
-                    "penaltyScore": 1,
-                    "hint": "It’s ok",
-                    "identifier": "00000000-0000-0000-0000-000000000001",
-                    "name": "No",
-                    "description": "Description3"
-                  }
-                ],
-                "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched",
+                "name": "I used my dominant hand to cut the circle",
                 "description": "Description1"
               },
               {
@@ -233,30 +165,30 @@
                 "answers": [
                   {
                     "isCorrect": true,
-                    "score": 0,
+                    "score": 10,
                     "penaltyScore": 1,
-                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "hint": "",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
-                    "description": "Description4"
+                    "description": "Description1"
                   },
                   {
                     "isCorrect": false,
                     "score": 10,
                     "penaltyScore": 1,
-                    "hint": "complete the exercis",
+                    "hint": "Don't forget to apply proper tension on the gauze while cutting.",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
-                    "description": "Description4"
+                    "description": "Description2"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands",
-                "description": "Description1"
+                "name": "I used my non dominant hand to apply tension",
+                "description": "Description2"
               },
               {
                 "minScore": 1,
-                "maxScore": 15,
+                "maxScore": 10,
                 "row": 1,
                 "column": 1,
                 "rowSpan": 1,
@@ -266,26 +198,26 @@
                 "selectionMode": "Single",
                 "answers": [
                   {
-                    "isCorrect": true,
-                    "score": 15,
+                    "isCorrect": false,
+                    "score": 10,
                     "penaltyScore": 1,
                     "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "Yes",
-                    "description": "Description4"
+                    "description": "Description3"
                   },
                   {
-                    "isCorrect": false,
-                    "score": 0,
+                    "isCorrect": true,
+                    "score": 10,
                     "penaltyScore": 1,
-                    "hint": "but your overall speed will be affected",
+                    "hint": "",
                     "identifier": "00000000-0000-0000-0000-000000000001",
                     "name": "No",
-                    "description": "Description4"
+                    "description": "Description3"
                   }
                 ],
                 "identifier": "00000000-0000-0000-0000-000000000001",
-                "name": "I switched hands during",
+                "name": "I switched hands during the exercise",
                 "description": "Description1"
               }
             ],
