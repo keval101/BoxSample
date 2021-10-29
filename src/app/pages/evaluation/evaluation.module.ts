@@ -13,6 +13,7 @@ import { RatingModule } from 'primeng/rating';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { CarouselModule } from 'primeng/carousel';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [EvaluationComponent],
@@ -27,6 +28,7 @@ import { CarouselModule } from 'primeng/carousel';
     RadioButtonModule,
     EvaluationRoutingModule,
     ConfirmDialogModule,
+    DialogModule,
   ],
   providers: [ConfirmationService],
 })

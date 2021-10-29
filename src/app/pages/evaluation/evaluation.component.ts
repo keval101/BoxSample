@@ -53,6 +53,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   exerciseName;
   indexDB;
   indexDbSubscription: Subscription;
+  display = false;
+  popupImageUrl: string;
 
   constructor(
     private router: Router,
@@ -246,6 +248,11 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.dataservice.submitData('12345', {}).subscribe((res) => {});
 
     this.router.navigate(['/end']);
+  }
+
+  showDialog(url) {
+    this.display = true;
+    this.popupImageUrl = url;
   }
 
   recordingTime(): number {
