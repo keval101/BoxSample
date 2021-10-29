@@ -236,3 +236,19 @@ p-radiobutton {
     }
   }
 }
+
+.assessment-image {
+  padding: 0 !important;
+  .p-dialog-header {
+    margin-bottom: 0 !important;
+    .p-dialog-header-icons {
+      display: none;
+    }
+  }
+  img {
+    display: block !important;
+    width: 80vw;
+    max-width: 800px;
+    height: auto;
+  }
+}

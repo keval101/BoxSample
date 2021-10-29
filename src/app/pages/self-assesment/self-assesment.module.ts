@@ -15,6 +15,8 @@ import { TabViewModule } from 'primeng/tabview';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   declarations: [SelfAssesmentComponent],
   imports: [
@@ -29,6 +31,7 @@ import { ConfirmationService } from 'primeng/api';
     GalleriaModule,
     SelfAssesmentRoutingModule,
     ConfirmDialogModule,
+    DialogModule,
   ],
   providers: [ConfirmationService],
 })

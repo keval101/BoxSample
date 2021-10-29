@@ -6,6 +6,16 @@
   ></app-header>
 </div>
 
+<p-dialog
+  styleClass="assessment-image"
+  [(visible)]="display"
+  [style]="{ height: 'auto', width: 'auto' }"
+  [modal]="true"
+  [dismissableMask]="true"
+>
+  <img [src]="popupImageUrl" alt="resultImage" />
+</p-dialog>
+
 <div class="container">
   <div class="container__title">
     <p class="container__title-text">{{ 'evaluation.title' | translate }}</p>
@@ -19,7 +29,10 @@
 
       <div class="result__container-result">
         <div class="result__container-result-container">
-          <div class="carousel-images" *ngIf="items.length > 0">
+          <div class="carousel-images" *ngIf="items.length === 1">
+            <img [src]="items" (click)="showDialog(items)" alt="goal" />
+          </div>
+          <div class="carousel-images" *ngIf="items.length > 1">
             <p-carousel
               [value]="items"
               (touchmove)="this.utility.iosScrollDis($event)"
@@ -27,7 +40,11 @@
               [responsiveOptions]
             >
               <ng-template let-item pTemplate="item">
-                <img [src]="item" class="screenShotImage" />
+                <img
+                  [src]="item"
+                  (click)="showDialog(item)"
+                  class="screenShotImage"
+                />
               </ng-template>
             </p-carousel>
           </div>
@@ -35,6 +52,7 @@
             <img
               src="assets/images/goalImage.png"
               alt="goal"
+              (click)="showDialog('assets/images/goalImage.png')"
               [ngStyle]="{
                 display: isGoal ? 'block' : 'none'
               }"
@@ -42,6 +60,7 @@
             <img
               src="{{ selfAssessImage.url }}"
               alt="selfassesment"
+              (click)="showDialog(selfAssessImage.url)"
               [ngStyle]="{
                 display: !isGoal ? 'block' : 'none'
               }"

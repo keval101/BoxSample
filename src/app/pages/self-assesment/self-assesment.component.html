@@ -6,6 +6,15 @@
   ></app-header>
 </div>
 
+<p-dialog
+  styleClass="assessment-image"
+  [(visible)]="display"
+  [style]="{ height: 'auto', width: 'auto' }"
+  [modal]="true"
+  [dismissableMask]="true"
+>
+  <img [src]="popupImageUrl" alt="resultImage" />
+</p-dialog>
 <div class="container">
   <div class="container__title">
     <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
@@ -24,7 +33,11 @@
       </p>
 
       <div class="selfassesment__result-content">
-        <img [src]="resultImage" alt="resultImage" />
+        <img
+          [src]="resultImage"
+          (click)="showDialog(resultImage)"
+          alt="resultImage"
+        />
       </div>
     </div>
 
@@ -52,6 +65,7 @@
                 class="screenShotImage"
                 [title]="item?.hint"
                 id="index"
+                (click)="showDialog(item.url)"
               />
             </ng-template>
           </p-carousel>

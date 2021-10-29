@@ -41,6 +41,9 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   totalScreenShot = [];
   indexDB;
   indexDbSubscription: Subscription;
+  display = false;
+  popupImageUrl: string;
+
   @ViewChild('sidenav') sidenav: ElementRef;
 
   constructor(
@@ -232,5 +235,10 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
     }
     this.dataService.setCaseData(this.selectedScreenShot, 'selfAssessment');
     this.dataService.preserveQueryParams('/self-assesment-questions');
+  }
+
+  showDialog(url) {
+    this.display = true;
+    this.popupImageUrl = url;
   }
 }
