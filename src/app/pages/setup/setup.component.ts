@@ -260,6 +260,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   onCancelAllowAccess(): void {
     this.confirmationService.confirm({
       message: this.allowAccessText,
+      key: 'allowAccessDevice',
       accept: () => {
         this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
