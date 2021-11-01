@@ -103,7 +103,11 @@
         <i class="pi pi-chevron-left"></i>
       </button>
 
-      <button class="button button-fill button-small" (click)="redirectTo()">
+      <button
+        [disabled]="startExercise"
+        class="button button-fill button-small"
+        (click)="redirectTo()"
+      >
         {{ 'setup.startExercise' | translate }}
       </button>
     </div>
@@ -129,6 +133,28 @@
       (click)="cd.accept()"
     >
       {{ 'setup.quit' | translate }}
+    </button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog header="Confirmation" key="allowAccessDevice" #op>
+  <ng-template pTemplate="header">
+    <p class="header m-0">{{ 'setup.allowAccessTitle' | translate }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer" class="footer">
+    <button
+      class="button button-small button-outline"
+      type="button"
+      (click)="cancelDevicePopup()"
+    >
+      {{ 'setup.cancel' | translate }}
+    </button>
+    <button
+      class="button button-small button-fill"
+      type="button"
+      (click)="confirmAllowAccess()"
+    >
+      {{ 'setup.allow' | translate }}
     </button>
   </ng-template>
 </p-confirmDialog>

@@ -149,7 +149,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
       message: this.cancelText,
 
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });

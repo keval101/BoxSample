@@ -122,7 +122,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.exerciseData = this.appData.case.reportSections[0].reportItems[0];
     this.screenshotsData = this.appData.case.questionnaire.pages[0];
     this.recording = true;
-    this.evolutionService.cancelValue = false;
+    this.evolutionService.setCancelValue(false);
     this.resultImage = this.appData.takeScreenShot;
 
     this.questionData.forEach((element) => {
@@ -211,7 +211,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });
@@ -221,7 +221,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });

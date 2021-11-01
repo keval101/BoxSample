@@ -53,7 +53,11 @@
         "quitExe" : "Quit exercise",
         "goback":"No, go back",
         "quit": "Yes, quit",
-        "cancelText" :"Are you sure you want to quit the exercise?"
+        "cancelText" :"Are you sure you want to quit the exercise?",
+        "allowAccessTitle": "Allow device access",
+        "allowAccessMsg": "Please provide camera & microphone access and then refresh the page.",
+        "allow":"Ok",
+        "cancel":"Cancel"
     },
     "recordingPage": {
         "finishRecording" : "Finish recording",

@@ -69,6 +69,7 @@ const routes: Routes = [
   },
   {
     path: 'end',
+    canActivate: [AuthguardService],
     loadChildren: () =>
       import('src/app/pages/end-screen/end-screen.module').then(
         (m) => m.EndScreenModule
