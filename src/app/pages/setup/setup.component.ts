@@ -46,7 +46,9 @@ export class SetupComponent implements OnInit, OnDestroy {
   deviceLabel;
   flashSubject = new Subject();
   cancelText: string;
+  allowAccessText: string;
   userAgent;
+  startExercise = true;
 
   setupScreen = true;
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -72,8 +74,9 @@ export class SetupComponent implements OnInit, OnDestroy {
     private dataservice: DataService,
     public utility: UtilityService
   ) {
-    this.translateService.get('setup.cancelText').subscribe((text: string) => {
-      this.cancelText = text;
+    this.translateService.get('setup').subscribe((text: any) => {
+      this.cancelText = text.cancelText;
+      this.allowAccessText = text.allowAccessMsg;
     });
 
     this.headerService.muteUnmuteMic.subscribe(
@@ -137,6 +140,7 @@ export class SetupComponent implements OnInit, OnDestroy {
           },
         })
         .then((stream) => {
+          this.startExercise = false;
           window.stream = stream;
           this.videoStream = stream;
           _video.srcObject = stream;
@@ -171,6 +175,10 @@ export class SetupComponent implements OnInit, OnDestroy {
               });
             });
           }
+        })
+        .catch((err) => {
+          this.startExercise = true;
+          this.onCancelAllowAccess();
         });
     });
   }
@@ -221,6 +229,10 @@ export class SetupComponent implements OnInit, OnDestroy {
     }
   }
 
+  cancelDevicePopup() {
+    this.evolutionService.cancelValue = true;
+    this.router.navigate(['/end']);
+  }
   confirm(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
@@ -232,9 +244,22 @@ export class SetupComponent implements OnInit, OnDestroy {
     });
   }
 
+  confirmAllowAccess(): void {
+    this.confirmationService.close();
+  }
   onCancelExersice(): void {
     this.confirmationService.confirm({
       message: this.cancelText,
+      accept: () => {
+        this.evolutionService.cancelValue = true;
+        this.router.navigate(['/end']);
+      },
+    });
+  }
+
+  onCancelAllowAccess(): void {
+    this.confirmationService.confirm({
+      message: this.allowAccessText,
       accept: () => {
         this.evolutionService.cancelValue = true;
         this.router.navigate(['/end']);

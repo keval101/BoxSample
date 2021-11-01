@@ -17,6 +17,10 @@
     width: 32rem;
   }
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   &-exSmall {
     width: 8rem;
   }

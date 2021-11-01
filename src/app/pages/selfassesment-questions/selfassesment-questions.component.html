@@ -62,9 +62,6 @@
       class="button button-small button-fill"
       type="button"
       (click)="redirectTo()"
-      [ngStyle]="{
-        opacity: isDisable() ? '0.5' : '1'
-      }"
       [disabled]="isDisable()"
     >
       {{ 'selfassesment.next' | translate }}
