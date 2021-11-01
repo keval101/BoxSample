@@ -230,7 +230,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   }
 
   cancelDevicePopup() {
-    this.evolutionService.cancelValue = true;
+    this.evolutionService.setCancelValue(true);
     this.router.navigate(['/end']);
   }
   confirm(): void {
@@ -238,7 +238,7 @@ export class SetupComponent implements OnInit, OnDestroy {
       message: this.cancelText,
 
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });
@@ -251,7 +251,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });
@@ -261,7 +261,7 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: this.allowAccessText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });

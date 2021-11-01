@@ -194,7 +194,7 @@ export class TakescreenshotComponent
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });
@@ -204,7 +204,7 @@ export class TakescreenshotComponent
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {
-        this.evolutionService.cancelValue = true;
+        this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
     });
