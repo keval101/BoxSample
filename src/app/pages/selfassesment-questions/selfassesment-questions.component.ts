@@ -83,46 +83,25 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     return JSON.parse(this.dataService.getSessionData('caseData'));
   }
 
-  handleChange(e, data) {
+  handleChange(e, data, ans) {
     if (this.radioDatas.length > 0) {
       const idx = this.radioDatas.findIndex((idxs) => idxs.name === data.name);
       if (idx !== -1) {
-        if (data.selectedAnswer === true) {
-          this.radioDatas[idx].score = data.answers[0].score;
-          this.radioDatas[idx].hint = data.answers[0].hint;
-        } else {
-          this.radioDatas[idx].score = data.answers[1].score;
-          this.radioDatas[idx].hint = data.answers[1].hint;
-        }
+        this.radioDatas[idx].score = ans.score;
+        this.radioDatas[idx].hint = ans.hint;
       } else {
-        if (data.selectedAnswer === true) {
-          this.radioDatas.push({
-            name: data.name,
-            score: data.answers[0].score,
-            hint: data.answers[0].hint,
-          });
-        } else {
-          this.radioDatas.push({
-            name: data.name,
-            score: data.answers[1].score,
-            hint: data.answers[1].hint,
-          });
-        }
+        this.radioDatas.push({
+          name: data.name,
+          score: ans.score,
+          hint: ans.hint,
+        });
       }
     } else {
-      if (data.selectedAnswer === true) {
-        this.radioDatas.push({
-          name: data.name,
-          score: data.answers[0].score,
-          hint: data.answers[0].hint,
-        });
-      } else {
-        this.radioDatas.push({
-          name: data.name,
-          score: data.answers[1].score,
-          hint: data.answers[1].hint,
-        });
-      }
+      this.radioDatas.push({
+        name: data.name,
+        score: ans.score,
+        hint: ans.hint,
+      });
     }
   }
 

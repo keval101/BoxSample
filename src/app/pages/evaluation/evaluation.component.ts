@@ -122,7 +122,6 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.exerciseData = this.appData.case.reportSections[0].reportItems[0];
     this.screenshotsData = this.appData.case.questionnaire.pages[0];
     this.recording = true;
-    this.evolutionService.setCancelValue(false);
     this.resultImage = this.appData.takeScreenShot;
 
     this.questionData.forEach((element) => {
@@ -143,10 +142,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
         title: this.exerciseData.name,
         measured: this.appData.recordingTime,
         goalvalue: this.exerciseData.goalValueString,
-        score:
-          recordinScore < 1 && recordinScore > 0
-            ? recordinScore.toFixed(2)
-            : recordinScore + ' / ' + '50',
+        score: Math.round(recordinScore) + ' / ' + '50',
       },
       {
         title: this.screenshotsData.name,
@@ -246,7 +242,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.dataservice.submitData('12345', {}).subscribe((res) => {});
-
+    this.evolutionService.setCancelValue(false);
     this.router.navigate(['/end']);
   }
 
