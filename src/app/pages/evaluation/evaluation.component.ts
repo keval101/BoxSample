@@ -180,12 +180,15 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       } else {
         if (allRecording.length) {
           const arr = [];
-          arr.push(allRecording[2].screenshotData);
-          allRecording[1].screenshots.forEach((element) => {
-            arr.push(element);
+          allRecording.forEach((element) => {
+            if (element.screenshotData) {
+              arr.push(element.screenshotData);
+            }
+            if (element.screenshots) {
+              arr.push(element.screenshots);
+            }
           });
-          this.items = arr;
-        } else {
+          this.items = this.moveLastArrayElementToFirstIndex(arr);
         }
       }
     };
@@ -249,6 +252,11 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   showDialog(url) {
     this.display = true;
     this.popupImageUrl = url;
+  }
+  moveLastArrayElementToFirstIndex(this_array) {
+    this_array.splice(0, 0, this_array[this_array.length - 1]);
+    this_array.pop();
+    return this_array;
   }
 
   recordingTime(): number {

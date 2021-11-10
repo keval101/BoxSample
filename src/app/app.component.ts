@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataservice.setSessionData('/', 'currentUrl');
     this.primengConfig.ripple = true;
   }
 
