@@ -42,8 +42,8 @@
       border: none;
       cursor: pointer;
       position: absolute;
-      left: 0;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 2rem;
     }
     .screenShotText {

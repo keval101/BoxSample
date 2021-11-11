@@ -116,7 +116,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   getAndDisplayData(db) {
     const tx = db.transaction(['recording'], 'readonly');
     const store = tx.objectStore('recording');
-    const req = store.openCursor(3);
+    const req = store.openCursor();
     req.onsuccess = (event) => {
       const cursor = event.target.result;
       if (cursor != null) {

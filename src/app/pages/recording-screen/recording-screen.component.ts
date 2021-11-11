@@ -166,8 +166,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         cursor.continue();
       } else {
         if (allRecording.length) {
-          this.videoSource = allRecording[0].recordingPath;
-          this.recordingFinish = true;
+          allRecording.forEach((element) => {
+            this.videoSource = element.recordingPath;
+            this.recordingFinish = true;
+          });
         } else {
           this.initRecording();
         }
@@ -270,12 +272,21 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(superBuffer);
       reader.onloadend = () => {
         const base64data = reader.result;
-        this.videoSource = base64data;
-        this.storeRecording(this.indexDB, base64data);
+        this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
         this.storeScreenshots(this.indexDB, this.totalScreenshot);
+        if ('storage' in navigator && 'estimate' in navigator.storage) {
+          navigator.storage.estimate().then((storageSpace) => {
+            if (storageSpace.quota / 1000 > superBuffer.size / 1000) {
+              this.videoSource = base64data;
+              this.storeRecording(this.indexDB, base64data);
+            } else {
+              this.videoSource = base64data;
+            }
+          });
+        } else {
+          this.videoSource = base64data;
+        }
       };
-
-      this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
     };
 
     this.mediaRecorder.ondataavailable = this.handleDataAvailable;

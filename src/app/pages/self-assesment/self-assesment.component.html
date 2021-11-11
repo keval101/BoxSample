@@ -66,6 +66,7 @@
                 [title]="item?.hint"
                 id="index"
                 (click)="showDialog(item.url)"
+                alt="screenShot-Image"
               />
             </ng-template>
           </p-carousel>
@@ -74,7 +75,12 @@
 
       <div class="imagessss">
         <div *ngFor="let item of screenShots; let i = index">
-          <img [src]="item.url" alt="" (click)="active(i)" class="p" />
+          <img
+            [src]="item.url"
+            alt="screenShot-thumbnails"
+            (click)="active(i)"
+            class="p"
+          />
         </div>
       </div>
     </div>

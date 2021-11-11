@@ -4,7 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { HeaderService } from './features/header/header.service';
 import { DataService } from './shared/shared/data.service';
 import { Location } from '@angular/common';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -61,6 +61,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        history.pushState(null, null, window.location.href);
+      }
+    });
+    this.dataservice.setSessionData('/', 'currentUrl');
     this.primengConfig.ripple = true;
   }
 
