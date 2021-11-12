@@ -89,6 +89,7 @@
       id="speakerMute"
     />
     <p-slider
+      *ngIf="!this.utility.iosDetector()"
       [(ngModel)]="val"
       [min]="0"
       [max]="100"
