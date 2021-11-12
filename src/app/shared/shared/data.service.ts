@@ -31,8 +31,8 @@ export class DataService {
   }
 
   getData(params): Observable<any> {
-    params = params ? params : 'caseOne';
-    return this.http.get(`../../../assets/data/${params}.json`);
+    params = params ? params : '6d1496f8-aa4c-4565-8eba-07727e8dc097';
+    return this.http.get(`https://appdevelop.virtamed.cloud/api/scene/${params}/details`);
   }
 
   submitData(contextId: string, data): Observable<any> {

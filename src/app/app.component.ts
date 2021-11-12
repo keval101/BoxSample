@@ -42,20 +42,7 @@ export class AppComponent implements OnInit {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
         const anyCase = this.route.snapshot.queryParams['sceneId'];
-        if (dataservice.getSessionData('caseData')) {
-          const d = JSON.parse(dataservice.getSessionData('caseData'));
-          if (
-            (d.sceneId && d.sceneId === anyCase) ||
-            (!d.sceneId && (anyCase === 'caseOne' || !anyCase))
-          ) {
-            this.appData = d.case;
-            this.dataservice.appData = d.case;
-          } else {
-            this.getAppData(anyCase ? anyCase : null);
-          }
-        } else {
-          this.getAppData(anyCase ? anyCase : null);
-        }
+        this.getAppData(anyCase ? anyCase : null);
       }
     });
   }
