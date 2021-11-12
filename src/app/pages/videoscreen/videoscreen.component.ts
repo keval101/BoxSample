@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from '../../shared/shared/data.service';
+import { UtilityService } from 'src/app/shared/shared/utility.service';
 
 @Component({
   selector: 'app-videoscreen',
@@ -40,7 +41,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     private dataService: DataService,
     private Translateservice: TranslateService,
     private confirmationService: ConfirmationService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    public utility: UtilityService
   ) {
     this.headerService.videoFullscreen.subscribe((res) => {
       if (res === true) {
@@ -117,20 +119,23 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     this.video.nativeElement.volume = this.val / 100;
     if (this.val === 0) {
       this.isMuted = true;
+      this.video.nativeElement.muted = true;
     } else {
       this.isMuted = false;
+      this.video.nativeElement.muted = false;
     }
   }
 
   muteVolume(): void {
     this.isMuted = true;
     this.val = 0;
-    this.video.nativeElement.volume = 0;
+    this.video.nativeElement.muted = true;
   }
 
   unMuteVolume(): void {
     this.isMuted = false;
     this.val = 30;
+    this.video.nativeElement.muted = false;
     this.video.nativeElement.volume = this.val / 100;
   }
 
