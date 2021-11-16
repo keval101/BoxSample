@@ -8,9 +8,6 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
     <script>
-      window.addEventListener('beforeunload', (event) => {
-        event.returnValue = 'Reload return..';
-      });
       window.addEventListener('popstate', function (event) {
         history.pushState(null, null, window.location.href);
       });

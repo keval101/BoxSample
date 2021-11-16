@@ -94,6 +94,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
           name: data.name,
           score: ans.score,
           hint: ans.hint,
+          selectedAns: data.selectedAnswer,
+          optionName: ans.name,
         });
       }
     } else {
@@ -101,6 +103,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
         name: data.name,
         score: ans.score,
         hint: ans.hint,
+        selectedAns: data.selectedAnswer,
+        optionName: ans.name,
       });
     }
   }

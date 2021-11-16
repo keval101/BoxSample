@@ -2,6 +2,6 @@ import { Environment } from './interfaces/environment.interface';
 
 export const environment: Environment = {
   production: true,
-  API_HOST: 'https://app.virtamed.com/boxtrainer/',
+  API_HOST: 'https://appdevelop.virtamed.cloud/api/',
   version: '',
 };

@@ -24,8 +24,8 @@ import { TakescreenshotModule } from './pages/takescreenshot/takescreenshot.modu
 import { VideoscreenModule } from './pages/videoscreen/videoscreen.module';
 import { SharedModule } from '../app/shared/shared/shared.module';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthHeaderInterceptor } from './shared/shared/auth-header.interceptor';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { AuthHeaderInterceptor } from './shared/shared/auth-header.interceptor';
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -60,13 +60,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHeaderInterceptor,
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: HTTP_INTERCEPTORS,
+  //     useClass: AuthHeaderInterceptor,
+  //     multi: true,
+  //   },
+  // ],
   bootstrap: [AppComponent],
   exports: [TranslateModule, HeaderModule],
 })
