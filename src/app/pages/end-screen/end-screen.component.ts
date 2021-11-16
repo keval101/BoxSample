@@ -17,4 +17,8 @@ export class EndScreenComponent implements OnInit {
     this.cancel = this.evolutionService.cancelValue;
     this.isEndScreen = true;
   }
+
+  closeTab(e) {
+    window.close();
+  }
 }

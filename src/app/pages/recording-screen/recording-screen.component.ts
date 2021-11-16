@@ -64,6 +64,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   totalScreenshot = [];
   indexDB;
   indexDbSubscription: Subscription;
+  startRecordingTime;
 
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
@@ -249,6 +250,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   startRecording(): void {
+    this.startRecordingTime = new Date(new Date().toUTCString()).toISOString();
     this.stopwatch();
     this.isRunning = true;
     this.videoEle.nativeElement.volume = 0;
@@ -266,6 +268,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       return;
     }
     this.mediaRecorder.onstop = (event) => {
+      const endRecordingTime = new Date(new Date().toUTCString()).toISOString();
+      this.dataservice.setCaseData(
+        this.startRecordingTime,
+        'startRecordingTime'
+      );
+      this.dataservice.setCaseData(endRecordingTime, 'endRecordingTime');
       this.recordedBlobs = event.target.recordedBlobs;
       const superBuffer = new Blob(this.recordedBlobs, this.videoType);
       const reader = new FileReader();
