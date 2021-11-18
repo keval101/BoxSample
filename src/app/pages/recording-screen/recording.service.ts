@@ -9,4 +9,5 @@ export class RecordingService {
   cameraidValue;
   recordTimeDuration = new Subject();
   finalRecordDuration;
+  sceenShots = [];
 }

@@ -47,7 +47,6 @@ export class TakescreenshotComponent
   cancelText: string;
   isSidebarOpen = false;
   indexDB;
-  totalScreenShot = [];
   indexDbSubscription: Subscription;
 
   constructor(
@@ -86,13 +85,6 @@ export class TakescreenshotComponent
     });
     this.recording = true;
     this.takeScreenshot = true;
-
-    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
-      if (res && !this.indexDB) {
-        this.indexDB = res;
-        this.getAndDisplayData(res);
-      }
-    });
   }
 
   ngAfterViewInit(): void {
@@ -131,33 +123,6 @@ export class TakescreenshotComponent
     this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
   }
 
-  getAndDisplayData(db) {
-    const tx = db.transaction(['recording'], 'readonly');
-    const store = tx.objectStore('recording');
-    const req = store.openCursor(2);
-    req.onsuccess = (event) => {
-      const cursor = event.target.result;
-      if (cursor != null) {
-        this.totalScreenShot = cursor.value;
-        cursor.continue();
-      }
-    };
-    req.onerror = (event) => {
-      alert('error in cursor request ' + event.target.errorCode);
-    };
-  }
-
-  storeScreenshots(db, screenshots) {
-    const tx = db.transaction(['recording'], 'readwrite');
-    const store = tx.objectStore('recording');
-    const data = { screenshotData: screenshots };
-    store.add(data);
-    tx.oncomplete = () => {};
-    tx.onerror = (event) => {
-      alert('error storing Recording ' + event.target.errorCode);
-    };
-  }
-
   onRetake(): void {
     this.headerService.videoFullscreen.next(false);
     this.fullscreen = false;
@@ -184,11 +149,9 @@ export class TakescreenshotComponent
 
   onDone(): void {
     this.dataservice.preserveQueryParams('/self-assesment');
-    this.storeScreenshots(
-      this.indexDB,
+    this.takescreenshotService.captures = this.utility.getImageBlob(
       this.canvas.nativeElement.toDataURL('image/png')
     );
-    this.takescreenshotService.captures = this.totalScreenShot;
   }
   onCancelExersice(): void {
     this.confirmationService.confirm({
@@ -222,6 +185,6 @@ export class TakescreenshotComponent
   }
 
   get appData() {
-    return JSON.parse(this.dataservice.getSessionData('caseData'));
+    return this.dataservice.appData;
   }
 }

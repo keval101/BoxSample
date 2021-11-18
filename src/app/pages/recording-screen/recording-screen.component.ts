@@ -61,7 +61,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   flashCheckedValue = false;
   isFullScreen: boolean;
   cancelText: string;
-  totalScreenshot = [];
   indexDB;
   indexDbSubscription: Subscription;
   startRecordingTime;
@@ -85,7 +84,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private utility: UtilityService,
     private evolutionService: EvolutionService
   ) {
-    utility.initDatabase();
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
         this.micValue = res;
@@ -111,12 +109,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
-      if (res && !this.indexDB) {
-        this.indexDB = res;
-        this.getAndDisplayData(res);
-      }
-    });
+    this.initRecording();
   }
 
   initRecording() {
@@ -152,55 +145,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.micCheckedValue = this.headerService.muteMic;
     this.flashCheckedValue = this.headerService.flash;
     this.recordingDurationTime = '00:00';
-  }
-
-  getAndDisplayData(db) {
-    const tx = db.transaction(['recording'], 'readonly');
-    const store = tx.objectStore('recording');
-    const req = store.openCursor();
-    const allRecording = [];
-
-    req.onsuccess = (event) => {
-      const cursor = event.target.result;
-      if (cursor != null) {
-        allRecording.push(cursor.value);
-        cursor.continue();
-      } else {
-        if (allRecording.length) {
-          allRecording.forEach((element) => {
-            this.videoSource = element.recordingPath;
-            this.recordingFinish = true;
-          });
-        } else {
-          this.initRecording();
-        }
-      }
-    };
-    req.onerror = (event) => {
-      alert('error in cursor request ' + event.target.errorCode);
-    };
-  }
-
-  storeRecording(db, videoData) {
-    const tx = db.transaction(['recording'], 'readwrite');
-    const store = tx.objectStore('recording');
-    const data = { recordingPath: videoData };
-    store.add(data);
-    tx.oncomplete = () => {};
-    tx.onerror = (event) => {
-      alert('error storing Recording ' + event.target.errorCode);
-    };
-  }
-
-  storeScreenshots(db, screenshots) {
-    const tx = db.transaction(['recording'], 'readwrite');
-    const store = tx.objectStore('recording');
-    const data = { screenshots };
-    store.add(data);
-    tx.oncomplete = () => {};
-    tx.onerror = (event) => {
-      alert('error storing Recording ' + event.target.errorCode);
-    };
   }
 
   onFinish(): void {
@@ -269,31 +213,24 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     }
     this.mediaRecorder.onstop = (event) => {
       const endRecordingTime = new Date(new Date().toUTCString()).toISOString();
-      this.dataservice.setCaseData(
-        this.startRecordingTime,
-        'startRecordingTime'
-      );
-      this.dataservice.setCaseData(endRecordingTime, 'endRecordingTime');
+
+      this.dataservice.recordingStartTime = this.startRecordingTime;
+      this.dataservice.recordingEndTime = endRecordingTime;
+
       this.recordedBlobs = event.target.recordedBlobs;
       const superBuffer = new Blob(this.recordedBlobs, this.videoType);
+      this.dataservice.videoData = {
+        mimeType: this.videoType.type,
+        blob: superBuffer,
+      };
       const reader = new FileReader();
       reader.readAsDataURL(superBuffer);
       reader.onloadend = () => {
         const base64data = reader.result;
-        this.dataservice.setCaseData(this.displayTimer, 'recordingTime');
-        this.storeScreenshots(this.indexDB, this.totalScreenshot);
-        if ('storage' in navigator && 'estimate' in navigator.storage) {
-          navigator.storage.estimate().then((storageSpace) => {
-            if (storageSpace.quota / 1000 > superBuffer.size / 1000) {
-              this.videoSource = base64data;
-              this.storeRecording(this.indexDB, base64data);
-            } else {
-              this.videoSource = base64data;
-            }
-          });
-        } else {
-          this.videoSource = base64data;
-        }
+        this.dataservice.displayTimer = this.displayTimer;
+        this.videoSource = this.sanitizer.bypassSecurityTrustResourceUrl(
+          URL.createObjectURL(this.dataservice.videoData.blob)
+        );
       };
     };
 
@@ -403,7 +340,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement.style.height = vidStyleData.height + 'px';
     this.canvas.nativeElement.style.left = vidStyleData.left + 'px';
     this.canvas.nativeElement.style.top = vidStyleData.top + 'px';
-    this.totalScreenshot.push(this.canvas.nativeElement.toDataURL('image/png'));
+
+    this.recordingService.sceenShots.push(
+      this.utility.getImageBlob(
+        this.canvas.nativeElement.toDataURL('image/png')
+      )
+    );
   }
 
   redirectToPhoto(): void {
@@ -447,6 +389,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   get appData() {
-    return JSON.parse(this.dataservice.getSessionData('caseData'));
+    return this.dataservice.appData;
   }
 }

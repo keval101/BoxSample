@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as CryptoJS from 'crypto-js';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +16,20 @@ export class DataService {
   appData;
   currentUrl: string;
   activeParams: string;
+  screenShotsBlob = [];
+  videoBlob = [];
+  videoData;
+  recordingStartTime;
+  recordingEndTime;
+  displayTimer;
+  selfAssessmentScreenShot;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private activeRouter: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private messageService: MessageService
   ) {
     this.activeRouter.queryParams.subscribe((params) => {
       this.activeParams = params.sceneId;
@@ -32,16 +41,41 @@ export class DataService {
     return this.http.get(this.baseUrl + `scene/${params}/details`);
   }
 
+  showSuccess(message) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'success',
+      detail: message,
+    });
+  }
+
+  showError(message) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+    });
+  }
+
   submitData(reportGuid: string, data): Observable<any> {
     const randomNum = CryptoJS.lib.WordArray.random(16);
     const IV = randomNum.toString(CryptoJS.enc.Base64);
+    const keyString = 'fxhToKHXW82SlxvdfrYsIXMak2RdmpLD';
+    const Key = CryptoJS.enc.Utf8.parse(keyString);
+    const val = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+    const encrypted = CryptoJS.AES.encrypt(val, Key, {
+      iv: randomNum,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    }).toString();
+    const b64 = encrypted.toString(CryptoJS.enc.Hex);
 
     return this.http.post(
       this.baseUrl + `user/reports/context/${reportGuid}`,
-      data,
+      b64,
       {
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
           apiKey: 'kpgwtlAF2WTawB3ZlcUUsmCIYZTL4E',
           IV,
         },
@@ -49,21 +83,14 @@ export class DataService {
     );
   }
 
-  uploadMedia(blobData, mimeType): Observable<any> {
-    const fd = new FormData();
-    fd.append('fname', 'screenShot.png');
-    fd.append('data', blobData);
-
-    return this.http.put(
-      'https://virtamed.blob.core.windows.net/connect-develop-images/28c4f86f-b007-4c9f-89a1-4727b38e9c1a.png?sv=2017-04-17&sr=b&sig=uSIYvo3RsPJIgUokqnpfeQwaqqvJlB%2Fyl4rhphtVbm4%3D&se=2021-11-30T09%3A19%3A56Z&sp=rcw&rscc=public%2C%20max-age%3D1209600',
-      fd,
-      {
-        headers: {
-          'x-ms-blob-type': 'BlockBlob',
-          'Content-Type': mimeType,
-        },
-      }
-    );
+  uploadMedia(blobData, mimeType, url): Observable<any> {
+    mimeType = mimeType ? mimeType : 'image/png';
+    return this.http.put(url, blobData, {
+      headers: {
+        'x-ms-blob-type': 'BlockBlob',
+        'Content-Type': mimeType,
+      },
+    });
   }
 
   preserveQueryParams(url: string) {
@@ -75,16 +102,6 @@ export class DataService {
     } else {
       this.router.navigate([url]);
       this.setSessionData(url, 'currentUrl');
-    }
-  }
-
-  setCaseData(obj, key) {
-    if (this.getSessionData('caseData')) {
-      const data = JSON.parse(this.getSessionData('caseData'));
-      data[key] = obj;
-      this.setSessionData(data, 'caseData');
-    } else {
-      this.setSessionData({ case: obj }, 'caseData');
     }
   }
 

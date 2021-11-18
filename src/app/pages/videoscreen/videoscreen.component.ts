@@ -69,7 +69,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get appData() {
-    return JSON.parse(this.dataService.getSessionData('caseData'));
+    return this.dataService.appData;
   }
 
   ngOnDestroy() {

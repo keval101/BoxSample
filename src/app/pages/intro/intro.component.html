@@ -10,7 +10,7 @@
 <div class="container" (window:resize)="onResize($event)">
   <div class="container__title">
     <p class="container__title-text m-0">
-      {{ appData?.case?.name }}
+      {{ appData?.name }}
     </p>
 
     <div>
@@ -18,16 +18,13 @@
         {{ 'intro.description' | translate }}
       </p>
       <p class="container__title-descriptionText m-0">
-        {{ appData?.case?.description }}
+        {{ appData?.description }}
       </p>
     </div>
   </div>
 
   <div class="videoPreview">
-    <img
-      [src]="appData?.case?.descriptionItems[0]?.imageUrl"
-      alt="coverImages"
-    />
+    <img [src]="appData?.descriptionItems[0]?.imageUrl" alt="coverImages" />
   </div>
 
   <div
@@ -47,7 +44,7 @@
       class="sidebar__content"
       id="sidebar__content"
       *ngIf="appData"
-      [innerHTML]="appData?.case?.descriptionItems[0]?.content"
+      [innerHTML]="appData?.descriptionItems[0]?.content"
     ></div>
 
     <div class="sidebar__buttonGroup">

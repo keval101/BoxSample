@@ -17,6 +17,7 @@ import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-self-assesment',
@@ -54,6 +55,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
     private evolutionService: EvolutionService,
+    private sanitizer: DomSanitizer,
     public utility: UtilityService,
     private dataService: DataService
   ) {
@@ -110,25 +112,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   }
 
   get appData() {
-    return JSON.parse(this.dataService.getSessionData('caseData'));
-  }
-
-  getAndDisplayData(db) {
-    const tx = db.transaction(['recording'], 'readonly');
-    const store = tx.objectStore('recording');
-    const req = store.openCursor();
-    req.onsuccess = (event) => {
-      const cursor = event.target.result;
-      if (cursor != null) {
-        this.totalScreenShot = cursor.value;
-        const arr = this.totalScreenShot;
-        this.resultImage = cursor.value.screenshotData;
-        cursor.continue();
-      }
-    };
-    req.onerror = (event) => {
-      alert('error in cursor request ' + event.target.errorCode);
-    };
+    return this.dataService.appData;
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -163,14 +147,15 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
       });
     this.isScreenShot = true;
     this.recording = true;
-    this.screenShots = this.appData.case.questionnaire.pages[0].screenshots;
-    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
-      if (res && !this.indexDB) {
-        this.indexDB = res;
-        this.getAndDisplayData(res);
-        this.setScreenShots();
-      }
-    });
+    if (this.appData) {
+      this.screenShots = this.appData.questionnaire.pages[0].screenshots;
+    }
+
+    this.resultImage = this.sanitizer.bypassSecurityTrustResourceUrl(
+      URL.createObjectURL(this.takescreenshotService.captures)
+    );
+
+    this.setScreenShots();
   }
 
   ngOnDestroy() {
@@ -212,7 +197,6 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.imagePreviews = document.getElementsByClassName('p');
         this.selfAssesmentService.imageIndex = this.screenShots[0];
-        this.dataService.setCaseData(this.screenShots[0], 'selfAssessment');
         setTimeout(() => {
           this.imagePreviews[0].classList.add('active');
         }, 100);
@@ -232,8 +216,9 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   redirectTo(): void {
     if (!this.selectedScreenShot) {
       this.selectedScreenShot = this.screenShots[0];
+      this.dataService.selfAssessmentScreenShot = this.screenShots[0];
     }
-    this.dataService.setCaseData(this.selectedScreenShot, 'selfAssessment');
+    this.dataService.selfAssessmentScreenShot = this.selectedScreenShot;
     this.dataService.preserveQueryParams('/self-assesment-questions');
   }
 

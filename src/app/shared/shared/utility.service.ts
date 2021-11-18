@@ -49,6 +49,12 @@ export class UtilityService {
     };
   }
 
+  getImageBlob(data) {
+    const contentType = 'image/png';
+    const newData = data.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+    return this.getBlobData(newData, contentType);
+  }
+
   getBlobData(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];

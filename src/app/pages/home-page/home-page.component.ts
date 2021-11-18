@@ -17,7 +17,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.router.navigate(['/intro']);
+      if (this.appData) {
+        this.router.navigate(['/intro']);
+      }
     }, 2800);
   }
 

@@ -13,6 +13,7 @@ import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
 export class AppComponent implements OnInit {
   videoFullScreen = false;
   recordingScreen = false;
+  hasDataReceived = false;
   appData;
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -42,7 +43,10 @@ export class AppComponent implements OnInit {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
         const anyCase = this.route.snapshot.queryParams['sceneId'];
-        this.getAppData(anyCase ? anyCase : null);
+        if (!this.hasDataReceived) {
+          this.hasDataReceived = true;
+          this.getAppData(anyCase ? anyCase : null);
+        }
       }
     });
   }
@@ -53,28 +57,25 @@ export class AppComponent implements OnInit {
         history.pushState(null, null, window.location.href);
       }
     });
+    sessionStorage.clear();
     this.dataservice.setSessionData('/', 'currentUrl');
     this.primengConfig.ripple = true;
   }
 
   getAppData(params) {
-    this.dataservice.getData(params).subscribe((res) => {
-      if (res) {
-        this.appData = res;
-        this.dataservice.appData = res;
-        sessionStorage.clear();
-        if (!window.indexedDB) {
-          window.alert(
-            "Your browser doesn't support a stable version of IndexedDB."
-          );
-        } else {
-          indexedDB.deleteDatabase('myDatabase');
+    this.dataservice.getData(params).subscribe(
+      (res) => {
+        if (res) {
+          this.appData = res;
+          this.dataservice.appData = res;
+          sessionStorage.clear();
         }
-        this.dataservice.setCaseData(res, 'case');
-        if (params) {
-          this.dataservice.setCaseData(params, 'sceneId');
-        }
+      },
+      (err) => {
+        this.dataservice.showError(
+          'Some issue occured. Please contact your administrator!'
+        );
       }
-    });
+    );
   }
 }

@@ -22,6 +22,7 @@ import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
 import { Subscription } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from 'crypto-js';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-evaluation',
@@ -41,6 +42,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   items = [];
   cancelText: string;
   responsiveOptions = [];
+  isDataSave = false;
   @ViewChild('sidenav') sidenav: ElementRef;
 
   scores = [];
@@ -59,6 +61,9 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   popupImageUrl: string;
   recordinScore;
   finalObj;
+  totalMedia = 0;
+  count = 0;
+  totalMediaForUpload = [];
 
   constructor(
     private router: Router,
@@ -70,6 +75,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     private selfAssesmentService: SelfAssesmentService,
     private headerService: HeaderService,
     public utility: UtilityService,
+    private sanitizer: DomSanitizer,
     private dataservice: DataService,
     private selfAssesQueSer: SelfAssesmentQuestionService
   ) {
@@ -107,62 +113,78 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.indexDbSubscription = this.utility.indexDB.subscribe((res) => {
-      if (res && !this.indexDB) {
-        this.indexDB = res;
-        this.getAndDisplayData(res);
-      } else if (!this.indexDB) {
-        this.utility.initDatabase();
-      }
+    const newArray = [];
+    this.recordingService.sceenShots.forEach((element) => {
+      newArray.push(
+        this.sanitizer.bypassSecurityTrustResourceUrl(
+          URL.createObjectURL(element)
+        )
+      );
     });
-    this.questionData = this.appData.selfAssessmentQuestions;
-    this.selfAssessImage = this.appData.selfAssessment;
-    this.questionName = this.appData.case.questionnaire.pages[1].sections[0];
-    this.translateService
-      .get('evaluation.cancelText')
-      .subscribe((text: string) => {
-        this.cancelText = text;
-      });
-    this.exerciseData = this.appData.case.reportSections[0].reportItems[0];
-    this.screenshotsData = this.appData.case.questionnaire.pages[0];
-    this.recording = true;
-    this.resultImage = this.appData.takeScreenShot;
-
-    this.questionData.forEach((element) => {
-      this.totalScore = this.totalScore + element.score;
-      this.allHint.push(element.hint);
-    });
-
-    this.questionName.questions.forEach((element) => {
-      this.totalMaxScore = this.totalMaxScore + element.maxScore;
-    });
-
-    const totalScoreforQue = (this.totalScore * 100) / this.totalMaxScore;
-    const totalScoreforScreenShot =
-      (this.selfAssessImage.score * 100) / this.screenshotsData.maxScore;
-    this.recordinScore = this.recordingTime();
-    this.scores = [
-      {
-        title: this.exerciseData.name,
-        measured: this.appData.recordingTime,
-        goalvalue: this.exerciseData.goalValueString,
-        score:
-          Math.round(this.recordinScore) + ' / ' + this.exerciseData.maxScore,
-      },
-      {
-        title: this.screenshotsData.name,
-        measured: totalScoreforScreenShot.toFixed(0) + '%',
-        goalvalue: '100%',
-        score:
-          this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
-      },
-      {
-        title: this.questionName.name,
-        measured: totalScoreforQue.toFixed(0) + '%',
-        goalvalue: '100%',
-        score: this.totalScore + ' / ' + this.totalMaxScore,
-      },
+    this.items = [
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        URL.createObjectURL(this.takescreenshotService.captures)
+      ),
+      ...newArray,
     ];
+
+    this.totalMediaForUpload = [
+      this.takescreenshotService.captures,
+      ...this.recordingService.sceenShots,
+    ];
+
+    this.selfAssessImage = this.dataservice.selfAssessmentScreenShot;
+
+    if (this.appData) {
+      this.questionData = this.selfAssesQueSer.screenShotData;
+
+      this.questionName = this.appData.questionnaire.pages[1].sections[0];
+      this.translateService
+        .get('evaluation.cancelText')
+        .subscribe((text: string) => {
+          this.cancelText = text;
+        });
+      this.exerciseData = this.appData.reportSections[0].reportItems[0];
+      this.screenshotsData = this.appData.questionnaire.pages[0];
+      this.recording = true;
+      this.resultImage = this.appData.takeScreenShot;
+
+      this.questionData.forEach((element) => {
+        this.totalScore = this.totalScore + element.score;
+        this.allHint.push(element.hint);
+      });
+
+      this.questionName.questions.forEach((element) => {
+        this.totalMaxScore = this.totalMaxScore + element.maxScore;
+      });
+
+      const totalScoreforQue = (this.totalScore * 100) / this.totalMaxScore;
+      const totalScoreforScreenShot =
+        (this.selfAssessImage.score * 100) / this.screenshotsData.maxScore;
+      this.recordinScore = this.recordingTime();
+      this.scores = [
+        {
+          title: this.exerciseData.name,
+          measured: this.dataservice.displayTimer,
+          goalvalue: this.exerciseData.goalValueString,
+          score:
+            Math.round(this.recordinScore) + ' / ' + this.exerciseData.maxScore,
+        },
+        {
+          title: this.screenshotsData.name,
+          measured: totalScoreforScreenShot.toFixed(0) + '%',
+          goalvalue: '100%',
+          score:
+            this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
+        },
+        {
+          title: this.questionName.name,
+          measured: totalScoreforQue.toFixed(0) + '%',
+          goalvalue: '100%',
+          score: this.totalScore + ' / ' + this.totalMaxScore,
+        },
+      ];
+    }
   }
 
   createReqData() {
@@ -171,7 +193,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     this.questionName.questions.forEach((element, index) => {
       const question = {
         // calculated from Answers
-        Score: this.appData.selfAssessmentQuestions[index].score,
+        Score: this.selfAssesQueSer.screenShotData[index].score,
         // calculated from Answers
         MaxScore: element.maxScore,
         MinScore: element.minScore,
@@ -188,15 +210,15 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             IsDefinedAsCorrect: element.answers[0].isCorrect,
             // you will calculate
             IsCorrectlyAnswered:
-              this.appData.selfAssessmentQuestions[index].selectedAns,
+              this.selfAssesQueSer.screenShotData[index].selectedAns,
             // "score" from SceneDetails endpoint response
             ScoreDefined: element.answers[0].score,
             // "penaltyScore" from SceneDetails endpoint response
             PenaltyScoreDefined: element.answers[0].penaltyScore,
             // you will calculate
-            ScoreEvaluated: this.appData.selfAssessmentQuestions[index].score,
+            ScoreEvaluated: this.selfAssesQueSer.screenShotData[index].score,
             IsSelected:
-              this.appData.selfAssessmentQuestions[index].optionName === 'Yes'
+              this.selfAssesQueSer.screenShotData.optionName === 'Yes'
                 ? true
                 : false,
             AnswerType: element.answers[0].answerType,
@@ -212,15 +234,15 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             IsDefinedAsCorrect: element.answers[1].isCorrect,
             // you will calculate
             IsCorrectlyAnswered:
-              this.appData.selfAssessmentQuestions[index].selectedAns,
+              this.selfAssesQueSer.screenShotData[index].selectedAns,
             // "score" from SceneDetails endpoint response
             ScoreDefined: element.answers[1].score,
             // "penaltyScore" from SceneDetails endpoint response
             PenaltyScoreDefined: element.answers[1].penaltyScore,
             // you will calculate
-            ScoreEvaluated: this.appData.selfAssessmentQuestions[index].score,
+            ScoreEvaluated: this.selfAssesQueSer.screenShotData[index].score,
             IsSelected:
-              this.appData.selfAssessmentQuestions[index].optionName === 'No'
+              this.selfAssesQueSer.screenShotData[index].optionName === 'No'
                 ? true
                 : false,
             AnswerType: element.answers[1].answerType,
@@ -241,8 +263,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       questions.push(question);
     });
 
-    this.items.forEach((element) => {
-      screenshots.push({
+    this.totalMediaForUpload.forEach((element) => {
+      const obj = {
         GroupLanguageKey: '',
         DescriptionLanguageKey: 'Measurement screenshot description',
         NameLanguageKey: 'Measurement screenshot name',
@@ -250,23 +272,29 @@ export class EvaluationComponent implements OnInit, OnDestroy {
         Id: uuidv4(),
         FileName: 'ScreenshotFileName.png',
         FileGeneratedName: null,
+      };
+
+      this.dataservice.screenShotsBlob.push({
+        id: obj.Id,
+        blob: element,
       });
+      screenshots.push(obj);
     });
 
     this.finalObj = {
       // Generate unique
       Id: uuidv4(),
       //data.identifier
-      ActualSceneIdentifier: this.appData.case.identifier,
+      ActualSceneIdentifier: this.appData.identifier,
       //data.identifier
-      SceneIdentifier: this.appData.case.identifier,
-      SceneNameLanguageKey: this.appData.case.nameLanguageKey,
-      SceneSectionLanguageKey: this.appData.case.sceneSectionNameLanguageKey,
-      ActualSceneNameLanguageKey: this.appData.case.nameLanguageKey,
+      SceneIdentifier: this.appData.identifier,
+      SceneNameLanguageKey: this.appData.nameLanguageKey,
+      SceneSectionLanguageKey: this.appData.sceneSectionNameLanguageKey,
+      ActualSceneNameLanguageKey: this.appData.nameLanguageKey,
       // Start of the recording - UTC
-      StartDate: this.appData.startRecordingTime,
+      StartDate: this.dataservice.recordingStartTime,
       // End of the recording - UTC
-      EndDate: this.appData.endRecordingTime,
+      EndDate: this.dataservice.recordingEndTime,
       // static value
       Status: 10,
       // Generate unique
@@ -292,43 +320,40 @@ export class EvaluationComponent implements OnInit, OnDestroy {
         MaxScore: this.totalMaxScore,
         Pages: [
           {
-            PageType: this.appData.case.questionnaire.pages[1].pageType,
-            Rows: this.appData.case.questionnaire.pages[1].rows,
-            Columns: this.appData.case.questionnaire.pages[1].columns,
+            PageType: this.appData.questionnaire.pages[1].pageType,
+            Rows: this.appData.questionnaire.pages[1].rows,
+            Columns: this.appData.questionnaire.pages[1].columns,
             Sections: [
               {
-                Rows: this.appData.case.questionnaire.pages[1].sections[0].rows,
+                Rows: this.appData.questionnaire.pages[1].sections[0].rows,
                 Columns:
-                  this.appData.case.questionnaire.pages[1].sections[0].columns,
-                Row: this.appData.case.questionnaire.pages[1].sections[0].row,
-                Column:
-                  this.appData.case.questionnaire.pages[1].sections[0].column,
+                  this.appData.questionnaire.pages[1].sections[0].columns,
+                Row: this.appData.questionnaire.pages[1].sections[0].row,
+                Column: this.appData.questionnaire.pages[1].sections[0].column,
                 RowSpan:
-                  this.appData.case.questionnaire.pages[1].sections[0].rowSpan,
+                  this.appData.questionnaire.pages[1].sections[0].rowSpan,
                 ColumnSpan:
-                  this.appData.case.questionnaire.pages[1].sections[0]
-                    .columnSpan,
+                  this.appData.questionnaire.pages[1].sections[0].columnSpan,
                 Questions: questions,
                 NameLanguageKey:
-                  this.appData.case.questionnaire.pages[1].sections[0]
+                  this.appData.questionnaire.pages[1].sections[0]
                     .nameLanguageKey,
                 DescriptionLanguageKey:
-                  this.appData.case.questionnaire.pages[1].sections[0]
+                  this.appData.questionnaire.pages[1].sections[0]
                     .descriptionLanguageKey,
                 SortId: 0,
                 IsVisible: true,
                 Identifier:
-                  this.appData.case.questionnaire.pages[1].sections[0]
-                    .identifier,
+                  this.appData.questionnaire.pages[1].sections[0].identifier,
               },
             ],
             NameLanguageKey:
-              this.appData.case.questionnaire.pages[1].nameLanguageKey,
+              this.appData.questionnaire.pages[1].nameLanguageKey,
             DescriptionLanguageKey:
-              this.appData.case.questionnaire.pages[1].descriptionLanguageKey,
+              this.appData.questionnaire.pages[1].descriptionLanguageKey,
             SortId: 0,
             IsVisible: true,
-            Identifier: this.appData.case.questionnaire.pages[1].identifier,
+            Identifier: this.appData.questionnaire.pages[1].identifier,
           },
           {
             PageType: 2,
@@ -339,7 +364,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             // pages[PageType == 2].screenshots[0].imageBlobName
             SelectedAssessmentImageBlobName: this.selfAssessImage.url,
             // pages[PageType == 2].nameLanguageKey
-            NameLanguageKey: this.appData.case.identifier,
+            NameLanguageKey: this.appData.identifier,
             // pages[PageType == 2].descriptionLanguageKey
             DescriptionLanguageKey: this.screenshotsData.descriptionLanguageKey,
             SortId: 1,
@@ -347,21 +372,21 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             Identifier: this.screenshotsData.identifier,
           },
         ],
-        NameLanguageKey: this.appData.case.questionnaire.nameLanguageKey,
+        NameLanguageKey: this.appData.questionnaire.nameLanguageKey,
         DescriptionLanguageKey:
-          this.appData.case.questionnaire.descriptionLanguageKey,
+          this.appData.questionnaire.descriptionLanguageKey,
         SortId: 0,
         IsVisible: true,
-        Identifier: this.appData.case.questionnaire.identifier,
+        Identifier: this.appData.questionnaire.identifier,
       },
       ReportSections: [
         {
           SortId: 0,
           IsVisible: true,
           // reportSections.nameLanguageKey
-          NameLanguageKey: this.appData.case.reportSections[0].nameLanguageKey,
+          NameLanguageKey: this.appData.reportSections[0].nameLanguageKey,
           // reportSections.identifier
-          SectionIdentifier: this.appData.case.reportSections[0].identifier,
+          SectionIdentifier: this.appData.reportSections[0].identifier,
           //
           // Calculated from report items
           Score: Math.round(this.recordinScore),
@@ -405,8 +430,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
               Unit: 5,
               // time recording of video in seconds
               Value:
-                Number(this.appData.recordingTime.split(':')[0] * 60) +
-                Number(this.appData.recordingTime.split(':')[1]),
+                Number(this.dataservice.displayTimer.split(':')[0] * 60) +
+                Number(this.dataservice.displayTimer.split(':')[1]),
               Id: this.exerciseData.identifier,
               SortId: 0,
               IsVisible: true,
@@ -428,48 +453,23 @@ export class EvaluationComponent implements OnInit, OnDestroy {
           // Generate unique
           Id: uuidv4(),
           // only extension is important
-          FileName: 'MovieFileName.mp4',
+          FileName: `MovieFileName.${
+            this.dataservice.videoData.mimeType === 'video/mp4' ? 'mp4' : 'webm'
+          }`,
           FileGeneratedName: null,
         },
       ],
     };
+
+    const videoBlob = this.dataservice.videoData;
+    videoBlob.id = this.finalObj.Movies[0].Id;
+    this.dataservice.videoBlob.push(videoBlob);
   }
 
   ngOnDestroy() {
     if (this.indexDbSubscription) {
       this.indexDbSubscription.unsubscribe();
     }
-  }
-
-  getAndDisplayData(db) {
-    const tx = db.transaction(['recording'], 'readonly');
-    const store = tx.objectStore('recording');
-    const req = store.openCursor();
-    const allRecording = [];
-
-    req.onsuccess = (event) => {
-      const cursor = event.target.result;
-      if (cursor != null) {
-        allRecording.push(cursor.value);
-        cursor.continue();
-      } else {
-        if (allRecording.length) {
-          let arr = [];
-          allRecording.forEach((element) => {
-            if (element.screenshotData) {
-              arr.push(element.screenshotData);
-            }
-            if (element.screenshots) {
-              arr = [...arr, ...element.screenshots];
-            }
-          });
-          this.items = this.moveLastArrayElementToFirstIndex(arr);
-        }
-      }
-    };
-    req.onerror = (event) => {
-      alert('error in cursor request ' + event.target.errorCode);
-    };
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -515,21 +515,57 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   get appData() {
-    return JSON.parse(this.dataservice.getSessionData('caseData'));
+    return this.dataservice.appData;
   }
 
   onSubmit() {
+    this.isDataSave = true;
     this.createReqData();
-    // console.log(this.encrypt(this.finalObj));
     this.dataservice
-      .submitData(
-        'f3cefa4a-83c9-473c-8883-3a46f2ff4f2c',
-        this.encrypt(this.finalObj)
-      )
-      .subscribe((res) => {});
-    this.evolutionService.setCancelValue(false);
-    // console.log(this.finalObj);
-    this.router.navigate(['/end']);
+      .submitData('f3cefa4a-83c9-473c-8883-3a46f2ff4f2c', this.finalObj)
+      .subscribe(
+        (res) => {
+          this.dataservice.showSuccess('Data uploaded successfully...');
+          this.totalMedia = Object.keys(res).length;
+          this.uploadMedia(res);
+        },
+        () => {
+          this.isDataSave = false;
+          this.dataservice.showError(
+            'Some issue occured. Please contact your administrator!'
+          );
+        }
+      );
+  }
+
+  uploadMedia(res) {
+    const allMedia = [
+      ...this.dataservice.screenShotsBlob,
+      ...this.dataservice.videoBlob,
+    ];
+    allMedia.forEach((m) => {
+      if (res[m.id]) {
+        this.uploadFile(m, res[m.id]);
+      }
+    });
+  }
+
+  uploadFile(file, url) {
+    this.dataservice.uploadMedia(file.blob, file.mimeType, url).subscribe(
+      (res) => {
+        this.count++;
+        if (this.count === this.totalMedia) {
+          this.dataservice.showSuccess('Data successfully uploaded.');
+          this.evolutionService.setCancelValue(false);
+          this.router.navigate(['/end']);
+          this.isDataSave = false;
+        }
+      },
+      () => {
+        this.dataservice.showError('Error while uploading files.');
+        this.isDataSave = false;
+      }
+    );
   }
 
   showDialog(url) {
@@ -543,7 +579,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   recordingTime(): number {
-    const time = this.appData.recordingTime.split(':');
+    const time = this.dataservice.displayTimer.split(':');
     const totalSeconds = Number(time[0]) * 60 + Number(time[1]);
     if (
       this.exerciseData.bestIs === RecordingEnum.maxValue ||

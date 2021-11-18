@@ -14,6 +14,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { CarouselModule } from 'primeng/carousel';
 import { DialogModule } from 'primeng/dialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [EvaluationComponent],
@@ -29,6 +30,7 @@ import { DialogModule } from 'primeng/dialog';
     EvaluationRoutingModule,
     ConfirmDialogModule,
     DialogModule,
+    ProgressSpinnerModule,
   ],
   providers: [ConfirmationService],
 })
