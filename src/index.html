@@ -8,6 +8,11 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
     <script>
+      window.onbeforeunload = (event) => {
+        if (window.location.pathname !== '/end') {
+          event.returnValue = 'Reload return..';
+        }
+      };
       window.addEventListener('popstate', function (event) {
         history.pushState(null, null, window.location.href);
       });

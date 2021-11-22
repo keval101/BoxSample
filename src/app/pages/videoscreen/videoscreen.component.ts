@@ -64,12 +64,12 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     const video = document.getElementById('myvideo');
 
     video.addEventListener('canplay', () => {
-      this.isVideoLoaded = false;
+      this.dataService.setLoader(false);
     });
   }
 
   get appData() {
-    return JSON.parse(this.dataService.getSessionData('caseData'));
+    return this.dataService.appData;
   }
 
   ngOnDestroy() {
@@ -82,7 +82,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   PauseVideo(): void {
     if (!this.loaderStart) {
-      this.isVideoLoaded = true;
+      this.dataService.setLoader(true);
       this.loaderStart = true;
     }
     this.playVideo = true;
@@ -95,7 +95,7 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.video.nativeElement.addEventListener('timeupdate', () => {
       if (this.video.nativeElement.currentTime > 0) {
-        this.isVideoLoaded = false;
+        this.dataService.setLoader(false);
       }
       const progressBar = document.getElementById('progressBar');
       const time =
