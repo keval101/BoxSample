@@ -519,18 +519,21 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.isDataSave = true;
+    this.dataservice.setLoader(true);
     this.createReqData();
     this.dataservice
       .submitData('f3cefa4a-83c9-473c-8883-3a46f2ff4f2c', this.finalObj)
       .subscribe(
         (res) => {
           this.dataservice.showSuccess('Data uploaded successfully...');
-          this.totalMedia = Object.keys(res).length;
-          this.uploadMedia(res);
+          this.dataservice.setLoader(false);
+          this.evolutionService.setCancelValue(false);
+          this.router.navigate(['/end']);
+          // this.totalMedia = Object.keys(res).length;
+          // this.uploadMedia(res);
         },
         () => {
-          this.isDataSave = false;
+          this.dataservice.setLoader(false);
           this.dataservice.showError(
             'Some issue occured. Please contact your administrator!'
           );
@@ -558,12 +561,12 @@ export class EvaluationComponent implements OnInit, OnDestroy {
           this.dataservice.showSuccess('Data successfully uploaded.');
           this.evolutionService.setCancelValue(false);
           this.router.navigate(['/end']);
-          this.isDataSave = false;
+          this.dataservice.setLoader(false);
         }
       },
       () => {
         this.dataservice.showError('Error while uploading files.');
-        this.isDataSave = false;
+        this.dataservice.setLoader(false);
       }
     );
   }

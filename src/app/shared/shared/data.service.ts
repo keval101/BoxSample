@@ -24,6 +24,7 @@ export class DataService {
   displayTimer;
   selfAssessmentScreenShot;
 
+  loader = new BehaviorSubject(false);
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -34,6 +35,14 @@ export class DataService {
     this.activeRouter.queryParams.subscribe((params) => {
       this.activeParams = params.sceneId;
     });
+  }
+
+  setLoader(val) {
+    this.loader.next(val);
+  }
+
+  getLoader() {
+    return this.loader.asObservable();
   }
 
   getData(params): Observable<any> {

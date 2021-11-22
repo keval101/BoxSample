@@ -5,7 +5,6 @@
     (cancelExe)="onCancelExersice()"
   ></app-header>
 </div>
-<p-progressSpinner *ngIf="isDataSave"></p-progressSpinner>
 <p-dialog
   styleClass="assessment-image"
   [(visible)]="display"
@@ -30,7 +29,7 @@
       <div class="result__container-result">
         <div class="result__container-result-container">
           <div class="carousel-images" *ngIf="items.length === 1">
-            <img [src]="items" (click)="showDialog(items)" alt="goal" />
+            <img [src]="items[0]" (click)="showDialog(items[0])" alt="goal" />
           </div>
           <div class="carousel-images" *ngIf="items.length > 1">
             <p-carousel

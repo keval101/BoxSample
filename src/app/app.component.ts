@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   recordingScreen = false;
   hasDataReceived = false;
   appData;
+  loader;
   constructor(
     private primengConfig: PrimeNGConfig,
     public translate: TranslateService,
@@ -52,6 +53,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataservice.getLoader().subscribe((res) => {
+      this.loader = res;
+    });
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         history.pushState(null, null, window.location.href);

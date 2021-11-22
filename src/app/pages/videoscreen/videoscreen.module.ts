@@ -9,7 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SliderModule } from 'primeng/slider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [VideoscreenComponent],
@@ -22,7 +21,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ReactiveFormsModule,
     SliderModule,
     ConfirmDialogModule,
-    ProgressSpinnerModule,
   ],
   providers: [ConfirmationService],
 })
