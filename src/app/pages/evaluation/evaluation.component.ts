@@ -218,7 +218,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             // you will calculate
             ScoreEvaluated: this.selfAssesQueSer.screenShotData[index].score,
             IsSelected:
-              this.selfAssesQueSer.screenShotData.optionName === 'Yes'
+              this.selfAssesQueSer.screenShotData[index].optionName === 'Yes'
                 ? true
                 : false,
             AnswerType: element.answers[0].answerType,
@@ -525,12 +525,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       .submitData('f3cefa4a-83c9-473c-8883-3a46f2ff4f2c', this.finalObj)
       .subscribe(
         (res) => {
-          this.dataservice.showSuccess('Data uploaded successfully...');
-          this.dataservice.setLoader(false);
-          this.evolutionService.setCancelValue(false);
-          this.router.navigate(['/end']);
-          // this.totalMedia = Object.keys(res).length;
-          // this.uploadMedia(res);
+          this.totalMedia = Object.keys(res).length;
+          this.uploadMedia(res);
         },
         () => {
           this.dataservice.setLoader(false);
@@ -558,7 +554,6 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       (res) => {
         this.count++;
         if (this.count === this.totalMedia) {
-          this.dataservice.showSuccess('Data successfully uploaded.');
           this.evolutionService.setCancelValue(false);
           this.router.navigate(['/end']);
           this.dataservice.setLoader(false);
@@ -616,19 +611,5 @@ export class EvaluationComponent implements OnInit, OnDestroy {
         return this.exerciseData.maxScore;
       } else return 0;
     } else return this.exerciseData.maxScore;
-  }
-
-  encrypt(data) {
-    const keyString = 'fxhToKHXW82SlxvdfrYsIXMak2RdmpLD';
-    const Key = CryptoJS.enc.Utf8.parse(keyString);
-    const IV = CryptoJS.lib.WordArray.random(16);
-    const val = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
-    const encrypted = CryptoJS.AES.encrypt(val, Key, {
-      iv: IV,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }).toString();
-    const b64 = encrypted.toString(CryptoJS.enc.Hex);
-    return b64;
   }
 }
