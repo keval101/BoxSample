@@ -60,6 +60,7 @@ export class TakescreenshotComponent
     private dataservice: DataService,
     private utility: UtilityService
   ) {
+    this.dataservice.setLoader(true);
     this.translateService
       .get('takescreenshot.cancelText')
       .subscribe((text: string) => {
@@ -103,6 +104,7 @@ export class TakescreenshotComponent
           this.videoStream = stream;
           _video.srcObject = stream;
           _video.play();
+          this.dataservice.setLoader(false);
         });
     }
   }
