@@ -51,6 +51,7 @@
           <p-carousel
             (touchmove)="this.utility.iosScrollDis($event)"
             [value]="screenShots"
+            [circular]="true"
             [numVisible]="1"
             [page]="selectedPage"
             [numScroll]="1"

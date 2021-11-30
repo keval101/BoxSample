@@ -16,6 +16,7 @@ export class DataService {
   appData;
   currentUrl: string;
   activeParams: string;
+  activeReportGuid: string;
   screenShotsBlob = [];
   videoBlob = [];
   videoData;
@@ -34,6 +35,7 @@ export class DataService {
   ) {
     this.activeRouter.queryParams.subscribe((params) => {
       this.activeParams = params.sceneId;
+      this.activeReportGuid = params.reportContextHash;
     });
   }
 
@@ -103,11 +105,31 @@ export class DataService {
   }
 
   preserveQueryParams(url: string) {
-    if (this.activeParams) {
+    if (this.activeParams || this.activeReportGuid) {
       this.router.navigate([url], {
-        queryParams: { sceneId: this.activeParams },
+        queryParams: {
+          sceneId: this.activeParams,
+          reportContextHash: this.activeReportGuid,
+        },
       });
-      this.setSessionData(`${url}?sceneId=caseTwo`, 'currentUrl');
+      if (this.activeParams) {
+        this.setSessionData(
+          `${url}?sceneId=${this.activeParams}`,
+          'currentUrl'
+        );
+      }
+      if (this.activeParams && this.activeReportGuid) {
+        this.setSessionData(
+          `${url}?sceneId=${this.activeParams}&reportContextHash=${this.activeReportGuid}`,
+          'currentUrl'
+        );
+      }
+      if (!this.activeParams && this.activeReportGuid) {
+        this.setSessionData(
+          `${url}?reportContextHash=${this.activeReportGuid}`,
+          'currentUrl'
+        );
+      }
     } else {
       this.router.navigate([url]);
       this.setSessionData(url, 'currentUrl');

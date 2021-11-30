@@ -146,17 +146,18 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.flashCheckedValue = this.headerService.flash;
     this.recordingDurationTime = '00:00';
   }
-
   onFinish(): void {
     this.recordingService.fullscreen = false;
     this.isSidebarOpen = false;
     this.isRunning = false;
     this.stopRecording();
-    setTimeout(() => {
-      this.recordingFinish = true;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.recordingFinish = true;
+    // }, 1000);
     this.videoTrack.stop();
     this.audioTrack.stop();
+
+    this.dataservice.preserveQueryParams('/takescreenshot');
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -348,9 +349,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     );
   }
 
-  redirectToPhoto(): void {
-    this.dataservice.preserveQueryParams('/takescreenshot');
-  }
+  // redirectToPhoto(): void {
+  //   this.dataservice.preserveQueryParams('/takescreenshot');
+  // }
 
   confirm(): void {
     this.confirmationService.confirm({

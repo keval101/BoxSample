@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EvolutionService } from './evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from '../self-assesment/self-assesment.service';
@@ -64,7 +64,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   totalMedia = 0;
   count = 0;
   totalMediaForUpload = [];
-
+  reportGuid: string;
   constructor(
     private router: Router,
     public translateService: TranslateService,
@@ -77,7 +77,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     public utility: UtilityService,
     private sanitizer: DomSanitizer,
     private dataservice: DataService,
-    private selfAssesQueSer: SelfAssesmentQuestionService
+    private selfAssesQueSer: SelfAssesmentQuestionService,
+    private activeRoute: ActivatedRoute
   ) {
     this.responsiveOptions = [
       {
@@ -113,6 +114,11 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const reportGuid =
+      this.activeRoute.snapshot.queryParams['reportContextHash'];
+    this.reportGuid = reportGuid
+      ? reportGuid
+      : 'f3cefa4a-83c9-473c-8883-3a46f2ff4f2c';
     const newArray = [];
     this.recordingService.sceenShots.forEach((element) => {
       newArray.push(
@@ -521,20 +527,18 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.dataservice.setLoader(true);
     this.createReqData();
-    this.dataservice
-      .submitData('f3cefa4a-83c9-473c-8883-3a46f2ff4f2c', this.finalObj)
-      .subscribe(
-        (res) => {
-          this.totalMedia = Object.keys(res).length;
-          this.uploadMedia(res);
-        },
-        () => {
-          this.dataservice.setLoader(false);
-          this.dataservice.showError(
-            'Some issue occured. Please contact your administrator!'
-          );
-        }
-      );
+    this.dataservice.submitData(this.reportGuid, this.finalObj).subscribe(
+      (res) => {
+        this.totalMedia = Object.keys(res).length;
+        this.uploadMedia(res);
+      },
+      () => {
+        this.dataservice.setLoader(false);
+        this.dataservice.showError(
+          'Some issue occured. Please contact your administrator!'
+        );
+      }
+    );
   }
 
   uploadMedia(res) {
