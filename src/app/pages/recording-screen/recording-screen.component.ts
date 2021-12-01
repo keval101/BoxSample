@@ -87,6 +87,11 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
         this.micValue = res;
+        if ( res === false ){
+          this.videoEle.nativeElement.muted = false;
+        } else {
+          this.videoEle.nativeElement.muted = true;
+        }
         this.muteVideo();
       });
     }, 4000);
@@ -151,13 +156,13 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.isSidebarOpen = false;
     this.isRunning = false;
     this.stopRecording();
-    // setTimeout(() => {
-    //   this.recordingFinish = true;
-    // }, 1000);
+    setTimeout(() => {
+      this.recordingFinish = true;
+    }, 1000);
     this.videoTrack.stop();
     this.audioTrack.stop();
 
-    this.dataservice.preserveQueryParams('/takescreenshot');
+    // this.dataservice.preserveQueryParams('/takescreenshot');
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -349,9 +354,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     );
   }
 
-  // redirectToPhoto(): void {
-  //   this.dataservice.preserveQueryParams('/takescreenshot');
-  // }
+  redirectToPhoto(): void {
+    this.dataservice.preserveQueryParams('/takescreenshot');
+  }
 
   confirm(): void {
     this.confirmationService.confirm({
