@@ -10,10 +10,10 @@
     ></app-header>
   </div>
 
-  <!-- <div class="videoPreview" *ngIf="videoSource && recordingFinish">
+  <div class="videoPreview" *ngIf="videoSource && recordingFinish">
     <video [src]="videoSource" playsinline controls #videoPreview></video>
     <button class="close" (click)="redirectToPhoto()">X</button>
-  </div> -->
+  </div>
 
   <div class="recording__logo">
     <img src="assets/images/Logo2.svg" alt="logo" />
@@ -23,12 +23,9 @@
     <video id="video" class="video" autoplay playsinline muted #video></video>
   </div>
 
-  <div
-    class="counter"
-    [ngClass]="{ goPadding: paddingClass }"
-    *ngIf="counterTime"
-  >
-    <p class="m-0">{{ counter }}</p>
+  <div class="counter" *ngIf="counterTime">
+    <img src="../../../assets/images/Animation" alt="" />
+    <!-- <p class="m-0">{{ counter }}</p> -->
   </div>
 
   <canvas
