@@ -23,12 +23,9 @@
     <video id="video" class="video" autoplay playsinline muted #video></video>
   </div>
 
-  <div
-    class="counter"
-    [ngClass]="{ goPadding: paddingClass }"
-    *ngIf="counterTime"
-  >
-    <p class="m-0">{{ counter }}</p>
+  <div class="counter" *ngIf="counterTime">
+    <img src="../../../assets/images/Animation" alt="" />
+    <!-- <p class="m-0">{{ counter }}</p> -->
   </div>
 
   <canvas

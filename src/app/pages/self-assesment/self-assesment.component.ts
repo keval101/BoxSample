@@ -43,7 +43,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   indexDB;
   indexDbSubscription: Subscription;
   display = false;
-  popupImageUrl: string;
+  popupImageUrl: any;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 

@@ -87,7 +87,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.headerService.muteUnmuteMic.subscribe((res) => {
         this.micValue = res;
-        if ( res === false ){
+        if (res === false) {
           this.videoEle.nativeElement.muted = false;
         } else {
           this.videoEle.nativeElement.muted = true;
@@ -129,21 +129,18 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       this.counterTime = true;
       const counterText = this.data[d];
       this.counter = counterText;
-
-      if (d === 3) {
-        this.paddingClass = true;
-      }
     });
     setTimeout(() => {
       timerSub.unsubscribe();
       this.startRecording();
+      this.paddingClass = true;
       this.counterTime = false;
       if (this.headerService.muteMic === false) {
         if (window.stream.getAudioTracks().length > 0) {
           window.stream.getAudioTracks()[0].enabled = false;
         }
       }
-    }, 5000);
+    }, 10000);
     setTimeout(() => {
       this.startCamera();
     }, 500);
