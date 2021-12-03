@@ -84,17 +84,10 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private utility: UtilityService,
     private evolutionService: EvolutionService
   ) {
-    setTimeout(() => {
-      this.headerService.muteUnmuteMic.subscribe((res) => {
-        this.micValue = res;
-        if (res === false) {
-          this.videoEle.nativeElement.muted = false;
-        } else {
-          this.videoEle.nativeElement.muted = true;
-        }
-        this.muteVideo();
-      });
-    }, 4000);
+    this.headerService.muteUnmuteMic.subscribe((res) => {
+      this.micValue = res;
+      this.muteVideo();
+    });
     this.deviceInfoId = this.setupSerice.cameraIdInformation;
 
     this.headerService.videoFullscreen.subscribe((fullscreenValue) => {
@@ -135,12 +128,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       this.startRecording();
       this.paddingClass = true;
       this.counterTime = false;
-      if (this.headerService.muteMic === false) {
-        if (window.stream.getAudioTracks().length > 0) {
-          window.stream.getAudioTracks()[0].enabled = false;
+      setTimeout(() => {
+        if (this.headerService.muteMic === false) {
+          if (window.stream.getAudioTracks().length > 0) {
+            window.stream.getAudioTracks()[0].enabled = false;
+          }
         }
-      }
-    }, 10000);
+      }, 100);
+    }, 9000);
     setTimeout(() => {
       this.startCamera();
     }, 500);
