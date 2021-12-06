@@ -154,7 +154,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.videoTrack.stop();
     this.audioTrack.stop();
 
-    // this.dataservice.preserveQueryParams('/takescreenshot');
+    this.dataservice.preserveQueryParams('/takescreenshot');
   }
 
   onSlidebarOpen(value: boolean): void {
@@ -346,9 +346,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     );
   }
 
-  redirectToPhoto(): void {
-    this.dataservice.preserveQueryParams('/takescreenshot');
-  }
+  // redirectToPhoto(): void {
+  //   this.dataservice.preserveQueryParams('/takescreenshot');
+  // }
 
   confirm(): void {
     this.confirmationService.confirm({
