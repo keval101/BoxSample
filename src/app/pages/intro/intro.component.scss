@@ -95,7 +95,8 @@ ol {
     margin: 0;
     background: transparent;
     .pi-times {
-      margin: 0 40px 0 0px;
+      // margin: 0 40px 0 0px;
+      margin: 0 4rem 0 0px;
       width: 3.5rem;
       height: 3.5rem;
       font-size: 3.5rem;
@@ -125,8 +126,10 @@ ol {
     height: auto;
 
     img {
-      width: 31.939rem;
-      height: 3.019rem;
+      // width: 31.939rem;
+      // height: 3.019rem;
+      width: 100%;
+      height: auto;
       margin-top: 11.3rem;
       margin-bottom: 6.667rem;
       @media (max-width: 450px) {
@@ -137,7 +140,7 @@ ol {
 
   &__buttonGroup {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     font-size: 2.4rem;
     margin-bottom: 4rem;
   }

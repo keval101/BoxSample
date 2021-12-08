@@ -53,6 +53,10 @@
         font-size: 2rem;
       }
 
+      @media (min-width: 1370px) {
+        font-size: 2.4rem;
+      }
+
       &-icon {
         color: $primary-color;
         font-size: inherit;
@@ -115,6 +119,12 @@
       opacity: 1;
       transition: all 0.5s ease;
     }
+    @media (max-width: 600px) {
+      &::before {
+        left: -25px;
+        border-left: 25px solid transparent;
+      }
+    }
 
     &.fullscreen {
       background: transparent;
@@ -135,7 +145,8 @@
         align-items: center;
 
         #speaker {
-          margin: 0 40px 0 0px;
+          // margin: 0 40px 0 0px;
+          margin: 0 4rem 0 0px;
           width: 2.1rem !important;
           @media (max-width: 600px) {
             margin: 0 10px 0 0px;
@@ -153,7 +164,8 @@
           width: 2.2rem;
         }
         #fullscreen {
-          margin: 0 40px 0 0px;
+          // margin: 0 40px 0 0px;
+          margin: 0 4rem 0 0px;
           width: 2.8rem;
           @media (max-width: 600px) {
             margin: 0 10px 0 0px;
@@ -163,7 +175,8 @@
           }
         }
         #closescreen {
-          margin: 0 40px 0 0px;
+          // margin: 0 40px 0 0px;
+          margin: 0 4rem 0 0px;
           width: 3rem;
           @media (max-width: 600px) {
             margin: 0 10px 0 0px;
@@ -173,7 +186,8 @@
           }
         }
         .pi-question-circle:before {
-          margin: 0 40px 0 0px;
+          // margin: 0 40px 0 0px;
+          margin: 0 4rem 0 0px;
           color: $white-color;
           font-size: 3.2rem;
           @media (max-width: 600px) {
@@ -184,7 +198,8 @@
           }
         }
         .pi-bars:before {
-          margin: 0 40px 0 0px;
+          // margin: 0 40px 0 0px;
+          margin: 0 4rem 0 0px;
           color: $white-color;
           font-size: 3.2rem;
           @media (max-width: 600px) {
@@ -208,7 +223,8 @@
 }
 
 .pi-times {
-  margin: 0 40px 0 0px;
+  // margin: 0 40px 0 0px;
+  margin: 0 4rem 0 0px;
   width: 3.5rem;
   height: 3.5rem;
   font-size: 3.5rem;

@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from 'crypto-js';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments';
 
 @Component({
   selector: 'app-evaluation',
@@ -308,7 +309,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       // static
       SimulatorIdentifier: 'cc43f6cb-d382-4783-a337-6532e3b2cdb1',
       // Version of the BoxTrainer WebApp
-      SimulatorVersion: '1.2.1.48',
+      SimulatorVersion: environment.version,
       // static
       UserInterfaceVersion: 'N/A',
       // Sum of Score(ReportItems + Questionnaire + Assessment screenshots)
