@@ -5,6 +5,8 @@ import { HeaderService } from './features/header/header.service';
 import { DataService } from './shared/shared/data.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
+import { environment } from 'src/environments';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +18,8 @@ export class AppComponent implements OnInit {
   hasDataReceived = false;
   appData;
   loader;
+  versionInfo: string;
+
   constructor(
     private primengConfig: PrimeNGConfig,
     public translate: TranslateService,
@@ -27,7 +31,7 @@ export class AppComponent implements OnInit {
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
-
+    this.versionInfo = environment.version;
     this.headerService.videoFullscreen.subscribe((res) => {
       if (this.location.path() === '/recording') {
         this.recordingScreen = true;

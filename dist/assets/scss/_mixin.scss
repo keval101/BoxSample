@@ -112,7 +112,8 @@
       margin: 0;
       background: transparent;
       .pi-times {
-        margin: 0 40px 0 0px;
+        // margin: 0 40px 0 0px;
+        margin: 0 4rem 0 0px;
         width: 3.5rem;
         height: 3.5rem;
         font-size: 3.5rem;
@@ -213,8 +214,10 @@
       height: auto;
 
       img {
-        width: 31.939rem;
-        height: 3.019rem;
+        // width: 31.939rem;
+        // height: 3.019rem;
+        width: 100%;
+        height: auto;
         margin-top: 11.3rem;
         margin-bottom: 6.667rem;
 
@@ -227,6 +230,7 @@
     &__buttonGroup {
       font-size: 2.4rem;
       display: flex;
+      justify-content: flex-end;
       margin-bottom: 4rem;
       button:not(:last-child) {
         margin-right: 1.6rem;

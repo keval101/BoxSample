@@ -72,7 +72,14 @@
     <img src="assets/images/Logo2.svg" alt="logo" />
   </div>
 
-  <div class="slider" *ngIf="!videoFullScreen" @fadeAnimation>
+  <div
+    class="slider"
+    [ngClass]="{
+      sliderHide: this.utility.iosDetector()
+    }"
+    *ngIf="!videoFullScreen"
+    @fadeAnimation
+  >
     <img
       *ngIf="!isMuted"
       src="../../../assets/icnons/volume.svg"

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { v4 as uuidv4 } from 'uuid';
 import { DataService } from 'src/app/shared/shared/data.service';
+import { environment } from 'src/environments';
 
 @Component({
   selector: 'app-end-screen',
@@ -39,7 +40,7 @@ export class EndScreenComponent implements OnInit {
         Status: 20,
         UserSession: uuidv4(),
         SimulatorIdentifier: 'cc43f6cb-d382-4783-a337-6532e3b2cdb1',
-        SimulatorVersion: '1.2.1.48',
+        SimulatorVersion: environment.version,
         UserInterfaceVersion: 'N/A',
         Score: 0,
         MaxScore: 0,

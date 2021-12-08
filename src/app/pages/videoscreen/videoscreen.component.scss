@@ -176,7 +176,10 @@
 //   color: $white-color;
 //   transform: translateY(-1.2rem);
 // }
-
+.sliderHide {
+  justify-content: flex-end !important;
+  right: 19rem !important;
+}
 .slider {
   display: flex;
   align-items: center;

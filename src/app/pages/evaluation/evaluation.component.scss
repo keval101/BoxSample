@@ -190,7 +190,8 @@
       margin: 0;
       background: transparent;
       .pi-times {
-        margin: 0 40px 0 0px;
+        // margin: 0 40px 0 0px;
+        margin: 0 4rem 0 0px;
         width: 3.5rem;
         height: 3.5rem;
         font-size: 3.5rem;
@@ -434,7 +435,7 @@
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
   font-family: 'Myriad Light';
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: $black-color;
   font-weight: 400;
 }
