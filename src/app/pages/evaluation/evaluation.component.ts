@@ -434,7 +434,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
               ReportMode: 0,
               Score: Math.round(this.recordinScore),
               MaxScore: this.exerciseData.maxScore,
-              Unit: 5,
+              Unit: 'Second',
               // time recording of video in seconds
               Value:
                 Number(this.dataservice.displayTimer.split(':')[0] * 60) +
