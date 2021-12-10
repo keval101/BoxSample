@@ -243,15 +243,10 @@
 
 .counter {
   position: absolute;
-  width: 40rem;
-  height: 40rem;
   z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   p {
     font-size: 33.33rem;
     color: $primary-color;
