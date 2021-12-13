@@ -20,6 +20,11 @@
 }
 
 .logo {
+    max-width: 39.7%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 7rem;
   &__items {
     position: relative;
     margin-left: 4.261rem;
@@ -77,10 +82,10 @@
       position: absolute;
       z-index: 100000;
       top: 0;
-      left: -46px;
+      left: -6.4rem;
       margin: 0;
       padding: 0;
-      border-left: 46px solid transparent;
+      border-left: 6.4rem solid transparent;
       border-right: 0px solid transparent;
       border-bottom: 6.4rem solid #707172;
     }
