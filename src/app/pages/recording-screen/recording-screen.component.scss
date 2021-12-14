@@ -246,14 +246,8 @@
   z-index: 1;
   top: 50%;
   left: 50%;
+  padding: 10rem;
   transform: translate(-50%, -50%);
-  background: transparent;
-  p {
-    font-size: 33.33rem;
-    color: $primary-color;
-    text-align: center;
-    -webkit-text-stroke: 5.5px;
-  }
 }
 .goPadding {
   padding-bottom: 12rem;
