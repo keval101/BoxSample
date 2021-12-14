@@ -64,7 +64,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   indexDB;
   indexDbSubscription: Subscription;
   startRecordingTime;
-
+  intervalId: any;
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -123,7 +123,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       const counterText = this.data[d];
       this.counter = counterText;
     });
-    setTimeout(() => {
+    this.intervalId = setTimeout(() => {
       timerSub.unsubscribe();
       this.startRecording();
       this.paddingClass = true;
@@ -351,13 +351,17 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   // }
 
   confirm(): void {
-    this.confirmationService.confirm({
-      message: this.cancelText,
-      accept: () => {
-        this.evolutionService.setCancelValue(true);
-        this.router.navigate(['/end']);
-      },
-    });
+    if (this.paddingClass) {
+      this.confirmationService.confirm({
+        message: this.cancelText,
+        accept: () => {
+          this.evolutionService.setCancelValue(true);
+          this.router.navigate(['/end']);
+        },
+      });
+    } else {
+      this.dataservice.preserveQueryParams('/setup');
+    }
   }
   onCancelExersice(): void {
     this.confirmationService.confirm({
@@ -370,8 +374,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.indexDbSubscription) {
-      this.indexDbSubscription.unsubscribe();
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
     if (
       !this.appData.recordingPath &&
@@ -380,9 +384,11 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     ) {
       this.headerService.videoFullscreen.next(false);
       window.stream.getTracks()[0].stop();
-      setTimeout(() => {
-        this.videoTimer.unsubscribe();
-      }, 4000);
+      if (this.videoTimer) {
+        setTimeout(() => {
+          this.videoTimer.unsubscribe();
+        }, 4000);
+      }
     }
   }
 
