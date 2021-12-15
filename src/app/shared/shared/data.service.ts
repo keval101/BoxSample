@@ -24,6 +24,7 @@ export class DataService {
   recordingEndTime;
   displayTimer;
   selfAssessmentScreenShot;
+  intervalId: any;
 
   loader = new BehaviorSubject(false);
   constructor(
