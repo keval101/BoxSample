@@ -20,6 +20,8 @@ import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { v4 as uuidv4 } from 'uuid';
+
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
@@ -64,11 +66,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   indexDB;
   indexDbSubscription: Subscription;
   startRecordingTime;
-  intervalId: any;
+
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('sidenav') sidenav: ElementRef;
+  randomNum: string;
 
   constructor(
     public translateService: TranslateService,
@@ -107,6 +110,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.randomNum = uuidv4();
     this.initRecording();
   }
 
@@ -117,25 +121,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         this.cancelText = text;
       });
 
-    const obs = interval(1000);
-    const timerSub: Subscription = obs.subscribe((d) => {
-      this.counterTime = true;
-      const counterText = this.data[d];
-      this.counter = counterText;
-    });
-    this.intervalId = setTimeout(() => {
-      timerSub.unsubscribe();
-      this.startRecording();
-      this.paddingClass = true;
-      this.counterTime = false;
-      setTimeout(() => {
-        if (this.headerService.muteMic === false) {
-          if (window.stream.getAudioTracks().length > 0) {
-            window.stream.getAudioTracks()[0].enabled = false;
-          }
-        }
-      }, 100);
-    }, 9000);
+    // const obs = interval(1000);
+    // const timerSub: Subscription = obs.subscribe((d) => {
+    //   // this.counterTime = true;
+    //   const counterText = this.data[d];
+    //   this.counter = counterText;
+    // });
     setTimeout(() => {
       this.startCamera();
     }, 500);
@@ -315,6 +306,20 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       },
     };
     await this.init(constraints);
+    this.counterTime = true;
+    clearTimeout(this.dataservice.intervalId);
+    this.dataservice.intervalId = setTimeout(() => {
+      this.startRecording();
+      this.paddingClass = true;
+      this.counterTime = false;
+      setTimeout(() => {
+        if (this.headerService.muteMic === false) {
+          if (window.stream.getAudioTracks().length > 0) {
+            window.stream.getAudioTracks()[0].enabled = false;
+          }
+        }
+      }, 100);
+    }, 9000);
   }
 
   videoInitialize(): void {
@@ -374,9 +379,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+    clearTimeout(this.dataservice.intervalId);
     if (
       !this.appData.recordingPath &&
       window.stream &&
@@ -385,9 +388,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       this.headerService.videoFullscreen.next(false);
       window.stream.getTracks()[0].stop();
       if (this.videoTimer) {
-        setTimeout(() => {
-          this.videoTimer.unsubscribe();
-        }, 4000);
+        this.videoTimer.unsubscribe();
       }
     }
   }
