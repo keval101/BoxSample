@@ -523,6 +523,10 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     return this.dataservice.appData;
   }
 
+  get branding() {
+    return this.dataservice.branding;
+  }
+
   onSubmit() {
     this.dataservice.setLoader(true);
     this.createReqData();

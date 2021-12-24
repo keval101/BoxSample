@@ -6,6 +6,7 @@ import { HeaderService } from './header.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { DataService } from '../../shared/shared/data.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnChanges, OnInit {
   fullScreen = false;
   flashoff: boolean;
   val: number;
+  myStyle: SafeHtml;
 
   recordingDuration = '00:00';
   @Input() onFinishRecording: boolean;
@@ -38,7 +40,8 @@ export class HeaderComponent implements OnChanges, OnInit {
     private recordingService: RecordingService,
     private headerService: HeaderService,
     private dataService: DataService,
-    public utility: UtilityService
+    public utility: UtilityService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnChanges(): void {
@@ -49,7 +52,14 @@ export class HeaderComponent implements OnChanges, OnInit {
     this.muteUnmuteToggle();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
+      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }
+      </style>`
+    );
+  }
 
   onShow(event: Event): void {
     event.stopPropagation();
@@ -67,6 +77,10 @@ export class HeaderComponent implements OnChanges, OnInit {
 
   get appData() {
     return this.dataService.appData;
+  }
+
+  get branding() {
+    return this.dataService.branding;
   }
 
   fullscreen(): void {

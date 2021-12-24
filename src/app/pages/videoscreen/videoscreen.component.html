@@ -21,7 +21,31 @@
   <div class="bottomContainer">
     <div class="buttons">
       <div class="playedBtn">
-        <button class="playPauseBtn" (click)="PlayVideo()" *ngIf="playVideo">
+        <button
+          class="playPauseBtn"
+          (click)="PlayVideo()"
+          *ngIf="playVideo"
+          [ngStyle]="{
+            background: branding?.generalConfig?.buttonFill?.backGround
+              ? branding?.generalConfig?.buttonFill?.backGround
+              : '',
+            border: branding?.generalConfig?.buttonFill?.border
+              ? branding?.generalConfig?.buttonFill?.border
+              : '',
+            color: branding?.generalConfig?.buttonFillText?.color
+              ? branding?.generalConfig?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+              ? branding?.generalConfig?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+              ? branding?.generalConfig?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+              ? branding?.generalConfig?.buttonFillText?.fontSize
+              : ''
+          }"
+        >
           <img
             src="assets/icnons/pause-solid.svg"
             alt="pause"
@@ -29,7 +53,31 @@
             id="playpause"
           />
         </button>
-        <button class="playPauseBtn" (click)="PauseVideo()" *ngIf="!playVideo">
+        <button
+          class="playPauseBtn"
+          (click)="PauseVideo()"
+          *ngIf="!playVideo"
+          [ngStyle]="{
+            background: branding?.generalConfig?.buttonFill?.backGround
+              ? branding?.generalConfig?.buttonFill?.backGround
+              : '',
+            border: branding?.generalConfig?.buttonFill?.border
+              ? branding?.generalConfig?.buttonFill?.border
+              : '',
+            color: branding?.generalConfig?.buttonFillText?.color
+              ? branding?.generalConfig?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+              ? branding?.generalConfig?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+              ? branding?.generalConfig?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+              ? branding?.generalConfig?.buttonFillText?.fontSize
+              : ''
+          }"
+        >
           <img
             src="assets/icnons/play-solid.svg"
             alt="play"
@@ -43,10 +91,59 @@
         <button
           class="button button-exSmall button-outline"
           (click)="redirectToBack()"
+          [ngStyle]="{
+            background: branding?.generalConfig?.buttonOutline?.backGround
+              ? branding?.generalConfig?.buttonOutline?.backGround
+              : '',
+            border: branding?.generalConfig?.buttonOutline?.border
+              ? branding?.generalConfig?.buttonOutline?.border
+              : '',
+            color: branding?.generalConfig?.buttonOutlineText?.color
+              ? branding?.generalConfig?.buttonOutlineText?.color
+              : '',
+            fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+              ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+              ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+              ? branding?.generalConfig?.buttonOutlineText?.fontSize
+              : '',
+            borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+              ? branding?.generalConfig?.buttonOutline?.borderRadius
+              : ''
+          }"
         >
           <i class="pi pi-chevron-left"></i>
         </button>
-        <button class="button button-small button-fill" (click)="redirectTo()">
+        <button
+          class="button button-small button-fill"
+          (click)="redirectTo()"
+          [ngStyle]="{
+            background: branding?.generalConfig?.buttonFill?.backGround
+              ? branding?.generalConfig?.buttonFill?.backGround
+              : '',
+            border: branding?.generalConfig?.buttonFill?.border
+              ? branding?.generalConfig?.buttonFill?.border
+              : '',
+            color: branding?.generalConfig?.buttonFillText?.color
+              ? branding?.generalConfig?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+              ? branding?.generalConfig?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+              ? branding?.generalConfig?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+              ? branding?.generalConfig?.buttonFillText?.fontSize
+              : '',
+            borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+              ? branding?.generalConfig?.buttonFill?.borderRadius
+              : ''
+          }"
+        >
           {{ 'video.prepareSetup' | translate }}
         </button>
       </div>
@@ -54,24 +151,75 @@
   </div>
 
   <div class="footer" [ngClass]="{ footerAnimation: videoFullScreen }">
-    <div class="progressbar" id="seekbar">
-      <div class="progressbar-color" id="progressBar"></div>
+    <div
+      class="progressbar"
+      id="seekbar"
+      [ngStyle]="{
+        backgroundColor: branding?.generalConfig?.loadingBar?.backGround
+          ? branding?.generalConfig?.loadingBar?.backGround
+          : ''
+      }"
+    >
+      <div
+        class="progressbar-color"
+        id="progressBar"
+        [ngStyle]="{
+          backgroundColor: branding?.generalConfig?.loadingBar?.forGround
+            ? branding?.generalConfig?.loadingBar?.forGround
+            : ''
+        }"
+      ></div>
     </div>
 
     <div class="footer__text">
-      <p class="footer__text-bold m-0">
+      <p
+        class="footer__text-bold m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentTextTitle?.color
+            ? branding?.generalConfig?.contentTextTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentTextTitle?.fontFamily
+            ? branding?.generalConfig?.contentTextTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentTextTitle?.fontWeight
+            ? branding?.generalConfig?.contentTextTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentTextTitle?.fontSize
+            ? branding?.generalConfig?.contentTextTitle?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.movies[0]?.fileName }}
       </p>
-      <p class="footer__text-light m-0">
+      <p
+        class="footer__text-light m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.movies[0]?.copyrightInfo }}
       </p>
     </div>
   </div>
 
   <div class="logo" [ngClass]="{ logoTop: videoFullScreen }">
-    <img src="assets/images/Logo2.svg" alt="logo" />
+    <img
+      src="assets/{{ brand }}/{{ branding?.generalConfig?.waterMarkUrl }}"
+      alt="logo"
+    />
   </div>
-
+  <div [innerHtml]="myStyle"></div>
   <div
     class="slider"
     [ngClass]="{
@@ -108,13 +256,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'video.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'video.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'video.goback' | translate }}
     </button>
@@ -123,6 +312,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'video.quit' | translate }}
     </button>

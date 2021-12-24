@@ -18,6 +18,7 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { Subscription } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 declare const window: Window &
   typeof globalThis & {
@@ -48,6 +49,7 @@ export class TakescreenshotComponent
   isSidebarOpen = false;
   indexDB;
   indexDbSubscription: Subscription;
+  myStyle: SafeHtml;
 
   constructor(
     private router: Router,
@@ -58,9 +60,10 @@ export class TakescreenshotComponent
     private confirmationService: ConfirmationService,
     private headerService: HeaderService,
     private dataservice: DataService,
-    private utility: UtilityService
+    private utility: UtilityService,
+    private _sanitizer: DomSanitizer
   ) {
-    this.dataservice.setLoader(true);
+    // this.dataservice.setLoader(true);
     this.translateService
       .get('takescreenshot.cancelText')
       .subscribe((text: string) => {
@@ -81,6 +84,16 @@ export class TakescreenshotComponent
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
+      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }</style>`
+    );
     this.headerService.videoFullscreen.subscribe((res) => {
       this.fullscreen = res;
     });
@@ -104,7 +117,7 @@ export class TakescreenshotComponent
           this.videoStream = stream;
           _video.srcObject = stream;
           _video.play();
-          this.dataservice.setLoader(false);
+          // this.dataservice.setLoader(false);
         });
     }
   }
@@ -188,5 +201,9 @@ export class TakescreenshotComponent
 
   get appData() {
     return this.dataservice.appData;
+  }
+
+  get branding() {
+    return this.dataservice.branding;
   }
 }

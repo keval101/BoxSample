@@ -1,27 +1,106 @@
-<div class="main-container">
+<div
+  class="main-container"
+  *ngIf="branding"
+  [ngStyle]="{
+    backgroundImage: branding?.generalConfig?.backGroundImg
+      ? 'url(assets/' +
+        brand +
+        '/' +
+        branding?.generalConfig?.backGroundImg +
+        ')'
+      : ''
+  }"
+>
   <div class="container">
     <div class="logo">
       <div class="logo__items">
-        <img src="assets/images/logo.png" alt="logo" />
+        <img
+          src="assets/{{ brand }}/{{ branding?.generalConfig?.logoUrl }}"
+          alt="logo"
+        />
       </div>
     </div>
 
     <div class="header">
-      <div class="header__left">
-        <p class="header__left--text m-0">
+      <div
+        class="header__left"
+        [ngStyle]="{
+          background: branding?.generalConfig?.primaryColor
+            ? branding?.generalConfig?.primaryColor
+            : ''
+        }"
+      >
+        <p
+          class="header__left--text m-0"
+          [ngStyle]="{
+            color: branding?.generalConfig?.productTitleLeft?.color
+              ? branding?.generalConfig?.productTitleLeft?.color
+              : '',
+            fontFamily: branding?.generalConfig?.productTitleLeft?.fontFamily
+              ? branding?.generalConfig?.productTitleLeft?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.productTitleLeft?.fontWeight
+              ? branding?.generalConfig?.productTitleLeft?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.productTitleLeft?.fontSize
+              ? branding?.generalConfig?.productTitleLeft?.fontSize
+              : ''
+          }"
+        >
           {{ 'home.projectTitle' | translate }}
         </p>
       </div>
-
-      <div class="header__right">
-        <span class="header__right--text">{{
-          appData ? appData?.sceneSectionName + ' - ' + appData?.name : ''
-        }}</span>
+      <div [innerHTML]="myStyle"></div>
+      <div
+        class="header__right"
+        [ngStyle]="{
+          background: branding?.generalConfig?.secondaryColor
+            ? branding?.generalConfig?.secondaryColor
+            : ''
+        }"
+      >
+        <span
+          class="header__right--text"
+          [ngStyle]="{
+            background: branding?.generalConfig?.secondaryColor
+              ? branding?.generalConfig?.secondaryColor
+              : '',
+            color: branding?.generalConfig?.productTitleRight?.color
+              ? branding?.generalConfig?.productTitleRight?.color
+              : '',
+            fontFamily: branding?.generalConfig?.productTitleRight?.fontFamily
+              ? branding?.generalConfig?.productTitleRight?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.productTitleRight?.fontWeight
+              ? branding?.generalConfig?.productTitleRight?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.productTitleRight?.fontSize
+              ? branding?.generalConfig?.productTitleRight?.fontSize
+              : ''
+          }"
+          >{{
+            appData ? appData?.sceneSectionName + ' - ' + appData?.name : ''
+          }}</span
+        >
       </div>
     </div>
 
-    <div class="loading__bar">
-      <div class="loading__bar--fill"></div>
+    <div
+      class="loading__bar"
+      [ngStyle]="{
+        backgroundColor: branding?.generalConfig?.loadingBar?.backGround
+          ? branding?.generalConfig?.loadingBar?.backGround
+          : ''
+      }"
+    >
+      <div
+        class="loading__bar--fill"
+        [ngStyle]="{
+          backgroundColor: branding?.generalConfig?.loadingBar?.forGround
+            ? branding?.generalConfig?.loadingBar?.forGround
+            : ''
+        }"
+      ></div>
     </div>
   </div>
 </div>

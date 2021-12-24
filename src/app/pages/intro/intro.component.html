@@ -9,15 +9,63 @@
 
 <div class="container" (window:resize)="onResize($event)">
   <div class="container__title">
-    <p class="container__title-text m-0">
+    <p
+      class="container__title-text m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       {{ appData?.name }}
     </p>
 
     <div>
-      <p class="container__title-description m-0">
+      <p
+        class="container__title-description m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ 'intro.description' | translate }}
       </p>
-      <p class="container__title-descriptionText m-0">
+      <p
+        class="container__title-descriptionText m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.description }}
       </p>
     </div>
@@ -39,7 +87,7 @@
     <div class="sidebar__header">
       <img src="assets/images/logo.svg" alt="logo" />
     </div>
-
+    <div [innerHTML]="myStyle"></div>
     <div
       class="sidebar__content"
       id="sidebar__content"
@@ -48,7 +96,33 @@
     ></div>
 
     <div class="sidebar__buttonGroup">
-      <button class="button button-fill button-big" (click)="redirectTo()">
+      <button
+        class="button button-fill button-big"
+        (click)="redirectTo()"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonFill?.backGround
+            ? branding?.generalConfig?.buttonFill?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonFill?.border
+            ? branding?.generalConfig?.buttonFill?.border
+            : '',
+          color: branding?.generalConfig?.buttonFillText?.color
+            ? branding?.generalConfig?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+            ? branding?.generalConfig?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+            ? branding?.generalConfig?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+            ? branding?.generalConfig?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+            ? branding?.generalConfig?.buttonFill?.borderRadius
+            : ''
+        }"
+      >
         {{ 'intro.watchMovie' | translate }}
       </button>
     </div>
@@ -57,13 +131,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'intro.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'intro.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'intro.goback' | translate }}
     </button>
@@ -72,6 +187,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'intro.quit' | translate }}
     </button>

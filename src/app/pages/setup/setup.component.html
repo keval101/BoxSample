@@ -13,10 +13,42 @@
   (click)="closeSidebar()"
 >
   <div class="container__title">
-    <p class="container__title-text m-0">
+    <p
+      class="container__title-text m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       {{ 'setup.title' | translate }}
     </p>
-    <p class="container__title-message m-0">
+    <p
+      class="container__title-message m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.actionText?.color
+          ? branding?.generalConfig?.actionText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.actionText?.fontFamily
+          ? branding?.generalConfig?.actionText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.actionText?.fontWeight
+          ? branding?.generalConfig?.actionText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.actionText?.fontSize
+          ? branding?.generalConfig?.actionText?.fontSize
+          : ''
+      }"
+    >
       {{ 'setup.message' | translate }}
     </p>
   </div>
@@ -46,6 +78,7 @@
           id="mic"
           [ngStyle]="{ display: !checkedMic ? 'none' : 'block' }"
         />
+        <div [innerHtml]="myStyle"></div>
         <p-inputSwitch
           [(ngModel)]="checkedMic"
           (ngModelChange)="muteUnmuteToggle()"
@@ -68,6 +101,7 @@
           id="flash"
           [ngStyle]="{ display: !checkedFlash ? 'none' : 'block' }"
         />
+        <div [innerHtml]="myStyle"></div>
         <p-inputSwitch
           [(ngModel)]="checkedFlash"
           (ngModelChange)="flashToggle()"
@@ -99,6 +133,29 @@
       <button
         class="button button-outline button-exSmall"
         (click)="redirectToBack()"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonOutline?.backGround
+            ? branding?.generalConfig?.buttonOutline?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonOutline?.border
+            ? branding?.generalConfig?.buttonOutline?.border
+            : '',
+          color: branding?.generalConfig?.buttonOutlineText?.color
+            ? branding?.generalConfig?.buttonOutlineText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+            ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+            ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+            ? branding?.generalConfig?.buttonOutlineText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+            ? branding?.generalConfig?.buttonOutline?.borderRadius
+            : ''
+        }"
       >
         <i class="pi pi-chevron-left"></i>
       </button>
@@ -107,6 +164,29 @@
         [disabled]="startExercise"
         class="button button-fill button-small"
         (click)="redirectTo()"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonFill?.backGround
+            ? branding?.generalConfig?.buttonFill?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonFill?.border
+            ? branding?.generalConfig?.buttonFill?.border
+            : '',
+          color: branding?.generalConfig?.buttonFillText?.color
+            ? branding?.generalConfig?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+            ? branding?.generalConfig?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+            ? branding?.generalConfig?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+            ? branding?.generalConfig?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+            ? branding?.generalConfig?.buttonFill?.borderRadius
+            : ''
+        }"
       >
         {{ 'setup.startExercise' | translate }}
       </button>
@@ -116,13 +196,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'setup.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'setup.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.goback' | translate }}
     </button>
@@ -131,6 +252,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.quit' | translate }}
     </button>
@@ -139,13 +283,54 @@
 
 <p-confirmDialog header="Confirmation" key="allowAccessDevice" #op>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'setup.allowAccessTitle' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'setup.allowAccessTitle' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cancelDevicePopup()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.cancel' | translate }}
     </button>
@@ -153,6 +338,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="confirmAllowAccess()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.allow' | translate }}
     </button>

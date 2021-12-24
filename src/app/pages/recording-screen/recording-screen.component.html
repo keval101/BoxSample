@@ -16,7 +16,10 @@
   </div> -->
 
   <div class="recording__logo">
-    <img src="assets/images/Logo2.svg" alt="logo" />
+    <img
+      src="assets/{{ brand }}/{{ branding?.generalConfig?.waterMarkUrl }}"
+      alt="logo"
+    />
   </div>
 
   <div class="recording__video">
@@ -66,13 +69,36 @@
         class="button button-big button-fill"
         (click)="onFinish()"
         [disabled]="!paddingClass"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonFill?.backGround
+            ? branding?.generalConfig?.buttonFill?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonFill?.border
+            ? branding?.generalConfig?.buttonFill?.border
+            : '',
+          color: branding?.generalConfig?.buttonFillText?.color
+            ? branding?.generalConfig?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+            ? branding?.generalConfig?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+            ? branding?.generalConfig?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+            ? branding?.generalConfig?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+            ? branding?.generalConfig?.buttonFill?.borderRadius
+            : ''
+        }"
       >
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
     </div>
   </div>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <div
   class="sidebar recording-sidebar"
   #sidenav
@@ -101,13 +127,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'recordingPage.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'recordingPage.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.goback' | translate }}
     </button>
@@ -116,6 +183,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'recordingPage.quit' | translate }}
     </button>

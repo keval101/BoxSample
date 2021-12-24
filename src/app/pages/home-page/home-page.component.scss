@@ -2,7 +2,7 @@
 @import '../../../assets/scss/mixin';
 
 .main-container {
-  background: url('../../../assets/images/background.png');
+  // background: url('../../../assets/images/background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -65,7 +65,6 @@
       margin: 0;
     }
   }
-
   &__right {
     display: flex;
     justify-content: flex-start;
@@ -87,7 +86,7 @@
       padding: 0;
       border-left: 6.4rem solid transparent;
       border-right: 0px solid transparent;
-      border-bottom: 6.4rem solid #707172;
+      border-bottom: 6.4rem solid;
     }
 
     &--text {

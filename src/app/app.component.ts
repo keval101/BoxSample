@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   videoFullScreen = false;
   recordingScreen = false;
   hasDataReceived = false;
+  homeScreen = false;
   appData;
-  loader;
-  versionInfo: string;
+  loader = true;
+
+  public versionInfo = environment.version;
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -31,13 +33,13 @@ export class AppComponent implements OnInit {
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
-    this.versionInfo = environment.version;
     this.headerService.videoFullscreen.subscribe((res) => {
       if (this.location.path() === '/recording') {
         this.recordingScreen = true;
       } else {
         this.recordingScreen = false;
       }
+
       if (res === true) {
         this.videoFullScreen = true;
       } else {
@@ -71,15 +73,21 @@ export class AppComponent implements OnInit {
   }
 
   getAppData(params) {
+    const url = `../assets/branding/${environment.branding}.json`;
+    this.dataservice.getBrandingData(url).subscribe((res) => {
+      this.dataservice.branding = res;
+    });
     this.dataservice.getData(params).subscribe(
       (res) => {
         if (res) {
           this.appData = res;
           this.dataservice.appData = res;
           sessionStorage.clear();
+          this.loader = false;
         }
       },
       (err) => {
+        this.loader = false;
         this.dataservice.showError(
           'Some issue occured. Please contact your administrator!'
         );

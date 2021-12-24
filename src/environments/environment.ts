@@ -6,4 +6,5 @@ export const environment: Environment = {
   production: false,
   API_HOST: 'https://appdevelop.virtamed.cloud/api/',
   version: '1.0.0',
+  branding: 'ethicon',
 };

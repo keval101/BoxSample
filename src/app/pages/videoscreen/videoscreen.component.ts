@@ -14,6 +14,8 @@ import { ConfirmationService } from 'primeng/api';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from '../../shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
+import { environment } from 'src/environments';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-videoscreen',
@@ -33,6 +35,10 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   isMuted = false;
   cancelText: string;
   isVideoLoaded: boolean;
+
+  brand = environment.branding;
+  myStyle: SafeHtml;
+
   @ViewChild('video') video: ElementRef;
 
   constructor(
@@ -42,7 +48,8 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     private Translateservice: TranslateService,
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
-    public utility: UtilityService
+    public utility: UtilityService,
+    private _sanitizer: DomSanitizer
   ) {
     this.headerService.videoFullscreen.subscribe((res) => {
       if (res === true) {
@@ -54,6 +61,13 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      .p-slider .p-slider-handle {background: ${this.branding.generalConfig.UIElementSecondColor} !important};
+      .p-slider.p-slider-horizontal {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      </style>`
+    );
     this.Translateservice.get('video.cancelText').subscribe((text: string) => {
       this.cancelText = text;
     });
@@ -147,6 +161,10 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
     this.playVideo = false;
     this.video.nativeElement.pause();
     this.dataService.preserveQueryParams('/setup');
+  }
+
+  get branding() {
+    return this.dataService.branding;
   }
 
   onCancelExersice(): void {

@@ -17,8 +17,42 @@
 </p-dialog>
 <div class="container">
   <div class="container__title">
-    <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
-    <p class="container__title-message m-0">
+    <p
+      class="container__title-text"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'selfassesment.title' | translate }}
+    </p>
+    <p
+      class="container__title-message m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.actionText?.color
+          ? branding?.generalConfig?.actionText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.actionText?.fontFamily
+          ? branding?.generalConfig?.actionText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.actionText?.fontWeight
+          ? branding?.generalConfig?.actionText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.actionText?.fontSize
+          ? branding?.generalConfig?.actionText?.fontSize
+          : ''
+      }"
+    >
       {{ 'selfassesment.message' | translate }}
       <span class="learnMoreText" (click)="sidebarOpenData($event)"
         >Learn more <i class="pi pi-question-circle"></i
@@ -28,7 +62,23 @@
 
   <div class="selfassesment__result">
     <div class="selfassesment__result-image">
-      <p class="selfassesment__result-title">
+      <p
+        class="selfassesment__result-title"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.resultTitle' | translate }}
       </p>
 
@@ -42,7 +92,23 @@
     </div>
 
     <div class="selfassesment__result-choise">
-      <p class="selfassesment__result-title">
+      <p
+        class="selfassesment__result-title"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.choice' | translate }}
       </p>
 
@@ -92,12 +158,35 @@
       class="button button-small button-fill"
       type="button"
       (click)="redirectTo()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.next' | translate }}
     </button>
   </div>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <div
   class="sidebar"
   #sidenav
@@ -127,13 +216,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'selfassesment.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'selfassesment.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonOutline?.backGround
+          ? branding?.generalConfig?.buttonOutline?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonOutline?.border
+          ? branding?.generalConfig?.buttonOutline?.border
+          : '',
+        color: branding?.generalConfig?.buttonOutlineText?.color
+          ? branding?.generalConfig?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+          ? branding?.generalConfig?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.goback' | translate }}
     </button>
@@ -142,6 +272,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.quit' | translate }}
     </button>

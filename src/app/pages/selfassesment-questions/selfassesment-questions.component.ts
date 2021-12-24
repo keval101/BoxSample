@@ -13,6 +13,7 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { SelfAssesmentQuestionService } from './self-assesment-questions.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-selfassesment-questions',
@@ -32,6 +33,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   disabled = true;
   radioData = [];
   radioDatas = [];
+  myStyle: SafeHtml;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -42,7 +44,8 @@ export class SelfassesmentQuestionsComponent implements OnInit {
     private headerService: HeaderService,
     private evolutionService: EvolutionService,
     private dataService: DataService,
-    private selfAssesQueSer: SelfAssesmentQuestionService
+    private selfAssesQueSer: SelfAssesmentQuestionService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -58,6 +61,16 @@ export class SelfassesmentQuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {background: ${this.branding.generalConfig.secondaryColor} !important; }</style>`
+    );
+
     this.translateService
       .get('selfassesmentquestions.cancelText')
       .subscribe((text: string) => {
@@ -83,6 +96,10 @@ export class SelfassesmentQuestionsComponent implements OnInit {
 
   get appData() {
     return this.dataService.appData;
+  }
+
+  get branding() {
+    return this.dataService.branding;
   }
 
   handleChange(e, data, ans) {

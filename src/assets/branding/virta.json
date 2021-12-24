@@ -1,0 +1,106 @@
+{
+  "generalConfig": {
+    "headerLeft": "#044772",
+    "headerRight": "#707172",
+    "primaryColor": "#044772",
+    "secondaryColor": "#707172",
+    "textPrimary": "#000000",
+    "homeAngle": "#707172",
+    "logoUrl": "logo.png",
+    "backGroundImg": "background.png",
+    "poweredByLogo": "",
+    "loadingBar": {
+      "forGround": "#B41513",
+      "backGround": "#DEE2E4"
+    },
+    "productTitleLeft": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "32px",
+      "color": "#ffffff"
+    },
+    "productTitleRight": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "32px",
+      "color": "#ffffff"
+    },
+    "versionInformationBright": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": 500,
+      "fontSize": "16px",
+      "color": "#ffffff"
+    },
+    "topTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "32px",
+      "color": "#ffffff"
+    },
+    "contentTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "40px",
+      "color": "#044772"
+    },
+    "contentText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#000000"
+    },
+    "contentTextTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#044772"
+    },
+    "versionInformationDark": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": 500,
+      "fontSize": "16px",
+      "color": "#707172"
+    },
+    "waterMarkUrl": "watermark.png",
+    "UIElementPrimaryColor": "#ffffff",
+    "UIElementSecondColor": "#B41513",
+    "actionText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "32px",
+      "color": "#B32226"
+    },
+    "buttonFill": {
+      "backGround": "#B41513",
+      "borderRadius": "5px"
+    },
+    "buttonOutline": {
+      "border": "1px solid #B41513",
+      "borderRadius": "5px"
+    },
+    "buttonFillText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#ffffff"
+    },
+    "buttonOutlineText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": 500,
+      "fontSize": "24px",
+      "color": "#B41513"
+    },
+    "tableTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#B41513"
+    },
+    "tableText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#000000"
+    }
+  }
+}

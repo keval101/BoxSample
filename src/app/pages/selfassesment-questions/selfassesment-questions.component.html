@@ -8,27 +8,93 @@
 
 <div class="container">
   <div class="container__title">
-    <p class="container__title-text">
+    <p
+      class="container__title-text"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       {{ 'selfassesmentquestions.title' | translate }}
     </p>
-    <p class="container__title-message m-0">
+    <p
+      class="container__title-message m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.actionText?.color
+          ? branding?.generalConfig?.actionText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.actionText?.fontFamily
+          ? branding?.generalConfig?.actionText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.actionText?.fontWeight
+          ? branding?.generalConfig?.actionText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.actionText?.fontSize
+          ? branding?.generalConfig?.actionText?.fontSize
+          : ''
+      }"
+    >
       {{ 'selfassesmentquestions.message' | translate }}
       <span class="learnMoreText" (click)="sidebarOpenData($event)"
         >Learn more <i class="pi pi-question-circle"></i
       ></span>
     </p>
   </div>
-
+  <div [innerHTML]="myStyle"></div>
   <div class="questions" *ngIf="radioData">
     <div
       class="questions__ques"
       *ngFor="let queArr of radioData; let i = index"
     >
-      <p class="questions__ques-text">{{ i + 1 }}. {{ queArr.name }}</p>
+      <p
+        class="questions__ques-text"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentText?.color
+            ? branding?.generalConfig?.contentText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentText?.fontFamily
+            ? branding?.generalConfig?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentText?.fontWeight
+            ? branding?.generalConfig?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentText?.fontSize
+            ? branding?.generalConfig?.contentText?.fontSize
+            : ''
+        }"
+      >
+        {{ i + 1 }}. {{ queArr.name }}
+      </p>
 
       <div class="questions__ques-radioGroup">
         <div class="p-field-radiobutton radioBtn">
-          <label for="ans{{ i }}">
+          <label
+            for="ans{{ i }}"
+            [ngStyle]="{
+              color: branding?.generalConfig?.contentText?.color
+                ? branding?.generalConfig?.contentText?.color
+                : '',
+              fontFamily: branding?.generalConfig?.contentText?.fontFamily
+                ? branding?.generalConfig?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.generalConfig?.contentText?.fontWeight
+                ? branding?.generalConfig?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.generalConfig?.contentText?.fontSize
+                ? branding?.generalConfig?.contentText?.fontSize
+                : ''
+            }"
+          >
             <p-radioButton
               name="answer{{ i }}"
               [value]="queArr?.answers[0]?.isCorrect"
@@ -42,7 +108,23 @@
         </div>
 
         <div class="p-field-radiobutton radioBtn">
-          <label for="ans{{ i + 10 }}">
+          <label
+            for="ans{{ i + 10 }}"
+            [ngStyle]="{
+              color: branding?.generalConfig?.contentText?.color
+                ? branding?.generalConfig?.contentText?.color
+                : '',
+              fontFamily: branding?.generalConfig?.contentText?.fontFamily
+                ? branding?.generalConfig?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.generalConfig?.contentText?.fontWeight
+                ? branding?.generalConfig?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.generalConfig?.contentText?.fontSize
+                ? branding?.generalConfig?.contentText?.fontSize
+                : ''
+            }"
+          >
             <p-radioButton
               name="answer{{ i }}"
               [value]="queArr?.answers[1]?.isCorrect"
@@ -63,6 +145,29 @@
       type="button"
       (click)="redirectTo()"
       [disabled]="isDisable()"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.next' | translate }}
     </button>
@@ -96,13 +201,54 @@
 
   <p-confirmDialog header="Confirmation" #cd>
     <ng-template pTemplate="header">
-      <p class="header m-0">{{ 'chooseScreenshot.quitExe' | translate }}</p>
+      <p
+        class="header m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentTitle?.color
+            ? branding?.generalConfig?.contentTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+            ? branding?.generalConfig?.contentTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+            ? branding?.generalConfig?.contentTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentTitle?.fontSize
+            ? branding?.generalConfig?.contentTitle?.fontSize
+            : ''
+        }"
+      >
+        {{ 'chooseScreenshot.quitExe' | translate }}
+      </p>
     </ng-template>
     <ng-template pTemplate="footer" class="footer">
       <button
         class="button button-small button-outline"
         type="button"
         (click)="cd.reject()"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonOutline?.backGround
+            ? branding?.generalConfig?.buttonOutline?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonOutline?.border
+            ? branding?.generalConfig?.buttonOutline?.border
+            : '',
+          color: branding?.generalConfig?.buttonOutlineText?.color
+            ? branding?.generalConfig?.buttonOutlineText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
+            ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
+            ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
+            ? branding?.generalConfig?.buttonOutlineText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
+            ? branding?.generalConfig?.buttonOutline?.borderRadius
+            : ''
+        }"
       >
         {{ 'chooseScreenshot.goback' | translate }}
       </button>
@@ -111,6 +257,29 @@
         class="button button-small button-fill"
         type="button"
         (click)="cd.accept()"
+        [ngStyle]="{
+          background: branding?.generalConfig?.buttonFill?.backGround
+            ? branding?.generalConfig?.buttonFill?.backGround
+            : '',
+          border: branding?.generalConfig?.buttonFill?.border
+            ? branding?.generalConfig?.buttonFill?.border
+            : '',
+          color: branding?.generalConfig?.buttonFillText?.color
+            ? branding?.generalConfig?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+            ? branding?.generalConfig?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+            ? branding?.generalConfig?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+            ? branding?.generalConfig?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+            ? branding?.generalConfig?.buttonFill?.borderRadius
+            : ''
+        }"
       >
         {{ 'chooseScreenshot.quit' | translate }}
       </button>

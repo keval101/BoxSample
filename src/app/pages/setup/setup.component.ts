@@ -16,6 +16,8 @@ import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { SetupService } from './setup.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 declare let ImageCapture;
 
 declare const window: Window &
@@ -49,6 +51,7 @@ export class SetupComponent implements OnInit, OnDestroy {
   allowAccessText: string;
   userAgent;
   startExercise = true;
+  myStyle: SafeHtml;
 
   setupScreen = true;
   @ViewChild('sidenav') sidenav: ElementRef;
@@ -72,7 +75,8 @@ export class SetupComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
     private dataservice: DataService,
-    public utility: UtilityService
+    public utility: UtilityService,
+    private _sanitizer: DomSanitizer
   ) {
     this.translateService.get('setup').subscribe((text: any) => {
       this.cancelText = text.cancelText;
@@ -86,6 +90,17 @@ export class SetupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize};color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
+      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }</style>`
+    );
+
     this.isScreenShot = true;
     this.recording = true;
 
@@ -255,6 +270,10 @@ export class SetupComponent implements OnInit, OnDestroy {
         this.router.navigate(['/end']);
       },
     });
+  }
+
+  get branding() {
+    return this.dataservice.branding;
   }
 
   onCancelAllowAccess(): void {

@@ -1,0 +1,106 @@
+{
+  "generalConfig": {
+    "headerLeft": "#F30617",
+    "headerRight": "#F30617",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#F30617",
+    "textPrimary": "#212121",
+    "homeAngle": "#FFFFFF",
+    "logoUrl": "logo.png",
+    "backGroundImg": "background.png",
+    "poweredByLogo": "",
+    "loadingBar": {
+      "forGround": "#FFFFFF",
+      "backGround": "#DEE2E4"
+    },
+    "productTitleLeft": {
+      "fontFamily": "Arial",
+      "fontWeight": 900,
+      "fontSize": "32px",
+      "color": "#212121"
+    },
+    "productTitleRight": {
+      "fontFamily": "Arial",
+      "fontWeight": 900,
+      "fontSize": "32px",
+      "color": "#ffffff"
+    },
+    "versionInformationBright": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "16px",
+      "color": "#ffffff"
+    },
+    "topTitle": {
+      "fontFamily": "Arial",
+      "fontWeight": 900,
+      "fontSize": "32px",
+      "color": "#ffffff"
+    },
+    "contentTitle": {
+      "fontFamily": "Arial",
+      "fontWeight": 900,
+      "fontSize": "40px",
+      "color": "#212121"
+    },
+    "contentText": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#212121"
+    },
+    "contentTextTitle": {
+      "fontFamily": "Arial",
+      "fontWeight": 900,
+      "fontSize": "24px",
+      "color": "#212121"
+    },
+    "versionInformationDark": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "16px",
+      "color": "#828282"
+    },
+    "waterMarkUrl": "watermark.png",
+    "UIElementPrimaryColor": "#ffffff",
+    "UIElementSecondColor": "#828282",
+    "actionText": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "30px",
+      "color": "#F30617"
+    },
+    "buttonFill": {
+      "backGround": "#FC0200",
+      "borderRadius": "5px"
+    },
+    "buttonOutline": {
+      "border": "2px solid #FC0200",
+      "borderRadius": "5px"
+    },
+    "buttonFillText": {
+      "fontFamily": "Arial",
+      "fontWeight": "bold",
+      "fontSize": "24px",
+      "color": "#ffffff"
+    },
+    "buttonOutlineText": {
+      "fontFamily": "Arial",
+      "fontWeight": "bold",
+      "fontSize": "24px",
+      "color": "#FC0200"
+    },
+    "tableTitle": {
+      "fontFamily": "Arial",
+      "fontWeight": 500,
+      "fontSize": "24px",
+      "color": "#F30617"
+    },
+    "tableText": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "24px",
+      "color": "#000000"
+    }
+  }
+}

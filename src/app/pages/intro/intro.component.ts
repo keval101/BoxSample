@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -24,6 +25,8 @@ export class IntroComponent implements OnInit {
   cancelText: string;
   introScreen = true;
   mobile = false;
+  myStyle: SafeHtml;
+
   @ViewChild('sidenav') sidenav: ElementRef;
 
   @HostListener('window:resize', ['$event'])
@@ -43,10 +46,19 @@ export class IntroComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private evolutionService: EvolutionService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>#sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      </style>`
+    );
+
     this.recording = true;
     this.translateService.get('intro.cancelText').subscribe((text: string) => {
       this.cancelText = text;
@@ -86,6 +98,10 @@ export class IntroComponent implements OnInit {
 
   get appData() {
     return this.dataService.appData;
+  }
+
+  get branding() {
+    return this.dataService.branding;
   }
 
   redirectTo(): void {

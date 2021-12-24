@@ -1,7 +1,32 @@
 <div class="conatiner">
   <div class="header">
-    <div class="header__left" [ngClass]="{ fullscreen: fullScreen }">
-      <span class="header__left--text" *ngIf="!fullScreen" @fadeAnimation
+    <div
+      class="header__left"
+      [ngClass]="{ fullscreen: fullScreen }"
+      [ngStyle]="{
+        background: branding?.generalConfig?.headerLeft
+          ? branding?.generalConfig?.headerLeft
+          : ''
+      }"
+    >
+      <span
+        class="header__left--text"
+        *ngIf="!fullScreen"
+        @fadeAnimation
+        [ngStyle]="{
+          color: branding?.generalConfig?.topTitle?.color
+            ? branding?.generalConfig?.topTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.topTitle?.fontFamily
+            ? branding?.generalConfig?.topTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.topTitle?.fontWeight
+            ? branding?.generalConfig?.topTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.topTitle?.fontSize
+            ? branding?.generalConfig?.topTitle?.fontSize
+            : ''
+        }"
         >{{ appData?.sceneSectionName + ' - ' + appData?.name }}
       </span>
 
@@ -9,15 +34,33 @@
         class="header__left--duration"
         *ngIf="!onFinishRecording || sidebarOpen"
       >
-        <p class="pi pi-circle-on header__left--duration-icon"></p>
+        <p
+          class="pi pi-circle-on header__left--duration-icon"
+          [ngStyle]="{
+            color: branding?.generalConfig?.primaryColor
+              ? branding?.generalConfig?.primaryColor
+              : ''
+          }"
+        ></p>
         <p class="header__left--duration-time">
           {{ 'header.duration' | translate }}
           <span>{{ recordingDuration }}</span>
         </p>
       </span>
     </div>
-
-    <div class="header__right" [ngClass]="{ fullscreen: fullScreen }">
+    <div [innerHTML]="myStyle"></div>
+    <div
+      class="header__right"
+      [ngClass]="{ fullscreen: fullScreen }"
+      [ngStyle]="{
+        background: branding?.generalConfig?.headerRight
+          ? branding?.generalConfig?.headerRight
+          : '',
+        color: branding?.generalConfig?.secondaryColor
+          ? branding?.generalConfig?.secondaryColor
+          : ''
+      }"
+    >
       <div
         class="header__right--icons"
         [ngStyle]="{ visibility: sidebarOpen ? 'hidden' : 'visible' }"
