@@ -22,7 +22,7 @@ import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
 import { Subscription } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from 'crypto-js';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from 'src/environments';
 
 @Component({
@@ -66,6 +66,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   count = 0;
   totalMediaForUpload = [];
   reportGuid: string;
+  myStyle: SafeHtml;
+
   constructor(
     private router: Router,
     public translateService: TranslateService,
@@ -79,7 +81,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private dataservice: DataService,
     private selfAssesQueSer: SelfAssesmentQuestionService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private _sanitizer: DomSanitizer
   ) {
     this.responsiveOptions = [
       {
@@ -115,6 +118,24 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // .p-rating .p-rating-icon.pi-star
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.generalConfig.secondaryColor} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.generalConfig.secondaryColor} !important; }
+      .pi-chevron-right:before {color: ${this.branding.generalConfig.primaryColor} !important; }
+      .pi-chevron-left:before {color: ${this.branding.generalConfig.primaryColor} !important; }
+      .p-rating .p-rating-icon.pi-star {color: ${this.branding.generalConfig.secondaryColor} !important; }
+      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.generalConfig.secondaryColor} !important; }
+      .result__container .radio-group .radio-left-tab, .result__container .radio-group .radio-right-tab {color: ${this.branding.generalConfig.primaryColor} !important; }
+      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {color: ${this.branding.generalConfig.secondaryColor} !important; }
+      </style>`
+    );
     const reportGuid =
       this.activeRoute.snapshot.queryParams['reportContextHash'];
     this.reportGuid = reportGuid

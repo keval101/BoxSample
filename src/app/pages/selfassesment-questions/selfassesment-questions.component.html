@@ -55,46 +55,26 @@
     <div
       class="questions__ques"
       *ngFor="let queArr of radioData; let i = index"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentText?.color
+          ? branding?.generalConfig?.contentText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentText?.fontFamily
+          ? branding?.generalConfig?.contentText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentText?.fontWeight
+          ? branding?.generalConfig?.contentText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentText?.fontSize
+          ? branding?.generalConfig?.contentText?.fontSize
+          : ''
+      }"
     >
-      <p
-        class="questions__ques-text"
-        [ngStyle]="{
-          color: branding?.generalConfig?.contentText?.color
-            ? branding?.generalConfig?.contentText?.color
-            : '',
-          fontFamily: branding?.generalConfig?.contentText?.fontFamily
-            ? branding?.generalConfig?.contentText?.fontFamily
-            : '',
-          fontWeight: branding?.generalConfig?.contentText?.fontWeight
-            ? branding?.generalConfig?.contentText?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.contentText?.fontSize
-            ? branding?.generalConfig?.contentText?.fontSize
-            : ''
-        }"
-      >
-        {{ i + 1 }}. {{ queArr.name }}
-      </p>
+      <p class="questions__ques-text">{{ i + 1 }}. {{ queArr.name }}</p>
 
       <div class="questions__ques-radioGroup">
         <div class="p-field-radiobutton radioBtn">
-          <label
-            for="ans{{ i }}"
-            [ngStyle]="{
-              color: branding?.generalConfig?.contentText?.color
-                ? branding?.generalConfig?.contentText?.color
-                : '',
-              fontFamily: branding?.generalConfig?.contentText?.fontFamily
-                ? branding?.generalConfig?.contentText?.fontFamily
-                : '',
-              fontWeight: branding?.generalConfig?.contentText?.fontWeight
-                ? branding?.generalConfig?.contentText?.fontWeight
-                : '',
-              fontSize: branding?.generalConfig?.contentText?.fontSize
-                ? branding?.generalConfig?.contentText?.fontSize
-                : ''
-            }"
-          >
+          <label for="ans{{ i }}">
             <p-radioButton
               name="answer{{ i }}"
               [value]="queArr?.answers[0]?.isCorrect"
@@ -108,23 +88,7 @@
         </div>
 
         <div class="p-field-radiobutton radioBtn">
-          <label
-            for="ans{{ i + 10 }}"
-            [ngStyle]="{
-              color: branding?.generalConfig?.contentText?.color
-                ? branding?.generalConfig?.contentText?.color
-                : '',
-              fontFamily: branding?.generalConfig?.contentText?.fontFamily
-                ? branding?.generalConfig?.contentText?.fontFamily
-                : '',
-              fontWeight: branding?.generalConfig?.contentText?.fontWeight
-                ? branding?.generalConfig?.contentText?.fontWeight
-                : '',
-              fontSize: branding?.generalConfig?.contentText?.fontSize
-                ? branding?.generalConfig?.contentText?.fontSize
-                : ''
-            }"
-          >
+          <label for="ans{{ i + 10 }}">
             <p-radioButton
               name="answer{{ i }}"
               [value]="queArr?.answers[1]?.isCorrect"

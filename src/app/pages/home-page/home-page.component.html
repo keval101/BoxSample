@@ -11,6 +11,7 @@
       : ''
   }"
 >
+  <div [innerHTML]="myStyle"></div>
   <div class="container">
     <div class="logo">
       <div class="logo__items">
@@ -27,6 +28,12 @@
         [ngStyle]="{
           background: branding?.generalConfig?.primaryColor
             ? branding?.generalConfig?.primaryColor
+            : '',
+          width: branding?.generalConfig?.titleBar?.left?.width
+            ? branding?.generalConfig?.titleBar?.left?.width
+            : '',
+          'flex-shrink': branding?.generalConfig?.titleBar?.left?.shrink
+            ? branding?.generalConfig?.titleBar?.left?.shrink
             : ''
         }"
       >
@@ -50,12 +57,18 @@
           {{ 'home.projectTitle' | translate }}
         </p>
       </div>
-      <div [innerHTML]="myStyle"></div>
+
       <div
         class="header__right"
         [ngStyle]="{
           background: branding?.generalConfig?.secondaryColor
             ? branding?.generalConfig?.secondaryColor
+            : '',
+          width: branding?.generalConfig?.titleBar?.right?.width
+            ? branding?.generalConfig?.titleBar?.right.width
+            : '',
+          'flex-shrink': branding?.generalConfig?.titleBar?.right?.shrink
+            ? branding?.generalConfig?.titleBar?.right?.shrink
             : ''
         }"
       >

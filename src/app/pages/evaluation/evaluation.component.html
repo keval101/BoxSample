@@ -14,15 +14,49 @@
 >
   <img [src]="popupImageUrl" alt="resultImage" />
 </p-dialog>
-
+<div [innerHTML]="myStyle"></div>
 <div class="container">
   <div class="container__title">
-    <p class="container__title-text">{{ 'evaluation.title' | translate }}</p>
+    <p
+      class="container__title-text"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'evaluation.title' | translate }}
+    </p>
   </div>
 
   <div class="content" *ngIf="this.appData">
     <div class="result__container">
-      <p class="result__container-title">
+      <p
+        class="result__container-title"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentTextTitle?.color
+            ? branding?.generalConfig?.contentTextTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentTextTitle?.fontFamily
+            ? branding?.generalConfig?.contentTextTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentTextTitle?.fontWeight
+            ? branding?.generalConfig?.contentTextTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentTextTitle?.fontSize
+            ? branding?.generalConfig?.contentTextTitle?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.resultTitle' | translate }}
       </p>
 
@@ -140,7 +174,23 @@
     </div>
 
     <div class="score__container">
-      <p class="result__container-title">
+      <p
+        class="result__container-title"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentTextTitle?.color
+            ? branding?.generalConfig?.contentTextTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentTextTitle?.fontFamily
+            ? branding?.generalConfig?.contentTextTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentTextTitle?.fontWeight
+            ? branding?.generalConfig?.contentTextTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentTextTitle?.fontSize
+            ? branding?.generalConfig?.contentTextTitle?.fontSize
+            : ''
+        }"
+      >
         {{ 'evaluation.score' | translate }}
       </p>
 
@@ -148,35 +198,200 @@
         <ng-template pTemplate="header">
           <tr>
             <th>&nbsp;</th>
-            <th>{{ 'evaluation.measured' | translate }}</th>
-            <th>{{ 'evaluation.goalValue' | translate }}</th>
-            <th>{{ 'evaluation.score' | translate }}</th>
+            <th
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableTitle?.color
+                  ? branding?.generalConfig?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableTitle?.fontFamily
+                  ? branding?.generalConfig?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableTitle?.fontWeight
+                  ? branding?.generalConfig?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableTitle?.fontSize
+                  ? branding?.generalConfig?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.measured' | translate }}
+            </th>
+            <th
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableTitle?.color
+                  ? branding?.generalConfig?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableTitle?.fontFamily
+                  ? branding?.generalConfig?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableTitle?.fontWeight
+                  ? branding?.generalConfig?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableTitle?.fontSize
+                  ? branding?.generalConfig?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.goalValue' | translate }}
+            </th>
+            <th
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableTitle?.color
+                  ? branding?.generalConfig?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableTitle?.fontFamily
+                  ? branding?.generalConfig?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableTitle?.fontWeight
+                  ? branding?.generalConfig?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableTitle?.fontSize
+                  ? branding?.generalConfig?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.score' | translate }}
+            </th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-score>
           <tr>
-            <td class="rowTitle">
+            <td
+              class="rowTitle"
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableText?.color
+                  ? branding?.generalConfig?.tableText?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableText?.fontFamily
+                  ? branding?.generalConfig?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableText?.fontWeight
+                  ? branding?.generalConfig?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableText?.fontSize
+                  ? branding?.generalConfig?.tableText?.fontSize
+                  : ''
+              }"
+            >
               {{ score.title }}
             </td>
-            <td>{{ score.measured }}</td>
-            <td>{{ score.goalvalue }}</td>
-            <td class="score">{{ score.score }}</td>
+            <td
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableText?.color
+                  ? branding?.generalConfig?.tableText?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableText?.fontFamily
+                  ? branding?.generalConfig?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableText?.fontWeight
+                  ? branding?.generalConfig?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableText?.fontSize
+                  ? branding?.generalConfig?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.measured }}
+            </td>
+            <td
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableText?.color
+                  ? branding?.generalConfig?.tableText?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableText?.fontFamily
+                  ? branding?.generalConfig?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableText?.fontWeight
+                  ? branding?.generalConfig?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableText?.fontSize
+                  ? branding?.generalConfig?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.goalvalue }}
+            </td>
+            <td
+              class="score"
+              [ngStyle]="{
+                color: branding?.generalConfig?.tableText?.color
+                  ? branding?.generalConfig?.tableText?.color
+                  : '',
+                fontFamily: branding?.generalConfig?.tableText?.fontFamily
+                  ? branding?.generalConfig?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.generalConfig?.tableText?.fontWeight
+                  ? branding?.generalConfig?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.generalConfig?.tableText?.fontSize
+                  ? branding?.generalConfig?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.score }}
+            </td>
           </tr>
         </ng-template>
       </p-table>
 
       <div class="score__container-feedback">
-        <p class="result__container-title">
+        <p
+          class="result__container-title"
+          [ngStyle]="{
+            color: branding?.generalConfig?.contentTextTitle?.color
+              ? branding?.generalConfig?.contentTextTitle?.color
+              : '',
+            fontFamily: branding?.generalConfig?.contentTextTitle?.fontFamily
+              ? branding?.generalConfig?.contentTextTitle?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.contentTextTitle?.fontWeight
+              ? branding?.generalConfig?.contentTextTitle?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.contentTextTitle?.fontSize
+              ? branding?.generalConfig?.contentTextTitle?.fontSize
+              : ''
+          }"
+        >
           {{ 'evaluation.feedback' | translate }}
         </p>
         <div class="feedbackcontainer">
-          <p class="score__container-feedback-text">
+          <p
+            class="score__container-feedback-text"
+            [ngStyle]="{
+              color: branding?.generalConfig?.contentText?.color
+                ? branding?.generalConfig?.contentText?.color
+                : '',
+              fontFamily: branding?.generalConfig?.contentText?.fontFamily
+                ? branding?.generalConfig?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.generalConfig?.contentText?.fontWeight
+                ? branding?.generalConfig?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.generalConfig?.contentText?.fontSize
+                ? branding?.generalConfig?.contentText?.fontSize
+                : ''
+            }"
+          >
             {{ selfAssessImage.hint }}
           </p>
           <p
             class="score__container-feedback-text"
             *ngFor="let data of allHint"
+            [ngStyle]="{
+              color: branding?.generalConfig?.contentText?.color
+                ? branding?.generalConfig?.contentText?.color
+                : '',
+              fontFamily: branding?.generalConfig?.contentText?.fontFamily
+                ? branding?.generalConfig?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.generalConfig?.contentText?.fontWeight
+                ? branding?.generalConfig?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.generalConfig?.contentText?.fontSize
+                ? branding?.generalConfig?.contentText?.fontSize
+                : ''
+            }"
           >
             {{ data }}
           </p>
@@ -184,7 +399,23 @@
       </div>
 
       <div class="score__container-ratings">
-        <p class="score__container-ratings-text">
+        <p
+          class="score__container-ratings-text"
+          [ngStyle]="{
+            color: branding?.generalConfig?.actionText?.color
+              ? branding?.generalConfig?.actionText?.color
+              : '',
+            fontFamily: branding?.generalConfig?.actionText?.fontFamily
+              ? branding?.generalConfig?.actionText?.fontFamily
+              : '',
+            fontWeight: branding?.generalConfig?.actionText?.fontWeight
+              ? branding?.generalConfig?.actionText?.fontWeight
+              : '',
+            fontSize: branding?.generalConfig?.actionText?.fontSize
+              ? branding?.generalConfig?.actionText?.fontSize
+              : ''
+          }"
+        >
           {{ 'evaluation.ratingtext' | translate }}
         </p>
         <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
@@ -285,24 +516,26 @@
 </div>
 
 <p-confirmDialog header="Confirmation" #cd>
-  <ng-template
-    pTemplate="header"
-    [ngStyle]="{
-      color: branding?.generalConfig?.contentTitle?.color
-        ? branding?.generalConfig?.contentTitle?.color
-        : '',
-      fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
-        ? branding?.generalConfig?.contentTitle?.fontFamily
-        : '',
-      fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
-        ? branding?.generalConfig?.contentTitle?.fontWeight
-        : '',
-      fontSize: branding?.generalConfig?.contentTitle?.fontSize
-        ? branding?.generalConfig?.contentTitle?.fontSize
-        : ''
-    }"
-  >
-    <p class="header m-0">{{ 'evaluation.confirmation' | translate }}</p>
+  <ng-template pTemplate="header">
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'evaluation.confirmation' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button

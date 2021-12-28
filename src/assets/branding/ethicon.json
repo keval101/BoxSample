@@ -5,13 +5,33 @@
     "primaryColor": "#FFFFFF",
     "secondaryColor": "#F30617",
     "textPrimary": "#212121",
-    "homeAngle": "#FFFFFF",
+    "homeAngle": "transparent",
     "logoUrl": "logo.png",
     "backGroundImg": "background.png",
     "poweredByLogo": "",
     "loadingBar": {
       "forGround": "#FFFFFF",
       "backGround": "#DEE2E4"
+    },
+    "titleBar": {
+      "left": {
+        "shrink": 0,
+        "width": "30%"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "70%"
+      }
+    },
+    "topBar": {
+      "left": {
+        "shrink": 0,
+        "width": "30%"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "70%"
+      }
     },
     "productTitleLeft": {
       "fontFamily": "Arial",
