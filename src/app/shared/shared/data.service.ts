@@ -29,6 +29,7 @@ export class DataService {
   branding: any;
 
   loader = new BehaviorSubject(true);
+  homeScreen = new BehaviorSubject(false);
   constructor(
     private http: HttpClient,
     private router: Router,

@@ -9,7 +9,19 @@
     }"
     [ngStyle]="{
       transform: recordingScreen ? 'translateY(0rem)' : '',
-      color: recordingScreen || homeScreen ? 'white' : '#707172'
+      color:
+        recordingScreen || dataservice.homeScreen.value
+          ? branding?.generalConfig?.versionInformationBright?.color
+          : branding?.generalConfig?.versionInformationDark?.color,
+      fontFamily: branding?.generalConfig?.versionInformationBright?.fontFamily
+        ? branding?.generalConfig?.versionInformationBright?.fontFamily
+        : '',
+      fontWeight: branding?.generalConfig?.versionInformationBright?.fontWeight
+        ? branding?.generalConfig?.versionInformationBright?.fontWeight
+        : '',
+      fontSize: branding?.generalConfig?.versionInformationBright?.fontSize
+        ? branding?.generalConfig?.versionInformationBright?.fontSize
+        : ''
     }"
   >
     {{ 'home.rightReserved' | translate }}{{ this.versionInfo }}

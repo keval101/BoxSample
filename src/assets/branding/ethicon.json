@@ -5,7 +5,10 @@
     "primaryColor": "#FFFFFF",
     "secondaryColor": "#F30617",
     "textPrimary": "#212121",
-    "homeAngle": "transparent",
+    "homeAngle": {
+      "color": "transparent",
+      "display": "none"
+    },
     "logoUrl": "logo.png",
     "backGroundImg": "background.png",
     "poweredByLogo": "",
@@ -16,21 +19,21 @@
     "titleBar": {
       "left": {
         "shrink": 0,
-        "width": "30%"
+        "width": "507.95px"
       },
       "right": {
         "shrink": 1,
-        "width": "70%"
+        "width": "857px"
       }
     },
     "topBar": {
       "left": {
         "shrink": 0,
-        "width": "30%"
+        "width": "891.14px"
       },
       "right": {
         "shrink": 1,
-        "width": "70%"
+        "width": "120.99px"
       }
     },
     "productTitleLeft": {
@@ -84,6 +87,7 @@
     "waterMarkUrl": "watermark.png",
     "UIElementPrimaryColor": "#ffffff",
     "UIElementSecondColor": "#828282",
+    "UIElementRadio": "#F30617",
     "actionText": {
       "fontFamily": "Arial",
       "fontWeight": "normal",

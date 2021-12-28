@@ -5,13 +5,36 @@
     "primaryColor": "#044772",
     "secondaryColor": "#707172",
     "textPrimary": "#000000",
-    "homeAngle": "#707172",
+    "homeAngle": {
+      "color": "#707172",
+      "display": "block"
+    },
     "logoUrl": "logo.png",
     "backGroundImg": "background.png",
     "poweredByLogo": "",
     "loadingBar": {
       "forGround": "#B41513",
       "backGround": "#DEE2E4"
+    },
+    "titleBar": {
+      "left": {
+        "shrink": 0,
+        "width": "507.95px"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "857px"
+      }
+    },
+    "topBar": {
+      "left": {
+        "shrink": 0,
+        "width": "891.14px"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "120.99px"
+      }
     },
     "productTitleLeft": {
       "fontFamily": "Myriad Regular",
@@ -64,6 +87,7 @@
     "waterMarkUrl": "watermark.png",
     "UIElementPrimaryColor": "#ffffff",
     "UIElementSecondColor": "#B41513",
+    "UIElementRadio": "#B41513",
     "actionText": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",

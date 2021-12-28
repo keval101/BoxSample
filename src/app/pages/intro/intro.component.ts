@@ -51,6 +51,7 @@ export class IntroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.dataService.homeScreen.next(false);
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>#sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
       #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}

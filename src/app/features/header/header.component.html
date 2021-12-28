@@ -6,6 +6,12 @@
       [ngStyle]="{
         background: branding?.generalConfig?.headerLeft
           ? branding?.generalConfig?.headerLeft
+          : '',
+        width: branding?.generalConfig?.topBar?.left?.width
+          ? branding?.generalConfig?.topBar?.left?.width
+          : '',
+        'flex-shrink': branding?.generalConfig?.topBar?.left?.shrink
+          ? branding?.generalConfig?.topBar?.left?.shrink
           : ''
       }"
     >
@@ -56,8 +62,11 @@
         background: branding?.generalConfig?.headerRight
           ? branding?.generalConfig?.headerRight
           : '',
-        color: branding?.generalConfig?.secondaryColor
-          ? branding?.generalConfig?.secondaryColor
+        width: branding?.generalConfig?.topBar?.right?.width
+          ? branding?.generalConfig?.topBar?.right?.width
+          : '',
+        'flex-shrink': branding?.generalConfig?.topBar?.right?.shrink
+          ? branding?.generalConfig?.topBar?.right?.shrink
           : ''
       }"
     >

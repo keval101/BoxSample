@@ -19,6 +19,7 @@ import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { Subscription } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from 'src/environments';
 
 declare const window: Window &
   typeof globalThis & {
@@ -50,6 +51,8 @@ export class TakescreenshotComponent
   indexDB;
   indexDbSubscription: Subscription;
   myStyle: SafeHtml;
+
+  brand = environment.branding;
 
   constructor(
     private router: Router,

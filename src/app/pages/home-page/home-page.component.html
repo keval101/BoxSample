@@ -11,10 +11,29 @@
       : ''
   }"
 >
+  <div class="poweredLogo">
+    <h1>powered By<img src="../../../assets/ethicon/VIRTAMED.png" alt="" /></h1>
+  </div>
   <div [innerHTML]="myStyle"></div>
   <div class="container">
-    <div class="logo">
-      <div class="logo__items">
+    <div
+      class="logo"
+      [ngStyle]="{
+        paddingRight:
+          branding?.generalConfig?.homeAngle?.display === 'none'
+            ? '7rem'
+            : '7rem'
+      }"
+    >
+      <div
+        class="logo__items"
+        [ngStyle]="{
+          marginBottom:
+            branding?.generalConfig?.homeAngle?.display === 'none'
+              ? '0px'
+              : '3.166rem'
+        }"
+      >
         <img
           src="assets/{{ brand }}/{{ branding?.generalConfig?.logoUrl }}"
           alt="logo"
@@ -51,7 +70,11 @@
               : '',
             fontSize: branding?.generalConfig?.productTitleLeft?.fontSize
               ? branding?.generalConfig?.productTitleLeft?.fontSize
-              : ''
+              : '',
+            paddingRight:
+              branding?.generalConfig?.homeAngle?.display === 'none'
+                ? '4rem'
+                : '7rem'
           }"
         >
           {{ 'home.projectTitle' | translate }}

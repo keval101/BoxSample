@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   hasDataReceived = false;
   homeScreen = false;
   appData;
+  branding;
   loader = true;
 
   public versionInfo = environment.version;
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     public translate: TranslateService,
-    private dataservice: DataService,
+    public dataservice: DataService,
     private headerService: HeaderService,
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +47,12 @@ export class AppComponent implements OnInit {
         this.videoFullScreen = false;
       }
     });
+
+    if (this.location.path() === '') {
+      this.dataservice.homeScreen.next(true);
+    } else {
+      this.dataservice.homeScreen.next(false);
+    }
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
@@ -76,6 +83,7 @@ export class AppComponent implements OnInit {
     const url = `../assets/branding/${environment.branding}.json`;
     this.dataservice.getBrandingData(url).subscribe((res) => {
       this.dataservice.branding = res;
+      this.branding = res;
     });
     this.dataservice.getData(params).subscribe(
       (res) => {

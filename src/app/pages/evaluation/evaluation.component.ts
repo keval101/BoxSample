@@ -132,7 +132,6 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       .pi-chevron-left:before {color: ${this.branding.generalConfig.primaryColor} !important; }
       .p-rating .p-rating-icon.pi-star {color: ${this.branding.generalConfig.secondaryColor} !important; }
       .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.generalConfig.secondaryColor} !important; }
-      .result__container .radio-group .radio-left-tab, .result__container .radio-group .radio-right-tab {color: ${this.branding.generalConfig.primaryColor} !important; }
       .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {color: ${this.branding.generalConfig.secondaryColor} !important; }
       </style>`
     );

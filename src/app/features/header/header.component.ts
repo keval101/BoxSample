@@ -57,6 +57,7 @@ export class HeaderComponent implements OnChanges, OnInit {
       `<style>
       .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
       .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }
+      .header__right::before {color: ${this.branding.generalConfig.homeAngle.color} !important;display: ${this.branding.generalConfig.homeAngle.display}}
       </style>`
     );
   }
