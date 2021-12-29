@@ -68,6 +68,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   reportGuid: string;
   myStyle: SafeHtml;
 
+  brand = environment.branding;
+
   constructor(
     private router: Router,
     public translateService: TranslateService,

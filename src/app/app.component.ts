@@ -6,6 +6,7 @@ import { DataService } from './shared/shared/data.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
 import { environment } from 'src/environments';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   homeScreen = false;
   appData;
   branding;
-  loader = true;
+  loader: boolean;
+  appLoader: boolean;
 
   public versionInfo = environment.version;
 
@@ -80,21 +82,26 @@ export class AppComponent implements OnInit {
   }
 
   getAppData(params) {
+    this.dataservice.setLoader(true);
     const url = `../assets/branding/${environment.branding}.json`;
-    this.dataservice.getBrandingData(url).subscribe((res) => {
-      this.dataservice.branding = res;
-      this.branding = res;
-    });
-    this.dataservice.getData(params).subscribe(
+    const response = forkJoin([
+      this.dataservice.getBrandingData(url),
+      this.dataservice.getData(params),
+    ]);
+
+    response.subscribe(
       (res) => {
-        if (res) {
-          this.appData = res;
-          this.dataservice.appData = res;
-          sessionStorage.clear();
-          this.loader = false;
-        }
+        this.dataservice.branding = res[0];
+        this.branding = res[0];
+        this.appData = res[1];
+        this.dataservice.appData = res[1];
+        sessionStorage.clear();
+        this.loader = false;
+        this.appLoader = true;
+        this.dataservice.setLoader(false);
       },
       (err) => {
+        this.dataservice.setLoader(false);
         this.loader = false;
         this.dataservice.showError(
           'Some issue occured. Please contact your administrator!'

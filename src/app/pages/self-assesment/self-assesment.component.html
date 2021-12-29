@@ -65,17 +65,17 @@
       <p
         class="selfassesment__result-title"
         [ngStyle]="{
-          color: branding?.generalConfig?.contentText?.color
-            ? branding?.generalConfig?.contentText?.color
+          color: branding?.generalConfig?.subHeader?.color
+            ? branding?.generalConfig?.subHeader?.color
             : '',
-          fontFamily: branding?.generalConfig?.contentText?.fontFamily
-            ? branding?.generalConfig?.contentText?.fontFamily
+          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
+            ? branding?.generalConfig?.subHeader?.fontFamily
             : '',
-          fontWeight: branding?.generalConfig?.contentText?.fontWeight
-            ? branding?.generalConfig?.contentText?.fontWeight
+          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
+            ? branding?.generalConfig?.subHeader?.fontWeight
             : '',
-          fontSize: branding?.generalConfig?.contentText?.fontSize
-            ? branding?.generalConfig?.contentText?.fontSize
+          fontSize: branding?.generalConfig?.subHeader?.fontSize
+            ? branding?.generalConfig?.subHeader?.fontSize
             : ''
         }"
       >
@@ -95,17 +95,17 @@
       <p
         class="selfassesment__result-title"
         [ngStyle]="{
-          color: branding?.generalConfig?.contentText?.color
-            ? branding?.generalConfig?.contentText?.color
+          color: branding?.generalConfig?.subHeader?.color
+            ? branding?.generalConfig?.subHeader?.color
             : '',
-          fontFamily: branding?.generalConfig?.contentText?.fontFamily
-            ? branding?.generalConfig?.contentText?.fontFamily
+          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
+            ? branding?.generalConfig?.subHeader?.fontFamily
             : '',
-          fontWeight: branding?.generalConfig?.contentText?.fontWeight
-            ? branding?.generalConfig?.contentText?.fontWeight
+          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
+            ? branding?.generalConfig?.subHeader?.fontWeight
             : '',
-          fontSize: branding?.generalConfig?.contentText?.fontSize
-            ? branding?.generalConfig?.contentText?.fontSize
+          fontSize: branding?.generalConfig?.subHeader?.fontSize
+            ? branding?.generalConfig?.subHeader?.fontSize
             : ''
         }"
       >
@@ -195,7 +195,7 @@
 >
   <div class="sidebarHeader">
     <button class="closed" (click)="closeSidebar()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closedBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closedBtn" />
     </button>
     <button class="close" (click)="confirm()">
       <i class="pi pi-times" alt="cross"></i>
@@ -219,17 +219,17 @@
     <p
       class="header m-0"
       [ngStyle]="{
-        color: branding?.generalConfig?.contentTitle?.color
-          ? branding?.generalConfig?.contentTitle?.color
+        color: branding?.generalConfig?.confirmationDialogTitle?.color
+          ? branding?.generalConfig?.confirmationDialogTitle?.color
           : '',
-        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
-          ? branding?.generalConfig?.contentTitle?.fontFamily
+        fontFamily: branding?.generalConfig?.confirmationDialogTitle?.fontFamily
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
-          ? branding?.generalConfig?.contentTitle?.fontWeight
+        fontWeight: branding?.generalConfig?.confirmationDialogTitle?.fontWeight
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.contentTitle?.fontSize
-          ? branding?.generalConfig?.contentTitle?.fontSize
+        fontSize: branding?.generalConfig?.confirmationDialogTitle?.fontSize
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontSize
           : ''
       }"
     >

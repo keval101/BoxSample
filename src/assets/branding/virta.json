@@ -29,69 +29,98 @@
     "topBar": {
       "left": {
         "shrink": 0,
-        "width": "891.14px"
+        "width": "67%"
       },
       "right": {
         "shrink": 1,
-        "width": "120.99px"
+        "width": "33%"
       }
     },
     "productTitleLeft": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "32px",
+      "fontSize": "3.2rem",
       "color": "#ffffff"
     },
     "productTitleRight": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "32px",
+      "fontSize": "3.2rem",
       "color": "#ffffff"
     },
     "versionInformationBright": {
-      "fontFamily": "Myriad Regular",
+      "fontFamily": "Myriad light",
       "fontWeight": 500,
-      "fontSize": "16px",
+      "fontSize": "1.6rem",
       "color": "#ffffff"
     },
+    "versionInformationDark": {
+      "fontFamily": "Myriad light",
+      "fontWeight": 500,
+      "fontSize": "1.6rem",
+      "color": "#707172"
+    },
     "topTitle": {
-      "fontFamily": "Myriad Regular",
+      "fontFamily": "Myriad light",
       "fontWeight": "normal",
-      "fontSize": "32px",
+      "fontSize": "2.9rem",
       "color": "#ffffff"
     },
     "contentTitle": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "40px",
+      "fontSize": "4rem",
       "color": "#044772"
     },
     "contentText": {
-      "fontFamily": "Myriad Regular",
+      "fontFamily": "Myriad light",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#000000"
     },
     "contentTextTitle": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#044772"
     },
-    "versionInformationDark": {
-      "fontFamily": "Myriad Regular",
-      "fontWeight": 500,
-      "fontSize": "16px",
-      "color": "#707172"
+    "videoDetails": {
+      "color": ""
     },
+    "subHeader": {
+      "fontSize": "3.2rem",
+      "color": "#044772",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400"
+    },
+    "sidebarTitle": {
+      "fontSize": "3.2rem",
+      "color": "#044772",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400"
+    },
+    "selfAssessmentQuestionText": {
+      "fontSize": "3.2rem",
+      "color": "#000000",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400"
+    },
+    "confirmationDialogTitle": {
+      "fontSize": "4rem",
+      "color": "#B41513",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal"
+    },
+    "introDescriptionText": "Myriad Regular",
     "waterMarkUrl": "watermark.png",
     "UIElementPrimaryColor": "#ffffff",
+    "UIElementRecording": "#B41513",
     "UIElementSecondColor": "#B41513",
     "UIElementRadio": "#B41513",
     "actionText": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "32px",
+      "fontSize": "3.2rem",
       "color": "#B32226"
     },
     "buttonFill": {
@@ -103,27 +132,27 @@
       "borderRadius": "5px"
     },
     "buttonFillText": {
-      "fontFamily": "Myriad Regular",
+      "fontFamily": "Myriad light",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#ffffff"
     },
     "buttonOutlineText": {
-      "fontFamily": "Myriad Regular",
+      "fontFamily": "Myriad light",
       "fontWeight": 500,
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#B41513"
     },
     "tableTitle": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#B41513"
     },
     "tableText": {
       "fontFamily": "Myriad Regular",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#000000"
     }
   }

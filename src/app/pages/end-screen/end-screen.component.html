@@ -5,20 +5,143 @@
   ></app-header>
 </div>
 
-<div class="container">
+<div
+  class="container"
+  [ngStyle]="{
+    backgroundImage: branding?.generalConfig?.backGroundImg
+      ? 'url(assets/' +
+        brand +
+        '/' +
+        branding?.generalConfig?.backGroundImg +
+        ')'
+      : ''
+  }"
+>
+  <div
+    class="poweredLogo"
+    [ngStyle]="{
+      display: branding?.generalConfig?.poweredByLogo ? 'block' : 'none'
+    }"
+  >
+    <h1>powered By<img src="../../../assets/ethicon/VIRTAMED.png" alt="" /></h1>
+  </div>
   <div class="content">
-    <img src="assets/images/logo.png" alt="logo" />
+    <img
+      [ngStyle]="{
+        marginBottom: branding?.generalConfig?.poweredByLogo
+          ? '0px'
+          : '6.969rem'
+      }"
+      src="assets/{{ brand }}/{{ branding?.generalConfig?.logoUrl }}"
+      alt="logo"
+    />
 
-    <div *ngIf="!cancel">
+    <div
+      *ngIf="!cancel"
+      [ngStyle]="{
+        color: branding?.generalConfig?.contentTitle?.color
+          ? branding?.generalConfig?.contentTitle?.color
+          : '',
+        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+          ? branding?.generalConfig?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+          ? branding?.generalConfig?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.contentTitle?.fontSize
+          ? branding?.generalConfig?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       <p class="success">{{ 'end.success' | translate }}</p>
-      <p class="success-text m-0">{{ 'end.successMessage' | translate }}</p>
+      <p
+        class="success-text m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.subHeader?.color
+            ? branding?.generalConfig?.subHeader?.color
+            : '',
+          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
+            ? branding?.generalConfig?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
+            ? branding?.generalConfig?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.subHeader?.fontSize
+            ? branding?.generalConfig?.subHeader?.fontSize
+            : ''
+        }"
+      >
+        {{ 'end.successMessage' | translate }}
+      </p>
     </div>
 
     <div *ngIf="cancel">
-      <p class="success">{{ 'end.cancel' | translate }}</p>
-      <p class="success-text m-0">{{ 'end.cancelMessage' | translate }}</p>
+      <p
+        class="success"
+        [ngStyle]="{
+          color: branding?.generalConfig?.contentTitle?.color
+            ? branding?.generalConfig?.contentTitle?.color
+            : '',
+          fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
+            ? branding?.generalConfig?.contentTitle?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
+            ? branding?.generalConfig?.contentTitle?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.contentTitle?.fontSize
+            ? branding?.generalConfig?.contentTitle?.fontSize
+            : ''
+        }"
+      >
+        {{ 'end.cancel' | translate }}
+      </p>
+      <p
+        class="success-text m-0"
+        [ngStyle]="{
+          color: branding?.generalConfig?.subHeader?.color
+            ? branding?.generalConfig?.subHeader?.color
+            : '',
+          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
+            ? branding?.generalConfig?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
+            ? branding?.generalConfig?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.generalConfig?.subHeader?.fontSize
+            ? branding?.generalConfig?.subHeader?.fontSize
+            : ''
+        }"
+      >
+        {{ 'end.cancelMessage' | translate }}
+      </p>
     </div>
-    <button class="button button-fill button-small" (click)="closeTab($event)">
+    <button
+      class="button button-fill button-small"
+      (click)="closeTab($event)"
+      [ngStyle]="{
+        background: branding?.generalConfig?.buttonFill?.backGround
+          ? branding?.generalConfig?.buttonFill?.backGround
+          : '',
+        border: branding?.generalConfig?.buttonFill?.border
+          ? branding?.generalConfig?.buttonFill?.border
+          : '',
+        color: branding?.generalConfig?.buttonFillText?.color
+          ? branding?.generalConfig?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
+          ? branding?.generalConfig?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
+          ? branding?.generalConfig?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
+          ? branding?.generalConfig?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
+          ? branding?.generalConfig?.buttonFill?.borderRadius
+          : ''
+      }"
+    >
       {{ 'end.close' | translate }}
     </button>
   </div>

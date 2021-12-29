@@ -28,7 +28,7 @@ export class DataService {
 
   branding: any;
 
-  loader = new BehaviorSubject(true);
+  loader = new BehaviorSubject(false);
   homeScreen = new BehaviorSubject(false);
   constructor(
     private http: HttpClient,

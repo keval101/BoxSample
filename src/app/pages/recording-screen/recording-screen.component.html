@@ -111,7 +111,7 @@
 >
   <div class="sidebar__header">
     <button type="button" (click)="onSlidebarClose()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closeBtn" />
     </button>
 
     <div>
@@ -134,17 +134,17 @@
     <p
       class="header m-0"
       [ngStyle]="{
-        color: branding?.generalConfig?.contentTitle?.color
-          ? branding?.generalConfig?.contentTitle?.color
+        color: branding?.generalConfig?.confirmationDialogTitle?.color
+          ? branding?.generalConfig?.confirmationDialogTitle?.color
           : '',
-        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
-          ? branding?.generalConfig?.contentTitle?.fontFamily
+        fontFamily: branding?.generalConfig?.confirmationDialogTitle?.fontFamily
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
-          ? branding?.generalConfig?.contentTitle?.fontWeight
+        fontWeight: branding?.generalConfig?.confirmationDialogTitle?.fontWeight
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.contentTitle?.fontSize
-          ? branding?.generalConfig?.contentTitle?.fontSize
+        fontSize: branding?.generalConfig?.confirmationDialogTitle?.fontSize
+          ? branding?.generalConfig?.confirmationDialogTitle?.fontSize
           : ''
       }"
     >

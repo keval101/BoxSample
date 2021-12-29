@@ -18,6 +18,7 @@ import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from 'src/environments';
 
 @Component({
   selector: 'app-self-assesment',
@@ -45,6 +46,8 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   display = false;
   popupImageUrl: any;
   myStyle: SafeHtml;
+
+  brand = environment.branding;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -148,7 +151,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.sidebarTitle.fontSize} !important;color: ${this.branding.generalConfig.sidebarTitle.color};font-weight: ${this.branding.generalConfig.sidebarTitle.fontWeight};font-family: ${this.branding.generalConfig.sidebarTitle.fontFamily};}
       #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
       #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
       #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}

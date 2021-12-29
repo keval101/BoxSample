@@ -44,3 +44,20 @@ p {
 button {
   margin-top: 5.6rem;
 }
+
+.poweredLogo {
+  position: absolute;
+  top: 2.7rem;
+  right: 2.9rem;
+  h1 {
+    margin: 0;
+    font-size: 25px;
+    color: black;
+    font-weight: normal;
+    img {
+      width: 21.6rem;
+      height: auto;
+      margin-bottom: 0px !important;
+    }
+  }
+}

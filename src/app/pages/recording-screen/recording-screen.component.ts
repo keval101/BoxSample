@@ -116,12 +116,13 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
+      #sidebar__content h1 {font-size: ${this.branding.generalConfig.sidebarTitle.fontSize} !important;color: ${this.branding.generalConfig.sidebarTitle.color};font-weight: ${this.branding.generalConfig.sidebarTitle.fontWeight};font-family: ${this.branding.generalConfig.sidebarTitle.fontFamily};}
       #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
       #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
       #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
       .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
       .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
+      .header__left--duration-icon{color: ${this.branding.generalConfig.UIElementRecording} !important; }
       .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }</style>`
     );
     this.randomNum = uuidv4();

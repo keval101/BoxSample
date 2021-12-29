@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <p-progressSpinner *ngIf="loader"></p-progressSpinner>
-<ng-container *ngIf="!loader">
+<ng-container *ngIf="appLoader">
   <router-outlet></router-outlet>
   <p
     class="rightReserved m-0"

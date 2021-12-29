@@ -11,7 +11,7 @@
     },
     "logoUrl": "logo.png",
     "backGroundImg": "background.png",
-    "poweredByLogo": "",
+    "poweredByLogo": true,
     "loadingBar": {
       "forGround": "#FFFFFF",
       "backGround": "#DEE2E4"
@@ -29,69 +29,97 @@
     "topBar": {
       "left": {
         "shrink": 0,
-        "width": "891.14px"
+        "width": "67%"
       },
       "right": {
         "shrink": 1,
-        "width": "120.99px"
+        "width": "33%"
       }
     },
     "productTitleLeft": {
       "fontFamily": "Arial",
       "fontWeight": 900,
-      "fontSize": "32px",
+      "fontSize": "3.2rem",
       "color": "#212121"
     },
     "productTitleRight": {
       "fontFamily": "Arial",
       "fontWeight": 900,
-      "fontSize": "32px",
+      "fontSize": "3.2rem",
       "color": "#ffffff"
     },
     "versionInformationBright": {
       "fontFamily": "Arial",
       "fontWeight": "normal",
-      "fontSize": "16px",
+      "fontSize": "1.6rem",
       "color": "#ffffff"
+    },
+    "versionInformationDark": {
+      "fontFamily": "Arial",
+      "fontWeight": "normal",
+      "fontSize": "1.6rem",
+      "color": "#828282"
     },
     "topTitle": {
       "fontFamily": "Arial",
       "fontWeight": 900,
-      "fontSize": "32px",
+      "fontSize": "2.9rem",
       "color": "#ffffff"
     },
     "contentTitle": {
       "fontFamily": "Arial",
       "fontWeight": 900,
-      "fontSize": "40px",
+      "fontSize": "4rem",
       "color": "#212121"
     },
     "contentText": {
       "fontFamily": "Arial",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#212121"
     },
     "contentTextTitle": {
       "fontFamily": "Arial",
       "fontWeight": 900,
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#212121"
     },
-    "versionInformationDark": {
+    "videoDetails": {
+      "color": "#212121"
+    },
+    "subHeader": {
+      "fontSize": "3.2rem",
+      "color": "#000000",
       "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "16px",
-      "color": "#828282"
+      "fontWeight": "900"
+    },
+    "sidebarTitle": {
+      "fontSize": "3.2rem",
+      "color": "#000000",
+      "fontFamily": "Arial",
+      "fontWeight": "900"
+    },
+    "selfAssessmentQuestionText": {
+      "fontSize": "3.2rem",
+      "color": "#000000",
+      "fontFamily": "Arial",
+      "fontWeight": "400"
+    },
+    "confirmationDialogTitle": {
+      "fontSize": "4rem",
+      "color": "#000000",
+      "fontFamily": "Arial",
+      "fontWeight": "900"
     },
     "waterMarkUrl": "watermark.png",
     "UIElementPrimaryColor": "#ffffff",
+    "UIElementRecording": "#ffffff",
     "UIElementSecondColor": "#828282",
     "UIElementRadio": "#F30617",
     "actionText": {
       "fontFamily": "Arial",
       "fontWeight": "normal",
-      "fontSize": "30px",
+      "fontSize": "3rem",
       "color": "#F30617"
     },
     "buttonFill": {
@@ -105,25 +133,25 @@
     "buttonFillText": {
       "fontFamily": "Arial",
       "fontWeight": "bold",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#ffffff"
     },
     "buttonOutlineText": {
       "fontFamily": "Arial",
       "fontWeight": "bold",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#FC0200"
     },
     "tableTitle": {
       "fontFamily": "Arial",
       "fontWeight": 500,
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#F30617"
     },
     "tableText": {
       "fontFamily": "Arial",
       "fontWeight": "normal",
-      "fontSize": "24px",
+      "fontSize": "2.4rem",
       "color": "#000000"
     }
   }
