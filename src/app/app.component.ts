@@ -59,9 +59,13 @@ export class AppComponent implements OnInit {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
         const anyCase = this.route.snapshot.queryParams['sceneId'];
+        const brandingParam = this.route.snapshot.queryParams['branding'];
         if (!this.hasDataReceived) {
           this.hasDataReceived = true;
-          this.getAppData(anyCase ? anyCase : null);
+          this.getAppData(
+            anyCase ? anyCase : null,
+            brandingParam ? brandingParam : null
+          );
         }
       }
     });
@@ -81,8 +85,9 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
-  getAppData(params) {
+  getAppData(params, brandingParam) {
     this.dataservice.setLoader(true);
+    environment.branding = brandingParam ? brandingParam : environment.branding;
     const url = `../assets/branding/${environment.branding}.json`;
     const response = forkJoin([
       this.dataservice.getBrandingData(url),

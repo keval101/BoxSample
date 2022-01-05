@@ -151,15 +151,16 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      #sidebar__content h1 {font-size: ${this.branding.generalConfig.sidebarTitle.fontSize} !important;color: ${this.branding.generalConfig.sidebarTitle.color};font-weight: ${this.branding.generalConfig.sidebarTitle.fontWeight};font-family: ${this.branding.generalConfig.sidebarTitle.fontFamily};}
-      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
-      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.generalConfig.secondaryColor} !important; }
-      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.generalConfig.secondaryColor} !important; }
-      .pi-chevron-right:before {color: ${this.branding.generalConfig.primaryColor} !important; }
-      .pi-chevron-left:before {color: ${this.branding.generalConfig.primaryColor} !important; }
+      #sidebar__content h1 {font-size: ${this.branding.sidebarTitle.fontSize} !important;color: ${this.branding.sidebarTitle.color};font-weight: ${this.branding.sidebarTitle.fontWeight};font-family: ${this.branding.sidebarTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.contentTextTitle.fontSize};color: ${this.branding.contentTextTitle.color};font-weight: ${this.branding.contentTextTitle.fontWeight};font-family: ${this.branding.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.secondaryColor} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.secondaryColor} !important; }
+      .pi-chevron-right:before {color: ${this.branding.primaryColor} !important; }
+      .pi-chevron-left:before {color: ${this.branding.primaryColor} !important; }
+      .screenshot-thumbnails.active {birder: ${this.branding.buttonOutline.border}}
       </style>`
     );
     this.translateService

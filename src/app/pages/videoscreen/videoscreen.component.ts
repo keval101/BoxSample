@@ -63,9 +63,9 @@ export class VideoscreenComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      .p-slider .p-slider-handle {background: ${this.branding.generalConfig.UIElementSecondColor} !important};
-      .p-slider.p-slider-horizontal {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important}
-      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize};color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
+      .p-slider .p-slider-handle {background: ${this.branding.UIElementSecondColor} !important};
+      .p-slider.p-slider-horizontal {background: ${this.branding.UIElementPrimaryColor} !important}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize};color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       </style>`
     );
     this.Translateservice.get('video.cancelText').subscribe((text: string) => {

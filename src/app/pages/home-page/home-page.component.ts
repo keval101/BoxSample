@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      .header__right::before {color: ${this.branding.generalConfig.homeAngle.color} !important;display: ${this.branding.generalConfig.homeAngle.display}}
+      .header__right::before {color: ${this.branding.homeAngle.color} !important;display: ${this.branding.homeAngle.display}}
       ;
       </style>`
     );

@@ -55,9 +55,9 @@ export class HeaderComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementSecondColor} !important; }
-      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.generalConfig.UIElementPrimaryColor} !important; }
-      .header__right::before {color: ${this.branding.generalConfig.homeAngle.color} !important;display: ${this.branding.generalConfig.homeAngle.display}}
+      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.UIElementSecondColor} !important; }
+      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.UIElementPrimaryColor} !important; }
+      .header__right::before {color: ${this.branding.homeAngle.color} !important;display: ${this.branding.homeAngle.display}}
       </style>`
     );
   }

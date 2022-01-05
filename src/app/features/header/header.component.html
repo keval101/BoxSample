@@ -4,15 +4,14 @@
       class="header__left"
       [ngClass]="{ fullscreen: fullScreen }"
       [ngStyle]="{
-        background: branding?.generalConfig?.headerLeft
-          ? branding?.generalConfig?.headerLeft
+        background: branding?.headerLeft ? branding?.headerLeft : '',
+        width: branding?.topBar?.left?.width
+          ? branding?.topBar?.left?.width
           : '',
-        width: branding?.generalConfig?.topBar?.left?.width
-          ? branding?.generalConfig?.topBar?.left?.width
+        'flex-shrink': branding?.topBar?.left?.shrink
+          ? branding?.topBar?.left?.shrink
           : '',
-        'flex-shrink': branding?.generalConfig?.topBar?.left?.shrink
-          ? branding?.generalConfig?.topBar?.left?.shrink
-          : ''
+        opacity: branding?.headerLeft === branding?.headerRight ? '' : '0.9'
       }"
     >
       <span
@@ -20,17 +19,15 @@
         *ngIf="!fullScreen"
         @fadeAnimation
         [ngStyle]="{
-          color: branding?.generalConfig?.topTitle?.color
-            ? branding?.generalConfig?.topTitle?.color
+          color: branding?.topTitle?.color ? branding?.topTitle?.color : '',
+          fontFamily: branding?.topTitle?.fontFamily
+            ? branding?.topTitle?.fontFamily
             : '',
-          fontFamily: branding?.generalConfig?.topTitle?.fontFamily
-            ? branding?.generalConfig?.topTitle?.fontFamily
+          fontWeight: branding?.topTitle?.fontWeight
+            ? branding?.topTitle?.fontWeight
             : '',
-          fontWeight: branding?.generalConfig?.topTitle?.fontWeight
-            ? branding?.generalConfig?.topTitle?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.topTitle?.fontSize
-            ? branding?.generalConfig?.topTitle?.fontSize
+          fontSize: branding?.topTitle?.fontSize
+            ? branding?.topTitle?.fontSize
             : ''
         }"
         >{{ appData?.sceneSectionName + ' - ' + appData?.name }}
@@ -43,9 +40,7 @@
         <p
           class="pi pi-circle-on header__left--duration-icon"
           [ngStyle]="{
-            color: branding?.generalConfig?.primaryColor
-              ? branding?.generalConfig?.primaryColor
-              : ''
+            color: branding?.primaryColor ? branding?.primaryColor : ''
           }"
         ></p>
         <p class="header__left--duration-time">
@@ -59,14 +54,12 @@
       class="header__right"
       [ngClass]="{ fullscreen: fullScreen }"
       [ngStyle]="{
-        background: branding?.generalConfig?.headerRight
-          ? branding?.generalConfig?.headerRight
+        background: branding?.headerRight ? branding?.headerRight : '',
+        width: branding?.topBar?.right?.width
+          ? branding?.topBar?.right?.width
           : '',
-        width: branding?.generalConfig?.topBar?.right?.width
-          ? branding?.generalConfig?.topBar?.right?.width
-          : '',
-        'flex-shrink': branding?.generalConfig?.topBar?.right?.shrink
-          ? branding?.generalConfig?.topBar?.right?.shrink
+        'flex-shrink': branding?.topBar?.right?.shrink
+          ? branding?.topBar?.right?.shrink
           : ''
       }"
     >

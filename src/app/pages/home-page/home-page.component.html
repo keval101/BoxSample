@@ -2,22 +2,18 @@
   class="main-container"
   *ngIf="branding"
   [ngStyle]="{
-    backgroundImage: branding?.generalConfig?.backGroundImg
-      ? 'url(assets/' +
-        brand +
-        '/' +
-        branding?.generalConfig?.backGroundImg +
-        ')'
+    backgroundImage: branding?.backGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
       : ''
   }"
 >
   <div
     class="poweredLogo"
     [ngStyle]="{
-      display: branding?.generalConfig?.poweredByLogo ? 'block' : 'none'
+      display: branding?.poweredByLogo ? 'block' : 'none'
     }"
   >
-    <h1>powered By<img src="../../../assets/ethicon/VIRTAMED.png" alt="" /></h1>
+    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
   </div>
   <div [innerHTML]="myStyle"></div>
   <div class="container">
@@ -25,15 +21,10 @@
       <div
         class="logo__items"
         [ngStyle]="{
-          marginBottom: branding?.generalConfig?.poweredByLogo
-            ? '0px'
-            : '3.166rem'
+          marginBottom: branding?.poweredByLogo ? '0px' : '3.166rem'
         }"
       >
-        <img
-          src="assets/{{ brand }}/{{ branding?.generalConfig?.logoUrl }}"
-          alt="logo"
-        />
+        <img src="assets/{{ brand }}/{{ branding?.logoUrl }}" alt="logo" />
       </div>
     </div>
 
@@ -41,36 +32,32 @@
       <div
         class="header__left"
         [ngStyle]="{
-          background: branding?.generalConfig?.primaryColor
-            ? branding?.generalConfig?.primaryColor
+          background: branding?.primaryColor ? branding?.primaryColor : '',
+          width: branding?.titleBar?.left?.width
+            ? branding?.titleBar?.left?.width
             : '',
-          width: branding?.generalConfig?.titleBar?.left?.width
-            ? branding?.generalConfig?.titleBar?.left?.width
-            : '',
-          'flex-shrink': branding?.generalConfig?.titleBar?.left?.shrink
-            ? branding?.generalConfig?.titleBar?.left?.shrink
+          'flex-shrink': branding?.titleBar?.left?.shrink
+            ? branding?.titleBar?.left?.shrink
             : ''
         }"
       >
         <p
           class="header__left--text m-0"
           [ngStyle]="{
-            color: branding?.generalConfig?.productTitleLeft?.color
-              ? branding?.generalConfig?.productTitleLeft?.color
+            color: branding?.productTitleLeft?.color
+              ? branding?.productTitleLeft?.color
               : '',
-            fontFamily: branding?.generalConfig?.productTitleLeft?.fontFamily
-              ? branding?.generalConfig?.productTitleLeft?.fontFamily
+            fontFamily: branding?.productTitleLeft?.fontFamily
+              ? branding?.productTitleLeft?.fontFamily
               : '',
-            fontWeight: branding?.generalConfig?.productTitleLeft?.fontWeight
-              ? branding?.generalConfig?.productTitleLeft?.fontWeight
+            fontWeight: branding?.productTitleLeft?.fontWeight
+              ? branding?.productTitleLeft?.fontWeight
               : '',
-            fontSize: branding?.generalConfig?.productTitleLeft?.fontSize
-              ? branding?.generalConfig?.productTitleLeft?.fontSize
+            fontSize: branding?.productTitleLeft?.fontSize
+              ? branding?.productTitleLeft?.fontSize
               : '',
             paddingRight:
-              branding?.generalConfig?.homeAngle?.display === 'none'
-                ? '4rem'
-                : '7rem'
+              branding?.homeAngle?.display === 'none' ? '4rem' : '7rem'
           }"
         >
           {{ 'home.projectTitle' | translate }}
@@ -80,34 +67,32 @@
       <div
         class="header__right"
         [ngStyle]="{
-          background: branding?.generalConfig?.secondaryColor
-            ? branding?.generalConfig?.secondaryColor
+          background: branding?.secondaryColor ? branding?.secondaryColor : '',
+          width: branding?.titleBar?.right?.width
+            ? branding?.titleBar?.right.width
             : '',
-          width: branding?.generalConfig?.titleBar?.right?.width
-            ? branding?.generalConfig?.titleBar?.right.width
-            : '',
-          'flex-shrink': branding?.generalConfig?.titleBar?.right?.shrink
-            ? branding?.generalConfig?.titleBar?.right?.shrink
+          'flex-shrink': branding?.titleBar?.right?.shrink
+            ? branding?.titleBar?.right?.shrink
             : ''
         }"
       >
         <span
           class="header__right--text"
           [ngStyle]="{
-            background: branding?.generalConfig?.secondaryColor
-              ? branding?.generalConfig?.secondaryColor
+            background: branding?.secondaryColor
+              ? branding?.secondaryColor
               : '',
-            color: branding?.generalConfig?.productTitleRight?.color
-              ? branding?.generalConfig?.productTitleRight?.color
+            color: branding?.productTitleRight?.color
+              ? branding?.productTitleRight?.color
               : '',
-            fontFamily: branding?.generalConfig?.productTitleRight?.fontFamily
-              ? branding?.generalConfig?.productTitleRight?.fontFamily
+            fontFamily: branding?.productTitleRight?.fontFamily
+              ? branding?.productTitleRight?.fontFamily
               : '',
-            fontWeight: branding?.generalConfig?.productTitleRight?.fontWeight
-              ? branding?.generalConfig?.productTitleRight?.fontWeight
+            fontWeight: branding?.productTitleRight?.fontWeight
+              ? branding?.productTitleRight?.fontWeight
               : '',
-            fontSize: branding?.generalConfig?.productTitleRight?.fontSize
-              ? branding?.generalConfig?.productTitleRight?.fontSize
+            fontSize: branding?.productTitleRight?.fontSize
+              ? branding?.productTitleRight?.fontSize
               : ''
           }"
           >{{
@@ -120,16 +105,16 @@
     <div
       class="loading__bar"
       [ngStyle]="{
-        backgroundColor: branding?.generalConfig?.loadingBar?.backGround
-          ? branding?.generalConfig?.loadingBar?.backGround
+        backgroundColor: branding?.loadingBar?.backGround
+          ? branding?.loadingBar?.backGround
           : ''
       }"
     >
       <div
         class="loading__bar--fill"
         [ngStyle]="{
-          backgroundColor: branding?.generalConfig?.loadingBar?.forGround
-            ? branding?.generalConfig?.loadingBar?.forGround
+          backgroundColor: branding?.loadingBar?.forGround
+            ? branding?.loadingBar?.forGround
             : ''
         }"
       ></div>

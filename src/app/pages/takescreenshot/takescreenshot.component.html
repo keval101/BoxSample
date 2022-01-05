@@ -31,17 +31,15 @@
         class="screenShotText"
         *ngIf="isScreenShot"
         [ngStyle]="{
-          color: branding?.generalConfig?.actionText?.color
-            ? branding?.generalConfig?.actionText?.color
+          color: branding?.actionText?.color ? branding?.actionText?.color : '',
+          fontFamily: branding?.actionText?.fontFamily
+            ? branding?.actionText?.fontFamily
             : '',
-          fontFamily: branding?.generalConfig?.actionText?.fontFamily
-            ? branding?.generalConfig?.actionText?.fontFamily
+          fontWeight: branding?.actionText?.fontWeight
+            ? branding?.actionText?.fontWeight
             : '',
-          fontWeight: branding?.generalConfig?.actionText?.fontWeight
-            ? branding?.generalConfig?.actionText?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.actionText?.fontSize
-            ? branding?.generalConfig?.actionText?.fontSize
+          fontSize: branding?.actionText?.fontSize
+            ? branding?.actionText?.fontSize
             : ''
         }"
       >
@@ -52,17 +50,15 @@
         class="screenShotText"
         *ngIf="!isScreenShot"
         [ngStyle]="{
-          color: branding?.generalConfig?.actionText?.color
-            ? branding?.generalConfig?.actionText?.color
+          color: branding?.actionText?.color ? branding?.actionText?.color : '',
+          fontFamily: branding?.actionText?.fontFamily
+            ? branding?.actionText?.fontFamily
             : '',
-          fontFamily: branding?.generalConfig?.actionText?.fontFamily
-            ? branding?.generalConfig?.actionText?.fontFamily
+          fontWeight: branding?.actionText?.fontWeight
+            ? branding?.actionText?.fontWeight
             : '',
-          fontWeight: branding?.generalConfig?.actionText?.fontWeight
-            ? branding?.generalConfig?.actionText?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.actionText?.fontSize
-            ? branding?.generalConfig?.actionText?.fontSize
+          fontSize: branding?.actionText?.fontSize
+            ? branding?.actionText?.fontSize
             : ''
         }"
       >
@@ -88,26 +84,26 @@
         class="button button-small button-outline"
         (click)="onRetake()"
         [ngStyle]="{
-          background: branding?.generalConfig?.buttonOutline?.backGround
-            ? branding?.generalConfig?.buttonOutline?.backGround
+          background: branding?.buttonOutline?.backGround
+            ? branding?.buttonOutline?.backGround
             : '',
-          border: branding?.generalConfig?.buttonOutline?.border
-            ? branding?.generalConfig?.buttonOutline?.border
+          border: branding?.buttonOutline?.border
+            ? branding?.buttonOutline?.border
             : '',
-          color: branding?.generalConfig?.buttonOutlineText?.color
-            ? branding?.generalConfig?.buttonOutlineText?.color
+          color: branding?.buttonOutlineText?.color
+            ? branding?.buttonOutlineText?.color
             : '',
-          fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
-            ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+          fontFamily: branding?.buttonOutlineText?.fontFamily
+            ? branding?.buttonOutlineText?.fontFamily
             : '',
-          fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
-            ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+          fontWeight: branding?.buttonOutlineText?.fontWeight
+            ? branding?.buttonOutlineText?.fontWeight
             : '',
-          fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
-            ? branding?.generalConfig?.buttonOutlineText?.fontSize
+          fontSize: branding?.buttonOutlineText?.fontSize
+            ? branding?.buttonOutlineText?.fontSize
             : '',
-          borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
-            ? branding?.generalConfig?.buttonOutline?.borderRadius
+          borderRadius: branding?.buttonOutline?.borderRadius
+            ? branding?.buttonOutline?.borderRadius
             : ''
         }"
       >
@@ -117,26 +113,26 @@
         class="button button-small button-fill"
         (click)="onDone()"
         [ngStyle]="{
-          background: branding?.generalConfig?.buttonFill?.backGround
-            ? branding?.generalConfig?.buttonFill?.backGround
+          background: branding?.buttonFill?.backGround
+            ? branding?.buttonFill?.backGround
             : '',
-          border: branding?.generalConfig?.buttonFill?.border
-            ? branding?.generalConfig?.buttonFill?.border
+          border: branding?.buttonFill?.border
+            ? branding?.buttonFill?.border
             : '',
-          color: branding?.generalConfig?.buttonFillText?.color
-            ? branding?.generalConfig?.buttonFillText?.color
+          color: branding?.buttonFillText?.color
+            ? branding?.buttonFillText?.color
             : '',
-          fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
-            ? branding?.generalConfig?.buttonFillText?.fontFamily
+          fontFamily: branding?.buttonFillText?.fontFamily
+            ? branding?.buttonFillText?.fontFamily
             : '',
-          fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
-            ? branding?.generalConfig?.buttonFillText?.fontWeight
+          fontWeight: branding?.buttonFillText?.fontWeight
+            ? branding?.buttonFillText?.fontWeight
             : '',
-          fontSize: branding?.generalConfig?.buttonFillText?.fontSize
-            ? branding?.generalConfig?.buttonFillText?.fontSize
+          fontSize: branding?.buttonFillText?.fontSize
+            ? branding?.buttonFillText?.fontSize
             : '',
-          borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
-            ? branding?.generalConfig?.buttonFill?.borderRadius
+          borderRadius: branding?.buttonFill?.borderRadius
+            ? branding?.buttonFill?.borderRadius
             : ''
         }"
       >
@@ -158,7 +154,14 @@
     </button>
 
     <button type="button" class="button" id="cross" (click)="confirm()">
-      <i class="pi pi-times" (click)="confirm()" alt="cross"></i>
+      <i
+        class="pi pi-times"
+        (click)="confirm()"
+        alt="cross"
+        [ngStyle]="{
+          color: branding?.sidebarTitle?.iconColor
+        }"
+      ></i>
     </button>
   </div>
   <div
@@ -174,17 +177,17 @@
     <p
       class="header m-0"
       [ngStyle]="{
-        color: branding?.generalConfig?.confirmationDialogTitle?.color
-          ? branding?.generalConfig?.confirmationDialogTitle?.color
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
           : '',
-        fontFamily: branding?.generalConfig?.confirmationDialogTitle?.fontFamily
-          ? branding?.generalConfig?.confirmationDialogTitle?.fontFamily
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.confirmationDialogTitle?.fontWeight
-          ? branding?.generalConfig?.confirmationDialogTitle?.fontWeight
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.confirmationDialogTitle?.fontSize
-          ? branding?.generalConfig?.confirmationDialogTitle?.fontSize
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
           : ''
       }"
     >
@@ -197,26 +200,26 @@
       type="button"
       (click)="cd.reject()"
       [ngStyle]="{
-        background: branding?.generalConfig?.buttonOutline?.backGround
-          ? branding?.generalConfig?.buttonOutline?.backGround
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
           : '',
-        border: branding?.generalConfig?.buttonOutline?.border
-          ? branding?.generalConfig?.buttonOutline?.border
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
           : '',
-        color: branding?.generalConfig?.buttonOutlineText?.color
-          ? branding?.generalConfig?.buttonOutlineText?.color
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
           : '',
-        fontFamily: branding?.generalConfig?.buttonOutlineText?.fontFamily
-          ? branding?.generalConfig?.buttonOutlineText?.fontFamily
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.buttonOutlineText?.fontWeight
-          ? branding?.generalConfig?.buttonOutlineText?.fontWeight
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.buttonOutlineText?.fontSize
-          ? branding?.generalConfig?.buttonOutlineText?.fontSize
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
           : '',
-        borderRadius: branding?.generalConfig?.buttonOutline?.borderRadius
-          ? branding?.generalConfig?.buttonOutline?.borderRadius
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
           : ''
       }"
     >
@@ -228,26 +231,26 @@
       type="button"
       (click)="cd.accept()"
       [ngStyle]="{
-        background: branding?.generalConfig?.buttonFill?.backGround
-          ? branding?.generalConfig?.buttonFill?.backGround
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
           : '',
-        border: branding?.generalConfig?.buttonFill?.border
-          ? branding?.generalConfig?.buttonFill?.border
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
           : '',
-        color: branding?.generalConfig?.buttonFillText?.color
-          ? branding?.generalConfig?.buttonFillText?.color
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
           : '',
-        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
-          ? branding?.generalConfig?.buttonFillText?.fontFamily
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
-          ? branding?.generalConfig?.buttonFillText?.fontWeight
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
-          ? branding?.generalConfig?.buttonFillText?.fontSize
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
           : '',
-        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
-          ? branding?.generalConfig?.buttonFill?.borderRadius
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
           : ''
       }"
     >

@@ -8,66 +8,71 @@
 <div
   class="container"
   [ngStyle]="{
-    backgroundImage: branding?.generalConfig?.backGroundImg
-      ? 'url(assets/' +
-        brand +
-        '/' +
-        branding?.generalConfig?.backGroundImg +
-        ')'
+    backgroundImage: branding?.backGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
       : ''
   }"
 >
   <div
     class="poweredLogo"
     [ngStyle]="{
-      display: branding?.generalConfig?.poweredByLogo ? 'block' : 'none'
+      display: branding?.poweredByLogo ? 'block' : 'none'
     }"
   >
-    <h1>powered By<img src="../../../assets/ethicon/VIRTAMED.png" alt="" /></h1>
+    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
   </div>
   <div class="content">
     <img
       [ngStyle]="{
-        marginBottom: branding?.generalConfig?.poweredByLogo
-          ? '0px'
-          : '6.969rem'
+        marginBottom: branding?.poweredByLogo ? '0px' : '6.969rem'
       }"
-      src="assets/{{ brand }}/{{ branding?.generalConfig?.logoUrl }}"
+      src="assets/{{ brand }}/{{ branding?.logoUrl }}"
       alt="logo"
     />
 
     <div
       *ngIf="!cancel"
       [ngStyle]="{
-        color: branding?.generalConfig?.contentTitle?.color
-          ? branding?.generalConfig?.contentTitle?.color
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
           : '',
-        fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
-          ? branding?.generalConfig?.contentTitle?.fontFamily
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
-          ? branding?.generalConfig?.contentTitle?.fontWeight
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.contentTitle?.fontSize
-          ? branding?.generalConfig?.contentTitle?.fontSize
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
           : ''
       }"
     >
-      <p class="success">{{ 'end.success' | translate }}</p>
+      <p
+        class="success"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : ''
+        }"
+      >
+        {{ 'end.success' | translate }}
+      </p>
       <p
         class="success-text m-0"
         [ngStyle]="{
-          color: branding?.generalConfig?.subHeader?.color
-            ? branding?.generalConfig?.subHeader?.color
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
             : '',
-          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
-            ? branding?.generalConfig?.subHeader?.fontFamily
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
             : '',
-          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
-            ? branding?.generalConfig?.subHeader?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.subHeader?.fontSize
-            ? branding?.generalConfig?.subHeader?.fontSize
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
             : ''
         }"
       >
@@ -79,17 +84,14 @@
       <p
         class="success"
         [ngStyle]="{
-          color: branding?.generalConfig?.contentTitle?.color
-            ? branding?.generalConfig?.contentTitle?.color
+          color: branding?.contentTitle?.color
+            ? branding?.contentTitle?.color
             : '',
-          fontFamily: branding?.generalConfig?.contentTitle?.fontFamily
-            ? branding?.generalConfig?.contentTitle?.fontFamily
+          fontFamily: branding?.contentTitle?.fontFamily
+            ? branding?.contentTitle?.fontFamily
             : '',
-          fontWeight: branding?.generalConfig?.contentTitle?.fontWeight
-            ? branding?.generalConfig?.contentTitle?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.contentTitle?.fontSize
-            ? branding?.generalConfig?.contentTitle?.fontSize
+          fontWeight: branding?.contentTitle?.fontWeight
+            ? branding?.contentTitle?.fontWeight
             : ''
         }"
       >
@@ -98,17 +100,15 @@
       <p
         class="success-text m-0"
         [ngStyle]="{
-          color: branding?.generalConfig?.subHeader?.color
-            ? branding?.generalConfig?.subHeader?.color
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
             : '',
-          fontFamily: branding?.generalConfig?.subHeader?.fontFamily
-            ? branding?.generalConfig?.subHeader?.fontFamily
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
             : '',
-          fontWeight: branding?.generalConfig?.subHeader?.fontWeight
-            ? branding?.generalConfig?.subHeader?.fontWeight
-            : '',
-          fontSize: branding?.generalConfig?.subHeader?.fontSize
-            ? branding?.generalConfig?.subHeader?.fontSize
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
             : ''
         }"
       >
@@ -119,26 +119,26 @@
       class="button button-fill button-small"
       (click)="closeTab($event)"
       [ngStyle]="{
-        background: branding?.generalConfig?.buttonFill?.backGround
-          ? branding?.generalConfig?.buttonFill?.backGround
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
           : '',
-        border: branding?.generalConfig?.buttonFill?.border
-          ? branding?.generalConfig?.buttonFill?.border
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
           : '',
-        color: branding?.generalConfig?.buttonFillText?.color
-          ? branding?.generalConfig?.buttonFillText?.color
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
           : '',
-        fontFamily: branding?.generalConfig?.buttonFillText?.fontFamily
-          ? branding?.generalConfig?.buttonFillText?.fontFamily
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
           : '',
-        fontWeight: branding?.generalConfig?.buttonFillText?.fontWeight
-          ? branding?.generalConfig?.buttonFillText?.fontWeight
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
           : '',
-        fontSize: branding?.generalConfig?.buttonFillText?.fontSize
-          ? branding?.generalConfig?.buttonFillText?.fontSize
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
           : '',
-        borderRadius: branding?.generalConfig?.buttonFill?.borderRadius
-          ? branding?.generalConfig?.buttonFill?.borderRadius
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
           : ''
       }"
     >

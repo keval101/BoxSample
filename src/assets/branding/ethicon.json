@@ -1,5 +1,4 @@
 {
-  "generalConfig": {
     "headerLeft": "#F30617",
     "headerRight": "#F30617",
     "primaryColor": "#FFFFFF",
@@ -97,7 +96,8 @@
       "fontSize": "3.2rem",
       "color": "#000000",
       "fontFamily": "Arial",
-      "fontWeight": "900"
+      "fontWeight": "900",
+      "iconColor": "#828282"
     },
     "selfAssessmentQuestionText": {
       "fontSize": "3.2rem",
@@ -115,7 +115,7 @@
     "UIElementPrimaryColor": "#ffffff",
     "UIElementRecording": "#ffffff",
     "UIElementSecondColor": "#828282",
-    "UIElementRadio": "#F30617",
+    "UIElementOther": "#F30617",
     "actionText": {
       "fontFamily": "Arial",
       "fontWeight": "normal",
@@ -153,6 +153,9 @@
       "fontWeight": "normal",
       "fontSize": "2.4rem",
       "color": "#000000"
+    },
+    "tab": {
+      "fontSize": "1.4rem"
     }
-  }
+
 }

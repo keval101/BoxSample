@@ -123,18 +123,18 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     // .p-rating .p-rating-icon.pi-star
     this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
       `<style>
-      #sidebar__content h1 {font-size: ${this.branding.generalConfig.contentTitle.fontSize} !important;color: ${this.branding.generalConfig.contentTitle.color};font-weight: ${this.branding.generalConfig.contentTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTitle.fontFamily};}
-      #sidebar__content h2 {font-size: ${this.branding.generalConfig.contentTextTitle.fontSize};color: ${this.branding.generalConfig.contentTextTitle.color};font-weight: ${this.branding.generalConfig.contentTextTitle.fontWeight};font-family: ${this.branding.generalConfig.contentTextTitle.fontFamily};}
-      #sidebar__content p {font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      #sidebar__content ul{font-size: ${this.branding.generalConfig.contentText.fontSize} ;color: ${this.branding.generalConfig.contentText.color} ;font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.generalConfig.contentText.fontSize} !important;color: ${this.branding.generalConfig.contentText.color};font-weight: ${this.branding.generalConfig.contentText.fontWeight};font-family: ${this.branding.generalConfig.contentText.fontFamily};}
-      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.generalConfig.secondaryColor} !important; }
-      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.generalConfig.secondaryColor} !important; }
-      .pi-chevron-right:before {color: ${this.branding.generalConfig.primaryColor} !important; }
-      .pi-chevron-left:before {color: ${this.branding.generalConfig.primaryColor} !important; }
-      .p-rating .p-rating-icon.pi-star {color: ${this.branding.generalConfig.secondaryColor} !important; }
-      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.generalConfig.secondaryColor} !important; }
-      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {color: ${this.branding.generalConfig.secondaryColor} !important; }
+      #sidebar__content h1 {font-size: ${this.branding.contentTitle.fontSize} !important;color: ${this.branding.contentTitle.color};font-weight: ${this.branding.contentTitle.fontWeight};font-family: ${this.branding.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.contentTextTitle.fontSize};color: ${this.branding.contentTextTitle.color};font-weight: ${this.branding.contentTextTitle.fontWeight};font-family: ${this.branding.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.UIElementOther} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.UIElementOther} !important; }
+      .pi-chevron-right:before {color: ${this.branding.UIElementPrimary} !important; }
+      .pi-chevron-left:before {color: ${this.branding.UIElementPrimary} !important; }
+      .p-rating .p-rating-icon.pi-star {color: ${this.branding.UIElementOther} !important; }
+      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.UIElementOther} !important; }
+      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {background-color: ${this.branding.UIElementOther} !important; }
       </style>`
     );
     const reportGuid =
