@@ -9,15 +9,63 @@
 
 <div class="container" (window:resize)="onResize($event)">
   <div class="container__title">
-    <p class="container__title-text m-0">
+    <p
+      class="container__title-text m-0"
+      [ngStyle]="{
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
+          : '',
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       {{ appData?.name }}
     </p>
 
     <div>
-      <p class="container__title-description m-0">
+      <p
+        class="container__title-description m-0"
+        [ngStyle]="{
+          color: branding?.contentText?.color
+            ? branding?.contentText?.color
+            : '',
+          fontFamily: branding?.introDescriptionText
+            ? branding?.introDescriptionText
+            : '',
+          fontWeight: branding?.contentText?.fontWeight
+            ? branding?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.contentText?.fontSize
+            ? branding?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ 'intro.description' | translate }}
       </p>
-      <p class="container__title-descriptionText m-0">
+      <p
+        class="container__title-descriptionText m-0"
+        [ngStyle]="{
+          color: branding?.contentText?.color
+            ? branding?.contentText?.color
+            : '',
+          fontFamily: branding?.contentText?.fontFamily
+            ? branding?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.contentText?.fontWeight
+            ? branding?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.contentText?.fontSize
+            ? branding?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.description }}
       </p>
     </div>
@@ -39,7 +87,7 @@
     <div class="sidebar__header">
       <img src="assets/images/logo.svg" alt="logo" />
     </div>
-
+    <div [innerHTML]="myStyle"></div>
     <div
       class="sidebar__content"
       id="sidebar__content"
@@ -48,7 +96,33 @@
     ></div>
 
     <div class="sidebar__buttonGroup">
-      <button class="button button-fill button-big" (click)="redirectTo()">
+      <button
+        class="button button-fill button-big"
+        (click)="redirectTo()"
+        [ngStyle]="{
+          background: branding?.buttonFill?.backGround
+            ? branding?.buttonFill?.backGround
+            : '',
+          border: branding?.buttonFill?.border
+            ? branding?.buttonFill?.border
+            : '',
+          color: branding?.buttonFillText?.color
+            ? branding?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.buttonFillText?.fontFamily
+            ? branding?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonFillText?.fontWeight
+            ? branding?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.buttonFillText?.fontSize
+            ? branding?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.buttonFill?.borderRadius
+            ? branding?.buttonFill?.borderRadius
+            : ''
+        }"
+      >
         {{ 'intro.watchMovie' | translate }}
       </button>
     </div>
@@ -57,13 +131,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'intro.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'intro.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'intro.goback' | translate }}
     </button>
@@ -72,6 +187,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'intro.quit' | translate }}
     </button>

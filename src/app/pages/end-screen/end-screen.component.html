@@ -5,20 +5,143 @@
   ></app-header>
 </div>
 
-<div class="container">
+<div
+  class="container"
+  [ngStyle]="{
+    backgroundImage: branding?.backGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
+      : ''
+  }"
+>
+  <div
+    class="poweredLogo"
+    [ngStyle]="{
+      display: branding?.poweredByLogo ? 'block' : 'none'
+    }"
+  >
+    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
+  </div>
   <div class="content">
-    <img src="assets/images/logo.png" alt="logo" />
+    <img
+      [ngStyle]="{
+        marginBottom: branding?.poweredByLogo ? '0px' : '6.969rem'
+      }"
+      src="assets/{{ brand }}/{{ branding?.logoUrl }}"
+      alt="logo"
+    />
 
-    <div *ngIf="!cancel">
-      <p class="success">{{ 'end.success' | translate }}</p>
-      <p class="success-text m-0">{{ 'end.successMessage' | translate }}</p>
+    <div
+      *ngIf="!cancel"
+      [ngStyle]="{
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
+          : '',
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      <p
+        class="success"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : ''
+        }"
+      >
+        {{ 'end.success' | translate }}
+      </p>
+      <p
+        class="success-text m-0"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
+        {{ 'end.successMessage' | translate }}
+      </p>
     </div>
 
     <div *ngIf="cancel">
-      <p class="success">{{ 'end.cancel' | translate }}</p>
-      <p class="success-text m-0">{{ 'end.cancelMessage' | translate }}</p>
+      <p
+        class="success"
+        [ngStyle]="{
+          color: branding?.contentTitle?.color
+            ? branding?.contentTitle?.color
+            : '',
+          fontFamily: branding?.contentTitle?.fontFamily
+            ? branding?.contentTitle?.fontFamily
+            : '',
+          fontWeight: branding?.contentTitle?.fontWeight
+            ? branding?.contentTitle?.fontWeight
+            : ''
+        }"
+      >
+        {{ 'end.cancel' | translate }}
+      </p>
+      <p
+        class="success-text m-0"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
+        {{ 'end.cancelMessage' | translate }}
+      </p>
     </div>
-    <button class="button button-fill button-small" (click)="closeTab($event)">
+    <button
+      class="button button-fill button-small"
+      (click)="closeTab($event)"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
+    >
       {{ 'end.close' | translate }}
     </button>
   </div>

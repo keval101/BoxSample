@@ -26,7 +26,10 @@ export class DataService {
   selfAssessmentScreenShot;
   intervalId: any;
 
+  branding: any;
+
   loader = new BehaviorSubject(false);
+  homeScreen = new BehaviorSubject(false);
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -51,6 +54,10 @@ export class DataService {
   getData(params): Observable<any> {
     params = params ? params : '6d1496f8-aa4c-4565-8eba-07727e8dc097';
     return this.http.get(this.baseUrl + `scene/${params}/details`);
+  }
+
+  getBrandingData(url): Observable<any> {
+    return this.http.get(url);
   }
 
   showSuccess(message) {

@@ -27,11 +27,41 @@
     "
   >
     <div class="container__footer--camera">
-      <p class="screenShotText" *ngIf="isScreenShot">
+      <p
+        class="screenShotText"
+        *ngIf="isScreenShot"
+        [ngStyle]="{
+          color: branding?.actionText?.color ? branding?.actionText?.color : '',
+          fontFamily: branding?.actionText?.fontFamily
+            ? branding?.actionText?.fontFamily
+            : '',
+          fontWeight: branding?.actionText?.fontWeight
+            ? branding?.actionText?.fontWeight
+            : '',
+          fontSize: branding?.actionText?.fontSize
+            ? branding?.actionText?.fontSize
+            : ''
+        }"
+      >
         {{ fullscreen ? '' : ('takescreenshot.screenShotText' | translate) }}
       </p>
 
-      <p class="screenShotText" *ngIf="!isScreenShot">
+      <p
+        class="screenShotText"
+        *ngIf="!isScreenShot"
+        [ngStyle]="{
+          color: branding?.actionText?.color ? branding?.actionText?.color : '',
+          fontFamily: branding?.actionText?.fontFamily
+            ? branding?.actionText?.fontFamily
+            : '',
+          fontWeight: branding?.actionText?.fontWeight
+            ? branding?.actionText?.fontWeight
+            : '',
+          fontSize: branding?.actionText?.fontSize
+            ? branding?.actionText?.fontSize
+            : ''
+        }"
+      >
         {{ 'takescreenshot.previewText' | translate }}
       </p>
 
@@ -41,21 +71,77 @@
         (click)="takeScreenShot()"
         *ngIf="isScreenShot"
       >
-        <img src="assets/icnons/camera.png" alt="camera-icon" id="cameraIcon" />
+        <img
+          src="assets/{{ brand }}/camera.png"
+          alt="camera-icon"
+          id="cameraIcon"
+        />
       </button>
     </div>
 
     <div class="container__footer--Btngroup" *ngIf="onCameraClick">
-      <button class="button button-small button-outline" (click)="onRetake()">
+      <button
+        class="button button-small button-outline"
+        (click)="onRetake()"
+        [ngStyle]="{
+          background: branding?.buttonOutline?.backGround
+            ? branding?.buttonOutline?.backGround
+            : '',
+          border: branding?.buttonOutline?.border
+            ? branding?.buttonOutline?.border
+            : '',
+          color: branding?.buttonOutlineText?.color
+            ? branding?.buttonOutlineText?.color
+            : '',
+          fontFamily: branding?.buttonOutlineText?.fontFamily
+            ? branding?.buttonOutlineText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonOutlineText?.fontWeight
+            ? branding?.buttonOutlineText?.fontWeight
+            : '',
+          fontSize: branding?.buttonOutlineText?.fontSize
+            ? branding?.buttonOutlineText?.fontSize
+            : '',
+          borderRadius: branding?.buttonOutline?.borderRadius
+            ? branding?.buttonOutline?.borderRadius
+            : ''
+        }"
+      >
         {{ 'takescreenshot.retake' | translate }}
       </button>
-      <button class="button button-small button-fill" (click)="onDone()">
+      <button
+        class="button button-small button-fill"
+        (click)="onDone()"
+        [ngStyle]="{
+          background: branding?.buttonFill?.backGround
+            ? branding?.buttonFill?.backGround
+            : '',
+          border: branding?.buttonFill?.border
+            ? branding?.buttonFill?.border
+            : '',
+          color: branding?.buttonFillText?.color
+            ? branding?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.buttonFillText?.fontFamily
+            ? branding?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonFillText?.fontWeight
+            ? branding?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.buttonFillText?.fontSize
+            ? branding?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.buttonFill?.borderRadius
+            ? branding?.buttonFill?.borderRadius
+            : ''
+        }"
+      >
         {{ 'takescreenshot.proceed' | translate }}
       </button>
     </div>
   </div>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <div
   *ngIf="isSidebarOpen"
   #sidenav
@@ -64,11 +150,18 @@
 >
   <div class="sidebar__header">
     <button type="button" (click)="onSlidebarClose()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closeBtn" />
     </button>
 
     <button type="button" class="button" id="cross" (click)="confirm()">
-      <i class="pi pi-times" (click)="confirm()" alt="cross"></i>
+      <i
+        class="pi pi-times"
+        (click)="confirm()"
+        alt="cross"
+        [ngStyle]="{
+          color: branding?.sidebarTitle?.iconColor
+        }"
+      ></i>
     </button>
   </div>
   <div
@@ -81,13 +174,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'takescreenshot.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'takescreenshot.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'takescreenshot.goback' | translate }}
     </button>
@@ -96,6 +230,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'takescreenshot.quit' | translate }}
     </button>

@@ -16,7 +16,7 @@
   </div> -->
 
   <div class="recording__logo">
-    <img src="assets/images/Logo2.svg" alt="logo" />
+    <img src="assets/{{ brand }}/{{ branding?.waterMarkUrl }}" alt="logo" />
   </div>
 
   <div class="recording__video">
@@ -44,7 +44,7 @@
     <div class="recording__button--btnGroups">
       <button type="button" class="recordingBtn" (click)="confirm()">
         <img
-          src="assets/icnons/cancelRecording.svg"
+          src="assets/{{ brand }}/stopbutton.png"
           alt="camera-icon"
           class="btnIcon"
         />
@@ -56,7 +56,11 @@
         (click)="takescreenshot()"
         [disabled]="!paddingClass"
       >
-        <img src="assets/icnons/camera.png" alt="camera-icon" class="btnIcon" />
+        <img
+          src="assets/{{ brand }}/camera.png"
+          alt="camera-icon"
+          class="btnIcon"
+        />
       </button>
     </div>
 
@@ -66,13 +70,36 @@
         class="button button-big button-fill"
         (click)="onFinish()"
         [disabled]="!paddingClass"
+        [ngStyle]="{
+          background: branding?.buttonFill?.backGround
+            ? branding?.buttonFill?.backGround
+            : '',
+          border: branding?.buttonFill?.border
+            ? branding?.buttonFill?.border
+            : '',
+          color: branding?.buttonFillText?.color
+            ? branding?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.buttonFillText?.fontFamily
+            ? branding?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonFillText?.fontWeight
+            ? branding?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.buttonFillText?.fontSize
+            ? branding?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.buttonFill?.borderRadius
+            ? branding?.buttonFill?.borderRadius
+            : ''
+        }"
       >
         {{ 'recordingPage.finishRecording' | translate }}
       </button>
     </div>
   </div>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <div
   class="sidebar recording-sidebar"
   #sidenav
@@ -81,12 +108,19 @@
 >
   <div class="sidebar__header">
     <button type="button" (click)="onSlidebarClose()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closeBtn" />
     </button>
 
     <div>
       <button type="button" class="button" id="cross">
-        <i class="pi pi-times" (click)="confirm()" alt="cross"></i>
+        <i
+          class="pi pi-times"
+          (click)="confirm()"
+          alt="cross"
+          [ngStyle]="{
+            color: branding?.sidebarTitle?.iconColor
+          }"
+        ></i>
       </button>
     </div>
   </div>
@@ -101,13 +135,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'recordingPage.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'recordingPage.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.goback' | translate }}
     </button>
@@ -116,6 +191,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'recordingPage.quit' | translate }}
     </button>

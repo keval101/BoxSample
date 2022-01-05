@@ -22,7 +22,7 @@ import { RecordingEnum } from 'src/app/shared/shared/recording.enum';
 import { Subscription } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from 'crypto-js';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from 'src/environments';
 
 @Component({
@@ -66,6 +66,10 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   count = 0;
   totalMediaForUpload = [];
   reportGuid: string;
+  myStyle: SafeHtml;
+
+  brand = environment.branding;
+
   constructor(
     private router: Router,
     public translateService: TranslateService,
@@ -79,7 +83,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private dataservice: DataService,
     private selfAssesQueSer: SelfAssesmentQuestionService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private _sanitizer: DomSanitizer
   ) {
     this.responsiveOptions = [
       {
@@ -115,6 +120,23 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // .p-rating .p-rating-icon.pi-star
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.contentTitle.fontSize} !important;color: ${this.branding.contentTitle.color};font-weight: ${this.branding.contentTitle.fontWeight};font-family: ${this.branding.contentTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.contentTextTitle.fontSize};color: ${this.branding.contentTextTitle.color};font-weight: ${this.branding.contentTextTitle.fontWeight};font-family: ${this.branding.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.UIElementOther} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.UIElementOther} !important; }
+      .pi-chevron-right:before {color: ${this.branding.UIElementPrimary} !important; }
+      .pi-chevron-left:before {color: ${this.branding.UIElementPrimary} !important; }
+      .p-rating .p-rating-icon.pi-star {color: ${this.branding.UIElementOther} !important; }
+      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.UIElementOther} !important; }
+      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {background-color: ${this.branding.UIElementOther} !important; }
+      </style>`
+    );
     const reportGuid =
       this.activeRoute.snapshot.queryParams['reportContextHash'];
     this.reportGuid = reportGuid
@@ -521,6 +543,10 @@ export class EvaluationComponent implements OnInit, OnDestroy {
 
   get appData() {
     return this.dataservice.appData;
+  }
+
+  get branding() {
+    return this.dataservice.branding;
   }
 
   onSubmit() {

@@ -14,15 +14,47 @@
 >
   <img [src]="popupImageUrl" alt="resultImage" />
 </p-dialog>
-
+<div [innerHTML]="myStyle"></div>
 <div class="container">
   <div class="container__title">
-    <p class="container__title-text">{{ 'evaluation.title' | translate }}</p>
+    <p
+      class="container__title-text"
+      [ngStyle]="{
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
+          : '',
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'evaluation.title' | translate }}
+    </p>
   </div>
 
   <div class="content" *ngIf="this.appData">
     <div class="result__container">
-      <p class="result__container-title">
+      <p
+        class="result__container-title"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.resultTitle' | translate }}
       </p>
 
@@ -73,19 +105,59 @@
             <div
               class="radio-left-tab"
               [ngStyle]="{
-                background: isGoal ? '#b41513' : '',
-                color: isGoal ? 'white' : ''
+                background:
+                  branding?.buttonFill?.backGround && isGoal
+                    ? branding?.buttonFill?.backGround
+                    : '',
+                color:
+                  branding?.buttonFillText?.color && isGoal
+                    ? branding?.buttonFillText?.color
+                    : branding?.buttonOutlineText?.color,
+                fontFamily: branding?.buttonFillText?.fontFamily
+                  ? branding?.buttonFillText?.fontFamily
+                  : '',
+                fontWeight: branding?.buttonFillText?.fontWeight
+                  ? branding?.buttonFillText?.fontWeight
+                  : '',
+                borderRadius: branding?.buttonFill?.borderRadius
+                  ? branding?.buttonFill?.borderRadius
+                  : '',
+                fontSize: branding?.tab?.fontSize
               }"
               (click)="goalImage()"
             >
+              <!-- [ngStyle]="{
+                background: isGoal ? '#b41513' : '',
+                color: isGoal ? 'white' : ''
+              }" -->
               Goal
             </div>
+            <!-- [ngStyle]="{
+              background: !isGoal ? '#b41513' : '',
+              color: !isGoal ? 'white' : ''
+            }" -->
             <div
-              class="radio-right-tab"
               [ngStyle]="{
-                background: !isGoal ? '#b41513' : '',
-                color: !isGoal ? 'white' : ''
+                background:
+                  branding?.buttonFill?.backGround && !isGoal
+                    ? branding?.buttonFill?.backGround
+                    : '',
+                color:
+                  branding?.buttonFillText.color && !isGoal
+                    ? branding?.buttonFillText?.color
+                    : branding?.buttonOutlineText?.color,
+                fontFamily: branding?.buttonFillText?.fontFamily
+                  ? branding?.buttonFillText?.fontFamily
+                  : '',
+                fontWeight: branding?.buttonFillText?.fontWeight
+                  ? branding?.buttonFillText?.fontWeight
+                  : '',
+                borderRadius: branding?.buttonFill?.borderRadius
+                  ? branding?.buttonFill?.borderRadius
+                  : '',
+                fontSize: branding?.tab?.fontSize
               }"
+              class="radio-right-tab"
               (click)="selfAssest()"
             >
               Your self assessment
@@ -96,7 +168,21 @@
     </div>
 
     <div class="score__container">
-      <p class="result__container-title">
+      <p
+        class="result__container-title"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
         {{ 'evaluation.score' | translate }}
       </p>
 
@@ -104,35 +190,198 @@
         <ng-template pTemplate="header">
           <tr>
             <th>&nbsp;</th>
-            <th>{{ 'evaluation.measured' | translate }}</th>
-            <th>{{ 'evaluation.goalValue' | translate }}</th>
-            <th>{{ 'evaluation.score' | translate }}</th>
+            <th
+              [ngStyle]="{
+                color: branding?.tableTitle?.color
+                  ? branding?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.tableTitle?.fontFamily
+                  ? branding?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.tableTitle?.fontWeight
+                  ? branding?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.tableTitle?.fontSize
+                  ? branding?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.measured' | translate }}
+            </th>
+            <th
+              [ngStyle]="{
+                color: branding?.tableTitle?.color
+                  ? branding?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.tableTitle?.fontFamily
+                  ? branding?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.tableTitle?.fontWeight
+                  ? branding?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.tableTitle?.fontSize
+                  ? branding?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.goalValue' | translate }}
+            </th>
+            <th
+              [ngStyle]="{
+                color: branding?.tableTitle?.color
+                  ? branding?.tableTitle?.color
+                  : '',
+                fontFamily: branding?.tableTitle?.fontFamily
+                  ? branding?.tableTitle?.fontFamily
+                  : '',
+                fontWeight: branding?.tableTitle?.fontWeight
+                  ? branding?.tableTitle?.fontWeight
+                  : '',
+                fontSize: branding?.tableTitle?.fontSize
+                  ? branding?.tableTitle?.fontSize
+                  : ''
+              }"
+            >
+              {{ 'evaluation.score' | translate }}
+            </th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-score>
           <tr>
-            <td class="rowTitle">
+            <td
+              class="rowTitle"
+              [ngStyle]="{
+                color: branding?.tableText?.color
+                  ? branding?.tableText?.color
+                  : '',
+                fontFamily: branding?.tableText?.fontFamily
+                  ? branding?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.tableText?.fontWeight
+                  ? branding?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.tableText?.fontSize
+                  ? branding?.tableText?.fontSize
+                  : ''
+              }"
+            >
               {{ score.title }}
             </td>
-            <td>{{ score.measured }}</td>
-            <td>{{ score.goalvalue }}</td>
-            <td class="score">{{ score.score }}</td>
+            <td
+              [ngStyle]="{
+                color: branding?.tableText?.color
+                  ? branding?.tableText?.color
+                  : '',
+                fontFamily: branding?.tableText?.fontFamily
+                  ? branding?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.tableText?.fontWeight
+                  ? branding?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.tableText?.fontSize
+                  ? branding?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.measured }}
+            </td>
+            <td
+              [ngStyle]="{
+                color: branding?.tableText?.color
+                  ? branding?.tableText?.color
+                  : '',
+                fontFamily: branding?.tableText?.fontFamily
+                  ? branding?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.tableText?.fontWeight
+                  ? branding?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.tableText?.fontSize
+                  ? branding?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.goalvalue }}
+            </td>
+            <td
+              class="score"
+              [ngStyle]="{
+                color: branding?.tableText?.color
+                  ? branding?.tableText?.color
+                  : '',
+                fontFamily: branding?.tableText?.fontFamily
+                  ? branding?.tableText?.fontFamily
+                  : '',
+                fontWeight: branding?.tableText?.fontWeight
+                  ? branding?.tableText?.fontWeight
+                  : '',
+                fontSize: branding?.tableText?.fontSize
+                  ? branding?.tableText?.fontSize
+                  : ''
+              }"
+            >
+              {{ score.score }}
+            </td>
           </tr>
         </ng-template>
       </p-table>
 
       <div class="score__container-feedback">
-        <p class="result__container-title">
+        <p
+          class="result__container-title"
+          [ngStyle]="{
+            color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+            fontFamily: branding?.subHeader?.fontFamily
+              ? branding?.subHeader?.fontFamily
+              : '',
+            fontWeight: branding?.subHeader?.fontWeight
+              ? branding?.subHeader?.fontWeight
+              : '',
+            fontSize: branding?.subHeader?.fontSize
+              ? branding?.subHeader?.fontSize
+              : ''
+          }"
+        >
           {{ 'evaluation.feedback' | translate }}
         </p>
         <div class="feedbackcontainer">
-          <p class="score__container-feedback-text">
+          <p
+            class="score__container-feedback-text"
+            [ngStyle]="{
+              color: branding?.contentText?.color
+                ? branding?.contentText?.color
+                : '',
+              fontFamily: branding?.contentText?.fontFamily
+                ? branding?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.contentText?.fontWeight
+                ? branding?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.contentText?.fontSize
+                ? branding?.contentText?.fontSize
+                : ''
+            }"
+          >
             {{ selfAssessImage.hint }}
           </p>
           <p
             class="score__container-feedback-text"
             *ngFor="let data of allHint"
+            [ngStyle]="{
+              color: branding?.contentText?.color
+                ? branding?.contentText?.color
+                : '',
+              fontFamily: branding?.contentText?.fontFamily
+                ? branding?.contentText?.fontFamily
+                : '',
+              fontWeight: branding?.contentText?.fontWeight
+                ? branding?.contentText?.fontWeight
+                : '',
+              fontSize: branding?.contentText?.fontSize
+                ? branding?.contentText?.fontSize
+                : ''
+            }"
           >
             {{ data }}
           </p>
@@ -140,7 +389,23 @@
       </div>
 
       <div class="score__container-ratings">
-        <p class="score__container-ratings-text">
+        <p
+          class="score__container-ratings-text"
+          [ngStyle]="{
+            color: branding?.actionText?.color
+              ? branding?.actionText?.color
+              : '',
+            fontFamily: branding?.actionText?.fontFamily
+              ? branding?.actionText?.fontFamily
+              : '',
+            fontWeight: branding?.actionText?.fontWeight
+              ? branding?.actionText?.fontWeight
+              : '',
+            fontSize: branding?.actionText?.fontSize
+              ? branding?.actionText?.fontSize
+              : ''
+          }"
+        >
           {{ 'evaluation.ratingtext' | translate }}
         </p>
         <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
@@ -152,6 +417,29 @@
           type="button"
           (click)="confirm()"
           id="quitBtn"
+          [ngStyle]="{
+            background: branding?.buttonOutline?.backGround
+              ? branding?.buttonOutline?.backGround
+              : '',
+            border: branding?.buttonOutline?.border
+              ? branding?.buttonOutline?.border
+              : '',
+            color: branding?.buttonOutlineText?.color
+              ? branding?.buttonOutlineText?.color
+              : '',
+            fontFamily: branding?.buttonOutlineText?.fontFamily
+              ? branding?.buttonOutlineText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonOutlineText?.fontWeight
+              ? branding?.buttonOutlineText?.fontWeight
+              : '',
+            fontSize: branding?.buttonOutlineText?.fontSize
+              ? branding?.buttonOutlineText?.fontSize
+              : '',
+            borderRadius: branding?.buttonOutline?.borderRadius
+              ? branding?.buttonOutline?.borderRadius
+              : ''
+          }"
         >
           {{ 'evaluation.quit' | translate }}
         </button>
@@ -160,6 +448,29 @@
           class="button button-small button-fill"
           type="button"
           (click)="onSubmit()"
+          [ngStyle]="{
+            background: branding?.buttonFill?.backGround
+              ? branding?.buttonFill?.backGround
+              : '',
+            border: branding?.buttonFill?.border
+              ? branding?.buttonFill?.border
+              : '',
+            color: branding?.buttonFillText?.color
+              ? branding?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.buttonFillText?.fontFamily
+              ? branding?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonFillText?.fontWeight
+              ? branding?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.buttonFillText?.fontSize
+              ? branding?.buttonFillText?.fontSize
+              : '',
+            borderRadius: branding?.buttonFill?.borderRadius
+              ? branding?.buttonFill?.borderRadius
+              : ''
+          }"
         >
           {{ 'evaluation.save' | translate }}
         </button>
@@ -176,12 +487,18 @@
 >
   <div class="sidebar__header">
     <button type="button" (click)="onSlidebarClose()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closeBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closeBtn" />
     </button>
 
     <div>
       <button type="button" (click)="confirm()" class="button" id="cross">
-        <i class="pi pi-times" alt="cross"></i>
+        <i
+          class="pi pi-times"
+          alt="cross"
+          [ngStyle]="{
+            color: branding?.sidebarTitle?.iconColor
+          }"
+        ></i>
       </button>
     </div>
   </div>
@@ -196,13 +513,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'evaluation.confirmation' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'evaluation.confirmation' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'evaluation.cancel' | translate }}
     </button>
@@ -211,6 +569,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'evaluation.confirm' | translate }}
     </button>

@@ -2,7 +2,7 @@
 @import '../../../assets/scss/mixin';
 
 .main-container {
-  background: url('../../../assets/images/background.png');
+  // background: url('../../../assets/images/background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -15,7 +15,7 @@
 .container {
   position: relative;
   width: 100%;
-  height: 15.3rem;
+  height: auto;
   top: 29.73%;
 }
 
@@ -29,7 +29,7 @@
     position: relative;
     margin-left: 4.261rem;
     width: 44.847rem;
-    height: 4.231rem;
+    height: auto;
     margin-bottom: 3.166rem;
     img {
       width: 100%;
@@ -41,7 +41,7 @@
 .header {
   width: 100%;
   display: flex;
-  height: 6.4rem;
+  height: 8rem;
 
   &__left {
     box-sizing: content-box;
@@ -65,7 +65,6 @@
       margin: 0;
     }
   }
-
   &__right {
     display: flex;
     justify-content: flex-start;
@@ -87,7 +86,7 @@
       padding: 0;
       border-left: 6.4rem solid transparent;
       border-right: 0px solid transparent;
-      border-bottom: 6.4rem solid #707172;
+      border-bottom: 6.4rem solid;
     }
 
     &--text {
@@ -130,5 +129,21 @@
   }
   100% {
     width: 100%;
+  }
+}
+
+.poweredLogo {
+  position: absolute;
+  top: 2.7rem;
+  right: 2.9rem;
+  h1 {
+    margin: 0;
+    font-size: 25px;
+    color: black;
+    font-weight: normal;
+    img {
+      width: 21.6rem;
+      height: auto;
+    }
   }
 }

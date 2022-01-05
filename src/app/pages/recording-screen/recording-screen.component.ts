@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
 import { fadeAnimation } from '../../shared/app.animation';
 import { interval, Subscription, timer } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeaderService } from 'src/app/features/header/header.service';
 import { Platform } from '@angular/cdk/platform';
 import { SetupService } from '../setup/setup.service';
@@ -21,6 +21,7 @@ import { EvolutionService } from '../evaluation/evolution.service';
 import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { v4 as uuidv4 } from 'uuid';
+import { environment } from 'src/environments';
 
 declare let MediaRecorder;
 declare const window: Window &
@@ -66,6 +67,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   indexDB;
   indexDbSubscription: Subscription;
   startRecordingTime;
+  myStyle: SafeHtml;
+  brand = environment.branding;
 
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
@@ -85,7 +88,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private takescreenshotService: TakescreenshotService,
     private confirmationService: ConfirmationService,
     private utility: UtilityService,
-    private evolutionService: EvolutionService
+    private evolutionService: EvolutionService,
+    private _sanitizer: DomSanitizer
   ) {
     this.headerService.muteUnmuteMic.subscribe((res) => {
       this.micValue = res;
@@ -110,6 +114,17 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.sidebarTitle.fontSize} !important;color: ${this.branding.sidebarTitle.color};font-weight: ${this.branding.sidebarTitle.fontWeight};font-family: ${this.branding.sidebarTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.contentTextTitle.fontSize};color: ${this.branding.contentTextTitle.color};font-weight: ${this.branding.contentTextTitle.fontWeight};font-family: ${this.branding.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {background: ${this.branding.UIElementSecondColor} !important; }
+      .header__left--duration-icon{color: ${this.branding.UIElementRecording} !important; }
+      .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.UIElementPrimaryColor} !important; }</style>`
+    );
     this.randomNum = uuidv4();
     this.initRecording();
   }
@@ -395,5 +410,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
   get appData() {
     return this.dataservice.appData;
+  }
+
+  get branding() {
+    return this.dataservice.branding;
   }
 }

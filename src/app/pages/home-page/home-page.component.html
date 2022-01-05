@@ -1,27 +1,123 @@
-<div class="main-container">
+<div
+  class="main-container"
+  *ngIf="branding"
+  [ngStyle]="{
+    backgroundImage: branding?.backGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
+      : ''
+  }"
+>
+  <div
+    class="poweredLogo"
+    [ngStyle]="{
+      display: branding?.poweredByLogo ? 'block' : 'none'
+    }"
+  >
+    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
+  </div>
+  <div [innerHTML]="myStyle"></div>
   <div class="container">
     <div class="logo">
-      <div class="logo__items">
-        <img src="assets/images/logo.png" alt="logo" />
+      <div
+        class="logo__items"
+        [ngStyle]="{
+          marginBottom: branding?.poweredByLogo ? '0px' : '3.166rem'
+        }"
+      >
+        <img src="assets/{{ brand }}/{{ branding?.logoUrl }}" alt="logo" />
       </div>
     </div>
 
     <div class="header">
-      <div class="header__left">
-        <p class="header__left--text m-0">
+      <div
+        class="header__left"
+        [ngStyle]="{
+          background: branding?.primaryColor ? branding?.primaryColor : '',
+          width: branding?.titleBar?.left?.width
+            ? branding?.titleBar?.left?.width
+            : '',
+          'flex-shrink': branding?.titleBar?.left?.shrink
+            ? branding?.titleBar?.left?.shrink
+            : ''
+        }"
+      >
+        <p
+          class="header__left--text m-0"
+          [ngStyle]="{
+            color: branding?.productTitleLeft?.color
+              ? branding?.productTitleLeft?.color
+              : '',
+            fontFamily: branding?.productTitleLeft?.fontFamily
+              ? branding?.productTitleLeft?.fontFamily
+              : '',
+            fontWeight: branding?.productTitleLeft?.fontWeight
+              ? branding?.productTitleLeft?.fontWeight
+              : '',
+            fontSize: branding?.productTitleLeft?.fontSize
+              ? branding?.productTitleLeft?.fontSize
+              : '',
+            paddingRight:
+              branding?.homeAngle?.display === 'none' ? '4rem' : '7rem'
+          }"
+        >
           {{ 'home.projectTitle' | translate }}
         </p>
       </div>
 
-      <div class="header__right">
-        <span class="header__right--text">{{
-          appData ? appData?.sceneSectionName + ' - ' + appData?.name : ''
-        }}</span>
+      <div
+        class="header__right"
+        [ngStyle]="{
+          background: branding?.secondaryColor ? branding?.secondaryColor : '',
+          width: branding?.titleBar?.right?.width
+            ? branding?.titleBar?.right.width
+            : '',
+          'flex-shrink': branding?.titleBar?.right?.shrink
+            ? branding?.titleBar?.right?.shrink
+            : ''
+        }"
+      >
+        <span
+          class="header__right--text"
+          [ngStyle]="{
+            background: branding?.secondaryColor
+              ? branding?.secondaryColor
+              : '',
+            color: branding?.productTitleRight?.color
+              ? branding?.productTitleRight?.color
+              : '',
+            fontFamily: branding?.productTitleRight?.fontFamily
+              ? branding?.productTitleRight?.fontFamily
+              : '',
+            fontWeight: branding?.productTitleRight?.fontWeight
+              ? branding?.productTitleRight?.fontWeight
+              : '',
+            fontSize: branding?.productTitleRight?.fontSize
+              ? branding?.productTitleRight?.fontSize
+              : ''
+          }"
+          >{{
+            appData ? appData?.sceneSectionName + ' - ' + appData?.name : ''
+          }}</span
+        >
       </div>
     </div>
 
-    <div class="loading__bar">
-      <div class="loading__bar--fill"></div>
+    <div
+      class="loading__bar"
+      [ngStyle]="{
+        backgroundColor: branding?.loadingBar?.backGround
+          ? branding?.loadingBar?.backGround
+          : ''
+      }"
+    >
+      <div
+        class="loading__bar--fill"
+        [ngStyle]="{
+          backgroundColor: branding?.loadingBar?.forGround
+            ? branding?.loadingBar?.forGround
+            : ''
+        }"
+      ></div>
     </div>
   </div>
 </div>

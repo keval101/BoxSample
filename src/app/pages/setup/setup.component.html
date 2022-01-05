@@ -13,10 +13,40 @@
   (click)="closeSidebar()"
 >
   <div class="container__title">
-    <p class="container__title-text m-0">
+    <p
+      class="container__title-text m-0"
+      [ngStyle]="{
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
+          : '',
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
+          : ''
+      }"
+    >
       {{ 'setup.title' | translate }}
     </p>
-    <p class="container__title-message m-0">
+    <p
+      class="container__title-message m-0"
+      [ngStyle]="{
+        color: branding?.actionText?.color ? branding?.actionText?.color : '',
+        fontFamily: branding?.actionText?.fontFamily
+          ? branding?.actionText?.fontFamily
+          : '',
+        fontWeight: branding?.actionText?.fontWeight
+          ? branding?.actionText?.fontWeight
+          : '',
+        fontSize: branding?.actionText?.fontSize
+          ? branding?.actionText?.fontSize
+          : ''
+      }"
+    >
       {{ 'setup.message' | translate }}
     </p>
   </div>
@@ -46,6 +76,7 @@
           id="mic"
           [ngStyle]="{ display: !checkedMic ? 'none' : 'block' }"
         />
+        <div [innerHtml]="myStyle"></div>
         <p-inputSwitch
           [(ngModel)]="checkedMic"
           (ngModelChange)="muteUnmuteToggle()"
@@ -68,6 +99,7 @@
           id="flash"
           [ngStyle]="{ display: !checkedFlash ? 'none' : 'block' }"
         />
+        <div [innerHtml]="myStyle"></div>
         <p-inputSwitch
           [(ngModel)]="checkedFlash"
           (ngModelChange)="flashToggle()"
@@ -99,6 +131,29 @@
       <button
         class="button button-outline button-exSmall"
         (click)="redirectToBack()"
+        [ngStyle]="{
+          background: branding?.buttonOutline?.backGround
+            ? branding?.buttonOutline?.backGround
+            : '',
+          border: branding?.buttonOutline?.border
+            ? branding?.buttonOutline?.border
+            : '',
+          color: branding?.buttonOutlineText?.color
+            ? branding?.buttonOutlineText?.color
+            : '',
+          fontFamily: branding?.buttonOutlineText?.fontFamily
+            ? branding?.buttonOutlineText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonOutlineText?.fontWeight
+            ? branding?.buttonOutlineText?.fontWeight
+            : '',
+          fontSize: branding?.buttonOutlineText?.fontSize
+            ? branding?.buttonOutlineText?.fontSize
+            : '',
+          borderRadius: branding?.buttonOutline?.borderRadius
+            ? branding?.buttonOutline?.borderRadius
+            : ''
+        }"
       >
         <i class="pi pi-chevron-left"></i>
       </button>
@@ -107,6 +162,29 @@
         [disabled]="startExercise"
         class="button button-fill button-small"
         (click)="redirectTo()"
+        [ngStyle]="{
+          background: branding?.buttonFill?.backGround
+            ? branding?.buttonFill?.backGround
+            : '',
+          border: branding?.buttonFill?.border
+            ? branding?.buttonFill?.border
+            : '',
+          color: branding?.buttonFillText?.color
+            ? branding?.buttonFillText?.color
+            : '',
+          fontFamily: branding?.buttonFillText?.fontFamily
+            ? branding?.buttonFillText?.fontFamily
+            : '',
+          fontWeight: branding?.buttonFillText?.fontWeight
+            ? branding?.buttonFillText?.fontWeight
+            : '',
+          fontSize: branding?.buttonFillText?.fontSize
+            ? branding?.buttonFillText?.fontSize
+            : '',
+          borderRadius: branding?.buttonFill?.borderRadius
+            ? branding?.buttonFill?.borderRadius
+            : ''
+        }"
       >
         {{ 'setup.startExercise' | translate }}
       </button>
@@ -116,13 +194,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'setup.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'setup.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.goback' | translate }}
     </button>
@@ -131,6 +250,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.quit' | translate }}
     </button>
@@ -139,13 +281,54 @@
 
 <p-confirmDialog header="Confirmation" key="allowAccessDevice" #op>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'setup.allowAccessTitle' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'setup.allowAccessTitle' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cancelDevicePopup()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.cancel' | translate }}
     </button>
@@ -153,6 +336,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="confirmAllowAccess()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'setup.allow' | translate }}
     </button>

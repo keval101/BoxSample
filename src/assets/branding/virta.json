@@ -1,0 +1,162 @@
+{
+    "headerLeft": "#044772",
+    "headerRight": "#707172",
+    "primaryColor": "#044772",
+    "secondaryColor": "#707172",
+    "textPrimary": "#000000",
+    "homeAngle": {
+      "color": "#707172",
+      "display": "block"
+    },
+    "logoUrl": "logo.png",
+    "backGroundImg": "background.png",
+    "poweredByLogo": "",
+    "loadingBar": {
+      "forGround": "#B41513",
+      "backGround": "#DEE2E4"
+    },
+    "titleBar": {
+      "left": {
+        "shrink": 0,
+        "width": "507.95px"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "857px"
+      }
+    },
+    "topBar": {
+      "left": {
+        "shrink": 0,
+        "width": "67%"
+      },
+      "right": {
+        "shrink": 1,
+        "width": "33%"
+      }
+    },
+    "productTitleLeft": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "3.2rem",
+      "color": "#ffffff"
+    },
+    "productTitleRight": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "3.2rem",
+      "color": "#ffffff"
+    },
+    "versionInformationBright": {
+      "fontFamily": "Myriad light",
+      "fontWeight": 500,
+      "fontSize": "1.6rem",
+      "color": "#ffffff"
+    },
+    "versionInformationDark": {
+      "fontFamily": "Myriad light",
+      "fontWeight": 500,
+      "fontSize": "1.6rem",
+      "color": "#707172"
+    },
+    "topTitle": {
+      "fontFamily": "Myriad light",
+      "fontWeight": "normal",
+      "fontSize": "2.9rem",
+      "color": "#ffffff"
+    },
+    "contentTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "4rem",
+      "color": "#044772"
+    },
+    "contentText": {
+      "fontFamily": "Myriad light",
+      "fontWeight": "normal",
+      "fontSize": "2.4rem",
+      "color": "#000000"
+    },
+    "contentTextTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "2.4rem",
+      "color": "#044772"
+    },
+    "videoDetails": {
+      "color": ""
+    },
+    "subHeader": {
+      "fontSize": "3.2rem",
+      "color": "#044772",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400"
+    },
+    "sidebarTitle": {
+      "fontSize": "3.2rem",
+      "color": "#044772",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400",
+      "iconColor": "#22597c"
+    },
+    "selfAssessmentQuestionText": {
+      "fontSize": "3.2rem",
+      "color": "#000000",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "400"
+    },
+    "confirmationDialogTitle": {
+      "fontSize": "4rem",
+      "color": "#B41513",
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal"
+    },
+    "introDescriptionText": "Myriad Regular",
+    "waterMarkUrl": "watermark.png",
+    "UIElementPrimaryColor": "#ffffff",
+    "UIElementRecording": "#B41513",
+    "UIElementSecondColor": "#B41513",
+    "UIElementOther": "#B41513",
+    "actionText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "3.2rem",
+      "color": "#B32226"
+    },
+    "buttonFill": {
+      "backGround": "#B41513",
+      "borderRadius": "5px"
+    },
+    "buttonOutline": {
+      "border": "1px solid #B41513",
+      "borderRadius": "5px"
+    },
+    "buttonFillText": {
+      "fontFamily": "Myriad light",
+      "fontWeight": "normal",
+      "fontSize": "2.4rem",
+      "color": "#ffffff"
+    },
+    "buttonOutlineText": {
+      "fontFamily": "Myriad light",
+      "fontWeight": 500,
+      "fontSize": "2.4rem",
+      "color": "#B41513"
+    },
+    "tableTitle": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "2.4rem",
+      "color": "#B41513"
+    },
+    "tableText": {
+      "fontFamily": "Myriad Regular",
+      "fontWeight": "normal",
+      "fontSize": "2.4rem",
+      "color": "#000000"
+    },
+    "tab": {
+      "fontSize": "1.7rem"
+    }
+
+}

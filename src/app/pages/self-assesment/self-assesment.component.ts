@@ -17,7 +17,8 @@ import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { EvolutionService } from '../evaluation/evolution.service';
 import { TakescreenshotService } from '../takescreenshot/takescreenshot.service';
 import { SelfAssesmentService } from './self-assesment.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from 'src/environments';
 
 @Component({
   selector: 'app-self-assesment',
@@ -44,6 +45,9 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   indexDbSubscription: Subscription;
   display = false;
   popupImageUrl: any;
+  myStyle: SafeHtml;
+
+  brand = environment.branding;
 
   @ViewChild('sidenav') sidenav: ElementRef;
 
@@ -57,7 +61,8 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
     private evolutionService: EvolutionService,
     private sanitizer: DomSanitizer,
     public utility: UtilityService,
-    private dataService: DataService
+    private dataService: DataService,
+    private _sanitizer: DomSanitizer
   ) {
     this.responsiveOptions = [
       {
@@ -115,6 +120,10 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
     return this.dataService.appData;
   }
 
+  get branding() {
+    return this.dataService.branding;
+  }
+
   onSlidebarOpen(value: boolean): void {
     this.sidebarOpen = value;
   }
@@ -140,6 +149,20 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.myStyle = this._sanitizer.bypassSecurityTrustHtml(
+      `<style>
+      #sidebar__content h1 {font-size: ${this.branding.sidebarTitle.fontSize} !important;color: ${this.branding.sidebarTitle.color};font-weight: ${this.branding.sidebarTitle.fontWeight};font-family: ${this.branding.sidebarTitle.fontFamily};}
+      #sidebar__content h2 {font-size: ${this.branding.contentTextTitle.fontSize};color: ${this.branding.contentTextTitle.color};font-weight: ${this.branding.contentTextTitle.fontWeight};font-family: ${this.branding.contentTextTitle.fontFamily};}
+      #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.secondaryColor} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.secondaryColor} !important; }
+      .pi-chevron-right:before {color: ${this.branding.primaryColor} !important; }
+      .pi-chevron-left:before {color: ${this.branding.primaryColor} !important; }
+      .screenshot-thumbnails.active {birder: ${this.branding.buttonOutline.border}}
+      </style>`
+    );
     this.translateService
       .get('selfassesment.cancelText')
       .subscribe((text: string) => {

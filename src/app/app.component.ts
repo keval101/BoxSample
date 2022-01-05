@@ -6,6 +6,7 @@ import { DataService } from './shared/shared/data.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, Event } from '@angular/router';
 import { environment } from 'src/environments';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +17,18 @@ export class AppComponent implements OnInit {
   videoFullScreen = false;
   recordingScreen = false;
   hasDataReceived = false;
+  homeScreen = false;
   appData;
-  loader;
-  versionInfo: string;
+  branding;
+  loader: boolean;
+  appLoader: boolean;
+
+  public versionInfo = environment.version;
 
   constructor(
     private primengConfig: PrimeNGConfig,
     public translate: TranslateService,
-    private dataservice: DataService,
+    public dataservice: DataService,
     private headerService: HeaderService,
     private route: ActivatedRoute,
     private router: Router,
@@ -31,13 +36,13 @@ export class AppComponent implements OnInit {
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
-    this.versionInfo = environment.version;
     this.headerService.videoFullscreen.subscribe((res) => {
       if (this.location.path() === '/recording') {
         this.recordingScreen = true;
       } else {
         this.recordingScreen = false;
       }
+
       if (res === true) {
         this.videoFullScreen = true;
       } else {
@@ -45,12 +50,22 @@ export class AppComponent implements OnInit {
       }
     });
 
+    if (this.location.path() === '') {
+      this.dataservice.homeScreen.next(true);
+    } else {
+      this.dataservice.homeScreen.next(false);
+    }
+
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
         const anyCase = this.route.snapshot.queryParams['sceneId'];
+        const brandingParam = this.route.snapshot.queryParams['branding'];
         if (!this.hasDataReceived) {
           this.hasDataReceived = true;
-          this.getAppData(anyCase ? anyCase : null);
+          this.getAppData(
+            anyCase ? anyCase : null,
+            brandingParam ? brandingParam : null
+          );
         }
       }
     });
@@ -70,16 +85,29 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
-  getAppData(params) {
-    this.dataservice.getData(params).subscribe(
+  getAppData(params, brandingParam) {
+    this.dataservice.setLoader(true);
+    environment.branding = brandingParam ? brandingParam : environment.branding;
+    const url = `../assets/branding/${environment.branding}.json`;
+    const response = forkJoin([
+      this.dataservice.getBrandingData(url),
+      this.dataservice.getData(params),
+    ]);
+
+    response.subscribe(
       (res) => {
-        if (res) {
-          this.appData = res;
-          this.dataservice.appData = res;
-          sessionStorage.clear();
-        }
+        this.dataservice.branding = res[0];
+        this.branding = res[0];
+        this.appData = res[1];
+        this.dataservice.appData = res[1];
+        sessionStorage.clear();
+        this.loader = false;
+        this.appLoader = true;
+        this.dataservice.setLoader(false);
       },
       (err) => {
+        this.dataservice.setLoader(false);
+        this.loader = false;
         this.dataservice.showError(
           'Some issue occured. Please contact your administrator!'
         );

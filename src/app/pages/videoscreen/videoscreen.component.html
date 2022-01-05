@@ -21,7 +21,31 @@
   <div class="bottomContainer">
     <div class="buttons">
       <div class="playedBtn">
-        <button class="playPauseBtn" (click)="PlayVideo()" *ngIf="playVideo">
+        <button
+          class="playPauseBtn"
+          (click)="PlayVideo()"
+          *ngIf="playVideo"
+          [ngStyle]="{
+            background: branding?.buttonFill?.backGround
+              ? branding?.buttonFill?.backGround
+              : '',
+            border: branding?.buttonFill?.border
+              ? branding?.buttonFill?.border
+              : '',
+            color: branding?.buttonFillText?.color
+              ? branding?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.buttonFillText?.fontFamily
+              ? branding?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonFillText?.fontWeight
+              ? branding?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.buttonFillText?.fontSize
+              ? branding?.buttonFillText?.fontSize
+              : ''
+          }"
+        >
           <img
             src="assets/icnons/pause-solid.svg"
             alt="pause"
@@ -29,7 +53,31 @@
             id="playpause"
           />
         </button>
-        <button class="playPauseBtn" (click)="PauseVideo()" *ngIf="!playVideo">
+        <button
+          class="playPauseBtn"
+          (click)="PauseVideo()"
+          *ngIf="!playVideo"
+          [ngStyle]="{
+            background: branding?.buttonFill?.backGround
+              ? branding?.buttonFill?.backGround
+              : '',
+            border: branding?.buttonFill?.border
+              ? branding?.buttonFill?.border
+              : '',
+            color: branding?.buttonFillText?.color
+              ? branding?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.buttonFillText?.fontFamily
+              ? branding?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonFillText?.fontWeight
+              ? branding?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.buttonFillText?.fontSize
+              ? branding?.buttonFillText?.fontSize
+              : ''
+          }"
+        >
           <img
             src="assets/icnons/play-solid.svg"
             alt="play"
@@ -43,10 +91,59 @@
         <button
           class="button button-exSmall button-outline"
           (click)="redirectToBack()"
+          [ngStyle]="{
+            background: branding?.buttonOutline?.backGround
+              ? branding?.buttonOutline?.backGround
+              : '',
+            border: branding?.buttonOutline?.border
+              ? branding?.buttonOutline?.border
+              : '',
+            color: branding?.buttonOutlineText?.color
+              ? branding?.buttonOutlineText?.color
+              : '',
+            fontFamily: branding?.buttonOutlineText?.fontFamily
+              ? branding?.buttonOutlineText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonOutlineText?.fontWeight
+              ? branding?.buttonOutlineText?.fontWeight
+              : '',
+            fontSize: branding?.buttonOutlineText?.fontSize
+              ? branding?.buttonOutlineText?.fontSize
+              : '',
+            borderRadius: branding?.buttonOutline?.borderRadius
+              ? branding?.buttonOutline?.borderRadius
+              : ''
+          }"
         >
           <i class="pi pi-chevron-left"></i>
         </button>
-        <button class="button button-small button-fill" (click)="redirectTo()">
+        <button
+          class="button button-small button-fill"
+          (click)="redirectTo()"
+          [ngStyle]="{
+            background: branding?.buttonFill?.backGround
+              ? branding?.buttonFill?.backGround
+              : '',
+            border: branding?.buttonFill?.border
+              ? branding?.buttonFill?.border
+              : '',
+            color: branding?.buttonFillText?.color
+              ? branding?.buttonFillText?.color
+              : '',
+            fontFamily: branding?.buttonFillText?.fontFamily
+              ? branding?.buttonFillText?.fontFamily
+              : '',
+            fontWeight: branding?.buttonFillText?.fontWeight
+              ? branding?.buttonFillText?.fontWeight
+              : '',
+            fontSize: branding?.buttonFillText?.fontSize
+              ? branding?.buttonFillText?.fontSize
+              : '',
+            borderRadius: branding?.buttonFill?.borderRadius
+              ? branding?.buttonFill?.borderRadius
+              : ''
+          }"
+        >
           {{ 'video.prepareSetup' | translate }}
         </button>
       </div>
@@ -54,24 +151,72 @@
   </div>
 
   <div class="footer" [ngClass]="{ footerAnimation: videoFullScreen }">
-    <div class="progressbar" id="seekbar">
-      <div class="progressbar-color" id="progressBar"></div>
+    <div
+      class="progressbar"
+      id="seekbar"
+      [ngStyle]="{
+        backgroundColor: branding?.loadingBar?.backGround
+          ? branding?.loadingBar?.backGround
+          : ''
+      }"
+    >
+      <div
+        class="progressbar-color"
+        id="progressBar"
+        [ngStyle]="{
+          backgroundColor: branding?.loadingBar?.forGround
+            ? branding?.loadingBar?.forGround
+            : ''
+        }"
+      ></div>
     </div>
 
     <div class="footer__text">
-      <p class="footer__text-bold m-0">
+      <p
+        class="footer__text-bold m-0"
+        [ngStyle]="{
+          color: branding?.contentTextTitle?.color
+            ? branding?.contentTextTitle?.color
+            : '',
+          fontFamily: branding?.contentTextTitle?.fontFamily
+            ? branding?.contentTextTitle?.fontFamily
+            : '',
+          fontWeight: branding?.contentTextTitle?.fontWeight
+            ? branding?.contentTextTitle?.fontWeight
+            : '',
+          fontSize: branding?.contentTextTitle?.fontSize
+            ? branding?.contentTextTitle?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.movies[0]?.fileName }}
       </p>
-      <p class="footer__text-light m-0">
+      <p
+        class="footer__text-light m-0"
+        [ngStyle]="{
+          color: branding?.videoDetails?.color
+            ? branding?.videoDetails?.color
+            : '',
+          fontFamily: branding?.contentText?.fontFamily
+            ? branding?.contentText?.fontFamily
+            : '',
+          fontWeight: branding?.contentText?.fontWeight
+            ? branding?.contentText?.fontWeight
+            : '',
+          fontSize: branding?.contentText?.fontSize
+            ? branding?.contentText?.fontSize
+            : ''
+        }"
+      >
         {{ appData?.movies[0]?.copyrightInfo }}
       </p>
     </div>
   </div>
 
   <div class="logo" [ngClass]="{ logoTop: videoFullScreen }">
-    <img src="assets/images/Logo2.svg" alt="logo" />
+    <img src="assets/{{ brand }}/{{ branding?.waterMarkUrl }}" alt="logo" />
   </div>
-
+  <div [innerHtml]="myStyle"></div>
   <div
     class="slider"
     [ngClass]="{
@@ -108,13 +253,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'video.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'video.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'video.goback' | translate }}
     </button>
@@ -123,6 +309,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'video.quit' | translate }}
     </button>

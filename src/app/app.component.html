@@ -1,16 +1,29 @@
 <p-toast></p-toast>
 <p-progressSpinner *ngIf="loader"></p-progressSpinner>
-<router-outlet></router-outlet>
-
-<p
-  class="rightReserved m-0"
-  [ngClass]="{
-    rightReservedTop: videoFullScreen
-  }"
-  [ngStyle]="{
-    transform: recordingScreen ? 'translateY(0rem)' : '',
-    color: recordingScreen ? 'white' : '#707172'
-  }"
->
-  {{ 'home.rightReserved' | translate }}{{ this.versionInfo }}
-</p>
+<ng-container *ngIf="appLoader">
+  <router-outlet></router-outlet>
+  <p
+    class="rightReserved m-0"
+    [ngClass]="{
+      rightReservedTop: videoFullScreen
+    }"
+    [ngStyle]="{
+      transform: recordingScreen ? 'translateY(0rem)' : '',
+      color:
+        recordingScreen || dataservice.homeScreen.value
+          ? branding?.versionInformationBright?.color
+          : branding?.versionInformationDark?.color,
+      fontFamily: branding?.versionInformationBright?.fontFamily
+        ? branding?.versionInformationBright?.fontFamily
+        : '',
+      fontWeight: branding?.versionInformationBright?.fontWeight
+        ? branding?.versionInformationBright?.fontWeight
+        : '',
+      fontSize: branding?.versionInformationBright?.fontSize
+        ? branding?.versionInformationBright?.fontSize
+        : ''
+    }"
+  >
+    {{ 'home.rightReserved' | translate }}{{ this.versionInfo }}
+  </p>
+</ng-container>

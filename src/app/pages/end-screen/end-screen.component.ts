@@ -13,6 +13,8 @@ export class EndScreenComponent implements OnInit {
   recording: boolean;
   cancel = false;
   isEndScreen: boolean;
+  brand = environment.branding;
+
   constructor(
     private evolutionService: EvolutionService,
     private dataservice: DataService
@@ -65,6 +67,9 @@ export class EndScreenComponent implements OnInit {
 
   get appData() {
     return this.dataservice.appData;
+  }
+  get branding() {
+    return this.dataservice.branding;
   }
 
   closeTab(e) {

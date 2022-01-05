@@ -17,8 +17,40 @@
 </p-dialog>
 <div class="container">
   <div class="container__title">
-    <p class="container__title-text">{{ 'selfassesment.title' | translate }}</p>
-    <p class="container__title-message m-0">
+    <p
+      class="container__title-text"
+      [ngStyle]="{
+        color: branding?.contentTitle?.color
+          ? branding?.contentTitle?.color
+          : '',
+        fontFamily: branding?.contentTitle?.fontFamily
+          ? branding?.contentTitle?.fontFamily
+          : '',
+        fontWeight: branding?.contentTitle?.fontWeight
+          ? branding?.contentTitle?.fontWeight
+          : '',
+        fontSize: branding?.contentTitle?.fontSize
+          ? branding?.contentTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'selfassesment.title' | translate }}
+    </p>
+    <p
+      class="container__title-message m-0"
+      [ngStyle]="{
+        color: branding?.actionText?.color ? branding?.actionText?.color : '',
+        fontFamily: branding?.actionText?.fontFamily
+          ? branding?.actionText?.fontFamily
+          : '',
+        fontWeight: branding?.actionText?.fontWeight
+          ? branding?.actionText?.fontWeight
+          : '',
+        fontSize: branding?.actionText?.fontSize
+          ? branding?.actionText?.fontSize
+          : ''
+      }"
+    >
       {{ 'selfassesment.message' | translate }}
       <span class="learnMoreText" (click)="sidebarOpenData($event)"
         >Learn more <i class="pi pi-question-circle"></i
@@ -28,7 +60,21 @@
 
   <div class="selfassesment__result">
     <div class="selfassesment__result-image">
-      <p class="selfassesment__result-title">
+      <p
+        class="selfassesment__result-title"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.resultTitle' | translate }}
       </p>
 
@@ -42,7 +88,21 @@
     </div>
 
     <div class="selfassesment__result-choise">
-      <p class="selfassesment__result-title">
+      <p
+        class="selfassesment__result-title"
+        [ngStyle]="{
+          color: branding?.subHeader?.color ? branding?.subHeader?.color : '',
+          fontFamily: branding?.subHeader?.fontFamily
+            ? branding?.subHeader?.fontFamily
+            : '',
+          fontWeight: branding?.subHeader?.fontWeight
+            ? branding?.subHeader?.fontWeight
+            : '',
+          fontSize: branding?.subHeader?.fontSize
+            ? branding?.subHeader?.fontSize
+            : ''
+        }"
+      >
         {{ 'selfassesment.choice' | translate }}
       </p>
 
@@ -92,12 +152,35 @@
       class="button button-small button-fill"
       type="button"
       (click)="redirectTo()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.next' | translate }}
     </button>
   </div>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <div
   class="sidebar"
   #sidenav
@@ -106,10 +189,16 @@
 >
   <div class="sidebarHeader">
     <button class="closed" (click)="closeSidebar()">
-      <img src="assets/icnons/close.png" alt="closebtn" id="closedBtn" />
+      <img src="assets/{{ brand }}/close.png" alt="closebtn" id="closedBtn" />
     </button>
     <button class="close" (click)="confirm()">
-      <i class="pi pi-times" alt="cross"></i>
+      <i
+        class="pi pi-times"
+        alt="cross"
+        [ngStyle]="{
+          color: branding?.sidebarTitle?.iconColor
+        }"
+      ></i>
     </button>
   </div>
 
@@ -127,13 +216,54 @@
 
 <p-confirmDialog header="Confirmation" #cd>
   <ng-template pTemplate="header">
-    <p class="header m-0">{{ 'selfassesment.quitExe' | translate }}</p>
+    <p
+      class="header m-0"
+      [ngStyle]="{
+        color: branding?.confirmationDialogTitle?.color
+          ? branding?.confirmationDialogTitle?.color
+          : '',
+        fontFamily: branding?.confirmationDialogTitle?.fontFamily
+          ? branding?.confirmationDialogTitle?.fontFamily
+          : '',
+        fontWeight: branding?.confirmationDialogTitle?.fontWeight
+          ? branding?.confirmationDialogTitle?.fontWeight
+          : '',
+        fontSize: branding?.confirmationDialogTitle?.fontSize
+          ? branding?.confirmationDialogTitle?.fontSize
+          : ''
+      }"
+    >
+      {{ 'selfassesment.quitExe' | translate }}
+    </p>
   </ng-template>
   <ng-template pTemplate="footer" class="footer">
     <button
       class="button button-small button-outline"
       type="button"
       (click)="cd.reject()"
+      [ngStyle]="{
+        background: branding?.buttonOutline?.backGround
+          ? branding?.buttonOutline?.backGround
+          : '',
+        border: branding?.buttonOutline?.border
+          ? branding?.buttonOutline?.border
+          : '',
+        color: branding?.buttonOutlineText?.color
+          ? branding?.buttonOutlineText?.color
+          : '',
+        fontFamily: branding?.buttonOutlineText?.fontFamily
+          ? branding?.buttonOutlineText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonOutlineText?.fontWeight
+          ? branding?.buttonOutlineText?.fontWeight
+          : '',
+        fontSize: branding?.buttonOutlineText?.fontSize
+          ? branding?.buttonOutlineText?.fontSize
+          : '',
+        borderRadius: branding?.buttonOutline?.borderRadius
+          ? branding?.buttonOutline?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.goback' | translate }}
     </button>
@@ -142,6 +272,29 @@
       class="button button-small button-fill"
       type="button"
       (click)="cd.accept()"
+      [ngStyle]="{
+        background: branding?.buttonFill?.backGround
+          ? branding?.buttonFill?.backGround
+          : '',
+        border: branding?.buttonFill?.border
+          ? branding?.buttonFill?.border
+          : '',
+        color: branding?.buttonFillText?.color
+          ? branding?.buttonFillText?.color
+          : '',
+        fontFamily: branding?.buttonFillText?.fontFamily
+          ? branding?.buttonFillText?.fontFamily
+          : '',
+        fontWeight: branding?.buttonFillText?.fontWeight
+          ? branding?.buttonFillText?.fontWeight
+          : '',
+        fontSize: branding?.buttonFillText?.fontSize
+          ? branding?.buttonFillText?.fontSize
+          : '',
+        borderRadius: branding?.buttonFill?.borderRadius
+          ? branding?.buttonFill?.borderRadius
+          : ''
+      }"
     >
       {{ 'selfassesment.quit' | translate }}
     </button>

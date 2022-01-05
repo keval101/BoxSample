@@ -1,7 +1,35 @@
 <div class="conatiner">
   <div class="header">
-    <div class="header__left" [ngClass]="{ fullscreen: fullScreen }">
-      <span class="header__left--text" *ngIf="!fullScreen" @fadeAnimation
+    <div
+      class="header__left"
+      [ngClass]="{ fullscreen: fullScreen }"
+      [ngStyle]="{
+        background: branding?.headerLeft ? branding?.headerLeft : '',
+        width: branding?.topBar?.left?.width
+          ? branding?.topBar?.left?.width
+          : '',
+        'flex-shrink': branding?.topBar?.left?.shrink
+          ? branding?.topBar?.left?.shrink
+          : '',
+        opacity: branding?.headerLeft === branding?.headerRight ? '' : '0.9'
+      }"
+    >
+      <span
+        class="header__left--text"
+        *ngIf="!fullScreen"
+        @fadeAnimation
+        [ngStyle]="{
+          color: branding?.topTitle?.color ? branding?.topTitle?.color : '',
+          fontFamily: branding?.topTitle?.fontFamily
+            ? branding?.topTitle?.fontFamily
+            : '',
+          fontWeight: branding?.topTitle?.fontWeight
+            ? branding?.topTitle?.fontWeight
+            : '',
+          fontSize: branding?.topTitle?.fontSize
+            ? branding?.topTitle?.fontSize
+            : ''
+        }"
         >{{ appData?.sceneSectionName + ' - ' + appData?.name }}
       </span>
 
@@ -9,15 +37,32 @@
         class="header__left--duration"
         *ngIf="!onFinishRecording || sidebarOpen"
       >
-        <p class="pi pi-circle-on header__left--duration-icon"></p>
+        <p
+          class="pi pi-circle-on header__left--duration-icon"
+          [ngStyle]="{
+            color: branding?.primaryColor ? branding?.primaryColor : ''
+          }"
+        ></p>
         <p class="header__left--duration-time">
           {{ 'header.duration' | translate }}
           <span>{{ recordingDuration }}</span>
         </p>
       </span>
     </div>
-
-    <div class="header__right" [ngClass]="{ fullscreen: fullScreen }">
+    <div [innerHTML]="myStyle"></div>
+    <div
+      class="header__right"
+      [ngClass]="{ fullscreen: fullScreen }"
+      [ngStyle]="{
+        background: branding?.headerRight ? branding?.headerRight : '',
+        width: branding?.topBar?.right?.width
+          ? branding?.topBar?.right?.width
+          : '',
+        'flex-shrink': branding?.topBar?.right?.shrink
+          ? branding?.topBar?.right?.shrink
+          : ''
+      }"
+    >
       <div
         class="header__right--icons"
         [ngStyle]="{ visibility: sidebarOpen ? 'hidden' : 'visible' }"
