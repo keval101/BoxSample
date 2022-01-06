@@ -22,7 +22,7 @@
       },
       "right": {
         "shrink": 1,
-        "width": "857px"
+        "width": "calc(100% - 507.95px)"
       }
     },
     "topBar": {
