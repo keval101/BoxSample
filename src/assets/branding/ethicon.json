@@ -1,161 +1,168 @@
 {
-    "headerLeft": "#F30617",
-    "headerRight": "#F30617",
-    "primaryColor": "#FFFFFF",
-    "secondaryColor": "#F30617",
-    "textPrimary": "#212121",
-    "homeAngle": {
-      "color": "transparent",
-      "display": "none"
+  "headerLeft": "#F30617",
+  "headerRight": "#F30617",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#F30617",
+  "textPrimary": "#212121",
+  "homeAngle": {
+    "color": "transparent",
+    "display": "none"
+  },
+  "logoUrl": "logo.png",
+  "homeBackGroundImg": "backgroundHome.png",
+  "lastBackGroundImg": "background.png",
+  "poweredByLogo": true,
+  "loadingBar": {
+    "forGround": "#FFFFFF",
+    "backGround": "#DEE2E4"
+  },
+  "titleBar": {
+    "left": {
+      "shrink": 0,
+      "width": "507.95px"
     },
-    "logoUrl": "logo.png",
-    "backGroundImg": "background.png",
-    "poweredByLogo": true,
-    "loadingBar": {
-      "forGround": "#FFFFFF",
-      "backGround": "#DEE2E4"
-    },
-    "titleBar": {
-      "left": {
-        "shrink": 0,
-        "width": "507.95px"
-      },
-      "right": {
-        "shrink": 1,
-        "width": "calc(100% - 507.95px)"
-      }
-    },
-    "topBar": {
-      "left": {
-        "shrink": 0,
-        "width": "67%"
-      },
-      "right": {
-        "shrink": 1,
-        "width": "33%"
-      }
-    },
-    "productTitleLeft": {
-      "fontFamily": "Arial",
-      "fontWeight": 900,
-      "fontSize": "3.2rem",
-      "color": "#212121"
-    },
-    "productTitleRight": {
-      "fontFamily": "Arial",
-      "fontWeight": 900,
-      "fontSize": "3.2rem",
-      "color": "#ffffff"
-    },
-    "versionInformationBright": {
-      "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "1.6rem",
-      "color": "#ffffff"
-    },
-    "versionInformationDark": {
-      "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "1.6rem",
-      "color": "#828282"
-    },
-    "topTitle": {
-      "fontFamily": "Arial",
-      "fontWeight": 900,
-      "fontSize": "2.9rem",
-      "color": "#ffffff"
-    },
-    "contentTitle": {
-      "fontFamily": "Arial",
-      "fontWeight": 900,
-      "fontSize": "4rem",
-      "color": "#212121"
-    },
-    "contentText": {
-      "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "2.4rem",
-      "color": "#212121"
-    },
-    "contentTextTitle": {
-      "fontFamily": "Arial",
-      "fontWeight": 900,
-      "fontSize": "2.4rem",
-      "color": "#212121"
-    },
-    "videoDetails": {
-      "color": "#212121"
-    },
-    "subHeader": {
-      "fontSize": "3.2rem",
-      "color": "#000000",
-      "fontFamily": "Arial",
-      "fontWeight": "900"
-    },
-    "sidebarTitle": {
-      "fontSize": "3.2rem",
-      "color": "#000000",
-      "fontFamily": "Arial",
-      "fontWeight": "900",
-      "iconColor": "#828282"
-    },
-    "selfAssessmentQuestionText": {
-      "fontSize": "3.2rem",
-      "color": "#000000",
-      "fontFamily": "Arial",
-      "fontWeight": "400"
-    },
-    "confirmationDialogTitle": {
-      "fontSize": "4rem",
-      "color": "#000000",
-      "fontFamily": "Arial",
-      "fontWeight": "900"
-    },
-    "waterMarkUrl": "watermark.png",
-    "UIElementPrimaryColor": "#ffffff",
-    "UIElementRecording": "#ffffff",
-    "UIElementSecondColor": "#828282",
-    "UIElementOther": "#F30617",
-    "actionText": {
-      "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "3rem",
-      "color": "#F30617"
-    },
-    "buttonFill": {
-      "backGround": "#FC0200",
-      "borderRadius": "5px"
-    },
-    "buttonOutline": {
-      "border": "2px solid #FC0200",
-      "borderRadius": "5px"
-    },
-    "buttonFillText": {
-      "fontFamily": "Arial",
-      "fontWeight": "bold",
-      "fontSize": "2.4rem",
-      "color": "#ffffff"
-    },
-    "buttonOutlineText": {
-      "fontFamily": "Arial",
-      "fontWeight": "bold",
-      "fontSize": "2.4rem",
-      "color": "#FC0200"
-    },
-    "tableTitle": {
-      "fontFamily": "Arial",
-      "fontWeight": 500,
-      "fontSize": "2.4rem",
-      "color": "#F30617"
-    },
-    "tableText": {
-      "fontFamily": "Arial",
-      "fontWeight": "normal",
-      "fontSize": "2.4rem",
-      "color": "#000000"
-    },
-    "tab": {
-      "fontSize": "1.4rem"
+    "right": {
+      "shrink": 1,
+      "width": "calc(100% - 507.95px)"
     }
+  },
+  "topBar": {
+    "left": {
+      "shrink": 0,
+      "width": "67%"
+    },
+    "right": {
+      "shrink": 1,
+      "width": "33%"
+    }
+  },
+  "productTitleLeft": {
+    "fontFamily": "Arial",
+    "fontWeight": 900,
+    "fontSize": "3.2rem",
+    "color": "#212121"
+  },
+  "productTitleRight": {
+    "fontFamily": "Arial",
+    "fontWeight": 900,
+    "fontSize": "3.2rem",
+    "color": "#ffffff"
+  },
+  "versionInformationBright": {
+    "fontFamily": "Arial",
+    "fontWeight": "normal",
+    "fontSize": "1.6rem",
+    "color": "#ffffff"
+  },
+  "versionInformationDark": {
+    "fontFamily": "Arial",
+    "fontWeight": "normal",
+    "fontSize": "1.6rem",
+    "color": "#828282"
+  },
+  "topTitle": {
+    "fontFamily": "Arial",
+    "fontWeight": 900,
+    "fontSize": "2.9rem",
+    "color": "#ffffff"
+  },
+  "contentTitle": {
+    "fontFamily": "Arial",
+    "fontWeight": 900,
+    "fontSize": "4rem",
+    "color": "#212121"
+  },
+  "contentText": {
+    "fontFamily": "Arial",
+    "fontWeight": "normal",
+    "fontSize": "2.4rem",
+    "color": "#212121"
+  },
+  "contentTextTitle": {
+    "fontFamily": "Arial",
+    "fontWeight": 900,
+    "fontSize": "2.4rem",
+    "color": "#212121"
+  },
+  "videoDetails": {
+    "color": "#212121"
+  },
+  "subHeader": {
+    "fontSize": "3.2rem",
+    "color": "#000000",
+    "fontFamily": "Arial",
+    "fontWeight": "900"
+  },
+  "sidebarTitle": {
+    "fontSize": "3.2rem",
+    "color": "#000000",
+    "fontFamily": "Arial",
+    "fontWeight": "900",
+    "iconColor": "#828282"
+  },
+  "selfAssessmentQuestionText": {
+    "fontSize": "3.2rem",
+    "color": "#000000",
+    "fontFamily": "Arial",
+    "fontWeight": "400"
+  },
+  "confirmationDialogTitle": {
+    "fontSize": "4rem",
+    "color": "#000000",
+    "fontFamily": "Arial",
+    "fontWeight": "900"
+  },
+  "introDescriptionText": {
+    "fontSize": "2.4rem",
+    "color": "#000000",
+    "fontFamily": "Arial",
+    "fontWeight": "900"
+  },
 
+  "waterMarkUrl": "watermark.png",
+  "UIElementPrimaryColor": "#ffffff",
+  "UIElementRecording": "#ffffff",
+  "UIElementSecondColor": "#828282",
+  "UIElementOther": "#F30617",
+  "actionText": {
+    "fontFamily": "Arial",
+    "fontWeight": "normal",
+    "fontSize": "3rem",
+    "color": "#F30617"
+  },
+  "buttonFill": {
+    "backGround": "#FC0200",
+    "borderRadius": "5px"
+  },
+  "buttonOutline": {
+    "border": "2px solid #FC0200",
+    "borderRadius": "5px"
+  },
+  "buttonFillText": {
+    "fontFamily": "Arial",
+    "fontWeight": "bold",
+    "fontSize": "2.4rem",
+    "color": "#ffffff"
+  },
+  "buttonOutlineText": {
+    "fontFamily": "Arial",
+    "fontWeight": "bold",
+    "fontSize": "2.4rem",
+    "color": "#FC0200"
+  },
+  "tableTitle": {
+    "fontFamily": "Arial",
+    "fontWeight": 500,
+    "fontSize": "2.4rem",
+    "color": "#F30617"
+  },
+  "tableText": {
+    "fontFamily": "Arial",
+    "fontWeight": "normal",
+    "fontSize": "2.4rem",
+    "color": "#000000"
+  },
+  "tab": {
+    "fontSize": "1.4rem"
+  }
 }

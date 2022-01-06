@@ -2,8 +2,8 @@
   class="main-container"
   *ngIf="branding"
   [ngStyle]="{
-    backgroundImage: branding?.backGroundImg
-      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
+    backgroundImage: branding?.homeBackGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.homeBackGroundImg + ')'
       : ''
   }"
 >
@@ -13,17 +13,12 @@
       display: branding?.poweredByLogo ? 'block' : 'none'
     }"
   >
-    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
+    <h1>powered by<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
   </div>
   <div [innerHTML]="myStyle"></div>
   <div class="container">
     <div class="logo">
-      <div
-        class="logo__items"
-        [ngStyle]="{
-          marginBottom: branding?.poweredByLogo ? '0px' : '3.166rem'
-        }"
-      >
+      <div class="logo__items">
         <img src="assets/{{ brand }}/{{ branding?.logoUrl }}" alt="logo" />
       </div>
     </div>

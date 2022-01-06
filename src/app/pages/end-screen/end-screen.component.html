@@ -8,8 +8,8 @@
 <div
   class="container"
   [ngStyle]="{
-    backgroundImage: branding?.backGroundImg
-      ? 'url(assets/' + brand + '/' + branding?.backGroundImg + ')'
+    backgroundImage: branding?.lastBackGroundImg
+      ? 'url(assets/' + brand + '/' + branding?.lastBackGroundImg + ')'
       : ''
   }"
 >
@@ -19,16 +19,10 @@
       display: branding?.poweredByLogo ? 'block' : 'none'
     }"
   >
-    <h1>powered By<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
+    <h1>powered by<img src="../../../assets/images/VIRTAMED.png" alt="" /></h1>
   </div>
   <div class="content">
-    <img
-      [ngStyle]="{
-        marginBottom: branding?.poweredByLogo ? '0px' : '6.969rem'
-      }"
-      src="assets/{{ brand }}/{{ branding?.logoUrl }}"
-      alt="logo"
-    />
+    <img src="assets/{{ brand }}/{{ branding?.logoUrl }}" alt="logo" />
 
     <div
       *ngIf="!cancel"

@@ -33,17 +33,17 @@
       <p
         class="container__title-description m-0"
         [ngStyle]="{
-          color: branding?.contentText?.color
-            ? branding?.contentText?.color
+          color: branding?.introDescriptionText?.color
+            ? branding?.introDescriptionText?.color
             : '',
-          fontFamily: branding?.introDescriptionText
-            ? branding?.introDescriptionText
+          fontFamily: branding?.introDescriptionText.fontFamily
+            ? branding?.introDescriptionText.fontFamily
             : '',
-          fontWeight: branding?.contentText?.fontWeight
-            ? branding?.contentText?.fontWeight
+          fontWeight: branding?.introDescriptionText?.fontWeight
+            ? branding?.introDescriptionText?.fontWeight
             : '',
-          fontSize: branding?.contentText?.fontSize
-            ? branding?.contentText?.fontSize
+          fontSize: branding?.introDescriptionText?.fontSize
+            ? branding?.introDescriptionText?.fontSize
             : ''
         }"
       >
