@@ -156,10 +156,10 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
       #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
-      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.secondaryColor} !important; }
-      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.secondaryColor} !important; }
-      .pi-chevron-right:before {color: ${this.branding.primaryColor} !important; }
-      .pi-chevron-left:before {color: ${this.branding.primaryColor} !important; }
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .pi-chevron-right:before {color: ${this.branding.UIElementCarouselIndicator.color} !important; }
+      .pi-chevron-left:before {color: ${this.branding.UIElementCarouselIndicator.color} !important; }
       .screenshot-thumbnails.active {birder: ${this.branding.buttonOutline.border}}
       </style>`
     );

@@ -5,15 +5,35 @@
     (cancelExe)="onCancelExersice()"
   ></app-header>
 </div>
-
+<div [innerHTML]="myStyle"></div>
 <p-dialog
   styleClass="assessment-image"
   [(visible)]="display"
-  [style]="{ height: 'auto', width: 'auto' }"
+  [style]="{ height: 'auto', width: '800px' }"
   [modal]="true"
   [dismissableMask]="true"
+  *ngIf="display"
 >
-  <img [src]="popupImageUrl" alt="resultImage" />
+  <img [src]="popupImageUrl" *ngIf="!popupImageUrl.length" alt="resultImage" />
+  <p-carousel
+    (touchmove)="this.utility.iosScrollDis($event)"
+    [value]="popupImageUrl"
+    [circular]="true"
+    [numVisible]="1"
+    [numScroll]="1"
+    effect="fade"
+    [responsiveOptions]
+    *ngIf="popupImageUrl.length > 0"
+  >
+    <ng-template let-img pTemplate="img" let-i="index">
+      <img
+        style="height: 100%"
+        [src]="img.url"
+        class="screenShotImage"
+        alt="screenShot-Image"
+      />
+    </ng-template>
+  </p-carousel>
 </p-dialog>
 <div class="container">
   <div class="container__title">
@@ -126,7 +146,7 @@
                 class="screenShotImage"
                 [title]="item?.hint"
                 id="index"
-                (click)="showDialog(item.url)"
+                (click)="showDialog(screenShots)"
                 alt="screenShot-Image"
               />
             </ng-template>
@@ -180,7 +200,7 @@
     </button>
   </div>
 </div>
-<div [innerHTML]="myStyle"></div>
+
 <div
   class="sidebar"
   #sidenav

@@ -18,7 +18,12 @@
   <div [innerHTML]="myStyle"></div>
   <div class="container">
     <div class="logo">
-      <div class="logo__items">
+      <div
+        class="logo__items"
+        [ngStyle]="{
+          marginBottom: branding?.poweredByLogo ? '0px' : '3.166rem'
+        }"
+      >
         <img src="assets/{{ brand }}/{{ branding?.logoUrl }}" alt="logo" />
       </div>
     </div>

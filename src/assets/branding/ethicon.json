@@ -123,7 +123,10 @@
   "UIElementPrimaryColor": "#ffffff",
   "UIElementRecording": "#ffffff",
   "UIElementSecondColor": "#828282",
-  "UIElementOther": "#F30617",
+  "UIElementCarouselIndicator":{
+    "color":"#ffffff",
+    "background": "#F30617"
+  },
   "actionText": {
     "fontFamily": "Arial",
     "fontWeight": "normal",

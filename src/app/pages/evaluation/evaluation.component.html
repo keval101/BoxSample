@@ -8,11 +8,32 @@
 <p-dialog
   styleClass="assessment-image"
   [(visible)]="display"
-  [style]="{ height: 'auto', width: 'auto' }"
+  [style]="{ height: 'auto', width: '800px' }"
   [modal]="true"
   [dismissableMask]="true"
+  *ngIf="display"
 >
-  <img [src]="popupImageUrl" alt="resultImage" />
+  <img [src]="popupImageUrl" alt="resultImage" *ngIf="!popupImageUrl.length" />
+  <p-carousel
+    [showIndicators]="false"
+    (touchmove)="this.utility.iosScrollDis($event)"
+    [value]="popupImageUrl"
+    [circular]="true"
+    [numVisible]="1"
+    [numScroll]="1"
+    effect="fade"
+    [responsiveOptions]
+    *ngIf="popupImageUrl.length > 0"
+  >
+    <ng-template let-img pTemplate="img" let-i="index">
+      <img
+        style="height: 100%"
+        [src]="img"
+        class="screenShotImage"
+        alt="screenShot-Image"
+      />
+    </ng-template>
+  </p-carousel>
 </p-dialog>
 <div [innerHTML]="myStyle"></div>
 <div class="container">
@@ -74,7 +95,7 @@
               <ng-template let-item pTemplate="item">
                 <img
                   [src]="item"
-                  (click)="showDialog(item)"
+                  (click)="showDialog(items)"
                   class="screenShotImage"
                 />
               </ng-template>
@@ -447,6 +468,7 @@
         <button
           class="button button-small button-fill"
           type="button"
+          id="upload"
           (click)="onSubmit()"
           [ngStyle]="{
             background: branding?.buttonFill?.backGround

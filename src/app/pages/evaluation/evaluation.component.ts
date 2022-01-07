@@ -55,11 +55,12 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   allHint = [];
   questionData;
   questionName;
+  questionTitle;
   exerciseName;
   indexDB;
   indexDbSubscription: Subscription;
   display = false;
-  popupImageUrl: string;
+  popupImageUrl: any;
   recordinScore;
   finalObj;
   totalMedia = 0;
@@ -128,13 +129,13 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
-      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.UIElementOther} !important; }
-      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.UIElementOther} !important; }
-      .pi-chevron-right:before {color: ${this.branding.UIElementPrimary} !important; }
-      .pi-chevron-left:before {color: ${this.branding.UIElementPrimary} !important; }
-      .p-rating .p-rating-icon.pi-star {color: ${this.branding.UIElementOther} !important; }
-      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.UIElementOther} !important; }
-      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {background-color: ${this.branding.UIElementOther} !important; }
+      .p-carousel .p-carousel-content .p-carousel-prev {background: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .p-carousel .p-carousel-content .p-carousel-next {background: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .pi-chevron-right:before {color: ${this.branding.UIElementCarouselIndicator.color} !important; }
+      .pi-chevron-left:before {color: ${this.branding.UIElementCarouselIndicator.color} !important; }
+      .p-rating .p-rating-icon.pi-star {color: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {color: ${this.branding.UIElementCarouselIndicator.background} !important; }
+      .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {background-color: ${this.branding.UIElementCarouselIndicator.background} !important; }
       </style>`
     );
     const reportGuid =
@@ -168,6 +169,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       this.questionData = this.selfAssesQueSer.screenShotData;
 
       this.questionName = this.appData.questionnaire.pages[1].sections[0];
+      this.questionTitle = this.appData.questionnaire.pages[1];
       this.translateService
         .get('evaluation.cancelText')
         .subscribe((text: string) => {
@@ -207,7 +209,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
             this.selfAssessImage.score + ' / ' + this.screenshotsData.maxScore,
         },
         {
-          title: this.questionName.name,
+          title: this.questionTitle.name,
           measured: totalScoreforQue.toFixed(0) + '%',
           goalvalue: '100%',
           score: this.totalScore + ' / ' + this.totalMaxScore,

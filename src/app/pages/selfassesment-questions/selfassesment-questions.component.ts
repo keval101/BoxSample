@@ -71,7 +71,7 @@ export class SelfassesmentQuestionsComponent implements OnInit {
       #sidebar__content p {font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       #sidebar__content ul{font-size: ${this.branding.contentText.fontSize} ;color: ${this.branding.contentText.color} ;font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
       .p-dialog.p-confirm-dialog .p-confirm-dialog-message{font-size: ${this.branding.contentText.fontSize} !important;color: ${this.branding.contentText.color};font-weight: ${this.branding.contentText.fontWeight};font-family: ${this.branding.contentText.fontFamily};}
-      .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {background: ${this.branding.UIElementOther} !important; }</style>`
+      .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {background: ${this.branding.UIElementCarouselIndicator.background} !important; }</style>`
     );
 
     this.translateService
