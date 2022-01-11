@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && !this.appData) {
-        const anyCase = this.route.snapshot.queryParams['sceneId'];
+        const anyCase = this.route.snapshot.queryParams['sceneIdentifier'];
         const brandingParam = this.route.snapshot.queryParams['branding'];
         if (!this.hasDataReceived) {
           this.hasDataReceived = true;

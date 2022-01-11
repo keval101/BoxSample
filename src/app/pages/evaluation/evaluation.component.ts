@@ -139,7 +139,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       </style>`
     );
     const reportGuid =
-      this.activeRoute.snapshot.queryParams['reportContextHash'];
+      this.activeRoute.snapshot.queryParams['context'];
     this.reportGuid = reportGuid
       ? reportGuid
       : 'f3cefa4a-83c9-473c-8883-3a46f2ff4f2c';

@@ -38,8 +38,8 @@ export class DataService {
     private messageService: MessageService
   ) {
     this.activeRouter.queryParams.subscribe((params) => {
-      this.activeParams = params.sceneId;
-      this.activeReportGuid = params.reportContextHash;
+      this.activeParams = params.sceneIdentifier;
+      this.activeReportGuid = params.context;
     });
   }
 
@@ -116,25 +116,25 @@ export class DataService {
     if (this.activeParams || this.activeReportGuid) {
       this.router.navigate([url], {
         queryParams: {
-          sceneId: this.activeParams,
-          reportContextHash: this.activeReportGuid,
+          sceneIdentifier: this.activeParams,
+          context: this.activeReportGuid,
         },
       });
       if (this.activeParams) {
         this.setSessionData(
-          `${url}?sceneId=${this.activeParams}`,
+          `${url}?sceneIdentifier=${this.activeParams}`,
           'currentUrl'
         );
       }
       if (this.activeParams && this.activeReportGuid) {
         this.setSessionData(
-          `${url}?sceneId=${this.activeParams}&reportContextHash=${this.activeReportGuid}`,
+          `${url}?sceneIdentifier=${this.activeParams}&context=${this.activeReportGuid}`,
           'currentUrl'
         );
       }
       if (!this.activeParams && this.activeReportGuid) {
         this.setSessionData(
-          `${url}?reportContextHash=${this.activeReportGuid}`,
+          `${url}?context=${this.activeReportGuid}`,
           'currentUrl'
         );
       }
