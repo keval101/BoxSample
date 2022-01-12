@@ -138,8 +138,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
       .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {background-color: ${this.branding.UIElementCarouselIndicator.background} !important; }
       </style>`
     );
-    const reportGuid =
-      this.activeRoute.snapshot.queryParams['context'];
+    const reportGuid = this.activeRoute.snapshot.queryParams['context'];
     this.reportGuid = reportGuid
       ? reportGuid
       : 'f3cefa4a-83c9-473c-8883-3a46f2ff4f2c';
