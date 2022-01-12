@@ -68,7 +68,8 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   totalMediaForUpload = [];
   reportGuid: string;
   myStyle: SafeHtml;
-
+  selectedPage = 0;
+  dialogGoal=false;
   brand = environment.branding;
 
   constructor(
@@ -600,7 +601,17 @@ export class EvaluationComponent implements OnInit, OnDestroy {
   showDialog(url) {
     this.display = true;
     this.popupImageUrl = url;
+    if(typeof(this.popupImageUrl) == "string"){
+      this.dialogGoal=true;
+    }else{
+      this.dialogGoal=false;
+    }
   }
+
+  setPage(indexOf: { page: number }): void {
+    this.selectedPage = indexOf.page
+  }
+
   moveLastArrayElementToFirstIndex(this_array) {
     this_array.splice(0, 0, this_array[this_array.length - 1]);
     this_array.pop();

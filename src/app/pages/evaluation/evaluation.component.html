@@ -13,7 +13,7 @@
   [dismissableMask]="true"
   *ngIf="display"
 >
-  <img [src]="popupImageUrl" alt="resultImage" *ngIf="!popupImageUrl.length" />
+  <img [src]="popupImageUrl" alt="resultImage" *ngIf="dialogGoal" />
   <p-carousel
     [showIndicators]="false"
     (touchmove)="this.utility.iosScrollDis($event)"
@@ -23,7 +23,10 @@
     [numScroll]="1"
     effect="fade"
     [responsiveOptions]
-    *ngIf="popupImageUrl.length > 0"
+    *ngIf="!dialogGoal"
+    (onPage)="setPage($event)"
+    [page]="selectedPage"
+
   >
     <ng-template let-img pTemplate="img" let-i="index">
       <img
@@ -91,6 +94,8 @@
               [numVisible]="1"
               [circular]="true"
               [responsiveOptions]
+              (onPage)="setPage($event)"
+              [page]="selectedPage"
             >
               <ng-template let-item pTemplate="item">
                 <img

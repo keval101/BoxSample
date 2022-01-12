@@ -87,6 +87,7 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
   }
 
   setPage(indexOf: { page: number }): void {
+    this.selectedPage = indexOf.page;
     this.pageIndex = indexOf.page;
     this.screenShots.forEach((element, index) => {
       if (index === this.pageIndex) {
@@ -245,7 +246,8 @@ export class SelfAssesmentComponent implements OnInit, OnDestroy {
     this.dataService.preserveQueryParams('/self-assesment-questions');
   }
 
-  showDialog(url) {
+  showDialog(url:any,item:any) {
+    this.selectedPage = this.screenShots.indexOf(item)
     this.display = true;
     this.popupImageUrl = url;
   }

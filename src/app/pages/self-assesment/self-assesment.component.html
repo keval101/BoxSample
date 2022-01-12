@@ -24,6 +24,8 @@
     effect="fade"
     [responsiveOptions]
     *ngIf="popupImageUrl.length > 0"
+    (onPage)="setPage($event)"
+    [page]="selectedPage"
   >
     <ng-template let-img pTemplate="img" let-i="index">
       <img
@@ -101,7 +103,7 @@
       <div class="selfassesment__result-content">
         <img
           [src]="resultImage"
-          (click)="showDialog(resultImage)"
+          (click)="showDialog(resultImage,1)"
           alt="resultImage"
         />
       </div>
@@ -146,7 +148,7 @@
                 class="screenShotImage"
                 [title]="item?.hint"
                 id="index"
-                (click)="showDialog(screenShots)"
+                (click)="showDialog(screenShots,item)"
                 alt="screenShot-Image"
               />
             </ng-template>
