@@ -7,6 +7,12 @@ import { RecordingScreenComponent } from './recording-screen.component';
 import { HeaderModule } from 'src/app/features/header/header.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { NgxOpenCVModule, OpenCVConfig } from 'ngx-opencv';
+
+const openCVConfig: OpenCVConfig = {
+  openCVDirPath:'/assets/opencv'
+}
+
 @NgModule({
   declarations: [RecordingScreenComponent],
   imports: [
@@ -15,6 +21,7 @@ import { ConfirmationService } from 'primeng/api';
     RecordingScreenRoutingModule,
     HeaderModule,
     ConfirmDialogModule,
+    NgxOpenCVModule.forRoot(openCVConfig)
   ],
   providers: [ConfirmationService],
 })

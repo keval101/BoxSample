@@ -22,12 +22,14 @@ import { DataService } from 'src/app/shared/shared/data.service';
 import { UtilityService } from 'src/app/shared/shared/utility.service';
 import { v4 as uuidv4 } from 'uuid';
 import { environment } from 'src/environments';
+import { NgxOpenCVService, OpenCVState } from 'ngx-opencv';
 
 declare let MediaRecorder;
 declare const window: Window &
   typeof globalThis & {
     stream: MediaStream;
   };
+declare var cv:any;
 
 @Component({
   selector: 'app-recording-screen',
@@ -69,11 +71,15 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   startRecordingTime;
   myStyle: SafeHtml;
   brand = environment.branding;
-
+  isDetection:boolean;
+  examType:string="";
   @ViewChild('video') videoEle: ElementRef;
   @ViewChild('videoPreview') recordedVideoEle: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('sidenav') sidenav: ElementRef;
+  @ViewChild('videoFrame') videoFrame: ElementRef;
+  @ViewChild('detection') detection: ElementRef;
+  @ViewChild('circlePopup') circlePopup: ElementRef;
   randomNum: string;
 
   constructor(
@@ -89,7 +95,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private utility: UtilityService,
     private evolutionService: EvolutionService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private ngxOpenCvService:NgxOpenCVService
   ) {
     this.headerService.muteUnmuteMic.subscribe((res) => {
       this.micValue = res;
@@ -126,7 +133,11 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       .p-inputswitch .p-inputswitch-slider:before {background: ${this.branding.UIElementPrimaryColor} !important; }</style>`
     );
     this.randomNum = uuidv4();
-    this.initRecording();
+    this.ngxOpenCvService.cvState.subscribe((cvState:OpenCVState)=>{
+      if(cvState.ready){
+        this.initRecording();
+      }
+    }) 
   }
 
   initRecording() {
@@ -150,6 +161,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     this.recordingDurationTime = '00:00';
   }
   onFinish(): void {
+    this.isDetection = false;
     this.recordingService.fullscreen = false;
     this.isSidebarOpen = false;
     this.isRunning = false;
@@ -289,19 +301,152 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   resumeRecording(): void {
     this.mediaRecorder.start();
   }
-
+  
   handleSuccess(stream: MediaStream): void {
     window.stream = stream;
     const gumVideo = this.videoEle.nativeElement;
     gumVideo.srcObject = stream;
   }
+  context;
+  detectCircle(){
+    this.context = this.videoFrame.nativeElement.getContext('2d');
+    this.context.canvas.width = this.videoEle.nativeElement.offsetWidth;
+    this.context.canvas.height = this.videoEle.nativeElement.offsetHeight;
+    this.context.drawImage(this.videoEle.nativeElement,0,0,this.videoEle.nativeElement.offsetWidth,this.videoEle.nativeElement.offsetHeight);
+    let src = cv.imread('videoFrame');
+    this.processImage(src);
+    
+    // if(this.isDetection){
+    requestAnimationFrame(this.detectCircle.bind(this));
+    // }
+  }
+  processImage(src){
+    let detectionContext = this.detection.nativeElement.getContext('2d');
+    detectionContext.canvas.width = this.videoEle.nativeElement.offsetWidth;
+    detectionContext.canvas.height = this.videoEle.nativeElement.offsetHeight;
+    detectionContext.clearRect(0,0,this.videoEle.nativeElement.offsetWidth,this.videoEle.nativeElement.offsetHeight);
+    
+    let dst = cv.imread('detection');
+    //Convert into Gray Color
+    cv.cvtColor(src,src,cv.COLOR_RGBA2GRAY);
+    //Blur Image
+    cv.medianBlur(src,src,3);
+    
+    let circles = new cv.Mat();
 
+    let redColor = new cv.Scalar(255,0,0,255);
+    let greenColor = new cv.Scalar(0,255,0,255);
+    
+    cv.HoughCircles(src,circles,cv.HOUGH_GRADIENT,1,100,90,90);
+
+    let circleArray = [];
+
+    if(circles.cols === 0){
+      this.circlePopup.nativeElement.style.visibility = "visible";
+      this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
+    }else{
+      for(let i = 0; i < circles.cols; ++i) {
+        let x = circles.data32F[i * 3];
+        let y = circles.data32F[i * 3 + 1];
+        let radius = circles.data32F[i * 3 + 2];
+        let center = new cv.Point(x, y);
+        let smallCircle = new cv.Mat();
+        let bigCircle = new cv.Mat();
+        cv.HoughCircles(src,smallCircle,cv.HOUGH_GRADIENT,1,100,70,70,0,radius-5);
+        cv.HoughCircles(src,bigCircle,cv.HOUGH_GRADIENT,1,100,70,70,radius+5);
+        if(smallCircle.cols>0 || bigCircle.cols>0){
+          this.examType = "Practice";
+        }else{
+          this.examType = "Exam";
+        }
+        console.log(bigCircle.cols)
+        let maxRadius = bigCircle.cols>0?75:100;
+        console.log(maxRadius)
+        if(radius<maxRadius){
+          
+          // circleArray.push({center:center,radius:radius,color:redColor});
+          if(bigCircle.cols>0){
+            for(let b = 0; b < bigCircle.cols; ++b) {
+              let bx = bigCircle.data32F[b * 3];
+              let by = bigCircle.data32F[b * 3 + 1];
+              let bradius = bigCircle.data32F[b * 3 + 2];
+              let bcenter = new cv.Point(bx, by);
+              cv.circle(dst, bcenter, bradius, redColor,2);
+              // circleArray.push({center:bcenter,radius:bradius,color:redColor});
+            }
+          }
+          if(smallCircle.cols>0){
+            for(let s = 0; s < smallCircle.cols; ++s) {
+              let sx = smallCircle.data32F[s * 3];
+              let sy = smallCircle.data32F[s * 3 + 1];
+              let sradius = smallCircle.data32F[s * 3 + 2];
+              let scenter = new cv.Point(sx, sy);
+              cv.circle(dst, scenter, sradius, redColor,2);
+              // circleArray.push({center:scenter,radius:sradius,color:redColor});
+            }
+          }
+          cv.circle(dst, center, radius, redColor,2);
+          this.circlePopup.nativeElement.style.visibility = "visible";
+          this.circlePopup.nativeElement.innerHTML = "Please bring the gauze closer to your camera view";
+        }else{
+          // circleArray.push({center:center,radius:radius,color:greenColor});
+          
+          let leftEdge = this.videoEle.nativeElement.offsetWidth*20/100;
+          let rightEdge = this.videoEle.nativeElement.offsetWidth*80/100;
+          let circleLeftX = x-radius;
+          let circleRightX = x+radius;
+          let color;
+          if(circleLeftX > leftEdge && circleRightX < rightEdge){
+            this.circlePopup.nativeElement.style.visibility = "visible";
+            this.circlePopup.nativeElement.innerHTML = "Now start performing your "+this.examType.toLowerCase()+" circular cutting task";
+            color = greenColor;
+          }else{
+            this.circlePopup.nativeElement.style.visibility = "visible";
+            this.circlePopup.nativeElement.innerHTML = "Please position your gauze in the middle of your camera view";
+            color = redColor;
+          }
+          if(bigCircle.cols>0){
+            for(let b = 0; b < bigCircle.cols; ++b) {
+              let bx = bigCircle.data32F[b * 3];
+              let by = bigCircle.data32F[b * 3 + 1];
+              let bradius = bigCircle.data32F[b * 3 + 2];
+              let bcenter = new cv.Point(bx, by);
+              cv.circle(dst, bcenter, bradius, color,2);
+              // circleArray.push({center:bcenter,radius:bradius,color:greenColor});
+            }
+          }
+          if(smallCircle.cols>0){
+            for(let s = 0; s < smallCircle.cols; ++s) {
+              let sx = smallCircle.data32F[s * 3];
+              let sy = smallCircle.data32F[s * 3 + 1];
+              let sradius = smallCircle.data32F[s * 3 + 2];
+              let scenter = new cv.Point(sx, sy);
+              cv.circle(dst, scenter, sradius, color,2);
+              // circleArray.push({center:scenter,radius:sradius,color:greenColor});
+            }
+          }
+          cv.circle(dst, center, radius, color,2);
+        }
+      }
+    }
+    // for(let c=0;c<circleArray.length;c++){
+    //   cv.circle(dst, circleArray[c].center, circleArray[c].radius, circleArray[c].color,2);
+    // }
+    // console.log(examType)
+    cv.imshow('detection', dst);
+    src.delete();
+    dst.delete();
+  }
   async init(constraints: MediaStreamConstraints): Promise<MediaStream> {
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       this.videoTrack = stream.getVideoTracks()[0];
       this.audioTrack = stream.getAudioTracks()[0];
       this.handleSuccess(stream);
+      this.isDetection = true;
+      // setTimeout(()=>{
+        this.detectCircle();
+      // },9000)
       return null;
     } catch (e) {
       console.error('navigator.getUserMedia error:', e);
@@ -384,6 +529,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     }
   }
   onCancelExersice(): void {
+    this.isDetection = false;
     this.confirmationService.confirm({
       message: this.cancelText,
       accept: () => {

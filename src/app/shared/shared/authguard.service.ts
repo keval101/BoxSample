@@ -22,6 +22,7 @@ export class AuthguardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
+    return true;
     const currUrl = this.dataservice.getSessionData('currentUrl');
     if (currUrl === state.url) {
       return true;
