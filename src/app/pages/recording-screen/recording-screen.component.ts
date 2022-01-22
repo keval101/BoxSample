@@ -78,7 +78,6 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('sidenav') sidenav: ElementRef;
   @ViewChild('videoFrame') videoFrame: ElementRef;
-  @ViewChild('detection') detection: ElementRef;
   @ViewChild('circlePopup') circlePopup: ElementRef;
   randomNum: string;
 
@@ -308,89 +307,88 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     gumVideo.srcObject = stream;
   }
   context;
-  detectCircle(){
+  detection(){
     this.context = this.videoFrame.nativeElement.getContext('2d');
     this.context.canvas.width = this.videoEle.nativeElement.offsetWidth;
     this.context.canvas.height = this.videoEle.nativeElement.offsetHeight;
-    this.context.drawImage(this.videoEle.nativeElement,0,0,this.videoEle.nativeElement.offsetWidth,this.videoEle.nativeElement.offsetHeight);
-    let src = cv.imread('videoFrame');
-    this.processImage(src);
-    
-    // if(this.isDetection){
-    requestAnimationFrame(this.detectCircle.bind(this));
-    // }
+    setInterval(()=>{
+      if(this.videoEle.nativeElement.videoHeight>0){
+        this.detectCircle();
+      }
+    },0);
   }
-  processImage(src){
-    let detectionContext = this.detection.nativeElement.getContext('2d');
-    detectionContext.canvas.width = this.videoEle.nativeElement.offsetWidth;
-    detectionContext.canvas.height = this.videoEle.nativeElement.offsetHeight;
-    detectionContext.clearRect(0,0,this.videoEle.nativeElement.offsetWidth,this.videoEle.nativeElement.offsetHeight);
-    
-    let dst = cv.imread('detection');
+
+  detectCircle(){
+    let videoHeight = this.videoEle.nativeElement.videoHeight;
+    let videoOffset = this.videoEle.nativeElement.offsetHeight;
+    this.videoEle.nativeElement.height = this.videoEle.nativeElement.videoHeight;
+    this.videoEle.nativeElement.width = this.videoEle.nativeElement.videoWidth;
+    let src = new cv.Mat(this.videoEle.nativeElement.videoHeight,this.videoEle.nativeElement.videoWidth,cv.CV_8UC4)
+    let cap = new cv.VideoCapture(this.videoEle.nativeElement);
+    cap.read(src);
+
+    this.videoEle.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+    this.videoEle.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+
+    let dst = new cv.Mat(this.videoEle.nativeElement.offsetHeight,this.videoEle.nativeElement.offsetWidth,cv.CV_8UC4)
+    let dstcap = new cv.VideoCapture(this.videoEle.nativeElement);
+    dstcap.read(dst);
     //Convert into Gray Color
     cv.cvtColor(src,src,cv.COLOR_RGBA2GRAY);
     //Blur Image
-    cv.medianBlur(src,src,3);
-    
+    let ksize = new cv.Size(5,5)
+    cv.GaussianBlur(src,src,ksize,0)
+    cv.medianBlur(src,src,3);  
+
     let circles = new cv.Mat();
 
     let redColor = new cv.Scalar(255,0,0,255);
     let greenColor = new cv.Scalar(0,255,0,255);
     
-    cv.HoughCircles(src,circles,cv.HOUGH_GRADIENT,1,100,90,90);
-
-    let circleArray = [];
+    cv.HoughCircles(src,circles,cv.HOUGH_GRADIENT,1,100,85,85);
 
     if(circles.cols === 0){
       this.circlePopup.nativeElement.style.visibility = "visible";
       this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
-    }else{
+    }else if(circles.cols === 1){
       for(let i = 0; i < circles.cols; ++i) {
-        let x = circles.data32F[i * 3];
-        let y = circles.data32F[i * 3 + 1];
-        let radius = circles.data32F[i * 3 + 2];
+        let x = circles.data32F[i * 3]*videoOffset/videoHeight;
+        let y = circles.data32F[i * 3 + 1]*videoOffset/videoHeight;
+        let radius = circles.data32F[i * 3 + 2]*videoOffset/videoHeight;
         let center = new cv.Point(x, y);
         let smallCircle = new cv.Mat();
         let bigCircle = new cv.Mat();
-        cv.HoughCircles(src,smallCircle,cv.HOUGH_GRADIENT,1,100,70,70,0,radius-5);
-        cv.HoughCircles(src,bigCircle,cv.HOUGH_GRADIENT,1,100,70,70,radius+5);
+        cv.HoughCircles(src,smallCircle,cv.HOUGH_GRADIENT,1,100,70,70,0,circles.data32F[i * 3 + 2]-5);
+        cv.HoughCircles(src,bigCircle,cv.HOUGH_GRADIENT,1,100,70,70,circles.data32F[i * 3 + 2]+5);
         if(smallCircle.cols>0 || bigCircle.cols>0){
           this.examType = "Practice";
         }else{
           this.examType = "Exam";
         }
-        console.log(bigCircle.cols)
-        let maxRadius = bigCircle.cols>0?75:100;
-        console.log(maxRadius)
+        let maxRadius = bigCircle.cols>0?(75*videoOffset/videoHeight):(100*videoOffset/videoHeight);
         if(radius<maxRadius){
-          
-          // circleArray.push({center:center,radius:radius,color:redColor});
           if(bigCircle.cols>0){
             for(let b = 0; b < bigCircle.cols; ++b) {
-              let bx = bigCircle.data32F[b * 3];
-              let by = bigCircle.data32F[b * 3 + 1];
-              let bradius = bigCircle.data32F[b * 3 + 2];
+              let bx = bigCircle.data32F[b * 3]*videoOffset/videoHeight;;
+              let by = bigCircle.data32F[b * 3 + 1]*videoOffset/videoHeight;;
+              let bradius = bigCircle.data32F[b * 3 + 2]*videoOffset/videoHeight;;
               let bcenter = new cv.Point(bx, by);
               cv.circle(dst, bcenter, bradius, redColor,2);
-              // circleArray.push({center:bcenter,radius:bradius,color:redColor});
             }
           }
           if(smallCircle.cols>0){
             for(let s = 0; s < smallCircle.cols; ++s) {
-              let sx = smallCircle.data32F[s * 3];
-              let sy = smallCircle.data32F[s * 3 + 1];
-              let sradius = smallCircle.data32F[s * 3 + 2];
+              let sx = smallCircle.data32F[s * 3]*videoOffset/videoHeight;;
+              let sy = smallCircle.data32F[s * 3 + 1]*videoOffset/videoHeight;;
+              let sradius = smallCircle.data32F[s * 3 + 2]*videoOffset/videoHeight;;
               let scenter = new cv.Point(sx, sy);
               cv.circle(dst, scenter, sradius, redColor,2);
-              // circleArray.push({center:scenter,radius:sradius,color:redColor});
             }
           }
           cv.circle(dst, center, radius, redColor,2);
           this.circlePopup.nativeElement.style.visibility = "visible";
           this.circlePopup.nativeElement.innerHTML = "Please bring the gauze closer to your camera view";
         }else{
-          // circleArray.push({center:center,radius:radius,color:greenColor});
-          
           let leftEdge = this.videoEle.nativeElement.offsetWidth*20/100;
           let rightEdge = this.videoEle.nativeElement.offsetWidth*80/100;
           let circleLeftX = x-radius;
@@ -407,35 +405,31 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           }
           if(bigCircle.cols>0){
             for(let b = 0; b < bigCircle.cols; ++b) {
-              let bx = bigCircle.data32F[b * 3];
-              let by = bigCircle.data32F[b * 3 + 1];
-              let bradius = bigCircle.data32F[b * 3 + 2];
+              let bx = bigCircle.data32F[b * 3]*videoOffset/videoHeight;;
+              let by = bigCircle.data32F[b * 3 + 1]*videoOffset/videoHeight;;
+              let bradius = bigCircle.data32F[b * 3 + 2]*videoOffset/videoHeight;;
               let bcenter = new cv.Point(bx, by);
               cv.circle(dst, bcenter, bradius, color,2);
-              // circleArray.push({center:bcenter,radius:bradius,color:greenColor});
             }
           }
           if(smallCircle.cols>0){
             for(let s = 0; s < smallCircle.cols; ++s) {
-              let sx = smallCircle.data32F[s * 3];
-              let sy = smallCircle.data32F[s * 3 + 1];
-              let sradius = smallCircle.data32F[s * 3 + 2];
+              let sx = smallCircle.data32F[s * 3]*videoOffset/videoHeight;
+              let sy = smallCircle.data32F[s * 3 + 1]*videoOffset/videoHeight;
+              let sradius = smallCircle.data32F[s * 3 + 2]*videoOffset/videoHeight;
               let scenter = new cv.Point(sx, sy);
               cv.circle(dst, scenter, sradius, color,2);
-              // circleArray.push({center:scenter,radius:sradius,color:greenColor});
             }
           }
           cv.circle(dst, center, radius, color,2);
         }
       }
     }
-    // for(let c=0;c<circleArray.length;c++){
-    //   cv.circle(dst, circleArray[c].center, circleArray[c].radius, circleArray[c].color,2);
-    // }
-    // console.log(examType)
-    cv.imshow('detection', dst);
+
+    cv.imshow('videoFrame',dst)
+
     src.delete();
-    dst.delete();
+    dst.delete();    
   }
   async init(constraints: MediaStreamConstraints): Promise<MediaStream> {
     try {
@@ -444,9 +438,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       this.audioTrack = stream.getAudioTracks()[0];
       this.handleSuccess(stream);
       this.isDetection = true;
-      // setTimeout(()=>{
-        this.detectCircle();
-      // },9000)
+        this.detection();
       return null;
     } catch (e) {
       console.error('navigator.getUserMedia error:', e);

@@ -46,17 +46,9 @@
     }
     .videoFrame {
       position: absolute;
-      // min-width: 100vw;
       height: auto;
       width: auto;
       z-index: -10;
-    }
-    .detection {
-      z-index: 10;
-      position: absolute;
-      height: auto;
-      width: auto;
-      background-color: transparent;
     }
     video {
       position: absolute;
