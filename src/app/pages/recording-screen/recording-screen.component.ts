@@ -80,6 +80,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   @ViewChild('videoFrame') videoFrame: ElementRef;
   @ViewChild('circlePopup') circlePopup: ElementRef;
   randomNum: string;
+  defualtMessageTimeout;
+  showDefaultMessage:boolean = true;
 
   constructor(
     public translateService: TranslateService,
@@ -349,8 +351,18 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
 
     if(circles.cols === 0){
       this.circlePopup.nativeElement.style.visibility = "visible";
-      this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
+      if(this.showDefaultMessage){  
+        this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
+      }
     }else if(circles.cols === 1){
+      this.showDefaultMessage = false;
+      if(this.defualtMessageTimeout){
+        clearTimeout(this.defualtMessageTimeout);
+      }
+      this.defualtMessageTimeout=setTimeout(()=>{
+        this.showDefaultMessage = true;
+      },2000);
+
       for(let i = 0; i < circles.cols; ++i) {
         let x = circles.data32F[i * 3]*videoOffset/videoHeight;
         let y = circles.data32F[i * 3 + 1]*videoOffset/videoHeight;
