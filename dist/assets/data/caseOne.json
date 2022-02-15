@@ -1,0 +1,282 @@
+{
+  "name": "Circular cutting",
+  "nameLanguageKey": "Scene1.Name",
+  "description": "",
+  "groupName": "",
+  "sceneSectionName": "LaparoS™ - Essential skills",
+  "sceneSectionNameLanguageKey": "SceneSection.Name",
+  "imageBlobUrl": "https://virtamed.blob.core.windows.net/connect-develop-images/38cb21e7-65b1-4c1f-882c-0e0f7ef230d2.png?sv=2017-04-17&sr=b&sig=nFUqGgOoDUurJDOxT8RIU%2BkJcanfEDrEmRhbxZGmp2Q%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+  "reportSections": [
+    {
+      "name": "Report",
+      "nameLanguageKey": "ReportSection.Name",
+      "reportItems": [
+        {
+          "name": "Excercise Duration",
+          "nameLanguageKey": "ReportItem.ExcerciseDuration.Name",
+          "description": "",
+          "descriptionLanguageKey": "",
+          "maxValue": 6000,
+          "minValue": 90,
+          "maxScore": 50,
+          "noScore": false,
+          "goalValueString": "< 02:00",
+          "unit": "Second",
+          "bestIs": "MinValue",
+          "displayMode": "Default",
+          "identifier": "93704cc6-97a6-4643-9a2e-c5ffc579b3c0"
+        }
+      ],
+      "identifier": "fb0e7bc8-b9b0-4833-be8a-6dda7ddb4932"
+    }
+  ],
+  "simulationPreferences": [],
+  "descriptionItems": [
+    {
+      "header": "",
+      "content": "<div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Average duration</h2><p>1:30 minutes</p></div><div><h2>What you need</h2><ul><li>Your choice of box trainer</li><li>Grasper</li><li>Scissors</li><li>Gauze with circle pattern</li></ul></div><div><h2>What you will do</h2><ul><li>1. Watch a tutorial video</li><li>2. Record your exercise</li><li>3. Rate your result</li><li>4. Review and upload result</li></ul></div>",
+      "imageUrl": "https://virtamed.blob.core.windows.net/connect-develop-images/b9005725-b5eb-4f80-a9cd-3f74f0d4c8bf.png?sv=2017-04-17&sr=b&sig=E9x6BTjxnlvm%2FXamBDhXTWQaTgWBgoYYS1QRtMUngYw%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+      "movieUrl": "",
+      "tag": "IntroPage"
+    },
+    {
+      "header": "",
+      "content": "<h1>Exercise</h1><div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Your tasks</h2><p>Your objective is to cut out the circle as precisely and in as little time as possible</p><ul><li>Make sure your setup and equipment are ready</li><li>Make sure your camera is selected and your view is centered</li><li>When you are ready to start, press Start exercise.</li></ul><p>Note: your time will start once you press Start exercise and the 3 second countdown is done.</p></div>",
+      "imageUrl": "",
+      "movieUrl": "",
+      "tag": "SetupPage"
+    },
+    {
+      "header": "",
+      "content": "<h1>Exercise</h1><div><h2>Goals</h2><p>Precisely cut out the circle pattern from the gauze</p></div><div><h2>Your tasks</h2><ul><li>Perform the exercise as described in the tutorial video</li><li>If you like, you can take screenshots during the exercise by pressing the screenshot button</li><li>When you are finished the exercise, press the Finish recording button</li><li>Press the Stop button to cancel this recording and go back to the set up</li><li>Press the Quit button to cancel this recordning and quit the exercise</li></ul></div>",
+      "imageUrl": "",
+      "movieUrl": "",
+      "tag": "RecordingPage,TakescreenshotPage,EvaluationPage"
+    },
+    {
+      "header": "",
+      "content": "<h1>Learn more about the self assessment:</h1><div><p>In this self assessment you will choose from a sample of images the one that most looks like your final result. Based on your selection, you will receive feedback on what you can do differently next time to improve.</p></div><div><p>Compare your final result screenshot on the left to your choice sample image on the right.</p></div><div><p>Once you have selected the image that best matches, click Next.</p></div>",
+      "imageUrl": "",
+      "movieUrl": "",
+      "tag": "SelfAssesment"
+    },
+    {
+      "header": "",
+      "content": "<h1>Learn more about the questions:</h1><div><p>At the end of the exercise you are asked to answer some yes or no questions regarding your performance and experience in this exercise. Your answsers wiill influence your score.</p></div><div><p>Answer yes or no to the presented questions in order to proceed.</p></div>",
+      "imageUrl": "",
+      "movieUrl": "",
+      "tag": "SelfAssesmentQuestionsPage"
+    }
+  ],
+  "movies": [
+    {
+      "fileName": "Circular cutting",
+      "copyrightInfo": "by VirtaMed, Zurich, August 2021",
+      "url": "https://virtamed.blob.core.windows.net/connect-develop-movies/1d1ac399-1ee1-4466-8f8a-b042196205af.mp4?sv=2017-04-17&sr=b&sig=i%2F145%2Fhef5%2Fhp3xIigrYA90tYPecQxdoKSek1O5arGg%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000"
+    }
+  ],
+  "questionnaire": {
+    "maxScore": 80,
+    "pages": [
+      {
+        "maxScore": 50,
+        "screenshots": [
+          {
+            "identifier": "2df79577-3479-4a94-a0de-e0f5f3b5c55f",
+            "url": "https://virtamed.blob.core.windows.net/connect-develop-images/d8522548-b73b-4f50-a57b-9b6b6271a204.png?sv=2017-04-17&sr=b&sig=cRnJt3vwt3n3HGD79%2FX4%2B9RsFbMY4ABO%2FzG1D0eofBw%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+            "imageBlobName": "d8522548-b73b-4f50-a57b-9b6b6271a204.png",
+            "score": 40,
+            "hint": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+          },
+          {
+            "identifier": "6961dc99-829f-413a-a4b5-4118902c219e",
+            "url": "https://virtamed.blob.core.windows.net/connect-develop-images/b90684c7-e44f-49e6-8d9f-bd863984747c.png?sv=2017-04-17&sr=b&sig=GH3b9zXlSE9sN%2BIdJkppal9zWqQnGTF7oShsSxyEh6c%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+            "imageBlobName": "b90684c7-e44f-49e6-8d9f-bd863984747c.png",
+            "score": 30,
+            "hint": "Nice job. Keep on practicing to improve your accuracy."
+          },
+          {
+            "identifier": "2aee14a4-7c95-4477-bfab-4fee03963a0e",
+            "url": "https://virtamed.blob.core.windows.net/connect-develop-images/69dc40a0-c919-405e-965f-e849b5784536.png?sv=2017-04-17&sr=b&sig=%2FhkzNXEHmphqyz%2Foy9tCx5ELn9X1KOClps93GYsC4Ns%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+            "imageBlobName": "69dc40a0-c919-405e-965f-e849b5784536.png",
+            "score": 20,
+            "hint": "Great job cutting precisely!"
+          },
+          {
+            "identifier": "cc829968-18ce-474f-b67e-d979ef481029",
+            "url": "https://virtamed.blob.core.windows.net/connect-develop-images/47bd2c71-ba0a-4e58-a9db-50c9b640bd49.png?sv=2017-04-17&sr=b&sig=OliLTtZ0Ji0dUtnrT83wdbtuARaKpM17yAawVX1SPdY%3D&se=2021-11-17T12%3A04%3A26Z&sp=r&rscc=public%2C%20max-age%3D432000",
+            "imageBlobName": "47bd2c71-ba0a-4e58-a9db-50c9b640bd49.png",
+            "score": 50,
+            "hint": "Next time you can work on using your grasping hand to apply tension on the gauze for better cutting."
+          }
+        ],
+        "reportItemIdentifier": "00000000-0000-0000-0000-000000000000",
+        "pageType": "ScreenshotAssessment",
+        "identifier": "91b7a40a-0294-41fd-a1ff-1bd3eb25d5e3",
+        "name": "Screenshot Assessment",
+        "nameLanguageKey": "Scene1.Questionnaire.Pages.ScreenshotAssessment.Name",
+        "description": "Screenshot Assessment",
+        "descriptionLanguageKey": "Scene1.Questionnaire.Pages.ScreenshotAssessment.Description"
+      },
+      {
+        "rows": 1,
+        "columns": 1,
+        "sections": [
+          {
+            "name": "Section Name",
+            "nameLanguageKey": "Scene1.Questionnaire.Page2.Section.Name",
+            "description": "Section Description",
+            "descriptionLanguageKey": "Scene1.Questionnaire.Page2.Section.Description",
+            "questions": [
+              {
+                "name": "I used my dominant hand to cut the circle",
+                "nameLanguageKey": "Scene1.Questionnaire.Page2.Question1.Name",
+                "description": "",
+                "descriptionLanguageKey": "",
+                "answers": [
+                  {
+                    "answerType": "Answer",
+                    "name": "Yes",
+                    "nameLanguageKey": "Questionnaire.Answer.Yes",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "If you're up for a challenge you can try cutting with your non-dominant hand.",
+                    "identifier": "1645b185-a5d2-4344-bac6-6a9a12e3e951",
+                    "isCorrect": true,
+                    "score": 10,
+                    "penaltyScore": 0
+                  },
+                  {
+                    "answerType": "Answer",
+                    "name": "No",
+                    "nameLanguageKey": "Questionnaire.Answer.No",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "",
+                    "identifier": "597f0f63-f1fd-4c1e-b5bf-0a7bb2c82222",
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 0
+                  }
+                ],
+                "identifier": "179071df-5ad5-421b-bf4d-49a58b618d55",
+                "minScore": 0,
+                "maxScore": 10,
+                "row": 0,
+                "column": 0,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single"
+              },
+              {
+                "name": "I used my non dominant hand to apply tension",
+                "nameLanguageKey": "Scene1.Questionnaire.Page2.Question2.Name",
+                "description": "",
+                "descriptionLanguageKey": "",
+                "answers": [
+                  {
+                    "answerType": "Answer",
+                    "name": "Yes",
+                    "nameLanguageKey": "Questionnaire.Answer.Yes",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "",
+                    "identifier": "cbb6688a-37ef-4c32-8155-1c2e4755a623",
+                    "isCorrect": true,
+                    "score": 10,
+                    "penaltyScore": 0
+                  },
+                  {
+                    "answerType": "Answer",
+                    "name": "No",
+                    "nameLanguageKey": "Questionnaire.Answer.No",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "Don't forget to apply proper tension on the gauze while cutting.",
+                    "identifier": "a62888d6-5987-4759-981d-2333c69aebf6",
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 0
+                  }
+                ],
+                "identifier": "e65622a1-54d5-49e3-bb39-c7ec73ffdf39",
+                "minScore": 0,
+                "maxScore": 10,
+                "row": 1,
+                "column": 0,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single"
+              },
+              {
+                "name": "I switched hands during the exercise",
+                "nameLanguageKey": "Scene1.Questionnaire.Page2.Question3.Name",
+                "description": "",
+                "descriptionLanguageKey": "",
+                "answers": [
+                  {
+                    "answerType": "Answer",
+                    "name": "Yes",
+                    "nameLanguageKey": "Questionnaire.Answer.Yes",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "It’s ok to switch hands to complete the exercise, but your overall speed will be affected.",
+                    "identifier": "fad8dfc3-fd22-4d77-bd0b-92cc6dc55990",
+                    "isCorrect": false,
+                    "score": 0,
+                    "penaltyScore": 0
+                  },
+                  {
+                    "answerType": "Answer",
+                    "name": "No",
+                    "nameLanguageKey": "Questionnaire.Answer.No",
+                    "description": "",
+                    "descriptionLanguageKey": "",
+                    "hint": "",
+                    "identifier": "231f0a6e-7a61-4b72-a945-a86a16b16d90",
+                    "isCorrect": true,
+                    "score": 10,
+                    "penaltyScore": 0
+                  }
+                ],
+                "identifier": "260c2cc3-ca4e-4549-83ac-315364452de4",
+                "minScore": 0,
+                "maxScore": 10,
+                "row": 2,
+                "column": 0,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "orientation": "Horizontal",
+                "answerMode": "Manual",
+                "selectionMode": "Single"
+              }
+            ],
+            "identifier": "3e18d1fa-b582-467b-8869-a5144fc9163e",
+            "rows": 3,
+            "columns": 1,
+            "column": 0,
+            "columnSpan": 0,
+            "row": 0,
+            "rowSpan": 0
+          }
+        ],
+        "pageType": "Questionnaire",
+        "identifier": "3013b656-da99-44da-8125-80bb928b8534",
+        "name": "Questionnaire",
+        "nameLanguageKey": "Scene1.Questionnaire.Pages.Page2.Name",
+        "description": "Questionnaire",
+        "descriptionLanguageKey": "Scene1.Questionnaire.Pages.Page2.Description"
+      }
+    ],
+    "identifier": "acb4f8f2-2a2e-4321-b189-80aed0c5f18f",
+    "name": "",
+    "nameLanguageKey": "Empty",
+    "description": "",
+    "descriptionLanguageKey": "Empty"
+  },
+  "identifier": "6d1496f8-aa4c-4565-8eba-07727e8dc097"
+}

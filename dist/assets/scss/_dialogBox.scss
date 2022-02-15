@@ -1,0 +1,63 @@
+// Dailog Box CSS
+
+::ng-deep .p-dialog .p-dialog-header {
+  margin-bottom: 2.8rem;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  color: red;
+}
+::ng-deep .p-dialog-mask.p-component-overlay {
+  background-color: rgba(255, 255, 255, 0.66);
+}
+::ng-deep .p-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 36.2rem;
+  position: relative;
+  font-family: 'MyriadPro';
+  transform: scale(1);
+  width: 72.5rem;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+  border: 0 none;
+  padding: 3.4rem 4.3rem;
+}
+
+.header {
+  font-size: 4rem;
+  color: $primary-color;
+  font-weight: 500;
+}
+
+::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+  font-family: 'Myriad Light';
+  margin: 0 !important;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  font-weight: 300;
+}
+
+::ng-deep .p-dialog .p-dialog-header,
+::ng-deep .p-dialog .p-dialog-content,
+::ng-deep .p-dialog .p-dialog-footer {
+  padding: 0;
+}
+
+::ng-deep .p-dialog .p-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: 24rem;
+  }
+
+  button:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+}
+
+::ng-deep .p-confirm-dialog .p-dialog-content {
+  flex-grow: 1 !important;
+  align-items: flex-start !important;
+}

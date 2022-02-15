@@ -1,0 +1,244 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+
+  @if $breakpoint == tab {
+    @media (max-width: 48em) {
+      @content;
+    } //768px
+  }
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    } //1800px
+  }
+}
+
+@mixin reservedText {
+  position: absolute;
+  bottom: 1.2rem;
+  font-weight: 500;
+  left: 4rem;
+  color: $element-grey-color;
+  font-size: 1.6rem;
+  margin: 0;
+  font-family: 'Myriad Light';
+}
+
+@mixin onMobileScreenButton {
+  .buttonContainer {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    width: 5.4rem;
+    height: 4.4rem;
+    overflow: hidden;
+    top: 0.8rem;
+    right: 4rem;
+    z-index: 1000;
+
+    @media screen and (max-width: 600px) {
+      display: inline-block;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      position: absolute;
+
+      .pi-chevron-circle-left:before,
+      .pi-chevron-circle-right:before {
+        opacity: 0.7;
+        font-size: 3.4rem;
+      }
+
+      .pi-chevron-circle-left:before {
+        color: $white-color;
+      }
+      .pi-chevron-circle-right:before {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+@mixin sidebarStyles {
+  .sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 29.2825%;
+    max-width: 400px;
+    z-index: 101;
+    background: radial-gradient(
+      266.77% 97.9% at 1.86% 0.8%,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 4rem;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 600px) {
+      width: 250px;
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      height: 6.4rem;
+      border: none;
+      outline: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      .pi-times {
+        // margin: 0 40px 0 0px;
+        margin: 0 4rem 0 0px;
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 3.5rem;
+        color: #22597c;
+        @media (max-width: 600px) {
+          margin: 0 10px 0 0px;
+        }
+        @media (min-width: 601px) and (max-width: 1100px) {
+          margin: 0 20px 0 0px;
+        }
+      }
+    }
+
+    &__content {
+      position: relative;
+      flex-grow: 1;
+      vertical-align: top;
+      overflow-y: auto;
+      max-height: calc(100% - 30rem);
+      margin-bottom: 2rem;
+
+      &-title {
+        font-size: 3.2rem;
+        color: $blue-color;
+        font-weight: 500;
+        margin: 0 0 3rem 0;
+
+        @media screen and (max-width: 768px) {
+          font-size: 2.8rem;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 5.4rem;
+        }
+      }
+
+      &-title2 {
+        font-size: 2.4rem;
+        color: $blue-color;
+        font-weight: 400;
+        margin: 0;
+        font-family: 'Myriad Regular';
+
+        @media screen and (max-width: 768px) {
+          font-size: 2.4rem;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 3.6rem;
+        }
+      }
+
+      &-text {
+        font-size: 2.4rem;
+        color: $black-color;
+        margin: 0;
+        line-height: 3rem;
+        font-weight: 300;
+        font-family: 'Myriad Light';
+
+        @media screen and (max-width: 768px) {
+          font-size: 2.4rem;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 3.8rem;
+          line-height: 4.5rem;
+        }
+      }
+
+      &-goal {
+        margin-bottom: 2rem;
+      }
+
+      ul {
+        font-size: 2.4rem;
+        font-weight: 300;
+        font-family: 'Myriad Light';
+        @media screen and (max-width: 768px) {
+          font-size: 2.4rem;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 3.8rem;
+        }
+
+        li {
+          margin-bottom: 0.8rem;
+        }
+      }
+    }
+
+    &__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: auto;
+
+      img {
+        // width: 31.939rem;
+        // height: 3.019rem;
+        width: 100%;
+        height: auto;
+        margin-top: 11.3rem;
+        margin-bottom: 6.667rem;
+
+        @media (max-width: 450px) {
+          width: 100%;
+        }
+      }
+    }
+
+    &__buttonGroup {
+      font-size: 2.4rem;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 4rem;
+      button:not(:last-child) {
+        margin-right: 1.6rem;
+      }
+    }
+
+    .pi-chevron-left:before {
+      font-size: 2.4rem;
+    }
+  }
+}
