@@ -343,25 +343,37 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     let greenColor = new cv.Scalar(0, 255, 0, 255);
 
     cv.findContours(src,contours,hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE);
+    // cv.drawContours(dst, contours, -1, redColor, 1, 8, hierarchy, 1)
     let circles =[];
-    for (let i = 0; i < contours.size(); ++i) {
-      let tmp = new cv.Mat();
+    // console.log(contours.size())
+    for (let i = 0; i < contours.size();i++) {
       let cnt = contours.get(i);
-      cv.convexHull(cnt, tmp, false, true);
-      if(tmp.total()>8){
-        let circle = cv.minEnclosingCircle(cnt);
-        let circleArea = (3.14*circle.radius*circle.radius)-((3.14*circle.radius*circle.radius)*25/100);
-        if(circleArea>0){
-          if(cv.contourArea(tmp)>circleArea)
-          {
-            if(circle.radius > 25){
-              circles.push(i);
+      if(cv.contourArea(cnt)>2000)
+      {
+        // console.log(cv.contourArea(cnt));
+        let tmp = new cv.Mat();
+        cv.convexHull(cnt, tmp, false, true);
+
+        if(tmp.total()>8){
+          let circle = cv.minEnclosingCircle(cnt);
+          let circleArea = (3.14*circle.radius*circle.radius)-((3.14*circle.radius*circle.radius)*25/100);
+          if(circleArea>0){
+            let bottomEdge = this.videoEle.nativeElement.offsetWidth;
+            let circleBottomY = circle.center.y+circle.radius;
+            if(circleBottomY < bottomEdge){
+              if(cv.contourArea(tmp)>circleArea)
+              {
+                if(circle.radius > 25){
+                  circles.push(i);
+                  break;
+                }
+              }
             }
           }
-        }
-      } 
+        } 
+        tmp.delete();
+      }
       cnt.delete(); 
-      tmp.delete();
     }
     
     if(circles.length === 0){
@@ -381,6 +393,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       
       let cnt = contours.get(circles[0]);
       let circle = cv.minEnclosingCircle(cnt);
+      cnt.delete();
       this.examType = "Exam";
       let color;
       if(circle.radius<45){
