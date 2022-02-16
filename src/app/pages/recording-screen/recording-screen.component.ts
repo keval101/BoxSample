@@ -319,114 +319,149 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     },0);
   }
   circleDetection(){
-    this.videoEle.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
-    this.videoEle.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+      let videoHeight = this.videoEle.nativeElement.videoHeight;
+      let videoOffset = this.videoEle.nativeElement.offsetHeight;
+    
+      let context = this.videoFrame.nativeElement.getContext('2d');
+      this.videoFrame.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+      this.videoFrame.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+      context.clearRect(0,0, this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+      let dst = cv.imread('videoFrame');
+          
+      this.videoEle.nativeElement.height = this.videoEle.nativeElement.videoHeight;
+      this.videoEle.nativeElement.width = this.videoEle.nativeElement.videoWidth;
 
-    let src = new cv.Mat(this.videoEle.nativeElement.height,this.videoEle.nativeElement.width,cv.CV_8UC4)
-    let srccap = new cv.VideoCapture(this.videoEle.nativeElement);
-    srccap.read(src);
+      let src = new cv.Mat(this.videoEle.nativeElement.height,this.videoEle.nativeElement.width,cv.CV_8UC4)
+      let srccap = new cv.VideoCapture(this.videoEle.nativeElement);
+      srccap.read(src);
 
-    let dst = new cv.Mat(this.videoEle.nativeElement.height,this.videoEle.nativeElement.width,cv.CV_8UC4)
-    let dstcap = new cv.VideoCapture(this.videoEle.nativeElement);
-    dstcap.read(dst);
+      // let dst = new cv.Mat(this.videoEle.nativeElement.height,this.videoEle.nativeElement.width,cv.CV_8UC4)
+      // let dstcap = new cv.VideoCapture(this.videoEle.nativeElement);
+      // dstcap.read(dst);
+      
+      cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY);
+      let msize = new cv.Size(3, 3);
+      cv.GaussianBlur(src,src,msize,0)
+      cv.medianBlur(src,src,3) 
+      
+      cv.Canny(src, src, 10, 50, 3, false);    
+      let contours = new cv.MatVector();
+      let hierarchy = new cv.Mat();
 
-    cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY);
-    let msize = new cv.Size(3, 3);
-    cv.GaussianBlur(src,src,msize,0)
-    cv.medianBlur(src,src,3) 
+      let redColor = new cv.Scalar(255, 0, 0, 255);
+      let greenColor = new cv.Scalar(0, 255, 0, 255);
 
-    cv.Canny(src, src, 10, 100, 3, false);    
-    let contours = new cv.MatVector();
-    let hierarchy = new cv.Mat();
+      cv.findContours(src,contours,hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+      // cv.drawContours(dst, contours, -1, redColor, 1, 8, hierarchy, 1)
+      let circles =[];
+      for (let i = 0; i < contours.size();i++) {
+        let cnt = contours.get(i);
+        if(cv.contourArea(cnt)>2000)
+        {
+          // console.log(cv.contourArea(cnt));
+          let tmp = new cv.Mat();
+          cv.convexHull(cnt, tmp, false, true);
 
-    let redColor = new cv.Scalar(255, 0, 0, 255);
-    let greenColor = new cv.Scalar(0, 255, 0, 255);
-
-    cv.findContours(src,contours,hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE);
-    // cv.drawContours(dst, contours, -1, redColor, 1, 8, hierarchy, 1)
-    let circles =[];
-    // console.log(contours.size())
-    for (let i = 0; i < contours.size();i++) {
-      let cnt = contours.get(i);
-      if(cv.contourArea(cnt)>2000)
-      {
-        // console.log(cv.contourArea(cnt));
-        let tmp = new cv.Mat();
-        cv.convexHull(cnt, tmp, false, true);
-
-        if(tmp.total()>8){
-          let circle = cv.minEnclosingCircle(cnt);
-          let circleArea = (3.14*circle.radius*circle.radius)-((3.14*circle.radius*circle.radius)*25/100);
-          if(circleArea>0){
-            let bottomEdge = this.videoEle.nativeElement.offsetWidth;
-            let circleBottomY = circle.center.y+circle.radius;
-            if(circleBottomY < bottomEdge){
-              if(cv.contourArea(tmp)>circleArea)
-              {
-                if(circle.radius > 25){
-                  circles.push(i);
-                  break;
+          if(tmp.total()>8){
+            let circle = cv.minEnclosingCircle(cnt);
+            let circleArea = (3.14*circle.radius*circle.radius)-((3.14*circle.radius*circle.radius)*25/100);
+            if(circleArea>0){
+              let bottomEdge = screen.height;
+              let circleBottomY = circle.center.y+circle.radius;
+              if(circleBottomY < bottomEdge){
+                if(cv.contourArea(tmp)>circleArea)
+                {
+                  if(circle.radius > 25){
+                    let ellipse = cv.fitEllipse(contours.get(i));
+                    let obj = {
+                            index: i,
+                            ellipse: {
+                              angle: ellipse.angle,
+                              center: {
+                                x: ellipse.center.x * videoOffset/videoHeight,
+                                y: ellipse.center.y * videoOffset/videoHeight
+                              },
+                              size: {
+                                width: ellipse.size.width * videoOffset/videoHeight,
+                                height: ellipse.size.height * videoOffset/videoHeight
+                              }
+                            }
+                          }
+                    circles.push(obj);
+                    break;
+                  }
                 }
               }
             }
-          }
-        } 
-        tmp.delete();
+          } 
+          tmp.delete();
+        }
+        cnt.delete(); 
       }
-      cnt.delete(); 
-    }
-    
-    if(circles.length === 0){
-      this.circlePopup.nativeElement.style.visibility = "visible";
-      if(this.showDefaultMessage){  
-        this.circlePopup.nativeElement.style.color = "red";
-        this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
-      }
-    }else if(circles.length > 0){
-      this.showDefaultMessage = false;
-      if(this.defualtMessageTimeout){
-        clearTimeout(this.defualtMessageTimeout);
-      }
-      this.defualtMessageTimeout=setTimeout(()=>{
-        this.showDefaultMessage = true;
-      },2000);
       
-      let cnt = contours.get(circles[0]);
-      let circle = cv.minEnclosingCircle(cnt);
-      cnt.delete();
-      this.examType = "Exam";
-      let color;
-      if(circle.radius<45){
+      if(circles.length === 0){
         this.circlePopup.nativeElement.style.visibility = "visible";
-        this.circlePopup.nativeElement.style.color = "red";
-        this.circlePopup.nativeElement.innerHTML = "Please bring the gauze closer to your camera view";
-        color = redColor;
-        cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
-      }else{
-        let leftEdge = this.videoEle.nativeElement.offsetWidth*20/100;
-        let rightEdge = this.videoEle.nativeElement.offsetWidth*80/100;
-        let circleLeftX = circle.center.x-circle.radius;
-        let circleRightX = circle.center.x+circle.radius;
-          
-        if(circleLeftX > leftEdge && circleRightX < rightEdge){
-          this.circlePopup.nativeElement.style.visibility = "visible";
-          this.circlePopup.nativeElement.style.color = "green";
-          this.circlePopup.nativeElement.innerHTML = "Now start performing your "+this.examType.toLowerCase()+" circular cutting task";
-          cv.drawContours(dst, contours, circles[0], greenColor, 2, cv.LINE_8, hierarchy, 0);
-        }else{
+        if(this.showDefaultMessage){  
+          this.circlePopup.nativeElement.style.color = "red";
+          this.circlePopup.nativeElement.innerHTML = "Please place circular gauze into the middle of your camera view";
+        }
+      }else if(circles.length > 0){
+        this.showDefaultMessage = false;
+        if(this.defualtMessageTimeout){
+          clearTimeout(this.defualtMessageTimeout);
+        }
+        this.defualtMessageTimeout=setTimeout(()=>{
+          this.showDefaultMessage = true;
+        },2000);
+        
+        let cnt = contours.get(circles[0].index);
+        let circle = cv.minEnclosingCircle(cnt);
+        cnt.delete();
+        this.examType = "Exam";
+        let color;
+        if((circle.radius* videoOffset/videoHeight)<70){
           this.circlePopup.nativeElement.style.visibility = "visible";
           this.circlePopup.nativeElement.style.color = "red";
-          this.circlePopup.nativeElement.innerHTML = "Please position your gauze in the middle of your camera view";
-          cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
+          this.circlePopup.nativeElement.innerHTML = "Please bring the gauze closer to your camera view";
+          color = redColor;
+          cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
+
+          // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
+        }else{
+          let leftEdge = this.videoEle.nativeElement.offsetWidth*20/100;
+          let rightEdge = this.videoEle.nativeElement.offsetWidth*80/100;
+          // let leftEdge = this.videoEle.nativeElement.videoWidth*20/100;
+          // let rightEdge = this.videoEle.nativeElement.videoWidth*80/100;
+          let circleLeftX = (circle.center.x-circle.radius) * videoOffset/videoHeight;
+          let circleRightX = (circle.center.x+circle.radius) * videoOffset/videoHeight;
+          if(circleLeftX > leftEdge && circleRightX < rightEdge){
+            this.circlePopup.nativeElement.style.visibility = "visible";
+            this.circlePopup.nativeElement.style.color = "green";
+            this.circlePopup.nativeElement.innerHTML = "Now start performing your "+this.examType.toLowerCase()+" circular cutting task";
+            // cv.drawContours(dst, contours, circles[0], greenColor, 2, cv.LINE_8, hierarchy, 0);
+            cv.ellipse1(dst,circles[0].ellipse,greenColor,2,cv.LINE_8);
+          }else{
+            this.circlePopup.nativeElement.style.visibility = "visible";
+            this.circlePopup.nativeElement.style.color = "red";
+            this.circlePopup.nativeElement.innerHTML = "Please position your gauze in the middle of your camera view";
+            cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
+            // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
+          }
         }
       }
-    }
 
-    cv.imshow('videoFrame', dst);
-    src.delete();
-    dst.delete();
-    contours.delete();
-    hierarchy.delete();
+      // cv.imshow('videoFrame', dst);
+      let imageData = new ImageData(new Uint8ClampedArray(dst.data),dst.cols,dst.rows);
+      // context.drawImage(dst,0,0,this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+      this.videoFrame.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+      this.videoFrame.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+      context.clearRect(0,0,this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+
+      context.putImageData(imageData,0,0);
+      src.delete();
+      contours.delete();
+      hierarchy.delete();
+      dst.delete();
   }
 
   async init(constraints: MediaStreamConstraints): Promise<MediaStream> {
