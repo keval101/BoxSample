@@ -20,7 +20,7 @@
   </div>
 
   <div class="recording__video">
-    <div id="circlePopup" #circlePopup class="circlePopup"> Hello </div>
+    
     <video id="video" class="video" autoplay playsinline muted #video></video>
     <canvas id="videoFrame" class="videoFrame" #videoFrame></canvas>
   </div>
@@ -102,6 +102,16 @@
   </div>
 </div>
 <div [innerHTML]="myStyle"></div>
+<div id="proctorGuidance" #proctorGuidance class="proctorGuidance" [ngClass]="isSidebarOpen?'proctorGuidanceRight':''">
+  <div>
+    <h1>Proctor guidance</h1>
+    <div class="status">
+      <p>Status</p><div class="status-icon"></div>
+    </div>
+  </div>
+  <p></p>
+</div>
+
 <div
   class="sidebar recording-sidebar"
   #sidenav

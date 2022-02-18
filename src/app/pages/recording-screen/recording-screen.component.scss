@@ -30,20 +30,7 @@
     width: 100%;
     height: 100%;
     position: relative;
-    .circlePopup {
-      visibility: hidden;
-      position: absolute;
-      width: auto;
-      height: auto;
-      font-size: small;
-      border-radius: 5px;
-      padding: 5px 10px;
-      z-index: 11;
-      top: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: white;
-    }
+
     .videoFrame {
       position: absolute;
       height: auto;
@@ -116,6 +103,82 @@
 }
 ::ng-deep .p-inputswitch .p-inputswitch-slider:before {
   background: $white-color !important;
+}
+
+.proctorGuidance {
+  visibility: hidden;
+  position: absolute;
+  width: 40rem;
+  height: auto;
+  font-size: small;
+  padding: 3rem;
+  z-index: 11;
+  top: 9rem;
+  right: 3rem;
+  background: radial-gradient(
+    266.77% 97.9% at 1.86% 0.8%,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  opacity: 0.9;
+  transition: opacity 0.7s ease-in;
+  animation: fadedox 0.7s ease-in-out;
+
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.1);
+  div {
+    margin-bottom: 2rem;
+    .status {
+      display: flex;
+      align-items: center;
+    }
+    .status-icon {
+      background: red;
+      margin: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 10rem;
+      margin-left: 1rem;
+      margin-bottom: 3px;
+    }
+  }
+  h1 {
+    font-size: 3rem;
+    color: #000000;
+    font-weight: normal;
+    margin: 0;
+  }
+  p,
+  span {
+    margin: 0;
+    font-size: 2.4rem;
+    color: #000000;
+    font-weight: normal;
+    font-family: Myriad light;
+  }
+}
+
+.proctorGuidanceRight {
+  right: 43rem;
+  transition: opacity 0.7s ease-in-out;
+  animation: faded-box 0.7s ease-in-out;
+}
+
+@keyframes faded-box {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fadedox {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
 }
 
 .sidebar {
