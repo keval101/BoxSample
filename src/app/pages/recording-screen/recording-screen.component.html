@@ -105,11 +105,18 @@
 <div id="proctorGuidance" #proctorGuidance class="proctorGuidance" [ngClass]="isSidebarOpen?'proctorGuidanceRight':''">
   <div>
     <h1>Proctor guidance</h1>
+    <button type="button" class="button proctorButton" id="proctorButton">
+      <i
+        class="pi pi-times"
+        alt="cross"
+        (click)="stopDetection()"
+      ></i>
+    </button>
     <div class="status">
       <p>Status</p><div class="status-icon"></div>
     </div>
   </div>
-  <p></p>
+  <p>Set up complete. Please start performing your task</p>
 </div>
 
 <div

@@ -82,6 +82,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   randomNum: string;
   defualtMessageTimeout;
   showDefaultMessage:boolean = true;
+  detectionInterval;
 
   constructor(
     public translateService: TranslateService,
@@ -163,6 +164,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
   onFinish(): void {
     this.isDetection = false;
+    clearInterval(this.detectionInterval);
     this.recordingService.fullscreen = false;
     this.isSidebarOpen = false;
     this.isRunning = false;
@@ -308,9 +310,19 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     const gumVideo = this.videoEle.nativeElement;
     gumVideo.srcObject = stream;
   }
+  stopDetection(){
+    this.isDetection = false;
+    clearInterval(this.detectionInterval);
+    this.proctorGuidance.nativeElement.style.opacity = 0;
+    this.proctorGuidance.nativeElement.style.zIndex = -100;
+    let context = this.videoFrame.nativeElement.getContext('2d');
+    this.videoFrame.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+    this.videoFrame.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+    context.clearRect(0,0, this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+  }
   detection(){
-    console.log(this.proctorGuidance.nativeElement.children[0].children[1].children[1]);
-    setInterval(()=>{
+    // console.log(this.proctorGuidance.nativeElement.children[0].children[1]);
+    this.detectionInterval = setInterval(()=>{
       if(this.isDetection)
       {
         if(this.videoEle.nativeElement.videoHeight>0){
@@ -349,6 +361,9 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       let contours = new cv.MatVector();
       let hierarchy = new cv.Mat();
 
+      let redColor = new cv.Scalar(255, 0, 0, 255);
+      let greenColor = new cv.Scalar(0, 255, 0, 255);
+
       cv.findContours(src,contours,hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
       // cv.drawContours(dst, contours, -1, redColor, 1, 8, hierarchy, 1)
       let circles =[];
@@ -370,8 +385,20 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
                 if(cv.contourArea(tmp)>circleArea)
                 {
                   if(circle.radius > 25){
+                    let ellipse = cv.fitEllipse(contours.get(i));
                     let obj = {
                             index: i,
+                            ellipse: {
+                              angle: ellipse.angle,
+                              center: {
+                                x: ellipse.center.x * videoOffset/videoHeight,
+                                y: ellipse.center.y * videoOffset/videoHeight
+                              },
+                              size: {
+                                width: ellipse.size.width * videoOffset/videoHeight,
+                                height: ellipse.size.height * videoOffset/videoHeight
+                              }
+                            }
                           }
                     circles.push(obj);
                     break;
@@ -385,10 +412,15 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         cnt.delete(); 
       }
       
+      this.proctorGuidance.nativeElement.style.display = "block";
+      
       if(circles.length === 0){
-        this.proctorGuidance.nativeElement.style.visibility = "visible";
         if(this.showDefaultMessage){  
-          this.proctorGuidance.nativeElement.children[0].children[1].children[1].style.backgroundColor = "red";
+          // this.proctorGuidance.nativeElement.style.visibility = "hidden";
+          this.proctorGuidance.nativeElement.style.opacity = 1;
+          // this.proctorGuidance.nativeElement.style.display = "none";
+          this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
+          this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
           this.proctorGuidance.nativeElement.children[1].innerHTML = "Please place circular gauze into the middle of your camera view";
         }
       }else if(circles.length > 0){
@@ -405,10 +437,12 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         cnt.delete();
         this.examType = "Exam";
         if((circle.radius* videoOffset/videoHeight)<70){
-          this.proctorGuidance.nativeElement.style.visibility = "visible";
-          this.proctorGuidance.nativeElement.children[0].children[1].children[1].style.backgroundColor = "red";
+          // this.proctorGuidance.nativeElement.style.visibility = "hidden";
+          this.proctorGuidance.nativeElement.style.opacity = 1;
+          this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
+          this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
           this.proctorGuidance.nativeElement.children[1].innerHTML = "Please bring the gauze closer to your camera view";
-          // cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
+          cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
 
           // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
         }else{
@@ -417,16 +451,21 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           let circleLeftX = (circle.center.x-circle.radius) * videoOffset/videoHeight;
           let circleRightX = (circle.center.x+circle.radius) * videoOffset/videoHeight;
           if(circleLeftX > leftEdge && circleRightX < rightEdge){
-            this.proctorGuidance.nativeElement.style.visibility = "visible";
-            this.proctorGuidance.nativeElement.children[0].children[1].children[1].style.backgroundColor = "green";
+            // this.proctorGuidance.nativeElement.style.visibility = "visible";
+            this.proctorGuidance.nativeElement.style.opacity = 1;
+            this.proctorGuidance.nativeElement.children[0].children[1].style.display = "block";
+            this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "green";
             this.proctorGuidance.nativeElement.children[1].innerHTML = "Set up complete. Please start performing your task";
             // cv.drawContours(dst, contours, circles[0], greenColor, 2, cv.LINE_8, hierarchy, 0);
-            // cv.ellipse1(dst,circles[0].ellipse,greenColor,2,cv.LINE_8);
+            cv.ellipse1(dst,circles[0].ellipse,greenColor,2,cv.LINE_8);
           }else{
-            this.proctorGuidance.nativeElement.style.visibility = "visible";
-            this.proctorGuidance.nativeElement.children[0].children[1].children[1].style.backgroundColor = "red";
+            // this.proctorGuidance.nativeElement.style.visibility = "hidden";
+            this.proctorGuidance.nativeElement.style.opacity = 1;
+            // this.proctorGuidance.nativeElement.style.zIndex = -100;
+            this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
+            this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
             this.proctorGuidance.nativeElement.children[1].innerHTML = "Please position your gauze in the middle of your camera view";
-            // cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
+            cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
             // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
           }
         }
@@ -454,7 +493,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       this.audioTrack = stream.getAudioTracks()[0];
       this.handleSuccess(stream);
       this.isDetection = true;
-        this.detection();
+      this.detection();
       return null;
     } catch (e) {
       console.error('navigator.getUserMedia error:', e);
@@ -529,12 +568,14 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         message: this.cancelText,
         accept: () => {
           this.isDetection = false;
+          clearInterval(this.detectionInterval);
           this.evolutionService.setCancelValue(true);
           this.router.navigate(['/end']);
         },
       });
     } else {
       this.isDetection = false;
+      clearInterval(this.detectionInterval);
       this.dataservice.preserveQueryParams('/setup');
     }
   }
@@ -543,6 +584,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       message: this.cancelText,
       accept: () => {
         this.isDetection = false;
+        clearInterval(this.detectionInterval);
         this.evolutionService.setCancelValue(true);
         this.router.navigate(['/end']);
       },
