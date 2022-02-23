@@ -136,11 +136,13 @@
     .status-icon {
       background: green;
       margin: 0;
+      margin-bottom: 3px;
       width: 2rem;
       height: 2rem;
       border-radius: 10rem;
       margin-left: 1rem;
-      margin-bottom: 3px;
+      display: flex;
+      align-self: center;
     }
   }
   h1 {
@@ -162,8 +164,8 @@
   position: absolute;
   right: 0rem;
   top: 0rem;
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   &:hover {
     background-color: transparent;
   }

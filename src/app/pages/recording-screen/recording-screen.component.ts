@@ -6,7 +6,7 @@ import {
   OnDestroy,
   HostListener,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { RecordingService } from './recording.service';
 import { fadeAnimation } from '../../shared/app.animation';
@@ -98,7 +98,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     private utility: UtilityService,
     private evolutionService: EvolutionService,
     private _sanitizer: DomSanitizer,
-    private ngxOpenCvService:NgxOpenCVService
+    private ngxOpenCvService:NgxOpenCVService,
+    private route:ActivatedRoute
   ) {
     this.headerService.muteUnmuteMic.subscribe((res) => {
       this.micValue = res;
@@ -322,14 +323,41 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
   }
   detection(){
     // console.log(this.proctorGuidance.nativeElement.children[0].children[1]);
-    this.detectionInterval = setInterval(()=>{
-      if(this.isDetection)
-      {
-        if(this.videoEle.nativeElement.videoHeight>0){
-          this.circleDetection();
-        }
-      }
-    },0);
+    let detectionType = this.route.snapshot.queryParamMap.get('guidance');
+    switch(detectionType){
+      case 'circle':
+        this.detectionInterval = setInterval(()=>{
+          if(this.isDetection)
+          {
+            if(this.videoEle.nativeElement.videoHeight>0){
+              this.circleDetection();
+            }
+          }
+        },0);
+        break;
+      case 'dot':
+        this.detectionInterval = setInterval(()=>{
+          if(this.isDetection)
+          {
+            if(this.videoEle.nativeElement.videoHeight>0){
+              this.dotDetection();
+            }
+          }
+        },0);
+        break;
+      case 'off':
+        break;
+      default:
+        this.detectionInterval = setInterval(()=>{
+          if(this.isDetection)
+          {
+            if(this.videoEle.nativeElement.videoHeight>0){
+              this.circleDetection();
+            }
+          }
+        },0);
+        break;
+    }
   }
   circleDetection(){
       let videoHeight = this.videoEle.nativeElement.videoHeight;
@@ -484,6 +512,146 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       contours.delete();
       hierarchy.delete();
       dst.delete();
+  }
+
+  dotDetection(){
+    let videoHeight = this.videoEle.nativeElement.videoHeight;
+    let videoOffset = this.videoEle.nativeElement.offsetHeight;
+    
+    let context = this.videoFrame.nativeElement.getContext('2d');
+    this.videoFrame.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+    this.videoFrame.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+    context.clearRect(0,0, this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+    let dst = cv.imread('videoFrame');
+          
+    this.videoEle.nativeElement.height = this.videoEle.nativeElement.videoHeight;
+    this.videoEle.nativeElement.width = this.videoEle.nativeElement.videoWidth;
+
+    let src = new cv.Mat(this.videoEle.nativeElement.height,this.videoEle.nativeElement.width,cv.CV_8UC4)
+    let srccap = new cv.VideoCapture(this.videoEle.nativeElement);
+    srccap.read(src);
+    
+    let low = new cv.Mat(src.rows, src.cols, src.type(), [0, 0, 0, 255]);
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [90, 80, 70, 255]);
+    
+    cv.inRange(src, low, high, src);
+    let M = cv.Mat.ones(2, 2, cv.CV_8U);
+    
+    cv.morphologyEx(src, src, cv.MORPH_CLOSE, M);
+    low.delete();
+    high.delete();
+    M.delete();
+       
+    let contours = new cv.MatVector();
+    let hierarchy = new cv.Mat();
+
+    let redColor = new cv.Scalar(255, 0, 0, 255);
+    let greenColor = new cv.Scalar(0, 255, 0, 255);
+
+    cv.findContours(src,contours,hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
+        
+    let dots=[];
+    for (let i = 0; i < contours.size(); ++i) {
+      let cnt = contours.get(i);
+      let circle = cv.minEnclosingCircle(cnt);
+      let contourArea = cv.contourArea(cnt);
+      if(contourArea > 0 && contourArea < 20)
+      {
+        circle.radius = circle.radius * videoOffset/videoHeight;
+        circle.center.x = circle.center.x * videoOffset/videoHeight;
+        circle.center.y = circle.center.y * videoOffset/videoHeight;
+        if(circle.radius < 7){
+          let leftEdge = this.videoEle.nativeElement.offsetWidth*20/100;
+          let rightEdge = this.videoEle.nativeElement.offsetWidth*80/100;
+          let topEdge = this.videoEle.nativeElement.offsetHeight*30/100;
+          let bottomEdge;
+          
+          if(this.videoFrame.nativeElement.height<window.innerHeight){
+            bottomEdge = this.videoEle.nativeElement.offsetHeight*90/100;
+          }else{
+            bottomEdge = window.innerHeight*90/100;
+          }
+
+          let circleLeftX = circle.center.x-circle.radius;
+          let circleRightX = circle.center.x+circle.radius;
+          let circleTopY = circle.center.y-circle.radius;
+          let circleBottomY = circle.center.y+circle.radius;
+          if(circleLeftX > leftEdge && circleRightX < rightEdge && circleTopY > topEdge &&circleBottomY < bottomEdge){
+            let isDot = true;
+            for(let i=0;i<dots.length;i++){
+              if(circle.center.x > (dots[i].center.x-2) && circle.center.x < (dots[i].center.x+2))
+              {
+                isDot = false;
+              }
+            }
+            if(isDot)
+            {
+              dots.push({index:i,center:circle.center,radius:circle.radius});      
+            }
+          }
+        }
+      }
+    }
+    this.proctorGuidance.nativeElement.style.display = "block";
+    if(dots.length <= 1){
+      if(this.showDefaultMessage){  
+        this.proctorGuidance.nativeElement.style.opacity = 1;
+        this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
+        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
+        this.proctorGuidance.nativeElement.children[1].innerHTML = "Please place penrose drain into the middle of your camera view";
+      }
+    }else if(dots.length > 1){
+      this.showDefaultMessage = false;
+      if(this.defualtMessageTimeout){
+        clearTimeout(this.defualtMessageTimeout);
+      }
+      this.defualtMessageTimeout=setTimeout(()=>{
+        this.showDefaultMessage = true;
+      },2000);
+      
+      let color =greenColor; 
+      
+      for(let j=1;j<dots.length;j++){
+        if(dots[j].center.y>(dots[0].center.y+15) || dots[j].center.y<(dots[0].center.y-15)){
+          color = redColor;
+          break;
+        }
+      }
+      
+      for(let i=0;i<dots.length;i++){
+        cv.circle(dst, dots[i].center, dots[i].radius,color, 2);
+      }
+      
+      if(color === greenColor){
+        let distance=Math.sqrt((dots[1].center.x - dots[0].center.x)**2 + (dots[1].center.y - dots[0].center.y)**2)
+          
+        if(distance<0){
+          distance=Math.sqrt((dots[1].center.x - dots[0].center.x)**2 + (dots[1].center.y - dots[0].center.y)**2)
+        }
+        // To convert px into cm
+        // distance = distance *0.0264583333;
+        this.proctorGuidance.nativeElement.style.opacity = 1;
+        this.proctorGuidance.nativeElement.children[0].children[1].style.display = "block";
+        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "green";
+        this.proctorGuidance.nativeElement.children[1].innerHTML = "Set up complete. Please start performing your task<br><br>Distance Between two dots is "+Math.round(distance)+"px";
+      }else{
+        this.proctorGuidance.nativeElement.style.opacity = 1;
+        this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
+        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
+        this.proctorGuidance.nativeElement.children[1].innerHTML = "align the penrose drain horizontally";
+      }
+    }
+
+    let imageData = new ImageData(new Uint8ClampedArray(dst.data),dst.cols,dst.rows);
+    this.videoFrame.nativeElement.width = this.videoEle.nativeElement.offsetWidth;
+    this.videoFrame.nativeElement.height = this.videoEle.nativeElement.offsetHeight;
+    context.clearRect(0,0,this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
+
+    context.putImageData(imageData,0,0);
+    src.delete();
+    dst.delete();
+    contours.delete();
+    hierarchy.delete();
   }
 
   async init(constraints: MediaStreamConstraints): Promise<MediaStream> {
