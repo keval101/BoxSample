@@ -322,7 +322,7 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
     context.clearRect(0,0, this.videoFrame.nativeElement.width,this.videoFrame.nativeElement.height)
   }
   detection(){
-    // console.log(this.proctorGuidance.nativeElement.children[0].children[1]);
+    console.log(this.proctorGuidance.nativeElement.children[1].children[1]);
     let detectionType = this.route.snapshot.queryParamMap.get('guidance');
     switch(detectionType){
       case 'circle':
@@ -448,8 +448,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           this.proctorGuidance.nativeElement.style.opacity = 1;
           // this.proctorGuidance.nativeElement.style.display = "none";
           this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
-          this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
-          this.proctorGuidance.nativeElement.children[1].innerHTML = "Please place circular gauze into the middle of your camera view";
+          this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "red";
+          this.proctorGuidance.nativeElement.children[2].innerHTML = "Please place circular gauze into the middle of your camera view";
         }
       }else if(circles.length > 0){
         this.showDefaultMessage = false;
@@ -468,8 +468,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
           // this.proctorGuidance.nativeElement.style.visibility = "hidden";
           this.proctorGuidance.nativeElement.style.opacity = 1;
           this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
-          this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
-          this.proctorGuidance.nativeElement.children[1].innerHTML = "Please bring the gauze closer to your camera view";
+          this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "red";
+          this.proctorGuidance.nativeElement.children[2].innerHTML = "Please bring the gauze closer to your camera view";
           cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
 
           // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
@@ -482,8 +482,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
             // this.proctorGuidance.nativeElement.style.visibility = "visible";
             this.proctorGuidance.nativeElement.style.opacity = 1;
             this.proctorGuidance.nativeElement.children[0].children[1].style.display = "block";
-            this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "green";
-            this.proctorGuidance.nativeElement.children[1].innerHTML = "Set up complete. Please start performing your task";
+            this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "green";
+            this.proctorGuidance.nativeElement.children[2].innerHTML = "Set up complete. Please start performing your task";
             // cv.drawContours(dst, contours, circles[0], greenColor, 2, cv.LINE_8, hierarchy, 0);
             cv.ellipse1(dst,circles[0].ellipse,greenColor,2,cv.LINE_8);
           }else{
@@ -491,8 +491,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
             this.proctorGuidance.nativeElement.style.opacity = 1;
             // this.proctorGuidance.nativeElement.style.zIndex = -100;
             this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
-            this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
-            this.proctorGuidance.nativeElement.children[1].innerHTML = "Please position your gauze in the middle of your camera view";
+            this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "red";
+            this.proctorGuidance.nativeElement.children[2].innerHTML = "Please position your gauze in the middle of your camera view";
             cv.ellipse1(dst,circles[0].ellipse,redColor,2,cv.LINE_8);
             // cv.drawContours(dst, contours, circles[0], redColor, 2, cv.LINE_8, hierarchy, 0);
           }
@@ -597,8 +597,8 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
       if(this.showDefaultMessage){  
         this.proctorGuidance.nativeElement.style.opacity = 1;
         this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
-        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
-        this.proctorGuidance.nativeElement.children[1].innerHTML = "Please place penrose drain into the middle of your camera view";
+        this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "red";
+        this.proctorGuidance.nativeElement.children[2].innerHTML = "Please place penrose drain into the middle of your camera view";
       }
     }else if(dots.length > 1){
       this.showDefaultMessage = false;
@@ -632,13 +632,13 @@ export class RecordingScreenComponent implements OnInit, OnDestroy {
         // distance = distance *0.0264583333;
         this.proctorGuidance.nativeElement.style.opacity = 1;
         this.proctorGuidance.nativeElement.children[0].children[1].style.display = "block";
-        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "green";
-        this.proctorGuidance.nativeElement.children[1].innerHTML = "Set up complete. Please start performing your task<br><br>Distance Between two dots is "+Math.round(distance)+"px";
+        this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "green";
+        this.proctorGuidance.nativeElement.children[2].innerHTML = "Set up complete. Please start performing your task<br><br>Distance Between two dots is "+Math.round(distance)+"px";
       }else{
         this.proctorGuidance.nativeElement.style.opacity = 1;
         this.proctorGuidance.nativeElement.children[0].children[1].style.display = "none";
-        this.proctorGuidance.nativeElement.children[0].children[2].children[1].style.backgroundColor = "red";
-        this.proctorGuidance.nativeElement.children[1].innerHTML = "align the penrose drain horizontally";
+        this.proctorGuidance.nativeElement.children[1].children[1].style.backgroundColor = "red";
+        this.proctorGuidance.nativeElement.children[2].innerHTML = "Align the penrose drain horizontally";
       }
     }
 
